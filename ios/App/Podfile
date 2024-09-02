@@ -28,6 +28,8 @@ target 'Decoplanner' do
   capacitor_pods
   # Add your Pods here
   pod 'Firebase/Messaging'
+  pod 'Firebase/Auth', '10.25.0'
+  pod 'Firebase/CoreOnly', '10.25.0'
   pod 'CapacitorFirebaseAuthentication/Google', :path => '../../node_modules/@capacitor-firebase/authentication'
 end
 
