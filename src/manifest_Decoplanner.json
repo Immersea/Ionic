@@ -1,0 +1,21 @@
+{
+  "name": "Decoplanner",
+  "short_name": "Decoplanner",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/icon/icon192_decoplanner.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/icon512_decoplanner.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#fff",
+  "theme_color": "#fff",
+  "gcm_sender_id": "103953800507"
+}

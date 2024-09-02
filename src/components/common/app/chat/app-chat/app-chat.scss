@@ -1,0 +1,122 @@
+app-chat {
+  width: 100%;
+  height: var(--chatHeight);
+
+  #chat-container {
+    --padding-bottom: 65px;
+  }
+
+  .chat-footer {
+    position: absolute;
+    bottom: 0 !important;
+    width: 100%;
+  }
+
+  .messages {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .message {
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+
+  .system {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .system .message {
+    color: rgb(68, 68, 68);
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 1px;
+    font-size: smaller;
+  }
+
+  .yours {
+    align-items: flex-start;
+  }
+  .yours .sendername {
+    color: rgb(201, 201, 201);
+    font-size: smaller;
+  }
+  .yours .message {
+    margin-right: 25%;
+    background: linear-gradient(to bottom, #eee 0%, rgb(212, 212, 212) 100%);
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  .yours .message.last:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: -7px;
+    height: 20px;
+    width: 20px;
+    background: linear-gradient(to bottom, #eee 0%, rgb(212, 212, 212) 100%);
+    background-attachment: fixed;
+    border-bottom-right-radius: 15px;
+  }
+  .yours .message.last:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: -10px;
+    width: 10px;
+    height: 20px;
+    background: white;
+    border-bottom-right-radius: 10px;
+  }
+
+  .mine {
+    align-items: flex-end;
+  }
+  .mine .timestamp {
+    color: #00d0ea;
+    font-size: smaller;
+  }
+
+  .mine .message {
+    color: white;
+    margin-left: 25%;
+    background: linear-gradient(to bottom, #00d0ea 0%, #0085d1 100%);
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  .mine .message.last:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    right: -8px;
+    height: 20px;
+    width: 20px;
+    background: linear-gradient(to bottom, #00d0ea 0%, #0085d1 100%);
+    background-attachment: fixed;
+    border-bottom-left-radius: 15px;
+  }
+
+  .mine .message.last:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: -10px;
+    width: 10px;
+    height: 20px;
+    background: white;
+    border-bottom-left-radius: 10px;
+  }
+}

@@ -1,0 +1,15 @@
+dependencies: \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/strings/internal/cordz_functions.cc \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/Target\ Support\ Files/abseil/abseil-prefix.pch \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/strings/internal/cordz_functions.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/attributes.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/config.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/options.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/policy_checks.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/optimization.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/internal/raw_logging.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/internal/atomic_hook.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/log_severity.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/macros.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/base/port.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/abseil/absl/profiling/internal/exponential_biased.h

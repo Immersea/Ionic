@@ -1,0 +1,59 @@
+page-loading {
+  /* Component styles go here */
+  .loading-svg {
+    width: 200px;
+    height: 200px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px; /* half width*/
+    margin-top: -120px; /* half height*/
+  }
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 100px; //below logo
+    margin-left: -25px; /* half width*/
+  }
+  .loading-title {
+    height: 20px;
+    width: 100%;
+    color: var(--ion-text-color);
+    position: absolute;
+    top: 50%;
+    margin-top: -190px;
+  }
+  .loading-subtitle {
+    height: 20px;
+    width: 100%;
+    color: var(--ion-text-color);
+    position: absolute;
+    top: 50%;
+    margin-top: -160px;
+  }
+  .loading-logo {
+    position: absolute;
+    top: 35%;
+    left: 40%;
+  }
+  .loading-alert {
+    height: 20px;
+    width: 100%;
+    color: var(--ion-text-color);
+    position: absolute;
+    top: 80%;
+    margin-top: -190px;
+  }
+  .loading-alert1 {
+    height: 20px;
+    width: 100%;
+    color: var(--ion-text-color);
+    position: absolute;
+    top: 85%;
+    margin-top: -190px;
+  }
+}

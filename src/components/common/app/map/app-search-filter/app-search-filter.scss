@@ -1,0 +1,10 @@
+app-search-filter {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  .search-tags {
+    position: absolute;
+    top: calc(env(safe-area-inset-top) + 88px);
+    right: 0px;
+    z-index: 2;
+  }
+}

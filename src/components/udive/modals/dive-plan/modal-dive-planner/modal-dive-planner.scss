@@ -1,0 +1,9 @@
+modal-dive-planner {
+  ion-segment-button {
+    --color-checked: var(--ion-color-planner-contrast);
+  }
+  .nopaddingtop {
+    //remove extra padding for iOS
+    padding-top: 0px !important;
+  }
+}

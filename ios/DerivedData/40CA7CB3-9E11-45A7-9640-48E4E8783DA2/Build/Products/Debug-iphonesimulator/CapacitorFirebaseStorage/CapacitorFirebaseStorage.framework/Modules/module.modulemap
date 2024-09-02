@@ -1,0 +1,11 @@
+framework module CapacitorFirebaseStorage {
+  umbrella header "CapacitorFirebaseStorage-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module CapacitorFirebaseStorage.Swift {
+  header "CapacitorFirebaseStorage-Swift.h"
+  requires objc
+}

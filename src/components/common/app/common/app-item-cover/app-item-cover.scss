@@ -1,0 +1,39 @@
+app-item-cover {
+  width: 100%;
+  height: 20%;
+
+  ion-thumbnail {
+    position: relative;
+    margin-top: -100px;
+    margin-bottom: 0;
+    width: 100px;
+    height: 100px;
+    img {
+      border-radius: 50%;
+      padding: 0.08em;
+      border: solid 0.25em lightsteelblue;
+      background-color: white;
+    }
+  }
+  .cover {
+    position: relative;
+    height: var(--coverHeight);
+    background-color: lightblue;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+    ion-button {
+      position: absolute;
+      right: 0px;
+    }
+    ion-menu-button {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      color: black;
+      mix-blend-mode: difference;
+    }
+  }
+}

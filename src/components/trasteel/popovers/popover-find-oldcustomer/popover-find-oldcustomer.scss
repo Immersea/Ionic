@@ -1,0 +1,47 @@
+popover-find-oldcustomer {
+  /* Component styles go here */
+  ion-list {
+    min-height: 300px;
+  }
+  #project-grid {
+    ion-grid {
+      --ion-grid-column-padding: 0px;
+    }
+  }
+
+  .separator {
+    background-color: var(--ion-color-trasteel-tint);
+  }
+  #courses-grid {
+    .centered {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    ion-grid {
+      --ion-grid-column-padding: 2px;
+      border-collapse: collapse;
+      border-style: hidden;
+
+      .header {
+        background-color: var(--ion-color-trasteel);
+        font-weight: bold;
+        color: var(--ion-color-trasteel-contrast);
+      }
+
+      ion-col {
+        border: 1px solid black;
+        border-bottom: 0;
+        border-right: 0;
+      }
+      ion-col:last-child {
+        border-right: 1px solid black;
+      }
+
+      ion-row:last-child {
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+moduledependenciestarget: \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/AppAuth.build/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/Target\ Support\ Files/AppAuth/AppAuth-umbrella.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/System/Library/Frameworks/UIKit.framework/Modules/module.modulemap \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/usr/include/TargetConditionals.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDAuthState.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDAuthStateChangeDelegate.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDAuthStateErrorDelegate.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationRequest.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgentRequest.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDResponseTypes.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDScopes.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationResponse.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDAuthorizationService.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDError.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDErrorUtilities.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgent.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDExternalUserAgentSession.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDGrantTypes.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDIDToken.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDRegistrationRequest.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDRegistrationResponse.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDScopeUtilities.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDServiceConfiguration.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDServiceDiscovery.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDTokenRequest.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDTokenResponse.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDTokenUtilities.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDURLSessionProvider.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDEndSessionRequest.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDEndSessionResponse.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDClientMetadataParameters.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDDefines.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDFieldMapping.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuthCore/OIDURLQueryComponent.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuth.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuth/iOS/OIDAuthState+IOS.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuth/iOS/OIDAuthorizationService+IOS.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuth/iOS/OIDExternalUserAgentIOS.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuth/iOS/OIDExternalUserAgentIOSCustomBrowser.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/AppAuth/Sources/AppAuth/iOS/OIDExternalUserAgentCatalyst.h

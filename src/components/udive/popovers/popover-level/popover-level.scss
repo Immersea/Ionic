@@ -1,0 +1,34 @@
+popover-level {
+  .scrollx {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    .item {
+      flex: 0 0 0 0;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  //validators notification
+  .notification {
+    min-height: 20px;
+    height: 20px;
+    font-size: 0.8em;
+    color: #ea6153;
+    border-width: 1px;
+    border-color: #ea6153;
+    padding-left: 10px;
+    .item-inner {
+      margin-left: 0px !important;
+      border-bottom: 0px !important;
+    }
+    .icon {
+      font-size: 1.7em;
+      padding-left: 6px !important;
+      padding-top: 4px !important;
+    }
+  }
+}

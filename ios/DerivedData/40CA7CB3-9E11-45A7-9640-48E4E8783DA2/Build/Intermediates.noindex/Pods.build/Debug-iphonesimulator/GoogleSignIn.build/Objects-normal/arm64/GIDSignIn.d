@@ -1,0 +1,26 @@
+dependencies: \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/GoogleSignIn.build/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignIn.m \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDSignIn.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/TargetConditionals.modulemap \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/UIKit.framework/Modules/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignIn_Private.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDConfiguration.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDGoogleUser.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/GTMAppAuth.build/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/GTMSessionFetcher.build/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDProfileData.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDSignInResult.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDEMMSupport.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInInternalOptions.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInPreferences.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDCallbackQueue.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDScopes.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInCallbackSchemes.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDAuthStateMigration.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDEMMErrorHandler.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDGoogleUser_Private.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/AppAuth.build/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDProfileData_Private.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInResult_Private.h

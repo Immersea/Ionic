@@ -1,0 +1,133 @@
+{
+  "project_info": {
+    "project_number": "352375493863",
+    "firebase_url": "https://u-dive-cloud-prod.firebaseio.com",
+    "project_id": "u-dive-cloud-prod",
+    "storage_bucket": "u-dive-cloud-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352375493863:android:e983e2b872e1647bdffe42",
+        "android_client_info": {
+          "package_name": "cloud.udive.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352375493863-6gm864tl3v3mepoosvlum9h756ssqb76.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cloud.udive.app",
+            "certificate_hash": "cdad19fa96ebe2c330a73482b2022c420636786e"
+          }
+        },
+        {
+          "client_id": "352375493863-p8538os6pquiet2gfgujor7cpqr929kc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cloud.udive.app",
+            "certificate_hash": "0bcd85dc7119d73bb9e452bd202bbc732669e942"
+          }
+        },
+        {
+          "client_id": "352375493863-t4c4gn3tlda8ovu1dhis3skgbp9c9ugn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cloud.udive.app",
+            "certificate_hash": "57945b92dab2204c9fd0534ecb9f99fd45634d55"
+          }
+        },
+        {
+          "client_id": "352375493863-0bqndgfvdtgu884k4cgurp0vgulogt8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB5_rvfq5tBBUNGOLJL1Amgtkh_b9N2PA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352375493863-0bqndgfvdtgu884k4cgurp0vgulogt8d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "352375493863-8v0piro74739eqk8kvskka3bv5iiko6e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "cloud.udive.app",
+                "app_store_id": "1495155664"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352375493863:android:e60d1deb2f0eafc6dffe42",
+        "android_client_info": {
+          "package_name": "com.gue.decoplanner_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352375493863-343d0d1sajfdihsav1each5dse1dih15.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gue.decoplanner_mobile",
+            "certificate_hash": "0bcd85dc7119d73bb9e452bd202bbc732669e942"
+          }
+        },
+        {
+          "client_id": "352375493863-ggtaelbpee50i3h41ob0a8a8ur745q1e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gue.decoplanner_mobile",
+            "certificate_hash": "cdad19fa96ebe2c330a73482b2022c420636786e"
+          }
+        },
+        {
+          "client_id": "352375493863-lqt4v9dta48cs6vmqj4i1tic4347uq4p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gue.decoplanner_mobile",
+            "certificate_hash": "57945b92dab2204c9fd0534ecb9f99fd45634d55"
+          }
+        },
+        {
+          "client_id": "352375493863-0bqndgfvdtgu884k4cgurp0vgulogt8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB5_rvfq5tBBUNGOLJL1Amgtkh_b9N2PA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352375493863-0bqndgfvdtgu884k4cgurp0vgulogt8d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "352375493863-8v0piro74739eqk8kvskka3bv5iiko6e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "cloud.udive.app",
+                "app_store_id": "1495155664"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,56 @@
+app-sticky-search {
+  z-index: 10;
+  position: relative;
+  ion-searchbar {
+    opacity: 1;
+  }
+  ion-row {
+    --background: white;
+    width: 100%;
+    margin-top: -10000px; //out of screen
+    position: fixed;
+    padding-left: 10px;
+    padding-right: 10px;
+    opacity: 0.9;
+  }
+
+  .searchbar {
+    --background: #fff;
+    --icon-color: var(--ion-color-immersea);
+  }
+
+  .padding-ios {
+    padding-left: calc(50px + var(--ion-safe-area-left, 0px));
+    padding-right: 0px;
+    transition: 0.5s;
+  }
+
+  .padding-web {
+    padding-left: 0px;
+    padding-right: calc(40px + var(--ion-safe-area-right, 0px));
+    transition: 0.5s;
+  }
+
+  .searchbar-div {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: calc(8px + var(--ion-safe-area-top, 0px));
+    z-index: 3;
+    position: sticky;
+    top: 0px;
+  }
+
+  .searchbar-circle {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 50px;
+    border-color: var(--ion-color-immersea);
+    --box-shadow: 0px 0px;
+    transition: 0.5s;
+  }
+
+  .searchbar-nocircle {
+    --border-radius: 5px;
+    transition: 0.5s;
+  }
+}

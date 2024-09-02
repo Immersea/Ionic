@@ -1,0 +1,26 @@
+app-image-cache {
+  transform: inherit;
+  /* Component styles go here */
+  .cover-main {
+    transform: inherit;
+    position: relative;
+    background-color: var(--ion-color-tint);
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .cover-contain {
+    background-size: contain;
+  }
+
+  .cover-fill {
+    background-size: cover;
+  }
+
+  .cover-dimensions {
+    height: 100%;
+    width: 100%;
+    margin: "auto";
+  }
+}

@@ -1,0 +1,26 @@
+modal-user-details {
+  ion-grid {
+    height: 100%;
+    padding: 0;
+  }
+  ion-row {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .name {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 18pt;
+    color: #777;
+  }
+
+  .info {
+    margin-top: -5px;
+    margin-bottom: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11pt;
+    color: #aaa;
+  }
+}

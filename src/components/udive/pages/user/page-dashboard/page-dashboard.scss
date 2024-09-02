@@ -1,0 +1,17 @@
+page-dashboard {
+  .full-row {
+    min-height: 400px;
+    margin-bottom: 10px;
+  }
+  .half-row {
+    min-height: 200px;
+  }
+
+  .col-border {
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-mask-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border: 1px solid var(--ion-color-medium);
+  }
+}

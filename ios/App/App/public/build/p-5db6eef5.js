@@ -1,0 +1,2 @@
+import{W as e}from"./p-be6a132e.js";import"./p-cbe60c68.js";import"./p-c7ee7cfe.js";import"./p-694b8ade.js";class s extends e{async show(e){return undefined}async hide(e){return undefined}}export{s as SplashScreenWeb};
+//# sourceMappingURL=p-5db6eef5.js.map

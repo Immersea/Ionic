@@ -1,0 +1,25 @@
+page-client-details {
+  .cover {
+    height: var(--coverHeight);
+  }
+  ion-segment-button {
+    --color-checked: var(--ion-color-clients-contrast);
+  }
+  ion-badge {
+    margin-top: -15px;
+    margin-left: 10px;
+    font-size: 10px;
+  }
+  app-admin-dive-trips,
+  app-admin-diving-classes {
+    width: 100%;
+  }
+
+  .card-message {
+    width: 90%;
+    min-height: 150px;
+    ion-title {
+      padding-top: 60px;
+    }
+  }
+}

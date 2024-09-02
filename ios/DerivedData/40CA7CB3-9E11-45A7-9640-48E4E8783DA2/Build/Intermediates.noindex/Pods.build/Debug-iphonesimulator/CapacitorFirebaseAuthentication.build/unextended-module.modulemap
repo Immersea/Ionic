@@ -1,0 +1,10 @@
+framework module CapacitorFirebaseAuthentication {
+  umbrella header "CapacitorFirebaseAuthentication-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module CapacitorFirebaseAuthentication.__Swift {
+  exclude header "CapacitorFirebaseAuthentication-Swift.h"
+}

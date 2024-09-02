@@ -1,0 +1,171 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    //COMMON
+
+    //System and Advertising can be updated only by functions or SuperAdmin
+    match /system/{documents=**} {
+      allow read: if true
+      allow write: if get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"])
+    }
+
+    // translations write only to translators
+    match /translations/{documents=**} {
+      allow read: if true
+      allow write: if get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["translator"])
+    }
+
+    // temp translations allowed to everybody
+    match /temptranslations/{documents=**} {
+      allow read: if true
+      allow write: if true
+    }
+
+// user profiles can be updated and read only by user
+    match /userProfiles/{userId}/{documents=**} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    // user settings can be updated and read only by user
+    match /userSettings/{userId}/{documents=**} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    // user roles can be updated only by functions or SuperAdmin and read only by user
+    match /userRoles/{userId}/{documents=**} {
+      allow read: if request.auth.uid == userId || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;
+      allow write: if get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"])
+    }
+    //public user profiles can be updated only by functions and read only bu atuthenticated users
+    match /userPublicProfiles/{userId}/{documents=**} {
+      allow read: if request.auth!=null;
+      allow write: if false;
+    }
+    // chat messages can be updated only by chat users --- TBD
+    match /chats/{documents=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // reviews
+    match /reviews/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.userId == request.auth.uid ;
+      allow update: if resource.data.userId == request.auth.uid || get(/databases/$(database)/documents/$(resource.data.reviewed.collectionId)/$(resource.data.reviewed.id)).data.users[request.auth.uid].hasAny(["owner","editor"]); //update by user or by reviewd owner
+      allow delete: if resource.data.userId == request.auth.uid ;
+    }
+    //allow collection group access for queries
+    match /{path=**}/reviews/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+
+    //UDIVE
+    // user cards can be updated and read only by user
+    match /userCards/{userId}/{documents=**} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    // user dive plans summary can be updated only by functions or SuperAdmin and read only by user
+    match /userDivePlans/{userId}/{documents=**} {
+      allow read: if request.auth.uid == userId;
+      allow write: if get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"])
+    }
+    // user dive trips summary can be updated only by functions or SuperAdmin and read only by user
+    match /userDiveTrips/{userId}/{documents=**} {
+      allow read: if request.auth.uid == userId;
+      allow write: if get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"])
+    }
+    match /diveSites/{diveSiteId}/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.users[request.auth.uid].hasAny(["owner"]) ;//create only by new owner
+      allow update: if resource.data.users[request.auth.uid].hasAny(["editor","owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;//update only by exisiting editors or owners
+      allow delete: if resource.data.users[request.auth.uid].hasAny(["owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]);//delete only by existing document owner
+    }
+    match /divePlans/{divePlanId}/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.users[request.auth.uid].hasAny(["owner"]) ;//create only by new owner
+      allow update: if resource.data.users[request.auth.uid].hasAny(["editor","owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;//update only by exisiting editors or owners
+      allow delete: if resource.data.users[request.auth.uid].hasAny(["owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]);//delete only by existing document owner
+    }
+    match /divingCenters/{divingCenterId}/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.users[request.auth.uid].hasAny(["owner"]) ;//create only by new owner
+       allow update: if resource.data.users[request.auth.uid].hasAny(["editor","owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;//update only by exisiting editors or owners
+      allow delete: if resource.data.users[request.auth.uid].hasAny(["owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]);//delete only by existing document owner
+    }
+    match /diveCommunities/{diveCommunityId}/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.users[request.auth.uid].hasAny(["owner"]) ;//create only by new owner
+       allow update: if resource.data.users[request.auth.uid].hasAny(["editor","owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;//update only by exisiting editors or owners
+      allow delete: if resource.data.users[request.auth.uid].hasAny(["owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]);//delete only by existing document owner
+   }
+    match /divingSchools/{diveSiteId}/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.users[request.auth.uid].hasAny(["owner"]) ;//create only by new owner
+      allow update: if resource.data.users[request.auth.uid].hasAny(["editor","owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;//update only by exisiting editors or owners
+      allow delete: if resource.data.users[request.auth.uid].hasAny(["owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]);//delete only by existing document owner
+    }
+    match /serviceCenters/{serviceCenterId}/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.users[request.auth.uid].hasAny(["owner"]) ;//create only by new owner
+      allow update: if resource.data.users[request.auth.uid].hasAny(["editor","owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;//update only by exisiting editors or owners
+      allow delete: if resource.data.users[request.auth.uid].hasAny(["owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]);//delete only by existing document owner
+   }
+    match /diveTrips/{diveTripId}/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.users[request.auth.uid].hasAny(["owner"]) ;//create only by new owner
+      allow update: if resource.data.users[request.auth.uid].hasAny(["editor","owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;//update only by exisiting editors or owners
+      allow delete: if resource.data.users[request.auth.uid].hasAny(["owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]);//delete only by existing document owner
+   }
+   match /divingClasses/{divingClassId}/{documents=**} {
+      allow read: if true;
+      allow create: if request.resource.data.users[request.auth.uid].hasAny(["owner"]) ;//create only by new owner
+      allow update: if resource.data.users[request.auth.uid].hasAny(["editor","owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]) ;//update only by exisiting editors or owners
+      allow delete: if resource.data.users[request.auth.uid].hasAny(["owner"]) || get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.roles.hasAny(["superAdmin"]);//delete only by existing document owner
+   }
+
+
+    //generated map Data
+    match /mapData/userPublicProfiles/{documents=**} {
+      allow read: if true;//request.auth!=null;
+      allow write: if false;
+    }
+    match /mapData/divingCenters/{documents=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /mapData/diveCommunities/{documents=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /mapData/diveSites/{documents=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /mapData/divingSchools/{documents=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /mapData/serviceCenters/{documents=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    //QUERIES
+    //allow collection group access for queries
+    match /{path=**}/availabilities/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /{path=**}/userPublicProfiles/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    //ALL OTHER DOCUMENTS
+    match /{document=**} {
+      allow read:  if false;
+      allow write:  if false;
+    }
+  }
+}

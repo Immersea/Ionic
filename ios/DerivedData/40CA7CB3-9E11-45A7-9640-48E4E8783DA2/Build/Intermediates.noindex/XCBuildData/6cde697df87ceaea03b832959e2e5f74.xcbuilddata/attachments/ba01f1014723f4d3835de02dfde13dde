@@ -1,0 +1,28 @@
+{
+  "" : {
+    "diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/CapacitorFilesystem-master.dia",
+    "emit-module-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/CapacitorFilesystem-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/CapacitorFilesystem-master-emit-module.dia",
+    "swift-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/CapacitorFilesystem-master.swiftdeps"
+  },
+  "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/Filesystem.swift" : {
+    "const-values" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/Filesystem.swiftconstvalues",
+    "dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/Filesystem.d",
+    "diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/Filesystem.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/Filesystem.o",
+    "llvm-bc" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/Filesystem.bc",
+    "object" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/Filesystem.o",
+    "swift-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/Filesystem.swiftdeps",
+    "swiftmodule" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/Filesystem~partial.swiftmodule"
+  },
+  "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemPlugin.swift" : {
+    "const-values" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/FilesystemPlugin.swiftconstvalues",
+    "dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/FilesystemPlugin.d",
+    "diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/FilesystemPlugin.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/FilesystemPlugin.o",
+    "llvm-bc" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/FilesystemPlugin.bc",
+    "object" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/FilesystemPlugin.o",
+    "swift-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/FilesystemPlugin.swiftdeps",
+    "swiftmodule" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorFilesystem.build/Objects-normal/arm64/FilesystemPlugin~partial.swiftmodule"
+  }
+}

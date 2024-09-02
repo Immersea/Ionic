@@ -1,0 +1,7 @@
+app-banner {
+  .bannerDiv {
+    width: var(--bannerWidth);
+    height: var(--bannerHeight);
+    background-color: var(--ion-color-tint);
+  }
+}

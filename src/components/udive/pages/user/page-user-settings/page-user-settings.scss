@@ -1,0 +1,12 @@
+page-user-settings {
+  .cover-header {
+    margin-top: var(--coverHeight);
+  }
+  ion-segment-button {
+    --color-checked: var(--ion-color-udive-contrast);
+  }
+  .nopaddingtop {
+    //remove for iOS
+    padding-top: 0px !important;
+  }
+}

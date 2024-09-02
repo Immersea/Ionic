@@ -1,0 +1,48 @@
+{
+  "" : {
+    "diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CapacitorCamera-master.dia",
+    "emit-module-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CapacitorCamera-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CapacitorCamera-master-emit-module.dia",
+    "swift-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CapacitorCamera-master.swiftdeps"
+  },
+  "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/camera/ios/Sources/CameraPlugin/CameraExtensions.swift" : {
+    "const-values" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraExtensions.swiftconstvalues",
+    "dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraExtensions.d",
+    "diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraExtensions.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraExtensions.o",
+    "llvm-bc" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraExtensions.bc",
+    "object" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraExtensions.o",
+    "swift-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraExtensions.swiftdeps",
+    "swiftmodule" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraExtensions~partial.swiftmodule"
+  },
+  "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/camera/ios/Sources/CameraPlugin/CameraPlugin.swift" : {
+    "const-values" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraPlugin.swiftconstvalues",
+    "dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraPlugin.d",
+    "diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraPlugin.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraPlugin.o",
+    "llvm-bc" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraPlugin.bc",
+    "object" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraPlugin.o",
+    "swift-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraPlugin.swiftdeps",
+    "swiftmodule" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraPlugin~partial.swiftmodule"
+  },
+  "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/camera/ios/Sources/CameraPlugin/CameraTypes.swift" : {
+    "const-values" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraTypes.swiftconstvalues",
+    "dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraTypes.d",
+    "diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraTypes.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraTypes.o",
+    "llvm-bc" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraTypes.bc",
+    "object" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraTypes.o",
+    "swift-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraTypes.swiftdeps",
+    "swiftmodule" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/CameraTypes~partial.swiftmodule"
+  },
+  "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/camera/ios/Sources/CameraPlugin/ImageSaver.swift" : {
+    "const-values" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/ImageSaver.swiftconstvalues",
+    "dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/ImageSaver.d",
+    "diagnostics" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/ImageSaver.dia",
+    "index-unit-output-path" : "/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/ImageSaver.o",
+    "llvm-bc" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/ImageSaver.bc",
+    "object" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/ImageSaver.o",
+    "swift-dependencies" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/ImageSaver.swiftdeps",
+    "swiftmodule" : "/Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCamera.build/Objects-normal/arm64/ImageSaver~partial.swiftmodule"
+  }
+}

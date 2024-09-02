@@ -1,0 +1,10 @@
+framework module CapacitorFirebaseFirestore {
+  umbrella header "CapacitorFirebaseFirestore-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module CapacitorFirebaseFirestore.__Swift {
+  exclude header "CapacitorFirebaseFirestore-Swift.h"
+}

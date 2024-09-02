@@ -1,0 +1,33 @@
+modal-dive-configuration {
+  .scrollx {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    .item {
+      flex: 0 0 0 0;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  input {
+    text-align: right;
+  }
+  .fixedLabel {
+    min-width: 80% !important;
+    max-width: 80% !important;
+  }
+  ion-item .item-inner {
+    box-shadow: none !important;
+    border-bottom: 1px solid #dedede !important;
+  }
+
+  .item-input .label-md,
+  .item-select .label-md,
+  .item-datetime .label-md {
+    color: rgb(0, 0, 0);
+  }
+}

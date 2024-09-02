@@ -1,0 +1,30 @@
+dependencies: \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/FirebaseAuth.build/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Storage/FIRAuthKeychainServices.m \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Storage/FIRAuthKeychainServices.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/os_availability.modulemap \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/Security.framework/Modules/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FirebaseCoreInternal.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/FirebaseCore.build/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIRAppInternal.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponent.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponentContainer.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponentType.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIRDependency.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIRHeartbeatLogger.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIRLibrary.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIRLogger.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseCore/Extension/FIROptionsInternal.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuth_Internal.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Interop/FIRAuthInterop.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthBackend.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthRPCRequest.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthRPCResponse.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuth.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthAPNSTokenType.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthErrors.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Storage/FIRAuthUserDefaults.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Utilities/FIRAuthErrorUtils.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRMultiFactorInfo.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/App/Pods/FirebaseAuth/FirebaseAuth/Sources/Utilities/FIRAuthInternalErrors.h

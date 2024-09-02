@@ -1,0 +1,29 @@
+page-login {
+  /* Component styles go here */
+  .apple {
+    --background: black;
+  }
+  .facebook {
+    --background: var(--facebook-color);
+  }
+  .google {
+    --background: var(--google-color);
+  }
+
+  .validation-error {
+    padding-left: 18px;
+    font-size: 0.7rem;
+    color: red;
+  }
+
+  .small {
+    font-size: 0.8rem;
+    color: var(--ion-color-tint);
+  }
+
+  .centered {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}

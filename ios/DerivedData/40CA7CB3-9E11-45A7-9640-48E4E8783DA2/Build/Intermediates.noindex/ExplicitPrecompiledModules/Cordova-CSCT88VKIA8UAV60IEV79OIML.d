@@ -1,0 +1,22 @@
+moduledependenciestarget: \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/ios/DerivedData/40CA7CB3-9E11-45A7-9640-48E4E8783DA2/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorCordova.build/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/CapacitorCordova.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/System/Library/Frameworks/UIKit.framework/Modules/module.modulemap \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/AppDelegate.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVViewController.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDV.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVAvailability.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVPlugin.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVPluginResult.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVCommandDelegate.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVInvokedUrlCommand.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/System/Library/Frameworks/WebKit.framework/Modules/module.modulemap \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVURLProtocol.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVScreenOrientationDelegate.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVWebViewProcessPoolFactory.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVCommandDelegateImpl.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVPluginManager.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVConfigParser.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/CDVPlugin+Resources.h \
+  /Users/lucapalezza/aruba/Development/IonicApps/Ionic/node_modules/@capacitor/ios/CapacitorCordova/CapacitorCordova/Classes/Public/NSDictionary+CordovaPreferences.h

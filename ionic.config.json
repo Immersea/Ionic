@@ -1,0 +1,8 @@
+{
+  "name": "DecoPlanner",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom",
+  "id": "cbf46ed1"
+}

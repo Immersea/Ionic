@@ -1,0 +1,54 @@
+app-upload-covers {
+  width: 100%;
+  ion-thumbnail {
+    position: relative;
+    margin-top: -100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    width: 100px;
+    height: 100px;
+    img {
+      border-radius: 50%;
+      padding: 0.08em;
+      border: solid 0.25em lightsteelblue;
+      background-color: white;
+    }
+    ion-button {
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      position: absolute !important;
+      color: #141414; // add a theme for better looks
+      font-size: 24px;
+    }
+  }
+  .cover {
+    position: relative;
+    height: var(--coverHeightModal);
+    background-color: lightblue;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+    ion-button {
+      bottom: 5%;
+      left: 10%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      color: #141414; // add a theme for better looks
+      font-size: 24px;
+    }
+  }
+
+  .save-item {
+    top: -150px;
+    text-align: center;
+    position: relative;
+    color: #494848;
+    font-size: 20px;
+  }
+}

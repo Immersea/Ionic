@@ -1,0 +1,66 @@
+app-user-cover {
+  width: 100%;
+
+  ion-grid {
+    height: 100%;
+    padding: 0;
+  }
+  ion-row {
+    align-items: center;
+    text-align: center;
+
+    height: 80%;
+    width: 100%;
+  }
+
+  .name {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 18pt;
+    color: #777;
+  }
+
+  .info {
+    margin-top: -5px;
+    margin-bottom: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11pt;
+    color: #aaa;
+  }
+
+  ion-thumbnail {
+    position: relative;
+    margin-top: -100px;
+    margin-bottom: 0;
+    width: 100px;
+    height: 100px;
+    img {
+      border-radius: 50%;
+      padding: 0.08em;
+      border: solid 0.25em lightsteelblue;
+      background-color: white;
+    }
+  }
+  .cover-main {
+    position: absolute;
+    background-color: lightblue;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-top: calc(-1 * var(--coverHeight));
+    height: var(--coverHeight);
+    width: 100%;
+    ion-button {
+      position: absolute;
+      right: 0px;
+    }
+    ion-menu-button {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      color: black;
+      mix-blend-mode: difference;
+    }
+  }
+}

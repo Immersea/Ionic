@@ -1,0 +1,24 @@
+modal-upload-image {
+  --width: 70% !important;
+  --height: 70% !important;
+  /* Ensure the size of the image fit the container perfectly */
+  img {
+    display: block;
+
+    /* This rule is very important, please don't ignore this */
+    max-width: 100%;
+  }
+
+  .rounded {
+    .cropper-view-box,
+    .cropper-face {
+      border-radius: 50%;
+    }
+  }
+
+  .drop-area {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+  }
+}

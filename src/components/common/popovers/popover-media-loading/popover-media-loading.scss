@@ -1,0 +1,18 @@
+popover-media-loading {
+  ion-note {
+    padding-left: 20px;
+  }
+
+  .drop-area {
+    width: 100%;
+  }
+  app-dragdrop-file {
+    p {
+      color: black !important;
+    }
+    #drop-area {
+      border: 2px dashed black !important;
+      height: 100px !important;
+    }
+  }
+}

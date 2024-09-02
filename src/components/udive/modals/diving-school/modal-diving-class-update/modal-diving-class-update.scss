@@ -1,0 +1,11 @@
+modal-diving-class-update {
+  ion-list {
+    width: 100%;
+  }
+  app-diving-class-schedule {
+    width: 100%;
+  }
+  ion-segment-button {
+    --color-checked: var(--ion-color-divingclass-contrast);
+  }
+}

@@ -1,0 +1,11 @@
+framework module CapacitorNetwork {
+  umbrella header "CapacitorNetwork-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module CapacitorNetwork.Swift {
+  header "CapacitorNetwork-Swift.h"
+  requires objc
+}
