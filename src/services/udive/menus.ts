@@ -1,19 +1,19 @@
-import {ADMINROUTE} from "../common/router";
-import {DIVECENTERSSCOLLECTION, DivingCentersService} from "./divingCenters";
-import {DivingSchoolsService, DIVESCHOOLSSCOLLECTION} from "./divingSchools";
+import { ADMINROUTE } from "../common/router";
+import { DIVECENTERSSCOLLECTION, DivingCentersService } from "./divingCenters";
+import { DivingSchoolsService, DIVESCHOOLSSCOLLECTION } from "./divingSchools";
 import {
   SERVICECENTERSCOLLECTION,
   ServiceCentersService,
 } from "./serviceCenters";
-import {UserService} from "../common/user";
-import {MenuService} from "../common/menus";
-import {UDiveFilterService} from "./ud-db-filter";
+import { UserService } from "../common/user";
+import { MenuService } from "../common/menus";
+import { UDiveFilterService } from "./ud-db-filter";
 import {
   DIVECOMMUNITIESCOLLECTION,
   DiveCommunitiesService,
 } from "./diveCommunities";
-import {Environment} from "../../global/env";
-import {orderBy} from "lodash";
+import { Environment } from "../../global/env";
+import { orderBy } from "lodash";
 
 export class MenuController {
   renderMenus(url) {
@@ -124,7 +124,7 @@ export class MenuController {
               text: "Deco Planner",
               url: "/deco-planner",
               iconType: "custom",
-              icon: "./assets/images/dp4.svg",
+              icon: "assets/images/dp4.svg",
             },
             {
               tag: "gas-blender",
@@ -155,7 +155,7 @@ export class MenuController {
               text: "Deco Planner",
               url: "/deco-planner",
               iconType: "custom",
-              icon: "./assets/images/dp4.svg",
+              icon: "assets/images/dp4.svg",
             },
             {
               tag: "logbook",
@@ -267,7 +267,7 @@ export class MenuController {
             text: "Deco Planner",
             url: "/deco-planner",
             iconType: "custom",
-            icon: "./assets/images/dp4.svg",
+            icon: "assets/images/dp4.svg",
           },
           {
             tag: "gas-blender",

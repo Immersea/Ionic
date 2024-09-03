@@ -1,7 +1,7 @@
-import {Capacitor} from "@capacitor/core";
-import {isPlatform} from "@ionic/core";
-import {ISDEV} from "./dev";
-import {AppNames, selectedApp} from "./env-apps";
+import { Capacitor } from "@capacitor/core";
+import { isPlatform } from "@ionic/core";
+import { ISDEV } from "./dev";
+import { AppNames, selectedApp } from "./env-apps";
 
 enum AppTitles {
   udive = "U-Dive",
@@ -183,14 +183,14 @@ class EnvController {
     let favicon = null;
     let touchicon = null;
     if (this.isUdive()) {
-      favicon = "./assets/icon/favicon_udive.ico";
-      touchicon = "./assets/icon/apple-touch-icon-udive.ico";
+      favicon = "assets/icon/favicon_udive.ico";
+      touchicon = "assets/icon/apple-touch-icon-udive.ico";
     } else if (this.isDecoplanner()) {
-      favicon = "./assets/icon/favicon_decoplanner.ico";
-      touchicon = "./assets/icon/apple-touch-icon-decoplanner.ico";
+      favicon = "assets/icon/favicon_decoplanner.ico";
+      touchicon = "assets/icon/apple-touch-icon-decoplanner.ico";
     } else if (this.isTrasteel()) {
-      favicon = "./assets/icon/favicon_trasteel.ico";
-      touchicon = "./assets/icon/apple-touch-icon-trasteel.ico";
+      favicon = "assets/icon/favicon_trasteel.ico";
+      touchicon = "assets/icon/apple-touch-icon-trasteel.ico";
     }
     let $favicon = document.querySelector(
       'link[rel="icon"]'

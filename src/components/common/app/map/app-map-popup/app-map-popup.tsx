@@ -1,4 +1,4 @@
-import {Component, h, Prop, Host, Element} from "@stencil/core";
+import { Component, h, Prop, Host, Element } from "@stencil/core";
 import {
   UserService,
   USERPUBLICPROFILECOLLECTION,
@@ -7,7 +7,7 @@ import {
   DiveSitesService,
   DIVESITESCOLLECTION,
 } from "../../../../../services/udive/diveSites";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
 import {
   DivingCentersService,
   DIVECENTERSSCOLLECTION,
@@ -20,8 +20,8 @@ import {
   ServiceCentersService,
   SERVICECENTERSCOLLECTION,
 } from "../../../../../services/udive/serviceCenters";
-import {MapDataDivingCenter} from "../../../../../interfaces/udive/diving-center/divingCenter";
-import {MapDataDiveSite} from "../../../../../interfaces/udive/dive-site/diveSite";
+import { MapDataDivingCenter } from "../../../../../interfaces/udive/diving-center/divingCenter";
+import { MapDataDiveSite } from "../../../../../interfaces/udive/dive-site/diveSite";
 import {
   DIVECOMMUNITIESCOLLECTION,
   DiveCommunitiesService,
@@ -30,7 +30,7 @@ import {
   CUSTOMERSCOLLECTION,
   CustomersService,
 } from "../../../../../services/trasteel/crm/customers";
-import {Environment} from "../../../../../global/env";
+import { Environment } from "../../../../../global/env";
 @Component({
   tag: "app-map-popup",
   styleUrl: "app-map-popup.scss",
@@ -200,7 +200,7 @@ export class AppMapPopup {
       <Host>
         {this.propObject.item.coverURL ? (
           <div
-            class="cover"
+            class='cover'
             style={
               this.propObject.item.coverURL
                 ? {
@@ -217,31 +217,31 @@ export class AppMapPopup {
               src={
                 this.propObject.item.photoURL
                   ? this.propObject.item.photoURL
-                  : "./assets/images/avatar.png"
+                  : "assets/images/avatar.png"
               }
             />
           </ion-thumbnail>
         ) : undefined}
-        <h2 class="center">{this.propObject.item.displayName}</h2>
-        <div class="center">
+        <h2 class='center'>{this.propObject.item.displayName}</h2>
+        <div class='center'>
           <ion-button
-            expand="full"
-            fill="outline"
-            color="dark"
+            expand='full'
+            fill='outline'
+            color='dark'
             onClick={() => this.openModal()}
           >
-            <my-transl tag="details" text="Details" />
+            <my-transl tag='details' text='Details' />
           </ion-button>
         </div>
         {this.propObject.collection == DIVESITESCOLLECTION ? (
-          <div class="center">
+          <div class='center'>
             <ion-button
-              expand="full"
-              fill="outline"
-              color="secondary"
+              expand='full'
+              fill='outline'
+              color='secondary'
               onClick={() => this.planDive()}
             >
-              <my-transl tag="plan-dive" text="Plan a Dive" />
+              <my-transl tag='plan-dive' text='Plan a Dive' />
             </ion-button>
           </div>
         ) : undefined}
@@ -250,30 +250,30 @@ export class AppMapPopup {
         this.userRoles &&
         this.userRoles.isSuperAdmin()
           ? [
-              <div class="center">
+              <div class='center'>
                 <ion-button
-                  expand="full"
-                  fill="outline"
-                  color="primary"
+                  expand='full'
+                  fill='outline'
+                  color='primary'
                   onClick={() => this.editModal()}
                 >
-                  <my-transl tag="edit" text="Edit" />
+                  <my-transl tag='edit' text='Edit' />
                 </ion-button>
               </div>,
-              <div class="center">
+              <div class='center'>
                 <ion-button
-                  expand="full"
-                  fill="outline"
-                  color="danger"
+                  expand='full'
+                  fill='outline'
+                  color='danger'
                   onClick={() => this.delete()}
                 >
-                  <my-transl tag="delete" text="Delete" />
+                  <my-transl tag='delete' text='Delete' />
                 </ion-button>
               </div>,
             ]
           : undefined}
 
-        <div class="margin"></div>
+        <div class='margin'></div>
       </Host>
     );
   }

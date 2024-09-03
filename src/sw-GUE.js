@@ -28,7 +28,7 @@ messaging.onBackgroundMessage(function (payload) {
   const notificationTitle = payload.data.title;
   const notificationOptions = {
     body: payload.data.body,
-    icon: "./assets/images/logo_decoplanner.png",
+    icon: "assets/images/logo_decoplanner.png",
     data: payload.data,
   };
 

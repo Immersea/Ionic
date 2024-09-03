@@ -1,4 +1,4 @@
-import {Capacitor} from "@capacitor/core";
+import { Capacitor } from "@capacitor/core";
 import {
   isSignInWithEmailLink,
   sendSignInLinkToEmail,
@@ -17,20 +17,21 @@ import {
   getAdditionalUserInfo,
   sendEmailVerification,
   OAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-import {auth} from "../../helpers/firebase";
-import {loadingController, alertController} from "@ionic/core";
-import {FirebaseAuthentication} from "@capacitor-firebase/authentication";
+import { auth } from "../../helpers/firebase";
+import { loadingController, alertController } from "@ionic/core";
+import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
 
-import {DatabaseService} from "./database";
-import {Environment} from "../../global/env";
-import {TranslationService} from "./translations";
-import {UserService} from "./user";
-import {UserProfile} from "../../interfaces/common/user/user-profile";
-import {SystemService} from "./system";
-import {UserRoles} from "../../interfaces/common/user/user-roles";
-import {UserSettings} from "../../interfaces/udive/user/user-settings";
-import {RouterService} from "./router";
+import { DatabaseService } from "./database";
+import { Environment } from "../../global/env";
+import { TranslationService } from "./translations";
+import { UserService } from "./user";
+import { UserProfile } from "../../interfaces/common/user/user-profile";
+import { SystemService } from "./system";
+import { UserRoles } from "../../interfaces/common/user/user-roles";
+import { UserSettings } from "../../interfaces/udive/user/user-settings";
+import { RouterService } from "./router";
 
 class AuthController {
   userProfile: UserProfile;
@@ -215,19 +216,37 @@ class AuthController {
     sendEmailVerification(auth.currentUser, this.actionCodeSettings);
   }
 
+  isElectron() {
+    return Capacitor.getPlatform() == "electron";
+  }
+
   async google() {
     await this.presentLoader();
-    // 1. Create credentials on the native layer
-    const result = await FirebaseAuthentication.signInWithGoogle();
-    if (Capacitor.isNativePlatform()) {
-      // 2. Sign in on the web layer using the id token
-      const credential = GoogleAuthProvider.credential(
-        result.credential?.idToken
-      );
-      const res = await signInWithCredential(auth, credential);
+    console.log("google");
+    if (this.isElectron()) {
+      //electron popup window
+      const provider = new GoogleAuthProvider();
+      console.log("isElectron", provider);
+      const res = await signInWithPopup(auth, provider);
+      //if (window!==undefined) {
+      //  window.location.href = "://"+res.user.
+      //}
       return this.providerHandler(res);
     } else {
-      return this.providerHandler(result);
+      console.log("Capacitor", Capacitor.getPlatform());
+
+      // 1. Create credentials on the native layer
+      const result = await FirebaseAuthentication.signInWithGoogle();
+      if (Capacitor.isNativePlatform()) {
+        // 2. Sign in on the web layer using the id token
+        const credential = GoogleAuthProvider.credential(
+          result.credential?.idToken
+        );
+        const res = await signInWithCredential(auth, credential);
+        return this.providerHandler(res);
+      } else {
+        return this.providerHandler(result);
+      }
     }
   }
 

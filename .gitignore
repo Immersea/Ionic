@@ -1,6 +1,7 @@
 node_modules/
 /vt/
 /electron-app/
+/electron/
 
 resources/ios/**/*
 resources/android/**/*

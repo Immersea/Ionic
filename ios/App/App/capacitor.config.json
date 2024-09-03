@@ -1,5 +1,5 @@
 {
-	"appId": "com.gue.decoplannermobile",
+	"appId": "com.gue.decoplanner-mobile",
 	"appName": "Decoplanner",
 	"webDir": "www",
 	"loggingBehavior": "production",
@@ -22,6 +22,15 @@
 				"apple.com"
 			]
 		}
+	},
+	"electron": {
+		"customUrlScheme": "immersea-electron",
+		"trayIconAndMenuEnabled": false,
+		"splashScreenEnabled": true,
+		"splashScreenImageName": "splash.png",
+		"hideMainWindowOnLaunch": false,
+		"deepLinkingEnabled": true,
+		"deepLinkingCustomProtocol": "immerseaapp"
 	},
 	"packageClassList": [
 		"FirebaseAuthenticationPlugin",

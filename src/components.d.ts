@@ -453,7 +453,7 @@ export namespace Components {
     collection: string;
     id: string;
     photoURL: string;
-    coverURL: string | {[coverId: string]: string};
+    coverURL: string | { [coverId: string]: string };
   };
         "showPhotoURL": boolean;
     }
@@ -3248,7 +3248,7 @@ declare namespace LocalJSX {
     collection: string;
     id: string;
     photoURL: string;
-    coverURL: string | {[coverId: string]: string};
+    coverURL: string | { [coverId: string]: string };
   };
         "onCoverUploaded"?: (event: AppUploadCoversCustomEvent<any>) => void;
         "showPhotoURL"?: boolean;

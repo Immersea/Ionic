@@ -1,6 +1,6 @@
-import {Component, State, h} from "@stencil/core";
-import {Environment} from "../../../../../global/env";
-import {SystemService} from "../../../../../services/common/system";
+import { Component, State, h } from "@stencil/core";
+import { Environment } from "../../../../../global/env";
+import { SystemService } from "../../../../../services/common/system";
 
 @Component({
   tag: "page-loading",
@@ -31,7 +31,7 @@ export class PageLoading {
         {false //old logo
           ? [
               <div
-                class="loading-logo"
+                class='loading-logo'
                 style={{
                   visibility: "visible",
                 }}
@@ -39,33 +39,33 @@ export class PageLoading {
                 <h1>{Environment.getAppTitle()}</h1>
               </div>,
               <img
-                src="./assets/css/loader.svg"
-                class="loading-svg"
-                alt="Loading..."
-                style={{visibility: "visible"}}
+                src='assets/css/loader.svg'
+                class='loading-svg'
+                alt='Loading...'
+                style={{ visibility: "visible" }}
               />,
             ]
           : undefined}
-        <ion-title class="loading-title ion-text-center" size="large">
+        <ion-title class='loading-title ion-text-center' size='large'>
           {Environment.getAppTitle()}
         </ion-title>
-        <ion-title class="loading-subtitle ion-text-center" size="small">
+        <ion-title class='loading-subtitle ion-text-center' size='small'>
           {Environment.getAppSubTitle()}
         </ion-title>
         <img
-          src={"./assets/images/" + Environment.getAppLogo()}
-          class="loading-svg"
-          alt="Loading..."
-          style={{visibility: "visible"}}
+          src={"assets/images/" + Environment.getAppLogo()}
+          class='loading-svg'
+          alt='Loading...'
+          style={{ visibility: "visible" }}
         />
         {this.network ? (
-          <ion-spinner class="loading-spinner" name="crescent"></ion-spinner>
+          <ion-spinner class='loading-spinner' name='crescent'></ion-spinner>
         ) : (
           [
-            <ion-title class="loading-alert ion-text-center" size="large">
+            <ion-title class='loading-alert ion-text-center' size='large'>
               NETWORK NOT AVAILABLE
             </ion-title>,
-            <ion-title class="loading-alert1 ion-text-center" size="large">
+            <ion-title class='loading-alert1 ion-text-center' size='large'>
               PLEASE TRY AGAIN LATER
             </ion-title>,
           ]

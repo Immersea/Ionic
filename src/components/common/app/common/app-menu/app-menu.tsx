@@ -1,15 +1,15 @@
-import {Component, h, State} from "@stencil/core";
-import {RouterService} from "../../../../../services/common/router";
-import {Environment} from "../../../../../global/env";
-import {UDiveMenuService} from "../../../../../services/udive/menus";
-import {MenuService} from "../../../../../services/common/menus";
-import {UserService} from "../../../../../services/common/user";
-import {alertController, isPlatform} from "@ionic/core";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {TrasteelMenuService} from "../../../../../services/trasteel/common/menus";
-import {Browser} from "@capacitor/browser";
-import {TranslationService} from "../../../../../services/common/translations";
-import {isArray} from "lodash";
+import { Component, h, State } from "@stencil/core";
+import { RouterService } from "../../../../../services/common/router";
+import { Environment } from "../../../../../global/env";
+import { UDiveMenuService } from "../../../../../services/udive/menus";
+import { MenuService } from "../../../../../services/common/menus";
+import { UserService } from "../../../../../services/common/user";
+import { alertController, isPlatform } from "@ionic/core";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { TrasteelMenuService } from "../../../../../services/trasteel/common/menus";
+import { Browser } from "@capacitor/browser";
+import { TranslationService } from "../../../../../services/common/translations";
+import { isArray } from "lodash";
 
 @Component({
   tag: "app-menu",
@@ -79,7 +79,7 @@ export class AppMenu {
           {
             text: TranslationService.getTransl("ok", "OK"),
             handler: async () => {
-              await Browser.open({url: item.externalUrl});
+              await Browser.open({ url: item.externalUrl });
             },
           },
         ],
@@ -90,18 +90,18 @@ export class AppMenu {
 
   render() {
     return (
-      <ion-split-pane content-id="menu-content" when={this.showMenu}>
-        <ion-menu content-id="menu-content" menuId="user">
+      <ion-split-pane content-id='menu-content' when={this.showMenu}>
+        <ion-menu content-id='menu-content' menuId='user'>
           <ion-header>
             <ion-toolbar color={this.headerColor}>
               <img
-                slot="start"
-                class="logo"
-                src={"./assets/images/" + Environment.getAppLogo()}
+                slot='start'
+                class='logo'
+                src={"assets/images/" + Environment.getAppLogo()}
               />
               <ion-title>{Environment.getAppTitle()}</ion-title>
               {Environment.getAppSubTitle() && !isPlatform("ios") ? (
-                <ion-title size="small">
+                <ion-title size='small'>
                   {Environment.getAppSubTitle()}
                 </ion-title>
               ) : undefined}
@@ -132,7 +132,7 @@ export class AppMenu {
             {this.userRoles ? (
               <app-user-cover
                 showUserDetails={false}
-                class="cover"
+                class='cover'
               ></app-user-cover>
             ) : undefined}
             {this.appMenu.map((list) => (
@@ -157,15 +157,15 @@ export class AppMenu {
                         }
                       >
                         {p.avatar ? (
-                          <ion-avatar slot="start">
+                          <ion-avatar slot='start'>
                             <img src={p.avatar} />
                           </ion-avatar>
                         ) : p.iconType && p.iconType !== "ionicon" ? (
                           p.iconType == "custom" ? (
-                            <ion-icon slot="start" src={p.icon}></ion-icon>
+                            <ion-icon slot='start' src={p.icon}></ion-icon>
                           ) : (
                             <ion-icon
-                              slot="start"
+                              slot='start'
                               class={
                                 p.iconType == "mapicon"
                                   ? "map-icon " + p.icon
@@ -176,7 +176,7 @@ export class AppMenu {
                             ></ion-icon>
                           )
                         ) : (
-                          <ion-icon slot="start" name={p.icon}></ion-icon>
+                          <ion-icon slot='start' name={p.icon}></ion-icon>
                         )}
 
                         <ion-label>
@@ -193,12 +193,12 @@ export class AppMenu {
             ))}
           </ion-content>
           <ion-footer>
-            <ion-title size="small">
+            <ion-title size='small'>
               {"version: " + Environment.getAppVersion()}
             </ion-title>
           </ion-footer>
         </ion-menu>
-        <ion-menu content-id="menu-content" menuId="admin">
+        <ion-menu content-id='menu-content' menuId='admin'>
           {this.adminMenu
             ? [
                 <ion-header>
@@ -208,9 +208,9 @@ export class AppMenu {
                         ? this.coverItemAdmin.displayName
                         : undefined}
                     </ion-title>
-                    <ion-buttons slot="start">
-                      <ion-button fill="clear" href="/">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    <ion-buttons slot='start'>
+                      <ion-button fill='clear' href='/'>
+                        <ion-icon name='arrow-back-outline'></ion-icon>
                       </ion-button>
                     </ion-buttons>
                   </ion-toolbar>
@@ -221,7 +221,7 @@ export class AppMenu {
                     this.coverItemAdmin.photoURL) ? (
                     <app-item-cover
                       item={this.coverItemAdmin}
-                      class="cover"
+                      class='cover'
                     ></app-item-cover>
                   ) : undefined}
                   <ion-list>
@@ -238,15 +238,15 @@ export class AppMenu {
                             }
                           >
                             {p.avatar ? (
-                              <ion-avatar slot="start">
+                              <ion-avatar slot='start'>
                                 <img src={p.avatar} />
                               </ion-avatar>
                             ) : p.iconType && p.iconType !== "ionicon" ? (
                               p.iconType == "custom" ? (
-                                <ion-icon slot="start" src={p.icon}></ion-icon>
+                                <ion-icon slot='start' src={p.icon}></ion-icon>
                               ) : (
                                 <ion-icon
-                                  slot="start"
+                                  slot='start'
                                   class={
                                     p.iconType == "mapicon"
                                       ? "map-icon " + p.icon
@@ -257,7 +257,7 @@ export class AppMenu {
                                 ></ion-icon>
                               )
                             ) : (
-                              <ion-icon slot="start" name={p.icon}></ion-icon>
+                              <ion-icon slot='start' name={p.icon}></ion-icon>
                             )}
 
                             <ion-label>
@@ -273,7 +273,7 @@ export class AppMenu {
                   </ion-list>
                 </ion-content>,
                 <ion-footer>
-                  <ion-title size="small">
+                  <ion-title size='small'>
                     {"version: " + Environment.getAppVersion()}
                   </ion-title>
                 </ion-footer>,
@@ -282,7 +282,7 @@ export class AppMenu {
         </ion-menu>
         <ion-router-outlet
           animated={true}
-          id="menu-content"
+          id='menu-content'
         ></ion-router-outlet>
       </ion-split-pane>
     );

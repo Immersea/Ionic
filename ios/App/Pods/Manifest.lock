@@ -37,9 +37,6 @@ PODS:
     - Capacitor
   - CapacitorSplashScreen (6.0.2):
     - Capacitor
-  - Firebase/Auth (10.25.0):
-    - Firebase/CoreOnly
-    - FirebaseAuth (~> 10.25.0)
   - Firebase/CoreOnly (10.25.0):
     - FirebaseCore (= 10.25.0)
   - Firebase/Messaging (10.25.0):
@@ -132,8 +129,6 @@ DEPENDENCIES:
   - "CapacitorNetwork (from `../../node_modules/@capacitor/network`)"
   - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
-  - Firebase/Auth (= 10.25.0)
-  - Firebase/CoreOnly (= 10.25.0)
   - Firebase/Messaging
 
 SPEC REPOS:
@@ -211,6 +206,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
 
-PODFILE CHECKSUM: f0755b16ef93866f4585f1aba81c7ebb1762617d
+PODFILE CHECKSUM: 219716a1423c6889bcec0b7e48b24b34f39ea2b4
 
 COCOAPODS: 1.15.2

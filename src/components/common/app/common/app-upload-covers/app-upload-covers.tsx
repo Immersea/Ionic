@@ -1,4 +1,4 @@
-import {Component, State, h, Prop, Event, EventEmitter} from "@stencil/core";
+import { Component, State, h, Prop, Event, EventEmitter } from "@stencil/core";
 import {
   UserService,
   USERPROFILECOLLECTION,
@@ -19,9 +19,9 @@ import {
   ServiceCentersService,
   SERVICECENTERSCOLLECTION,
 } from "../../../../../services/udive/serviceCenters";
-import {RouterService} from "../../../../../services/common/router";
-import {SYSTEMCOLLECTION} from "../../../../../services/common/system";
-import {StorageService} from "../../../../../services/common/storage";
+import { RouterService } from "../../../../../services/common/router";
+import { SYSTEMCOLLECTION } from "../../../../../services/common/system";
+import { StorageService } from "../../../../../services/common/storage";
 import {
   DIVECOMMUNITIESCOLLECTION,
   DiveCommunitiesService,
@@ -39,13 +39,13 @@ export class AppUploadCovers {
     collection: string;
     id: string;
     photoURL: string;
-    coverURL: string | {[coverId: string]: string};
+    coverURL: string | { [coverId: string]: string };
   };
 
   @Prop() showPhotoURL = true;
 
   @State() photoURL: string;
-  @State() coverURL: string | {[coverId: string]: string};
+  @State() coverURL: string | { [coverId: string]: string };
 
   @State() addressText: string;
 
@@ -91,7 +91,7 @@ export class AppUploadCovers {
                 this.item.coverURL = this.coverURL;
               }
             }
-            this.coverUploaded.emit({type: type, url: update});
+            this.coverUploaded.emit({ type: type, url: update });
             this.uploading = false;
           },
           "image/jpeg",
@@ -144,11 +144,11 @@ export class AppUploadCovers {
 
   render() {
     return [
-      this.uploading ? <ion-progress-bar type="indeterminate" /> : undefined,
+      this.uploading ? <ion-progress-bar type='indeterminate' /> : undefined,
       this.item
         ? [
             <div
-              class="cover"
+              class='cover'
               style={
                 this.item.coverURL
                   ? {
@@ -158,19 +158,19 @@ export class AppUploadCovers {
               }
             >
               <ion-button
-                fill="clear"
+                fill='clear'
                 icon-only
                 onClick={() => this.updatePhotoURL("cover")}
                 disabled={!this.item.id}
               >
-                <ion-icon name="camera" color="light" />
+                <ion-icon name='camera' color='light' />
               </ion-button>
             </div>,
             !this.item.id ? (
-              <div class="save-item">
+              <div class='save-item'>
                 <my-transl
-                  tag="save-item-error"
-                  text="Please save the item to upload pictures"
+                  tag='save-item-error'
+                  text='Please save the item to upload pictures'
                   isLabel
                 />
               </div>
@@ -181,16 +181,16 @@ export class AppUploadCovers {
                   src={
                     this.item.photoURL
                       ? this.item.photoURL
-                      : "./assets/images/avatar.png"
+                      : "assets/images/avatar.png"
                   }
                 />
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   icon-only
                   onClick={() => this.updatePhotoURL("photo")}
                   disabled={!this.item.id}
                 >
-                  <ion-icon name="camera" color="light" />
+                  <ion-icon name='camera' color='light' />
                 </ion-button>
               </ion-thumbnail>
             ) : undefined,

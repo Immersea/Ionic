@@ -1,6 +1,6 @@
-import {Component, h} from "@stencil/core";
-import {Environment} from "../../../../../global/env";
-import {RouterService} from "../../../../../services/common/router";
+import { Component, h } from "@stencil/core";
+import { Environment } from "../../../../../global/env";
+import { RouterService } from "../../../../../services/common/router";
 
 @Component({
   tag: "page-404",
@@ -9,15 +9,15 @@ import {RouterService} from "../../../../../services/common/router";
 export class Page404 {
   render() {
     return [
-      <app-navbar color={Environment.getAppColor()} tag="404" text="404" />,
+      <app-navbar color={Environment.getAppColor()} tag='404' text='404' />,
       <ion-content>
-        <img class="logo" src={"./assets/images/" + Environment.getAppLogo()} />
-        <ion-item lines="none">
+        <img class='logo' src={"assets/images/" + Environment.getAppLogo()} />
+        <ion-item lines='none'>
           <ion-label>
             <h1>Page Not Found</h1>
           </ion-label>
         </ion-item>
-        <ion-item lines="none">
+        <ion-item lines='none'>
           <ion-label>
             <p>
               The page you are looking for might have been removed, had its name
@@ -26,7 +26,7 @@ export class Page404 {
           </ion-label>
         </ion-item>
         <ion-item
-          lines="none"
+          lines='none'
           button
           onClick={() => RouterService.push("/", "root")}
         >

@@ -1,5 +1,5 @@
-import {Config} from "@stencil/core";
-import {sass} from "@stencil/sass";
+import { Config } from "@stencil/core";
+import { sass } from "@stencil/sass";
 
 // https://stenciljs.com/docs/config
 const native = true; // CHANGE FOR NATIVE APPS to TRUE

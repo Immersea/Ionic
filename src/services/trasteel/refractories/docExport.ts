@@ -1,13 +1,13 @@
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
-import {saveAs} from "file-saver";
-import {Project} from "../../../interfaces/trasteel/refractories/projects";
-import {CustomersService} from "../crm/customers";
-import {isNaN, toNumber, upperCase} from "lodash";
-import {formatDate} from "date-fns";
-import {TranslationService} from "../../common/translations";
-import {ProjectsService} from "./projects";
-import {slugify} from "../../../helpers/utils";
+import { saveAs } from "file-saver";
+import { Project } from "../../../interfaces/trasteel/refractories/projects";
+import { CustomersService } from "../crm/customers";
+import { isNaN, toNumber, upperCase } from "lodash";
+import { formatDate } from "date-fns";
+import { TranslationService } from "../../common/translations";
+import { ProjectsService } from "./projects";
+import { slugify } from "../../../helpers/utils";
 
 export class DOCExportController {
   async loadTemplate(url: string) {
@@ -19,7 +19,7 @@ export class DOCExportController {
   async generateDocument(project: Project, lang = "en") {
     try {
       const arrayBuffer = await this.loadTemplate(
-        "./assets/trasteel/template.docx"
+        "assets/trasteel/template.docx"
       );
       const zip = new PizZip(arrayBuffer);
       const doc = new Docxtemplater(zip, {

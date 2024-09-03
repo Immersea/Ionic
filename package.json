@@ -10,13 +10,14 @@
   "scripts": {
     "start": "stencil build --dev --watch --serve",
     "start-prod": "npm run switch-to-prod && stencil build --watch --serve && npm run switch-to-dev",
-    "start-electron-dev": "npm run start && cp -r ./www/* ./electron-app/ && npm start --prefix ./electron-app",
+    "start-electron-dev": "npm run start && npx cap sync @capacitor-community/electron  && npx cap open @capacitor-community/electron",
+    "start-electron-prod": "npm run start-prod && npx cap sync @capacitor-community/electron  && npx cap open @capacitor-community/electron",
     "build-dev-android": "npm run switch-to-native && cp -r ./capacitor.config.android-dev.ts ./capacitor.config.ts && npx cap sync android && npx cap open android && npm start",
     "build-dev-ios": "npm run switch-to-native && cp -r ./capacitor.config.ios-dev.ts ./capacitor.config.ts && npx cap sync ios && npx cap open ios && npm start",
     "build-prod-android": "npm run switch-to-native && npm run start-prod && cp -r ./capacitor.config.android-prod.ts ./capacitor.config.ts && npx cap sync android && npx cap open android",
     "build-prod-ios": "npm run switch-to-native && npm run start-prod && cp -r ./capacitor.config.ios-prod.ts ./capacitor.config.ts && npx cap sync ios && npx cap open ios",
     "switch-to-trasteel": "cp -r ./src/index-trasteel.html ./src/index.html && cp -r ./src/global/env-apps-trasteel.ts ./src/global/env-apps.ts && cp -r ./firebase-trasteel.json ./firebase.json && firebase use trasteel-consumables",
-    "switch-to-guedecoplanner": "cp -r ./src/index-decoplanner.html ./src/index.html && cp -r ./src/global/env-apps-decoplanner.ts ./src/global/env-apps.ts && cp -r ./firebase-decoplanner.json ./firebase.json && firebase use udive",
+    "switch-to-decoplanner": "cp -r ./src/index-decoplanner.html ./src/index.html && cp -r ./src/global/env-apps-decoplanner.ts ./src/global/env-apps.ts && cp -r ./firebase-decoplanner.json ./firebase.json && firebase use udive",
     "switch-to-udive": "cp -r ./src/index-udive.html ./src/index.html && cp -r ./src/global/env-apps-udive.ts ./src/global/env-apps.ts && cp -r ./firebase-udive.json ./firebase.json && firebase use udive",
     "switch-to-dev": "cp -r ./src/global/dev-dev.ts ./src/global/dev.ts",
     "switch-to-prod": "cp -r ./src/global/dev-prod.ts ./src/global/dev.ts",
@@ -24,7 +25,7 @@
     "switch-to-pwa": "cp -r ./stencil.config.pwa.ts ./stencil.config.ts",
     "deploy-trasteel": "npm run switch-to-pwa && npm run start-prod && rm -r ./functions-trasteel/lib && firebase use trasteel-consumables && firebase deploy --only storage,rules,functions,firestore,hosting:trasteel-consumables",
     "deploy-udive": "npm run switch-to-pwa && npm run start-prod && rm -r ./functions-udive/lib && firebase use udive && firebase deploy --only storage,rules,functions,firestore,hosting:udive",
-    "deploy-guedecoplanner": "npm run switch-to-pwa && npm run start-prod && rm -r ./functions-udive/lib && firebase use udive && firebase deploy --only storage,rules,functions,firestore,hosting:guedecoplanner",
+    "deploy-decoplanner": "npm run switch-to-pwa && npm run start-prod && rm -r ./functions-udive/lib && firebase use udive && firebase deploy --only storage,rules,functions,firestore,hosting:guedecoplanner",
     "deploy-udive-hosting": "npm run switch-to-pwa && npm run start-prod && firebase use udive && firebase deploy --only hosting:udive ",
     "deploy-decoplanner-hosting": "npm run switch-to-pwa && npm run start-prod && firebase use udive && firebase deploy --only hosting:guedecoplanner && firebase deploy --only hosting:guedecoplanner ",
     "deploy-trasteel-hosting": "npm run switch-to-pwa && npm run start && firebase use trasteel-consumables && firebase deploy --only hosting:trasteel-consumables",
@@ -37,6 +38,7 @@
     "ionic:serve": "stencil build --dev"
   },
   "dependencies": {
+    "@capacitor-community/electron": "^5.0.1",
     "@capacitor-firebase/authentication": "^6.1.0",
     "@capacitor/android": "^6.1.2",
     "@capacitor/app": "^6.0.1",

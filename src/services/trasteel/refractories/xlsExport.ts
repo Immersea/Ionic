@@ -1,12 +1,12 @@
-import {Workbook, Worksheet} from "exceljs";
+import { Workbook, Worksheet } from "exceljs";
 import * as fs from "file-saver";
-import {Project} from "../../../interfaces/trasteel/refractories/projects";
+import { Project } from "../../../interfaces/trasteel/refractories/projects";
 import {
   AreaShape,
   Shape,
 } from "../../../interfaces/trasteel/refractories/shapes";
-import {FileSystemService} from "../../common/fileSystem";
-import {DatasheetsService} from "./datasheets";
+import { FileSystemService } from "../../common/fileSystem";
+import { DatasheetsService } from "./datasheets";
 import {
   cloneDeep,
   find,
@@ -19,21 +19,21 @@ import {
   upperCase,
   upperFirst,
 } from "lodash";
-import {CustomersService} from "../crm/customers";
+import { CustomersService } from "../crm/customers";
 import {
   convertCurrency,
   replaceAll,
   roundDecimals,
   slugify,
 } from "../../../helpers/utils";
-import {DatasheetProperty} from "../../../interfaces/trasteel/refractories/datasheets";
-import {Environment} from "../../../global/env";
-import {StorageService} from "../../common/storage";
-import {SystemService} from "../../common/system";
-import {ProjectsService} from "./projects";
-import {UserService} from "../../common/user";
-import {TranslationService} from "../../common/translations";
-import {actionSheetController, alertController} from "@ionic/core";
+import { DatasheetProperty } from "../../../interfaces/trasteel/refractories/datasheets";
+import { Environment } from "../../../global/env";
+import { StorageService } from "../../common/storage";
+import { SystemService } from "../../common/system";
+import { ProjectsService } from "./projects";
+import { UserService } from "../../common/user";
+import { TranslationService } from "../../common/translations";
+import { actionSheetController, alertController } from "@ionic/core";
 //documentation
 //https://github.com/exceljs/exceljs
 
@@ -85,7 +85,7 @@ export class XLSXExportController {
       lang
     );
     this.cloneWorksheet(workbook, quantityWorksheet, "Summary", {
-      properties: {tabColor: {argb: tabColor}},
+      properties: { tabColor: { argb: tabColor } },
     });
 
     this.saveWorkbook(
@@ -111,7 +111,7 @@ export class XLSXExportController {
       lang
     );
     this.cloneWorksheet(workbook, quantityWorksheet, "QT", {
-      properties: {tabColor: {argb: tabColor}},
+      properties: { tabColor: { argb: tabColor } },
     });
     //create assembly
     const assemblyWorksheet = await this.exportAssembly(
@@ -120,7 +120,7 @@ export class XLSXExportController {
       lang
     );
     this.cloneWorksheet(workbook, assemblyWorksheet, "AT", {
-      properties: {tabColor: {argb: tabColor}},
+      properties: { tabColor: { argb: tabColor } },
     });
 
     this.saveWorkbook(
@@ -276,8 +276,8 @@ export class XLSXExportController {
         row.getCell(7).numFmt = "0%";
         row.getCell(8).value = area.qtyPerSetPcs_num;
         row.getCell(9).value = area.qtyPerSetMT_num;
-        row.getCell(11).value = {formula: "$N$1*H" + (bricksAreaRow + 1)};
-        row.getCell(12).value = {formula: "$N$1*I" + (bricksAreaRow + 1)};
+        row.getCell(11).value = { formula: "$N$1*H" + (bricksAreaRow + 1) };
+        row.getCell(12).value = { formula: "$N$1*I" + (bricksAreaRow + 1) };
         row.getCell(14).value = 1000;
         row.getCell(15).value = {
           formula: "P" + (bricksAreaRow + 1) + "/K" + (bricksAreaRow + 1),
@@ -464,8 +464,8 @@ export class XLSXExportController {
             row.getCell(6).value = summary.weightPerPiece_num;
             row.getCell(8).value = summary.qtyPerSetPcs_num;
             row.getCell(9).value = summary.qtyPerSetMT_num;
-            row.getCell(11).value = {formula: "$N$1*H" + (massesRow + 1)};
-            row.getCell(12).value = {formula: "$N$1*I" + (massesRow + 1)};
+            row.getCell(11).value = { formula: "$N$1*H" + (massesRow + 1) };
+            row.getCell(12).value = { formula: "$N$1*I" + (massesRow + 1) };
             row.getCell(14).value = 1000;
             row.getCell(15).value = {
               formula: "P" + (bricksAreaRow + 1) + "/K" + (massesRow + 1),
@@ -608,10 +608,18 @@ export class XLSXExportController {
       masses
     ) {
       const row = worksheet.getRow(totRow);
-      row.getCell(8).value = {formula: "H" + totalBricks + "+H" + totalMasses};
-      row.getCell(9).value = {formula: "I" + totalBricks + "+I" + totalMasses};
-      row.getCell(12).value = {formula: "L" + totalBricks + "+L" + totalMasses};
-      row.getCell(16).value = {formula: "P" + totalBricks + "+P" + totalMasses};
+      row.getCell(8).value = {
+        formula: "H" + totalBricks + "+H" + totalMasses,
+      };
+      row.getCell(9).value = {
+        formula: "I" + totalBricks + "+I" + totalMasses,
+      };
+      row.getCell(12).value = {
+        formula: "L" + totalBricks + "+L" + totalMasses,
+      };
+      row.getCell(16).value = {
+        formula: "P" + totalBricks + "+P" + totalMasses,
+      };
     } else {
       //delete grand total
       worksheet.spliceRows(totRow - 1, 3);
@@ -665,7 +673,7 @@ export class XLSXExportController {
         const rowEl = worksheet.getRow(row);
         if (rowEl.getCell(4).value == quality) {
           //fill price reference
-          rowEl.getCell(14).value = {formula: "$H$" + summaryRow};
+          rowEl.getCell(14).value = { formula: "$H$" + summaryRow };
         }
       }
       summaryRow++;
@@ -936,10 +944,10 @@ export class XLSXExportController {
     //fill courses totals
     const cell = worksheet.getCell(7, bricksAreaColumn);
     cell.value = TranslationService.getTransl("total", "Total", null, lang);
-    cell.alignment = {vertical: "middle", horizontal: "center"};
+    cell.alignment = { vertical: "middle", horizontal: "center" };
     const cell1 = worksheet.getCell(13, bricksAreaColumn);
     cell1.value = "Pc";
-    cell1.alignment = {vertical: "middle", horizontal: "center"};
+    cell1.alignment = { vertical: "middle", horizontal: "center" };
 
     //count total courses
     const courses = [];
@@ -1041,7 +1049,7 @@ export class XLSXExportController {
             "E" + courseRow.toString(),
             actualCol + courseRow.toString()
           );
-          totCell.value = {formula};
+          totCell.value = { formula };
           //update formula for safety
           const safetyRow = worksheet.getRow(courseRow + 4);
           const safetyCell = safetyRow.getCell(index);
@@ -1068,7 +1076,7 @@ export class XLSXExportController {
             actualCol + (courseRow + 3).toString()
           );
 
-          safetyCell.value = {formula: formulaSafety};
+          safetyCell.value = { formula: formulaSafety };
 
           //update formula for weight
           const weightRow = worksheet.getRow(courseRow + 5);
@@ -1086,7 +1094,7 @@ export class XLSXExportController {
             "E" + (courseRow + 4).toString(),
             actualCol + (courseRow + 4).toString()
           );
-          weightCell.value = {formula: formulaWeight};
+          weightCell.value = { formula: formulaWeight };
 
           //update rings count
           const countRow = worksheet.getRow(courseRow + 11);
@@ -1104,7 +1112,7 @@ export class XLSXExportController {
             "E" + courseRow.toString(),
             actualCol + courseRow.toString()
           );
-          countCell.value = {formula: formulaCount};
+          countCell.value = { formula: formulaCount };
 
           //update rings formula
           const ringsRow = worksheet.getRow(courseRow + 12);
@@ -1168,10 +1176,10 @@ export class XLSXExportController {
       }
 
       worksheet.getCell(courseRow, 2).border = {
-        top: {style: "thin"},
-        left: {style: "medium"},
-        bottom: {style: "thin"},
-        right: {style: "medium"},
+        top: { style: "thin" },
+        left: { style: "medium" },
+        bottom: { style: "thin" },
+        right: { style: "medium" },
       };
 
       //formula total course
@@ -1185,8 +1193,8 @@ export class XLSXExportController {
         courseIndex == minVal ? "E" + courseRow : "E15",
         lastCol + courseRow
       );
-      totalCell.value = {formula: refCellFormula};
-      totalCell.alignment = {vertical: "middle", horizontal: "center"};
+      totalCell.value = { formula: refCellFormula };
+      totalCell.alignment = { vertical: "middle", horizontal: "center" };
       totalCell.numFmt = "0";
 
       courseRow++;
@@ -1273,7 +1281,7 @@ export class XLSXExportController {
             shape["specialShapeVolume"] = specialShapeVolume;
           }
           const group = shapeGroups[dwgId][dataSheetId];
-          if (!find(group, {position, shape})) {
+          if (!find(group, { position, shape })) {
             shapeGroups[dwgId][dataSheetId].push({
               shape,
               density: projectArea.density,
@@ -1872,7 +1880,7 @@ export class XLSXExportController {
       //this.mergeAllErrors();
       //add worksheet to workbook
       const clonedWorksheet = this.cloneWorksheet(workbook, worksheet, dwgId, {
-        properties: {tabColor: {argb: tabColor}},
+        properties: { tabColor: { argb: tabColor } },
         pageSetup: {
           fitToPage: true,
           fitToHeight: 1,
@@ -2099,7 +2107,7 @@ export class XLSXExportController {
           }
           const row = worksheet.getRow(startRowNumber);
           row.height = 17;
-          row.alignment = {vertical: "top", horizontal: "right"};
+          row.alignment = { vertical: "top", horizontal: "right" };
           this.mergeCells(worksheet, startRowNumber, 10, startRowNumber, 12);
           this.mergeCells(worksheet, startRowNumber, 13, startRowNumber, 14);
           worksheet.getRow(startRowNumber + 1).height = 1;
@@ -2125,12 +2133,15 @@ export class XLSXExportController {
           );
           const propertyDecimals = toNumber(dataSheetProperty.decimals);
           row.getCell("C").value = propertyDescLeft;
-          row.getCell("C").alignment = {vertical: "top", horizontal: "left"};
+          row.getCell("C").alignment = { vertical: "top", horizontal: "left" };
           row.getCell("H").value = propertyDescRight ? propertyDescRight : "";
-          row.getCell("H").alignment = {vertical: "top", horizontal: "left"};
+          row.getCell("H").alignment = { vertical: "top", horizontal: "left" };
           if (comments) {
             row.getCell("I").value = comments;
-            row.getCell("I").alignment = {vertical: "top", horizontal: "left"};
+            row.getCell("I").alignment = {
+              vertical: "top",
+              horizontal: "left",
+            };
             //row.getCell("N").style
             //merge cells
             this.mergeCells(
@@ -2143,7 +2154,7 @@ export class XLSXExportController {
           }
 
           row.getCell("O").value = propertyDimension;
-          row.getCell("O").alignment = {horizontal: "left", vertical: "top"};
+          row.getCell("O").alignment = { horizontal: "left", vertical: "top" };
           //cell format
           let numFmt;
           switch (propertyDecimals) {
@@ -2196,7 +2207,7 @@ export class XLSXExportController {
             "O",
           ].forEach((columnLetter) => {
             row.getCell(columnLetter).border = {
-              bottom: {style: "hair", color: {argb: "FF000000"}},
+              bottom: { style: "hair", color: { argb: "FF000000" } },
             };
           });
           startRowNumber = startRowNumber + 2;
@@ -2235,9 +2246,9 @@ export class XLSXExportController {
       this.mergeCells(worksheet, startRowNumber + 7, 3, startRowNumber + 7, 15);
       worksheet.getCell(startRowNumber + 7, 3).border = {
         top: {},
-        left: {style: "thin"},
+        left: { style: "thin" },
         bottom: {},
-        right: {style: "thin"},
+        right: { style: "thin" },
       };
       //add worksheet to workbook
       const clonedWorksheet = this.cloneWorksheet(
@@ -2250,7 +2261,7 @@ export class XLSXExportController {
             fitToHeight: 1,
             fitToWidth: 1,
           },
-          properties: {tabColor: {argb: tabColor}},
+          properties: { tabColor: { argb: tabColor } },
         }
       );
       clonedWorksheet.pageSetup.printArea = "A1:Q" + (startRowNumber + 10);
@@ -2336,7 +2347,7 @@ export class XLSXExportController {
     try {
       currencies = await convertCurrency();
     } catch (err) {
-      currencies = {rates: {USD: 1, CHF: 1}};
+      currencies = { rates: { USD: 1, CHF: 1 } };
       Environment.log("convertCurrency err", err);
     }
     if (currencies && currencies["rates"]) {
@@ -2368,7 +2379,7 @@ export class XLSXExportController {
         const actualCell = worksheet.getCell(itemRow, col);
         if (firstCellFormula) {
           const newFormula = replaceAll(firstCellFormula, firstRow, itemRow);
-          actualCell.value = {formula: newFormula};
+          actualCell.value = { formula: newFormula };
         } else {
           actualCell.value = firstCellValue;
         }
@@ -2427,7 +2438,7 @@ export class XLSXExportController {
         const cellFormula = cell.formula;
         if (cellFormula) {
           let newFormula = replaceAll(cellFormula, "30", itemRow + 3);
-          cell.value = {formula: newFormula};
+          cell.value = { formula: newFormula };
         }
       });
     }
@@ -2438,14 +2449,14 @@ export class XLSXExportController {
       const cellFormula = cell.formula;
       if (cellFormula) {
         let newFormula = replaceAll(cellFormula, "30", itemRow + 3);
-        cell.value = {formula: newFormula};
+        cell.value = { formula: newFormula };
       }
     });
     const cell = worksheet.getCell("AC19");
     const cellFormula = cell.formula;
     if (cellFormula) {
       let newFormula = replaceAll(cellFormula, "28", itemRow + 1);
-      cell.value = {formula: newFormula};
+      cell.value = { formula: newFormula };
     }
 
     //merge split cells
@@ -2490,7 +2501,7 @@ export class XLSXExportController {
         if (totalCellFormula) {
           let newFormula = replaceAll(totalCellFormula, "27", itemRow);
           newFormula = replaceAll(newFormula, "29", itemRow + 2);
-          totalCell.value = {formula: newFormula};
+          totalCell.value = { formula: newFormula };
         }
       });
 
@@ -2508,7 +2519,7 @@ export class XLSXExportController {
       const totalCellFormula = totalCell.formula;
       if (totalCellFormula) {
         let newFormula = replaceAll(totalCellFormula, "30", itemRow + 3);
-        totalCell.value = {formula: newFormula};
+        totalCell.value = { formula: newFormula };
       }
     });
     let cells = ["M6", "M7", "M9", "M15", "M16"];
@@ -2518,7 +2529,7 @@ export class XLSXExportController {
       const totalCellFormula = totalCell.formula;
       if (totalCellFormula) {
         let newFormula = replaceAll(totalCellFormula, "30", itemRow + 3);
-        totalCell.value = {formula: newFormula};
+        totalCell.value = { formula: newFormula };
       }
     });
     cells = ["M8"];
@@ -2528,7 +2539,7 @@ export class XLSXExportController {
       const totalCellFormula = totalCell.formula;
       if (totalCellFormula) {
         let newFormula = replaceAll(totalCellFormula, "34", itemRow + 7);
-        totalCell.value = {formula: newFormula};
+        totalCell.value = { formula: newFormula };
       }
     });
     cells = ["M14"];
@@ -2538,24 +2549,24 @@ export class XLSXExportController {
       const totalCellFormula = totalCell.formula;
       if (totalCellFormula) {
         let newFormula = replaceAll(totalCellFormula, "32", itemRow + 5);
-        totalCell.value = {formula: newFormula};
+        totalCell.value = { formula: newFormula };
       }
     });
 
     const totalCell32 = worksheet.getCell("S" + (itemRow + 5));
     const totalCellFormula32 = totalCell32.formula;
     let newFormula32 = replaceAll(totalCellFormula32, "30", itemRow + 3);
-    totalCell32.value = {formula: newFormula32};
+    totalCell32.value = { formula: newFormula32 };
     const totalCell33 = worksheet.getCell("S" + (itemRow + 6));
     const totalCellFormula33 = totalCell33.formula;
     let newFormula33 = replaceAll(totalCellFormula33, "30", itemRow + 3);
     newFormula33 = replaceAll(newFormula33, "32", itemRow + 5);
-    totalCell33.value = {formula: newFormula33};
+    totalCell33.value = { formula: newFormula33 };
     const totalCell34 = worksheet.getCell("S" + (itemRow + 7));
     const totalCellFormula34 = totalCell34.formula;
     let newFormula34 = replaceAll(totalCellFormula34, "30", itemRow + 3);
     newFormula34 = replaceAll(newFormula34, "33", itemRow + 6);
-    totalCell34.value = {formula: newFormula34};
+    totalCell34.value = { formula: newFormula34 };
 
     this.mergeCells(worksheet, itemRow + 5, "S", itemRow + 5, "W");
     this.mergeCells(worksheet, itemRow + 6, "S", itemRow + 6, "Z");
@@ -2568,13 +2579,13 @@ export class XLSXExportController {
     this.mergeCells(worksheet, itemRow + 5, "AW", itemRow + 7, "AX");
     this.mergeCells(worksheet, itemRow + 5, "BB", itemRow + 7, "BC");
     this.cloneWorksheet(workbook, worksheet, "Budget", {
-      properties: {tabColor: {argb: tabColor}},
+      properties: { tabColor: { argb: tabColor } },
     });
 
     //get master codes
     const mcWorksheet = cloneDeep(template.getWorksheet("Master Codes"));
     this.cloneWorksheet(workbook, mcWorksheet, "Master Codes", {
-      properties: {tabColor: {argb: tabColor}},
+      properties: { tabColor: { argb: tabColor } },
     });
 
     this.saveWorkbook(
@@ -2700,7 +2711,7 @@ export class XLSXExportController {
     }
 
     this.cloneWorksheet(workbook, worksheet, "PO", {
-      properties: {tabColor: {argb: tabColor}},
+      properties: { tabColor: { argb: tabColor } },
     });
 
     this.saveWorkbook(
@@ -2831,7 +2842,7 @@ export class XLSXExportController {
     const sourceRow = worksheet.getRow(sourceRowNumber);
     const targetRow = worksheet.insertRow(targetRowNumber, []);
 
-    sourceRow.eachCell({includeEmpty: true}, (cell, colNumber) => {
+    sourceRow.eachCell({ includeEmpty: true }, (cell, colNumber) => {
       const targetCell = targetRow.getCell(colNumber);
       if (withValues) targetCell.value = cell.value; // Copy the value
       this.copyCellStyles(cell, targetCell); // Copy the style
@@ -2877,7 +2888,14 @@ export class XLSXExportController {
           col2
         );
     } catch (error) {
-      this.mergedCellsErrors.push({worksheet, row1, col1, row2, col2, border});
+      this.mergedCellsErrors.push({
+        worksheet,
+        row1,
+        col1,
+        row2,
+        col2,
+        border,
+      });
       Environment.log("mergeCells error", [
         worksheet,
         this.numberToColumn(this.columnToNumber(col1)) +
@@ -2966,10 +2984,10 @@ export class XLSXExportController {
     for (let row = startRow; row <= endRow; row++) {
       for (let col = startCol; col <= endCol; col++) {
         const border = {
-          top: top ? {style, color: {argb: color}} : null,
-          left: left ? {style, color: {argb: color}} : null,
-          bottom: bottom ? {style, color: {argb: color}} : null,
-          right: right ? {style, color: {argb: color}} : null,
+          top: top ? { style, color: { argb: color } } : null,
+          left: left ? { style, color: { argb: color } } : null,
+          bottom: bottom ? { style, color: { argb: color } } : null,
+          right: right ? { style, color: { argb: color } } : null,
         };
         worksheet.getCell(row, col).border = border;
       }
@@ -3061,8 +3079,8 @@ export class XLSXExportController {
           extension: "jpeg",
         });
         worksheet.addImage(imageId, {
-          tl: {col: col + 0.1, row: row + 0.1},
-          ext: {width: width, height: height},
+          tl: { col: col + 0.1, row: row + 0.1 },
+          ext: { width: width, height: height },
         });
         resolve(null);
       } catch (error) {
@@ -3075,7 +3093,7 @@ export class XLSXExportController {
   async importTemplate(): Promise<Workbook> {
     const template = new Workbook();
     const file = await (
-      await fetch("./assets/trasteel/template.xlsx")
+      await fetch("assets/trasteel/template.xlsx")
     ).arrayBuffer();
     await template.xlsx.load(file);
     return template;

@@ -1,11 +1,11 @@
-import {Component, h, Prop, State} from "@stencil/core";
-import {AuthService} from "../../../../../services/common/auth";
-import {TranslationService} from "../../../../../services/common/translations";
-import {alertController} from "@ionic/core";
-import {InputValidator} from "../../../../../interfaces/interfaces";
-import {RouterService} from "../../../../../services/common/router";
-import {Environment} from "../../../../../global/env";
-import {SystemService} from "../../../../../services/common/system";
+import { Component, h, Prop, State } from "@stencil/core";
+import { AuthService } from "../../../../../services/common/auth";
+import { TranslationService } from "../../../../../services/common/translations";
+import { alertController } from "@ionic/core";
+import { InputValidator } from "../../../../../interfaces/interfaces";
+import { RouterService } from "../../../../../services/common/router";
+import { Environment } from "../../../../../global/env";
+import { SystemService } from "../../../../../services/common/system";
 import {
   EmailAuthProvider,
   GoogleAuthProvider,
@@ -139,8 +139,8 @@ export class PageLostpsw {
     return [
       <app-navbar
         color={Environment.getAppColor()}
-        tag="forgot-psw"
-        text="Forgot Password"
+        tag='forgot-psw'
+        text='Forgot Password'
         back-button={true}
       ></app-navbar>,
       <ion-content
@@ -151,29 +151,29 @@ export class PageLostpsw {
           <app-banner
             scrollTopValue={this.scrollTop}
             heightPx={250}
-            link="./assets/images/friendship2SM.jpg"
+            link='assets/images/friendship2SM.jpg'
           ></app-banner>
         ) : undefined}
         <ion-grid>
           <ion-row>
             <ion-col>
               <app-form-item
-                label-tag="email"
-                label-text="Email"
-                name="emailpsw"
-                input-type="email"
+                label-tag='email'
+                label-text='Email'
+                name='emailpsw'
+                input-type='email'
                 onFormItemChanged={(ev) => this.inputHandler(ev)}
                 validator={["required", "email"]}
               ></app-form-item>
               <ion-button
                 margin-top
-                expand="block"
+                expand='block'
                 disabled={!this.emailpsw.valid}
                 onClick={() => this.checkEmail()}
               >
                 <my-transl
-                  tag="login-resetpsw"
-                  text="Reset my password"
+                  tag='login-resetpsw'
+                  text='Reset my password'
                 ></my-transl>
               </ion-button>
             </ion-col>

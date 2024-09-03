@@ -1,4 +1,4 @@
-import {Component, h, Prop, Host} from "@stencil/core";
+import { Component, h, Prop, Host } from "@stencil/core";
 
 @Component({
   tag: "app-item-cover",
@@ -14,7 +14,7 @@ export class AppItemCover {
         {this.item
           ? [
               <div
-                class="cover"
+                class='cover'
                 style={
                   this.item.coverURL
                     ? {
@@ -34,7 +34,7 @@ export class AppItemCover {
                     src={
                       this.item.photoURL
                         ? this.item.photoURL
-                        : "./assets/images/avatar.png"
+                        : "assets/images/avatar.png"
                     }
                     alt={this.item.displayName}
                   />

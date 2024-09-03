@@ -1,8 +1,8 @@
-import {Network} from "@capacitor/network";
-import {Component, h, State} from "@stencil/core";
-import {Environment} from "../../../../../global/env";
-import {InputValidator} from "../../../../../interfaces/interfaces";
-import {UserService} from "../../../../../services/common/user";
+import { Network } from "@capacitor/network";
+import { Component, h, State } from "@stencil/core";
+import { Environment } from "../../../../../global/env";
+import { InputValidator } from "../../../../../interfaces/interfaces";
+import { UserService } from "../../../../../services/common/user";
 
 @Component({
   tag: "page-support",
@@ -82,8 +82,8 @@ export class PageSupport {
     return [
       <ion-header>
         <app-navbar
-          tag="support"
-          text="Support"
+          tag='support'
+          text='Support'
           color={Environment.getAppColor()}
         ></app-navbar>
       </ion-header>,
@@ -95,56 +95,56 @@ export class PageSupport {
         <app-banner
           scrollTopValue={this.scrollTop}
           heightPx={250}
-          link="./assets/images/Jarrod-Stargate.jpg"
+          link='assets/images/Jarrod-Stargate.jpg'
         ></app-banner>
         <app-form-item
-          label-tag="email"
-          label-text="Email"
-          name="email"
-          lines="full"
+          label-tag='email'
+          label-text='Email'
+          name='email'
+          lines='full'
           value={this.email.value}
-          input-type="email"
+          input-type='email'
           onFormItemChanged={(ev) => this.inputHandler(ev)}
           onIsValid={() => this.checkFields()}
           validator={["required", "email"]}
         ></app-form-item>
         <app-form-item
-          label-tag="subject"
-          label-text="Subject"
-          name="subject"
-          lines="full"
+          label-tag='subject'
+          label-text='Subject'
+          name='subject'
+          lines='full'
           value={this.subject.value}
-          input-type="text"
+          input-type='text'
           onFormItemChanged={(ev) => this.inputHandler(ev)}
           onIsValid={() => this.checkFields()}
           validator={[
             "required",
             {
               name: "length",
-              options: {min: 5, max: null},
+              options: { min: 5, max: null },
             },
           ]}
         ></app-form-item>
         <app-form-item
-          label-tag="text"
-          label-text="Text"
-          name="body"
-          lines="full"
+          label-tag='text'
+          label-text='Text'
+          name='body'
+          lines='full'
           value={this.body.value}
-          input-type="text"
-          text-rows="10"
+          input-type='text'
+          text-rows='10'
           onFormItemChanged={(ev) => this.inputHandler(ev)}
           onIsValid={() => this.checkFields()}
           validator={[
             "required",
             {
               name: "length",
-              options: {min: 10, max: null},
+              options: { min: 10, max: null },
             },
           ]}
         ></app-form-item>
         <ion-button
-          expand="block"
+          expand='block'
           href={
             "mailto:decoplan@gue.com?subject=" +
             this.emailSubject +
@@ -154,8 +154,8 @@ export class PageSupport {
           onClick={() => this.messagesent()}
           disabled={!this.network || !this.send}
         >
-          <ion-icon name="send" slot="start"></ion-icon>
-          <my-transl tag="send" text="Send"></my-transl>
+          <ion-icon name='send' slot='start'></ion-icon>
+          <my-transl tag='send' text='Send'></my-transl>
         </ion-button>
       </ion-content>,
     ];

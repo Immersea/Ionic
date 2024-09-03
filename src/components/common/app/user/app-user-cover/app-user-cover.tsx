@@ -36,7 +36,6 @@ export class AppUserCover {
   }
 
   componentDidLoad() {
-    console.log("this.showCover", this.showCover, this.userProfile);
     //check if user is loaded or trigger local user
     if (!this.userProfile) {
       UserService.initLocalUser();
@@ -73,7 +72,7 @@ export class AppUserCover {
                 src={
                   this.userProfile.photoURL
                     ? this.userProfile.photoURL
-                    : "./assets/images/avatar.png"
+                    : "assets/images/avatar.png"
                 }
                 alt={this.userProfile.displayName}
               />
