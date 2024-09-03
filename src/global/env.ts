@@ -54,6 +54,8 @@ const firebase_settings = {
     measurementId: "G-D642PPJCHE",
     vapidKey:
       "BHUKjUbPorRLiLAkBHJIWpIbukBW2OZae40DArnshzhd4WCiS6PpBSXtULf9lXBolTTexGekINCZWaQ5-iQLYaY",
+    clientId:
+      "352375493863-6gm864tl3v3mepoosvlum9h756ssqb76.apps.googleusercontent.com",
   },
 };
 const siteUrls = {
@@ -117,6 +119,7 @@ class EnvController {
     $description.content = subtitle !== "" ? "-" + subtitle : "";
     return title;
   }
+
   public getAppSubTitle() {
     let subtitle = "";
     if (this.isUdive()) {
@@ -176,6 +179,25 @@ class EnvController {
       return AppVersions.decoplanner;
     } else if (this.isTrasteel()) {
       return AppVersions.trasteel;
+    }
+  }
+
+  public getElectronCustomUrl() {
+    if (this.isUdive()) {
+      return "udive-app";
+    } else if (this.isDecoplanner()) {
+      return "decoplanner-app";
+    } else if (this.isTrasteel()) {
+      return "trasteel-app";
+    }
+  }
+  public getElectronAppProtocol() {
+    if (this.isUdive()) {
+      return "udive-electron";
+    } else if (this.isDecoplanner()) {
+      return "decoplanner-electron";
+    } else if (this.isTrasteel()) {
+      return "trasteel-electron";
     }
   }
 

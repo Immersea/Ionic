@@ -1,4 +1,5 @@
 import { CapacitorElectronConfig } from "@capacitor-community/electron";
+import { ISDEV } from "./src/global/dev";
 
 const app_id = "com.gue.decoplanner-mobile";
 
@@ -8,11 +9,13 @@ const config: CapacitorElectronConfig = {
   appId: app_id,
   appName: app_name,
   webDir: "www",
-  loggingBehavior: "debug", //'none' | 'debug' | 'production';
-  server: {
-    url: "http://localhost:3333",
-    cleartext: true, // for Android
-  },
+  loggingBehavior: ISDEV ? "debug" : "production",
+  server: ISDEV
+    ? {
+        url: "http://localhost:3333",
+        cleartext: true, // for Android
+      }
+    : undefined,
   plugins: {
     PushNotifications: {
       presentationOptions: ["badge", "sound", "alert"],

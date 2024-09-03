@@ -222,19 +222,24 @@ class AuthController {
 
   async google() {
     await this.presentLoader();
-    console.log("google");
+    console.log(
+      "google",
+      this.isElectron(),
+      auth,
+      Capacitor.isNativePlatform()
+    );
     if (this.isElectron()) {
       //electron popup window
       const provider = new GoogleAuthProvider();
-      console.log("isElectron", provider);
+      console.log("isElectron", auth, provider, window);
       const res = await signInWithPopup(auth, provider);
-      //if (window!==undefined) {
-      //  window.location.href = "://"+res.user.
-      //}
+      console.log("res", res);
+      if (window !== undefined) {
+        window.location.href =
+          Environment.getElectronCustomUrl() + "://" + res.user.getIdToken();
+      }
       return this.providerHandler(res);
     } else {
-      console.log("Capacitor", Capacitor.getPlatform());
-
       // 1. Create credentials on the native layer
       const result = await FirebaseAuthentication.signInWithGoogle();
       if (Capacitor.isNativePlatform()) {

@@ -1,5 +1,5 @@
-import {initializeApp} from "firebase/app";
-import {getStorage} from "firebase/storage";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
 import {
   getAuth,
   indexedDBLocalPersistence,
@@ -12,21 +12,22 @@ import {
   persistentLocalCache,
   persistentMultipleTabManager,
 } from "firebase/firestore";
-import {getFunctions} from "firebase/functions";
+import { getFunctions } from "firebase/functions";
 //import {getMessaging} from "firebase/messaging";
-import {Environment} from "../global/env";
-import {Capacitor} from "@capacitor/core";
-import {getAnalytics} from "firebase/analytics";
+import { Environment } from "../global/env";
+import { Capacitor } from "@capacitor/core";
+import { getAnalytics } from "firebase/analytics";
 
 export const firebaseApp = initializeApp(Environment.getFirebaseSettings());
 
 function whichAuth() {
   let auth;
-  if (Capacitor.isNativePlatform()) {
+  if (Capacitor.isNativePlatform() && Capacitor.getPlatform() !== "electron") {
     auth = initializeAuth(firebaseApp, {
       persistence: indexedDBLocalPersistence,
     });
   } else {
+    console.log("getauth");
     auth = getAuth(firebaseApp);
   }
   return auth;
