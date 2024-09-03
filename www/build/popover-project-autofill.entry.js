@@ -1,6 +1,6 @@
 import { r as registerInstance, h, j as Host, k as getElement } from './index-d515af00.js';
 import './index-be90eba5.js';
-import { aq as AutoFillCourses } from './utils-cbf49763.js';
+import { aq as AutoFillCourses } from './utils-ced1e260.js';
 import { p as popoverController } from './overlays-b3ceb97d.js';
 import './utils-eff54c0c.js';
 import './animation-a35abe6a.js';
@@ -20,11 +20,11 @@ import './index-f47409f3.js';
 import './hardware-back-button-da755485.js';
 import './lodash-68d560b6.js';
 import './_commonjsHelpers-1a56c7bc.js';
-import './env-9be68260.js';
-import './map-dae4acde.js';
+import './env-c3ad5e77.js';
+import './map-fe092362.js';
 import './index-9b61a50b.js';
 import './user-cards-f5f720bb.js';
-import './customerLocation-71248eea.js';
+import './customerLocation-d18240cd.js';
 import './framework-delegate-779ab78c.js';
 
 const popoverProjectAutofillCss = "popover-project-autofill{}popover-project-autofill ion-list{min-height:300px}popover-project-autofill #project-grid ion-grid{--ion-grid-column-padding:0px}popover-project-autofill .separator{background-color:var(--ion-color-trasteel-tint)}popover-project-autofill #courses-grid .centered{display:flex;align-items:center;justify-content:center;text-align:center}popover-project-autofill #courses-grid ion-grid{--ion-grid-column-padding:2px;border-collapse:collapse;border-style:hidden}popover-project-autofill #courses-grid ion-grid .header{background-color:var(--ion-color-trasteel);font-weight:bold;color:var(--ion-color-trasteel-contrast)}popover-project-autofill #courses-grid ion-grid ion-col{border:1px solid black;border-bottom:0;border-right:0}popover-project-autofill #courses-grid ion-grid ion-col:last-child{border-right:1px solid black}popover-project-autofill #courses-grid ion-grid ion-row:last-child{border-bottom:1px solid black}";

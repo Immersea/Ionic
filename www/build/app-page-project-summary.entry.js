@@ -1,10 +1,10 @@
 import { r as registerInstance, h, j as Host } from './index-d515af00.js';
-import { j as CustomersService, ag as ProjectsService, T as TranslationService, aV as FileSaver_min, aO as slugify, aW as XLSXExportService } from './utils-cbf49763.js';
-import { T as TrasteelService } from './services-2650b7f8.js';
+import { j as CustomersService, ag as ProjectsService, T as TranslationService, aV as FileSaver_min, aO as slugify, aW as XLSXExportService } from './utils-ced1e260.js';
+import { T as TrasteelService } from './services-7994f696.js';
 import { c as commonjsGlobal, g as getDefaultExportFromCjs } from './_commonjsHelpers-1a56c7bc.js';
 import { l as lodash } from './lodash-68d560b6.js';
 import { d as dateFns } from './index-9b61a50b.js';
-import './env-9be68260.js';
+import './env-c3ad5e77.js';
 import './index-be90eba5.js';
 import './utils-eff54c0c.js';
 import './animation-a35abe6a.js';
@@ -24,9 +24,9 @@ import './index-f47409f3.js';
 import './hardware-back-button-da755485.js';
 import './overlays-b3ceb97d.js';
 import './framework-delegate-779ab78c.js';
-import './map-dae4acde.js';
+import './map-fe092362.js';
 import './user-cards-f5f720bb.js';
-import './customerLocation-71248eea.js';
+import './customerLocation-d18240cd.js';
 
 var docxtemplater = {exports: {}};
 

@@ -234,10 +234,7 @@ class AuthController {
       console.log("isElectron", auth, provider, window);
       const res = await signInWithPopup(auth, provider);
       console.log("res", res);
-      if (window !== undefined) {
-        window.location.href =
-          Environment.getElectronCustomUrl() + "://" + res.user.getIdToken();
-      }
+
       return this.providerHandler(res);
     } else {
       // 1. Create credentials on the native layer

@@ -1,10 +1,10 @@
 import { r as registerInstance, h, j as Host, k as getElement } from './index-d515af00.js';
-import { U as UserService, R as RouterService, c as DIVECENTERSSCOLLECTION, i as DivingCentersService, m as DIVESCHOOLSSCOLLECTION, n as DivingSchoolsService, k as SERVICECENTERSCOLLECTION, l as ServiceCentersService, a7 as slideHeight, ax as fabButtonTopMarginString } from './utils-cbf49763.js';
+import { U as UserService, R as RouterService, c as DIVECENTERSSCOLLECTION, i as DivingCentersService, m as DIVESCHOOLSSCOLLECTION, n as DivingSchoolsService, k as SERVICECENTERSCOLLECTION, l as ServiceCentersService, a7 as slideHeight, ax as fabButtonTopMarginString } from './utils-ced1e260.js';
 import { S as Swiper } from './swiper-a30cd476.js';
-import { E as Environment } from './env-9be68260.js';
+import { E as Environment } from './env-c3ad5e77.js';
 import './lodash-68d560b6.js';
 import './_commonjsHelpers-1a56c7bc.js';
-import './map-dae4acde.js';
+import './map-fe092362.js';
 import './index-9b61a50b.js';
 import './index-be90eba5.js';
 import './utils-eff54c0c.js';
@@ -26,7 +26,7 @@ import './hardware-back-button-da755485.js';
 import './overlays-b3ceb97d.js';
 import './framework-delegate-779ab78c.js';
 import './user-cards-f5f720bb.js';
-import './customerLocation-71248eea.js';
+import './customerLocation-d18240cd.js';
 
 const pageClientDetailsCss = "page-client-details .cover{height:var(--coverHeight)}page-client-details ion-segment-button{--color-checked:var(--ion-color-clients-contrast)}page-client-details ion-badge{margin-top:-15px;margin-left:10px;font-size:10px}page-client-details app-admin-dive-trips,page-client-details app-admin-diving-classes{width:100%}page-client-details .card-message{width:90%;min-height:150px}page-client-details .card-message ion-title{padding-top:60px}";
 

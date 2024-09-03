@@ -1,6 +1,6 @@
 import { r as registerInstance, l as createEvent, h, k as getElement } from './index-d515af00.js';
 import './index-be90eba5.js';
-import { T as TranslationService } from './utils-cbf49763.js';
+import { T as TranslationService } from './utils-ced1e260.js';
 import { l as lodash } from './lodash-68d560b6.js';
 import { a as alertController } from './overlays-b3ceb97d.js';
 import './utils-eff54c0c.js';
@@ -19,12 +19,12 @@ import './config-45217ee2.js';
 import './theme-6bada181.js';
 import './index-f47409f3.js';
 import './hardware-back-button-da755485.js';
-import './env-9be68260.js';
-import './map-dae4acde.js';
+import './env-c3ad5e77.js';
+import './map-fe092362.js';
 import './_commonjsHelpers-1a56c7bc.js';
 import './index-9b61a50b.js';
 import './user-cards-f5f720bb.js';
-import './customerLocation-71248eea.js';
+import './customerLocation-d18240cd.js';
 import './framework-delegate-779ab78c.js';
 
 const appDragdropFileCss = "app-dragdrop-file #drop-area{border:2px dashed white;border-radius:20px;width:90%;height:var(--coverHeight);margin:0 auto 0 auto;padding:20px;text-align:center;visibility:visible}app-dragdrop-file #drop-area.highlight{border-color:var(--ion-color-primary) !important;border-style:solid !important;border-width:5px !important}app-dragdrop-file p{margin-top:0;color:white}app-dragdrop-file ion-note{padding:0}app-dragdrop-file .my-form{text-align:center}app-dragdrop-file .button{display:inline-block;margin:20px 0 20px 0;padding:20px;background-color:var(--ion-color-primary);color:var(--ion-color-primary-contrast);cursor:pointer;border-radius:5px}app-dragdrop-file .button:hover{background:var(--ion-color-tertiary);color:var(--ion-color-tertiary-contrast)}app-dragdrop-file #fileElem{display:none}";

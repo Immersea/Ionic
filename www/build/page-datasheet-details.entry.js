@@ -1,10 +1,10 @@
 import { r as registerInstance, h } from './index-d515af00.js';
-import { B as SystemService, R as RouterService, O as DatasheetsService, T as TranslationService } from './utils-cbf49763.js';
+import { B as SystemService, R as RouterService, O as DatasheetsService, T as TranslationService } from './utils-ced1e260.js';
 import { S as Swiper } from './swiper-a30cd476.js';
-import { T as TrasteelService } from './services-2650b7f8.js';
+import { T as TrasteelService } from './services-7994f696.js';
 import { l as lodash } from './lodash-68d560b6.js';
-import { E as Environment } from './env-9be68260.js';
-import './map-dae4acde.js';
+import { E as Environment } from './env-c3ad5e77.js';
+import './map-fe092362.js';
 import './_commonjsHelpers-1a56c7bc.js';
 import './index-9b61a50b.js';
 import './index-be90eba5.js';
@@ -27,7 +27,7 @@ import './hardware-back-button-da755485.js';
 import './overlays-b3ceb97d.js';
 import './framework-delegate-779ab78c.js';
 import './user-cards-f5f720bb.js';
-import './customerLocation-71248eea.js';
+import './customerLocation-d18240cd.js';
 
 const pageDatasheetDetailsCss = "page-datasheet-details #properties-grid .centered{display:flex;align-items:center;justify-content:center;text-align:center}page-datasheet-details #properties-grid .showbool{--ion-grid-column-padding:1px}page-datasheet-details #properties-grid ion-grid{--ion-grid-column-padding:2px;border-collapse:collapse;border-style:hidden}page-datasheet-details #properties-grid ion-grid ion-row:first-child{background-color:var(--ion-color-trasteel);font-weight:bold;color:var(--ion-color-trasteel-contrast)}page-datasheet-details #properties-grid ion-grid ion-col{border:1px solid black;border-bottom:0;border-right:0}page-datasheet-details #properties-grid ion-grid ion-col:last-child{border-right:1px solid black}page-datasheet-details #properties-grid ion-grid ion-row:last-child{border-bottom:1px solid black}";
 

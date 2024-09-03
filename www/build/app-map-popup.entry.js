@@ -1,9 +1,9 @@
 import { r as registerInstance, h, j as Host, k as getElement } from './index-d515af00.js';
-import { U as UserService, c as DIVECENTERSSCOLLECTION, M as MapDataDivingCenter, d as DiveSitesService, e as DIVESITESCOLLECTION, h as MapDataDiveSite, i as DivingCentersService, C as CUSTOMERSCOLLECTION, j as CustomersService, k as SERVICECENTERSCOLLECTION, l as ServiceCentersService, m as DIVESCHOOLSSCOLLECTION, n as DivingSchoolsService, o as DIVECOMMUNITIESCOLLECTION, p as DiveCommunitiesService, q as USERPUBLICPROFILECOLLECTION } from './utils-cbf49763.js';
-import { E as Environment } from './env-9be68260.js';
+import { U as UserService, c as DIVECENTERSSCOLLECTION, M as MapDataDivingCenter, d as DiveSitesService, e as DIVESITESCOLLECTION, h as MapDataDiveSite, i as DivingCentersService, C as CUSTOMERSCOLLECTION, j as CustomersService, k as SERVICECENTERSCOLLECTION, l as ServiceCentersService, m as DIVESCHOOLSSCOLLECTION, n as DivingSchoolsService, o as DIVECOMMUNITIESCOLLECTION, p as DiveCommunitiesService, q as USERPUBLICPROFILECOLLECTION } from './utils-ced1e260.js';
+import { E as Environment } from './env-c3ad5e77.js';
 import './lodash-68d560b6.js';
 import './_commonjsHelpers-1a56c7bc.js';
-import './map-dae4acde.js';
+import './map-fe092362.js';
 import './index-9b61a50b.js';
 import './index-be90eba5.js';
 import './utils-eff54c0c.js';
@@ -25,7 +25,7 @@ import './hardware-back-button-da755485.js';
 import './overlays-b3ceb97d.js';
 import './framework-delegate-779ab78c.js';
 import './user-cards-f5f720bb.js';
-import './customerLocation-71248eea.js';
+import './customerLocation-d18240cd.js';
 
 const appMapPopupCss = "app-map-popup .margin{margin-bottom:10px}app-map-popup .center{text-align:center}app-map-popup h2{padding-left:5px;padding-right:5px}app-map-popup ion-thumbnail{position:relative;margin-top:-50px;margin-bottom:0;margin-right:auto;margin-left:auto;width:50px;height:50px}app-map-popup ion-thumbnail img{border-radius:50%;padding:0.08em;border:solid 0.25em lightsteelblue;background-color:white}app-map-popup .cover{position:relative;background-color:lightblue;background-size:cover;background-position:center;background-repeat:no-repeat;overflow:hidden;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2);width:100%;height:80px}";
 

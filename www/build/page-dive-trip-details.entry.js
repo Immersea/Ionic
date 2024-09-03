@@ -1,8 +1,8 @@
 import { r as registerInstance, h, k as getElement } from './index-d515af00.js';
-import { a9 as DiveTripsService, U as UserService, aF as calculateColumns, a2 as mapHeight, R as RouterService } from './utils-cbf49763.js';
+import { a9 as DiveTripsService, U as UserService, aF as calculateColumns, a2 as mapHeight, R as RouterService } from './utils-ced1e260.js';
 import { S as Swiper } from './swiper-a30cd476.js';
 import { l as lodash } from './lodash-68d560b6.js';
-import './env-9be68260.js';
+import './env-c3ad5e77.js';
 import './index-be90eba5.js';
 import './utils-eff54c0c.js';
 import './animation-a35abe6a.js';
@@ -22,11 +22,11 @@ import './index-f47409f3.js';
 import './hardware-back-button-da755485.js';
 import './overlays-b3ceb97d.js';
 import './framework-delegate-779ab78c.js';
-import './map-dae4acde.js';
+import './map-fe092362.js';
 import './_commonjsHelpers-1a56c7bc.js';
 import './index-9b61a50b.js';
 import './user-cards-f5f720bb.js';
-import './customerLocation-71248eea.js';
+import './customerLocation-d18240cd.js';
 
 const pageDiveTripDetailsCss = "page-dive-trip-details ion-segment-button{--color-checked:var(--ion-color-divetrip-contrast)}page-dive-trip-details #chat-slide{width:100%;height:100%}";
 

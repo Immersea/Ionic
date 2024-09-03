@@ -1,12 +1,12 @@
 import { h, r as registerInstance, k as getElement } from './index-d515af00.js';
-import { U as UserService, C as CUSTOMERSCOLLECTION, A as ADMINROUTE, r as CONTACTSCOLLECTION, s as DATASHEETSCOLLECTION, P as PROJECTSCOLLECTION, t as SHAPESCOLLECTION, k as SERVICECENTERSCOLLECTION, m as DIVESCHOOLSSCOLLECTION, o as DIVECOMMUNITIESCOLLECTION, c as DIVECENTERSSCOLLECTION, N as NotificationsService, u as setCoverHeight, D as DatabaseService, v as auth, w as UserProfile, x as AuthService, y as UserRoles, z as UserSettings, B as SystemService, T as TranslationService, E as UDiveFilterService, F as TrasteelFilterService, R as RouterService } from './utils-cbf49763.js';
+import { U as UserService, C as CUSTOMERSCOLLECTION, A as ADMINROUTE, r as CONTACTSCOLLECTION, s as DATASHEETSCOLLECTION, P as PROJECTSCOLLECTION, t as SHAPESCOLLECTION, k as SERVICECENTERSCOLLECTION, m as DIVESCHOOLSSCOLLECTION, o as DIVECOMMUNITIESCOLLECTION, c as DIVECENTERSSCOLLECTION, N as NotificationsService, u as setCoverHeight, D as DatabaseService, v as auth, w as UserProfile, x as AuthService, y as UserRoles, z as UserSettings, B as SystemService, T as TranslationService, E as UDiveFilterService, F as TrasteelFilterService, R as RouterService } from './utils-ced1e260.js';
 import './index-be90eba5.js';
-import { r as registerPlugin, E as Environment } from './env-9be68260.js';
+import { r as registerPlugin, E as Environment } from './env-c3ad5e77.js';
 import { a as isPlatform } from './ionic-global-c07767bf.js';
-import { T as TrasteelService } from './services-2650b7f8.js';
+import { T as TrasteelService } from './services-7994f696.js';
 import './lodash-68d560b6.js';
 import './_commonjsHelpers-1a56c7bc.js';
-import './map-dae4acde.js';
+import './map-fe092362.js';
 import './index-9b61a50b.js';
 import './overlays-b3ceb97d.js';
 import './index-51ff1772.js';
@@ -16,7 +16,7 @@ import './framework-delegate-779ab78c.js';
 import './gesture-controller-a0857859.js';
 import './index-93ceac82.js';
 import './user-cards-f5f720bb.js';
-import './customerLocation-71248eea.js';
+import './customerLocation-d18240cd.js';
 import './utils-eff54c0c.js';
 import './animation-a35abe6a.js';
 import './index-222db2aa.js';
@@ -35,7 +35,7 @@ const PushNotifications = registerPlugin('PushNotifications', {});
 /// <reference types="@capacitor/cli" />
 
 const SplashScreen = registerPlugin('SplashScreen', {
-    web: () => import('./web-7902e978.js').then(m => new m.SplashScreenWeb()),
+    web: () => import('./web-fac9635a.js').then(m => new m.SplashScreenWeb()),
 });
 
 function init() {
