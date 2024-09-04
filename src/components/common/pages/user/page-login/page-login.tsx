@@ -79,13 +79,13 @@ export class PageLogin {
     }
   }
 
-  async facebookLogin() {
+  /*async facebookLogin() {
     try {
       await AuthService.facebook();
     } catch (error) {
       this.showAlert(error);
     }
-  }
+  }*/
 
   async appleLogin() {
     const alert = await alertController.create({
@@ -543,22 +543,6 @@ export class PageLogin {
                         <ion-icon name='logo-google' slot='start'></ion-icon>
                         {(this.newUserRegistration ? "Register" : "Login") +
                           " with Google"}
-                      </ion-button>
-                    </ion-col>
-                  </ion-row>
-                ) : undefined,
-                !this.disableFacebook ? (
-                  <ion-row>
-                    <ion-col>
-                      <ion-button
-                        expand='block'
-                        onClick={() => this.facebookLogin()}
-                        disabled={!this.network}
-                        class='facebook'
-                      >
-                        <ion-icon name='logo-facebook' slot='start'></ion-icon>
-                        {(this.newUserRegistration ? "Register" : "Login") +
-                          " with Facebook"}
                       </ion-button>
                     </ion-col>
                   </ion-row>

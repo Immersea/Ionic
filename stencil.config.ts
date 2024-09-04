@@ -2,7 +2,7 @@ import { Config } from "@stencil/core";
 import { sass } from "@stencil/sass";
 
 // https://stenciljs.com/docs/config
-const native = true; // CHANGE FOR NATIVE APPS to TRUE
+const native = false; // CHANGE FOR NATIVE APPS to TRUE
 
 export const config: Config = {
   outputTargets: [

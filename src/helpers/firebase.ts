@@ -27,7 +27,6 @@ function whichAuth() {
       persistence: indexedDBLocalPersistence,
     });
   } else {
-    console.log("getauth");
     auth = getAuth(firebaseApp);
   }
   return auth;

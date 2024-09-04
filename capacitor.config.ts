@@ -1,15 +1,24 @@
 import { CapacitorConfig } from "@capacitor/cli";
-
-const app_id = "cloud.udive.app"; //Environment.getBundleId();
-const app_name = "decoplanner"; //Environment.getAppTitle();
-const app_protocol = "decoplanner-app"; //Environment.getElectronAppProtocol();
-const app_custom_url = "decoplannerelectron"; //Environment.getElectronCustomUrl();
+enum AppNames {
+  udive = "udive",
+  decoplanner = "decoplanner",
+  trasteel = "trasteel",
+}
+enum bundleIds {
+  udive = "cloud.udive.app",
+  decoplanner_ios = "com.gue.decoplanner-mobile",
+  decoplanner_android = "cloud.udive.app",
+  decoplanner_web = "com.gue.decoplanner-mobile-web",
+  trasteel = "com.trasteel.app",
+}
+const app_id = bundleIds.decoplanner_android;
+const app_name = AppNames.decoplanner;
 
 const config: CapacitorConfig = {
   appId: app_id,
   appName: app_name,
   webDir: "www",
-  loggingBehavior: "debug",
+  loggingBehavior: "production", //'none' | 'debug' | 'production';
   plugins: {
     PushNotifications: {
       presentationOptions: ["badge", "sound", "alert"],

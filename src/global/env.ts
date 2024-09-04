@@ -1,7 +1,20 @@
 import { Capacitor } from "@capacitor/core";
 import { isPlatform } from "@ionic/core";
 import { ISDEV } from "./dev";
-import { AppNames, selectedApp } from "./env-apps";
+import { selectedApp } from "./env-apps";
+
+export enum AppNames {
+  udive = "udive",
+  decoplanner = "decoplanner",
+  trasteel = "trasteel",
+}
+export enum bundleIds {
+  udive = "cloud.udive.app",
+  decoplanner_ios = "com.gue.decoplanner-mobile",
+  decoplanner_android = "cloud.udive.app",
+  decoplanner_web = "com.gue.decoplanner-mobile-web",
+  trasteel = "com.trasteel.app",
+}
 
 enum AppTitles {
   udive = "U-Dive",
@@ -17,7 +30,7 @@ enum AppSubTitles {
 
 export enum AppVersions {
   udive = "beta 1.1.1",
-  decoplanner = "1.4.0",
+  decoplanner = "1.4.1",
   trasteel = "1.3.9",
 }
 
@@ -81,10 +94,10 @@ const bundleId = {
   TRASTEEL: "com.trasteel.app",
   UDIVE: "cloud.udive.app",
   DECOPLANNER: isPlatform("android")
-    ? "cloud.udive.app"
+    ? bundleIds.decoplanner_android
     : isPlatform("ios")
-      ? "com.gue.decoplanner-mobile"
-      : "com.gue.decoplanner-mobile-web",
+      ? bundleIds.decoplanner_ios
+      : bundleIds.decoplanner_web,
 };
 
 export const MAPBOX =

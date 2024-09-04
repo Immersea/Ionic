@@ -7,7 +7,6 @@ import {
   sendPasswordResetEmail,
   EmailAuthProvider,
   GoogleAuthProvider,
-  FacebookAuthProvider,
   signInWithCredential,
   onAuthStateChanged,
   signOut,
@@ -170,11 +169,11 @@ class AuthController {
       signInMethods.indexOf(GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD) != -1
     ) {
       return this.google();
-    } else if (
+    } /*else if (
       signInMethods.indexOf(FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD) != -1
     ) {
       return this.facebook();
-    } else if (signInMethods.length == 0) {
+    } */ else if (signInMethods.length == 0) {
       //new user
       await this.presentLoader();
       var result;
@@ -222,19 +221,10 @@ class AuthController {
 
   async google() {
     await this.presentLoader();
-    console.log(
-      "google",
-      this.isElectron(),
-      auth,
-      Capacitor.isNativePlatform()
-    );
     if (this.isElectron()) {
       //electron popup window
       const provider = new GoogleAuthProvider();
-      console.log("isElectron", auth, provider, window);
       const res = await signInWithPopup(auth, provider);
-      console.log("res", res);
-
       return this.providerHandler(res);
     } else {
       // 1. Create credentials on the native layer
@@ -252,7 +242,7 @@ class AuthController {
     }
   }
 
-  async facebook() {
+  /*async facebook() {
     await this.presentLoader();
     // 1. Create credentials on the native layer
     const result = await FirebaseAuthentication.signInWithFacebook();
@@ -266,25 +256,32 @@ class AuthController {
     } else {
       return this.providerHandler(result);
     }
-  }
+  }*/
 
   async apple() {
     await this.presentLoader();
-    // 1. Create credentials on the native layer
-    const result = await FirebaseAuthentication.signInWithApple({
-      skipNativeAuth: true,
-    });
-    if (Capacitor.isNativePlatform()) {
-      // 2. Sign in on the web layer using the id token and nonce
+    if (this.isElectron()) {
+      //electron-android popup window
       const provider = new OAuthProvider("apple.com");
-      const credential = provider.credential({
-        idToken: result.credential?.idToken,
-        rawNonce: result.credential?.nonce,
-      });
-      const res = await signInWithCredential(auth, credential);
+      const res = await signInWithPopup(auth, provider);
       return this.providerHandler(res);
     } else {
-      return this.providerHandler(result);
+      // 1. Create credentials on the native layer
+      const result = await FirebaseAuthentication.signInWithApple({
+        skipNativeAuth: true,
+      });
+      if (Capacitor.isNativePlatform()) {
+        // 2. Sign in on the web layer using the id token and nonce
+        const provider = new OAuthProvider("apple.com");
+        const credential = provider.credential({
+          idToken: result.credential?.idToken,
+          rawNonce: result.credential?.nonce,
+        });
+        const res = await signInWithCredential(auth, credential);
+        return this.providerHandler(res);
+      } else {
+        return this.providerHandler(result);
+      }
     }
   }
 
