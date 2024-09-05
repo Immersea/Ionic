@@ -2,6 +2,7 @@ import { Capacitor } from "@capacitor/core";
 import { isPlatform } from "@ionic/core";
 import { ISDEV } from "./dev";
 import { selectedApp } from "./env-apps";
+import { isElectron } from "../helpers/utils";
 
 export enum AppNames {
   udive = "udive",
@@ -15,10 +16,15 @@ export enum bundleIds {
   decoplanner_web = "com.gue.decoplanner-mobile-web",
   trasteel = "com.trasteel.app",
 }
+enum AppProtocols {
+  udive = "udiveapp",
+  decoplanner = "decoplannerapp",
+  trasteel = "trasteelapp",
+}
 
 enum AppTitles {
   udive = "U-Dive",
-  decoplanner = "Decoplanner",
+  decoplanner = "GUE Decoplanner",
   trasteel = "Trasteel",
 }
 
@@ -31,7 +37,7 @@ enum AppSubTitles {
 export enum AppVersions {
   udive = "beta 1.1.1",
   decoplanner = "1.4.1",
-  trasteel = "1.3.9",
+  trasteel = "1.4.0",
 }
 
 const firebase_settings = {
@@ -195,25 +201,6 @@ class EnvController {
     }
   }
 
-  public getElectronCustomUrl() {
-    if (this.isUdive()) {
-      return "udive-app";
-    } else if (this.isDecoplanner()) {
-      return "decoplanner-app";
-    } else if (this.isTrasteel()) {
-      return "trasteel-app";
-    }
-  }
-  public getElectronAppProtocol() {
-    if (this.isUdive()) {
-      return "udive-electron";
-    } else if (this.isDecoplanner()) {
-      return "decoplanner-electron";
-    } else if (this.isTrasteel()) {
-      return "trasteel-electron";
-    }
-  }
-
   public changeIcons() {
     let favicon = null;
     let touchicon = null;
@@ -274,7 +261,9 @@ class EnvController {
   }
 
   public getSiteUrl() {
-    if (this.isDev()) {
+    if (isElectron()) {
+      return this.getAppProtocol() + "://localhost";
+    } else if (this.isDev()) {
       return siteUrls.LOCALHOST;
     } else if (this.appName === AppNames.udive) {
       return siteUrls.UDIVE;
@@ -312,6 +301,16 @@ class EnvController {
       return bundleId.DECOPLANNER;
     } else if (this.appName === AppNames.trasteel) {
       return bundleId.TRASTEEL;
+    }
+  }
+
+  public getAppProtocol() {
+    if (this.appName === AppNames.udive) {
+      return AppProtocols.udive;
+    } else if (this.appName === AppNames.decoplanner) {
+      return AppProtocols.decoplanner;
+    } else if (this.appName === AppNames.trasteel) {
+      return AppProtocols.trasteel;
     }
   }
 

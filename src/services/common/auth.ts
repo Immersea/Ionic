@@ -31,6 +31,8 @@ import { SystemService } from "./system";
 import { UserRoles } from "../../interfaces/common/user/user-roles";
 import { UserSettings } from "../../interfaces/udive/user/user-settings";
 import { RouterService } from "./router";
+import { cloneDeep } from "lodash";
+import { isElectron } from "../../helpers/utils";
 
 class AuthController {
   userProfile: UserProfile;
@@ -44,7 +46,7 @@ class AuthController {
   showUserSettings = false;
 
   actionCodeSettings = {
-    url: Environment.getSiteUrl(), //send to user page
+    url: Environment.getSiteUrl(), //send to app page or electron app
     handleCodeInApp: true,
     iOS: {
       bundleId: Environment.getBundleId(),
@@ -60,6 +62,7 @@ class AuthController {
   constructor() {}
 
   init() {
+    console.log("this.actionCodeSettings.url ", this.actionCodeSettings.url);
     onAuthStateChanged(auth, (user) => {
       //wait for services and registration
       //only used for logout
@@ -94,11 +97,17 @@ class AuthController {
 
   async sendEmailLink(email: string) {
     await this.presentLoader();
-
-    DatabaseService.saveLocalDocument("emailForSignIn", email);
+    const actionCodeSettings = cloneDeep(this.actionCodeSettings);
+    if (isElectron()) {
+      actionCodeSettings.url += "/signin";
+    }
+    actionCodeSettings.url += "?email=" + encodeURIComponent(email);
+    console.log("actionCodeSettings", actionCodeSettings);
     return new Promise((resolve, reject) => {
       sendSignInLinkToEmail(auth, email, this.actionCodeSettings).then(
         () => {
+          // Store the email locally for when the link is clicked
+          DatabaseService.saveLocalDocument("emailForSignIn", email);
           this.dismissLoading();
           resolve(true);
         },
@@ -108,35 +117,6 @@ class AuthController {
         }
       );
     });
-  }
-
-  public async verifyEmailLink(url: string) {
-    const signin = isSignInWithEmailLink(auth, url);
-    if (signin) {
-      let email = await DatabaseService.getLocalDocument("emailForSignIn");
-      // if no email is found, ask for it again
-      if (!email) {
-        email = window.prompt("Please provide your email for confirmation");
-      }
-      let result;
-      if (Capacitor.isNativePlatform()) {
-        // The client SDK will parse the code from the link for you.
-        const credential = EmailAuthProvider.credentialWithLink(
-          email,
-          Environment.getDynamicLinkDomain()
-        );
-        result = await signInWithCredential(auth, credential);
-      } else {
-        result = await signInWithEmailLink(auth, email, url);
-      }
-
-      if (history && history.replaceState) {
-        history.replaceState({}, document.title, url.split("?")[0]);
-      }
-      DatabaseService.deleteLocalDocument("emailForSignIn");
-      return this.providerHandler(result);
-    }
-    return null;
   }
 
   async fetchSignInMethodsForEmail(email) {
@@ -211,17 +191,70 @@ class AuthController {
     }
   }
 
+  public checkLocationHref(url) {
+    const params = new URLSearchParams(url.search);
+    const email = params.get("email");
+    const link = url.href;
+
+    if (email && link) {
+      this.verifyEmailLink(email, link);
+    }
+  }
+
+  public async verifyEmailLink(email: string, link: string) {
+    const signin = isSignInWithEmailLink(auth, link);
+    console.log("verifyEmailLink", email, link, signin);
+    const emailForSignIn = "emailForSignIn";
+    if (signin) {
+      let email_stored = await DatabaseService.getLocalDocument(emailForSignIn);
+      if (email_stored && email_stored != email) {
+        //not the same email
+        SystemService.presentAlertError(
+          "You logged in with " +
+            email_stored +
+            " but authorisation if for " +
+            email +
+            ". Please try again!"
+        );
+      } else {
+        // if no email is found, ask for it again
+        //if (!email) {
+        //  email = window.prompt("Please provide your email for confirmation");
+        //}
+        let result;
+        try {
+          if (SystemService.isNative() && !isElectron()) {
+            // The client SDK will parse the code from the link for you.
+            const credential = EmailAuthProvider.credentialWithLink(
+              email,
+              Environment.getDynamicLinkDomain()
+            );
+            result = await signInWithCredential(auth, credential);
+          } else {
+            result = await signInWithEmailLink(auth, email, link);
+          }
+
+          if (history && history.replaceState) {
+            history.replaceState({}, document.title, link.split("?")[0]);
+          }
+          DatabaseService.deleteLocalDocument(emailForSignIn);
+          return this.providerHandler(result);
+        } catch (error) {
+          SystemService.presentAlertError(error);
+        }
+      }
+    }
+    DatabaseService.deleteLocalDocument(emailForSignIn);
+    return null;
+  }
+
   sendEmailVerification() {
     sendEmailVerification(auth.currentUser, this.actionCodeSettings);
   }
 
-  isElectron() {
-    return Capacitor.getPlatform() == "electron";
-  }
-
   async google() {
     await this.presentLoader();
-    if (this.isElectron()) {
+    if (isElectron()) {
       //electron popup window
       const provider = new GoogleAuthProvider();
       const res = await signInWithPopup(auth, provider);
@@ -260,8 +293,8 @@ class AuthController {
 
   async apple() {
     await this.presentLoader();
-    if (this.isElectron()) {
-      //electron-android popup window
+    if (isElectron()) {
+      //electron popup window
       const provider = new OAuthProvider("apple.com");
       const res = await signInWithPopup(auth, provider);
       return this.providerHandler(res);

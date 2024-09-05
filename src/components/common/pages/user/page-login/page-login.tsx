@@ -1,7 +1,7 @@
 import { Component, h, State } from "@stencil/core";
 import { AuthService } from "../../../../../services/common/auth";
 import { TranslationService } from "../../../../../services/common/translations";
-import { alertController, isPlatform } from "@ionic/core";
+import { alertController } from "@ionic/core";
 import { InputValidator } from "../../../../../interfaces/interfaces";
 import { RouterService } from "../../../../../services/common/router";
 import { DatabaseService } from "../../../../../services/common/database";
@@ -547,7 +547,7 @@ export class PageLogin {
                     </ion-col>
                   </ion-row>
                 ) : undefined,
-                !this.disableApple && !isPlatform("android") ? (
+                !this.disableApple && !SystemService.isAndroid() ? (
                   <ion-row>
                     <ion-col>
                       <ion-button

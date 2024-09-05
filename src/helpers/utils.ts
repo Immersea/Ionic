@@ -10,10 +10,10 @@ import {
   round,
   toNumber,
 } from "lodash";
-import {CURRENCY_API, LOCATIONIQ_GEOCODE} from "../global/env";
-import {SystemService} from "../services/common/system";
-import {LocationIQ} from "../services/common/map";
-import {differenceInMilliseconds, format, parseISO} from "date-fns";
+import { CURRENCY_API, LOCATIONIQ_GEOCODE } from "../global/env";
+import { SystemService } from "../services/common/system";
+import { LocationIQ } from "../services/common/map";
+import { differenceInMilliseconds, format, parseISO } from "date-fns";
 
 export function compareDates(a, b) {
   /*const date1 = moment(a);
@@ -110,7 +110,7 @@ export async function reverseGeocode(lat, lon): Promise<LocationIQ> {
 
 export function formatNumber(value: number, currency?: "EUR" | "USD"): string {
   if (!isNumber(toNumber(value))) value = 0;
-  const options = {style: "decimal", currency: null};
+  const options = { style: "decimal", currency: null };
   if (currency) {
     options.style = "currency";
     options.currency = currency;
@@ -464,7 +464,7 @@ export function isValidDate(dateString: string) {
 
 export function downloadJson(data: object, filename: string) {
   const jsonStr = JSON.stringify(data);
-  const blob = new Blob([jsonStr], {type: "application/json"});
+  const blob = new Blob([jsonStr], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -473,4 +473,13 @@ export function downloadJson(data: object, filename: string) {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+export function isElectron() {
+  // Check if the electronAPI is available
+  return (
+    typeof window !== "undefined" &&
+    window["electronAPI"] &&
+    window["electronAPI"].isElectron
+  );
 }

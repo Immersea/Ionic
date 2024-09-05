@@ -1,16 +1,16 @@
-import {BehaviorSubject, Observable} from "rxjs";
-import {DatabaseService} from "./database";
-import {TranslationService} from "./translations";
-import {alertController, loadingController} from "@ionic/core";
-import {orderBy} from "lodash";
-import {SystemPreference} from "../../interfaces/common/system/system";
-import {DivePlanModel} from "../../interfaces/udive/planner/dive-plan";
-import {Environment} from "../../global/env";
-import {RouterService} from "./router";
-import {Device, DeviceInfo} from "@capacitor/device";
-import {Network} from "@capacitor/network";
-import {TextMultilanguage} from "../../components";
-import {Capacitor} from "@capacitor/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { DatabaseService } from "./database";
+import { TranslationService } from "./translations";
+import { alertController, isPlatform, loadingController } from "@ionic/core";
+import { orderBy } from "lodash";
+import { SystemPreference } from "../../interfaces/common/system/system";
+import { DivePlanModel } from "../../interfaces/udive/planner/dive-plan";
+import { Environment } from "../../global/env";
+import { RouterService } from "./router";
+import { Device, DeviceInfo } from "@capacitor/device";
+import { Network } from "@capacitor/network";
+import { TextMultilanguage } from "../../components";
+import { Capacitor } from "@capacitor/core";
 
 export const SYSTEMCOLLECTION = "system";
 
@@ -281,25 +281,25 @@ class SystemController {
   getLanguages() {
     if (Environment.isUdive() || Environment.isDecoplanner()) {
       return [
-        {label: "English", value: "en", countryCode: "gb"},
-        {label: "Italiano", value: "it", countryCode: "it"},
-        {label: "Français", value: "fr", countryCode: "fr"},
-        {label: "Español", value: "es", countryCode: "es"},
-        {label: "Deutsch", value: "de", countryCode: "de"},
-        {label: "Português", value: "pt", countryCode: "pt"},
-        {label: "Svenska", value: "sv", countryCode: "se"},
-        {label: "Русский", value: "ru", countryCode: "ru"},
-        {label: "한국어", value: "ko", countryCode: "kr"},
-        {label: "中文", value: "zh", countryCode: "cn"},
+        { label: "English", value: "en", countryCode: "gb" },
+        { label: "Italiano", value: "it", countryCode: "it" },
+        { label: "Français", value: "fr", countryCode: "fr" },
+        { label: "Español", value: "es", countryCode: "es" },
+        { label: "Deutsch", value: "de", countryCode: "de" },
+        { label: "Português", value: "pt", countryCode: "pt" },
+        { label: "Svenska", value: "sv", countryCode: "se" },
+        { label: "Русский", value: "ru", countryCode: "ru" },
+        { label: "한국어", value: "ko", countryCode: "kr" },
+        { label: "中文", value: "zh", countryCode: "cn" },
       ];
     } else {
       return [
-        {label: "English", value: "en", countryCode: "en"},
-        {label: "Italiano", value: "it", countryCode: "it"},
-        {label: "Français", value: "fr", countryCode: "fr"},
-        {label: "Español", value: "es", countryCode: "es"},
-        {label: "Deutsch", value: "de", countryCode: "de"},
-        {label: "Русский", value: "ru", countryCode: "ru"},
+        { label: "English", value: "en", countryCode: "en" },
+        { label: "Italiano", value: "it", countryCode: "it" },
+        { label: "Français", value: "fr", countryCode: "fr" },
+        { label: "Español", value: "es", countryCode: "es" },
+        { label: "Deutsch", value: "de", countryCode: "de" },
+        { label: "Русский", value: "ru", countryCode: "ru" },
       ];
     }
   }
@@ -347,6 +347,18 @@ class SystemController {
       const isOnline = navigator.onLine;
       return isOnline;
     }
+  }
+
+  isAndroid() {
+    return Capacitor.getPlatform() == "android" || isPlatform("android");
+  }
+
+  isIOS() {
+    return Capacitor.getPlatform() == "ios" || isPlatform("ios");
+  }
+
+  isNative() {
+    return Capacitor.isNativePlatform();
   }
 }
 

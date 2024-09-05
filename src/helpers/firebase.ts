@@ -15,14 +15,15 @@ import {
 import { getFunctions } from "firebase/functions";
 //import {getMessaging} from "firebase/messaging";
 import { Environment } from "../global/env";
-import { Capacitor } from "@capacitor/core";
 import { getAnalytics } from "firebase/analytics";
+import { Capacitor } from "@capacitor/core";
+import { isElectron } from "./utils";
 
 export const firebaseApp = initializeApp(Environment.getFirebaseSettings());
 
 function whichAuth() {
   let auth;
-  if (Capacitor.isNativePlatform() && Capacitor.getPlatform() !== "electron") {
+  if (Capacitor.isNativePlatform() && isElectron()) {
     auth = initializeAuth(firebaseApp, {
       persistence: indexedDBLocalPersistence,
     });

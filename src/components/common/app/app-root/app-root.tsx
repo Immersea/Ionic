@@ -6,7 +6,7 @@ import { TranslationService } from "../../../../services/common/translations";
 import { UDiveFilterService } from "../../../../services/udive/ud-db-filter";
 import { RouterService, ADMINROUTE } from "../../../../services/common/router";
 import { SystemService } from "../../../../services/common/system";
-import { setCoverHeight } from "../../../../helpers/utils";
+import { isElectron, setCoverHeight } from "../../../../helpers/utils";
 import { UserProfile } from "../../../../interfaces/common/user/user-profile";
 import { UserRoles } from "../../../../interfaces/common/user/user-roles";
 import { UserSettings } from "../../../../interfaces/udive/user/user-settings";
@@ -162,7 +162,23 @@ export class AppRoot {
       DatabaseService.initServices();
 
       //check email link for user registration
-      await AuthService.verifyEmailLink(location.href);
+      if (!isElectron()) {
+        await AuthService.checkLocationHref(location.href);
+      } else {
+        // Ensure that the electronAPI is available before calling
+        console.log("window[electronAPI]", window["electronAPI"]);
+        if (
+          window["electronAPI"] &&
+          window["electronAPI"].onCheckLocationHref
+        ) {
+          // Listen for the 'check-location-href' event from Electron
+          window["electronAPI"].onCheckLocationHref((url: string) => {
+            console.log("Electron check-location-href", url);
+            // Call the AuthService's method
+            AuthService.checkLocationHref(url);
+          });
+        }
+      }
     } catch {
       //user never logged in
       //check network

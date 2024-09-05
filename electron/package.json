@@ -1,0 +1,57 @@
+{
+  "name": "trasteel-app",
+  "version": "1.4.0",
+  "main": "main.js",
+  "build": {
+    "appId": "com.trasteel.app",
+    "productName": "Trasteel",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "protocols": [
+        {
+          "name": "Trasteel Protocol",
+          "schemes": [
+            "trasteelapp"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "target": "nsis",
+      "protocols": [
+        {
+          "name": "Trasteel Protocol",
+          "schemes": [
+            "trasteelapp"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": "AppImage",
+      "protocols": [
+        {
+          "name": "Trasteel Protocol",
+          "schemes": [
+            "trasteelapp"
+          ]
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "start": "NODE_ENV=development electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Immersea s.r.l.",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "devDependencies": {
+    "electron": "^32.0.1",
+    "electron-builder": "^25.0.5"
+  }
+}
