@@ -1,0 +1,87 @@
+page-home {
+  ion-tabs {
+    // --------------Custom Semi Transparent & Rounded Tabs----------------------
+    ion-tab-bar {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      --background: transparent;
+      border-radius: 20px 20px 0 0;
+      --border: 0;
+      ion-tab-button {
+        --background: var(--ion-color-immersea);
+        --color: var(--ion-color-light);
+        --color-selected: var(--ion-color-immersea-contrast);
+      }
+    }
+    svg {
+      width: 78px;
+      margin-top: 16px;
+      path {
+        fill: var(--ion-color-immersea);
+      }
+    }
+
+    ion-tab-button.right {
+      margin-right: -1px;
+      margin-left: -2px;
+      border-top-right-radius: 20px;
+    }
+    ion-tab-button.left {
+      margin-left: -1px;
+      margin-right: -2px;
+      border-top-left-radius: 20px;
+    }
+  }
+
+  //animation
+  #occhio-1 {
+    animation: squeeze 2.4s infinite;
+  }
+  #occhio-2 {
+    animation: shift1 5s ease alternate infinite;
+  }
+  #occhio-3 {
+    animation: shift2 5s ease alternate infinite;
+  }
+  #occhio-4 {
+    animation: shift3 5s ease alternate infinite;
+  }
+
+  @keyframes shift1 {
+    0% {
+      cx: 15;
+    }
+    100% {
+      cx: 25;
+    }
+  }
+  @keyframes shift2 {
+    0% {
+      cx: 5;
+    }
+    100% {
+      cx: 15;
+    }
+  }
+  @keyframes shift3 {
+    0% {
+      cx: 0;
+    }
+    100% {
+      cx: 5;
+    }
+  }
+  @keyframes squeeze {
+    90% {
+      transform: none;
+      animation-timing-function: ease-in;
+    }
+    93% {
+      transform: translateY(3px) scaleY(0.8);
+    }
+    100% {
+      animation-timing-function: ease-out;
+    }
+  }
+}

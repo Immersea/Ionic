@@ -1,0 +1,18 @@
+app-immersea-profile {
+  height: 100%;
+  width: 100%;
+
+  .user-avatar {
+    padding-top: 60px;
+    padding-bottom: 20%;
+    font-size: large;
+  }
+  .menu-items {
+    ion-row {
+      padding-bottom: 40px;
+    }
+  }
+  ion-footer {
+    margin-top: -56px;
+  }
+}

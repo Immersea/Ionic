@@ -262,7 +262,11 @@ class EnvController {
 
   public getSiteUrl() {
     if (isElectron()) {
-      return this.getAppProtocol() + "://localhost";
+      return (
+        "https://" +
+        this.appName.toLocaleLowerCase() +
+        "-signin.web.app/finishSignIn"
+      );
     } else if (this.isDev()) {
       return siteUrls.LOCALHOST;
     } else if (this.appName === AppNames.udive) {

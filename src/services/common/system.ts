@@ -357,6 +357,10 @@ class SystemController {
     return Capacitor.getPlatform() == "ios" || isPlatform("ios");
   }
 
+  isWeb() {
+    return Capacitor.getPlatform() == "web" || isPlatform("pwa");
+  }
+
   isNative() {
     return Capacitor.isNativePlatform();
   }

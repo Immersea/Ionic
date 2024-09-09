@@ -163,20 +163,24 @@ export class AppRoot {
 
       //check email link for user registration
       if (!isElectron()) {
-        await AuthService.checkLocationHref(location.href);
+        await AuthService.signInLinkReceived(location.href);
       } else {
         // Ensure that the electronAPI is available before calling
-        console.log("window[electronAPI]", window["electronAPI"]);
-        if (
-          window["electronAPI"] &&
-          window["electronAPI"].onCheckLocationHref
-        ) {
-          // Listen for the 'check-location-href' event from Electron
-          window["electronAPI"].onCheckLocationHref((url: string) => {
-            console.log("Electron check-location-href", url);
-            // Call the AuthService's method
-            AuthService.checkLocationHref(url);
-          });
+        if (window["electronAPI"]) {
+          if (window["electronAPI"].onSignInLinkReceived) {
+            // Listen for the 'sign-in-link-received' event from Electron
+            window["electronAPI"].onSignInLinkReceived((url: string) => {
+              console.log("Electron sign-in-link-received", url);
+              // Call the AuthService's method
+              AuthService.signInLinkReceived(url);
+            });
+          }
+          if (window["electronAPI"].onMainLog) {
+            // Listen for logs from the main process
+            window["electronAPI"].onMainLog((log: string) => {
+              console.log("Received main process log:", log);
+            });
+          }
         }
       }
     } catch {

@@ -1,0 +1,30 @@
+{
+  "projects": {},
+  "targets": {
+    "trasteel-consumables": {
+      "hosting": {
+        "trasteel-signin": [
+          "trasteel-signin"
+        ],
+        "virtual-tours-imrs": [
+          "virtual-tours-imrs"
+        ],
+        "trasteel-consumables": [
+          "trasteel-consumables"
+        ]
+      }
+    },
+    "u-dive-cloud-prod": {
+      "hosting": {
+        "guedecoplanner": [
+          "guedecoplanner"
+        ],
+        "udive": [
+          "u-dive-cloud-prod"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

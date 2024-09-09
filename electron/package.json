@@ -5,8 +5,29 @@
   "build": {
     "appId": "com.trasteel.app",
     "productName": "Trasteel",
+    "files": [
+      "main.js",
+      "preload.js",
+      {
+        "from": "../www",
+        "to": "www",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "extraResources": [
+      {
+        "from": "../www",
+        "to": "resources/www"
+      }
+    ],
     "mac": {
       "category": "public.app-category.productivity",
+      "icon": "assets/icons/trasteel/icon512.png",
       "protocols": [
         {
           "name": "Trasteel Protocol",
@@ -18,6 +39,7 @@
     },
     "win": {
       "target": "nsis",
+      "icon": "assets/icons/trasteel/favicon.ico",
       "protocols": [
         {
           "name": "Trasteel Protocol",
@@ -29,6 +51,7 @@
     },
     "linux": {
       "target": "AppImage",
+      "icon": "assets/icons/trasteel/icon512.png",
       "protocols": [
         {
           "name": "Trasteel Protocol",

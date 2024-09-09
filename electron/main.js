@@ -1,10 +1,8 @@
 const {
   app,
   BrowserWindow,
-  protocol,
   ipcMain,
   shell,
-  dialog,
   Menu,
   globalShortcut,
 } = require("electron");
@@ -13,7 +11,7 @@ const httpServer = require("http-server");
 
 let mainWindow;
 let server;
-const port = 8091;
+const port = 8080;
 const host = "localhost";
 const AppProtocols = {
   udive: "udiveapp",
@@ -49,6 +47,11 @@ function getProtocolString() {
   }
 }
 
+function logData(str) {
+  console.log("logData: " + str);
+  mainWindow.webContents.send("main-log", `Main process: ` + str);
+}
+
 if (process.defaultApp) {
   if (process.argv.length >= 2) {
     app.setAsDefaultProtocolClient(getProtocolString(), process.execPath, [
@@ -74,7 +77,21 @@ if (!gotTheLock) {
 }
 //MAC-UNIX
 app.on("open-url", (event, url) => {
-  dialog.showErrorBox("Welcome Back", `You arrived from: ${url}`);
+  event.preventDefault();
+  logData("open-url" + url);
+  // Send the url to the renderer process through 'sign-in-link-received'
+  if (mainWindow) {
+    //SIGNIN
+    const urlParams = new URL(url);
+    const oobCode = urlParams.searchParams.get("oobCode");
+    const apiKey = urlParams.searchParams.get("apiKey");
+    const mode = urlParams.searchParams.get("mode");
+    // Log when the window is created
+    logData("oobCode " + oobCode);
+    if (oobCode && apiKey && mode) {
+      mainWindow.webContents.send("sign-in-link-received", url);
+    }
+  }
 });
 
 /*
@@ -82,18 +99,23 @@ START APP
 */
 
 function createWindow() {
-  // Start the local server
-  server = httpServer.createServer({
-    root: path.join(__dirname, "../www"),
-  });
+  // Start the local server in both development and production
+  const rootPath =
+    process.env.NODE_ENV === "development"
+      ? path.join(__dirname, "../www") // Development path
+      : path.join(__dirname, "www"); // Packaged path for production
+  server = httpServer.createServer({ root: rootPath });
 
-  server.listen(port, host, () => {
-    console.log("Server running at http://" + host + ":" + port + "/");
-  });
+  server.listen(port, host);
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    icon:
+      rootPath +
+      "/assets/icon/" +
+      appName.toLowerCase() +
+      "/apple-touch-icon.png", // Use the path to your icon
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false, // Important for security
@@ -114,6 +136,7 @@ function createWindow() {
       mainWindow.webContents.toggleDevTools();
     }
   });
+  logData("createWindow: " + host + port);
 }
 
 function appWhenReady() {
@@ -122,20 +145,6 @@ function appWhenReady() {
     app.setName(appName);
     const menu = Menu.buildFromTemplate(menuTemplate);
     Menu.setApplicationMenu(menu);
-
-    protocol.handle(getProtocolString(), (request, callback) => {
-      const url = request.url.splice(getProtocolString().length + 3); // Remove 'protocol://' from the URL
-      const parsedUrl = new URL(url);
-
-      // This is where you would handle the URL and pass the parameters to your app
-      if (mainWindow) {
-        console.log("Electron check-location-href", parsedUrl);
-        mainWindow.webContents.send("check-location-href", parsedUrl);
-      }
-
-      callback({ path: path.normalize(`${__dirname}/index.html`) });
-    });
-
     createWindow();
   });
 }
@@ -151,9 +160,7 @@ app.on("window-all-closed", () => {
 
 app.on("before-quit", () => {
   if (server) {
-    server.close(() => {
-      dialog.showErrorBox("Server closed");
-    });
+    server.close();
   }
 });
 

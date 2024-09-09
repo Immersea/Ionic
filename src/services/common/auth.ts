@@ -31,7 +31,6 @@ import { SystemService } from "./system";
 import { UserRoles } from "../../interfaces/common/user/user-roles";
 import { UserSettings } from "../../interfaces/udive/user/user-settings";
 import { RouterService } from "./router";
-import { cloneDeep } from "lodash";
 import { isElectron } from "../../helpers/utils";
 
 class AuthController {
@@ -62,7 +61,6 @@ class AuthController {
   constructor() {}
 
   init() {
-    console.log("this.actionCodeSettings.url ", this.actionCodeSettings.url);
     onAuthStateChanged(auth, (user) => {
       //wait for services and registration
       //only used for logout
@@ -97,12 +95,6 @@ class AuthController {
 
   async sendEmailLink(email: string) {
     await this.presentLoader();
-    const actionCodeSettings = cloneDeep(this.actionCodeSettings);
-    if (isElectron()) {
-      actionCodeSettings.url += "/signin";
-    }
-    actionCodeSettings.url += "?email=" + encodeURIComponent(email);
-    console.log("actionCodeSettings", actionCodeSettings);
     return new Promise((resolve, reject) => {
       sendSignInLinkToEmail(auth, email, this.actionCodeSettings).then(
         () => {
@@ -191,57 +183,56 @@ class AuthController {
     }
   }
 
-  public checkLocationHref(url) {
-    const params = new URLSearchParams(url.search);
-    const email = params.get("email");
-    const link = url.href;
-
-    if (email && link) {
+  async signInLinkReceived(url) {
+    // Create a URL object from the string
+    const parsedUrl = new URL(url);
+    const params = new URLSearchParams(parsedUrl.search);
+    // Extract the necessary parameters
+    const oobCode = params.get("oobCode");
+    const apiKey = params.get("apiKey");
+    const mode = params.get("mode");
+    const link =
+      Environment.getSiteUrl() +
+      "?oobCode=" +
+      oobCode +
+      "&apiKey=" +
+      apiKey +
+      "&mode=" +
+      mode;
+    console.log("signInLinkReceived", parsedUrl, link, oobCode);
+    if (link && oobCode) {
+      const email = await DatabaseService.getLocalDocument("emailForSignIn");
       this.verifyEmailLink(email, link);
     }
   }
 
-  public async verifyEmailLink(email: string, link: string) {
+  async verifyEmailLink(email: string, link: string) {
     const signin = isSignInWithEmailLink(auth, link);
     console.log("verifyEmailLink", email, link, signin);
     const emailForSignIn = "emailForSignIn";
     if (signin) {
-      let email_stored = await DatabaseService.getLocalDocument(emailForSignIn);
-      if (email_stored && email_stored != email) {
-        //not the same email
-        SystemService.presentAlertError(
-          "You logged in with " +
-            email_stored +
-            " but authorisation if for " +
-            email +
-            ". Please try again!"
-        );
-      } else {
-        // if no email is found, ask for it again
-        //if (!email) {
-        //  email = window.prompt("Please provide your email for confirmation");
-        //}
-        let result;
-        try {
-          if (SystemService.isNative() && !isElectron()) {
-            // The client SDK will parse the code from the link for you.
-            const credential = EmailAuthProvider.credentialWithLink(
-              email,
-              Environment.getDynamicLinkDomain()
-            );
-            result = await signInWithCredential(auth, credential);
-          } else {
-            result = await signInWithEmailLink(auth, email, link);
-          }
-
-          if (history && history.replaceState) {
-            history.replaceState({}, document.title, link.split("?")[0]);
-          }
-          DatabaseService.deleteLocalDocument(emailForSignIn);
-          return this.providerHandler(result);
-        } catch (error) {
-          SystemService.presentAlertError(error);
+      let result;
+      try {
+        if (SystemService.isNative() && !isElectron()) {
+          // The client SDK will parse the code from the link for you.
+          const credential = EmailAuthProvider.credentialWithLink(
+            email,
+            Environment.getDynamicLinkDomain()
+          );
+          result = await signInWithCredential(auth, credential);
+        } else {
+          console.log("signInWithEmailLink", auth, email, link);
+          result = await signInWithEmailLink(auth, email, link);
         }
+        console.log("result", result, !isElectron());
+        //reset link for web environment removing variables
+        if (!isElectron() && history && history.replaceState) {
+          history.replaceState({}, document.title, link.split("?")[0]);
+        }
+        DatabaseService.deleteLocalDocument(emailForSignIn);
+        return this.providerHandler(result);
+      } catch (error) {
+        SystemService.presentAlertError(error);
       }
     }
     DatabaseService.deleteLocalDocument(emailForSignIn);
