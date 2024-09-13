@@ -1,8 +1,10 @@
 node_modules/
-/www/
+www/
+android/
+ios/
 dist/
 /vt/
-/electron/dist/
-/electron/www/
-resources/ios/**/*
-resources/android/**/*
+electron/dist/
+electron/www/
+resources/ios/
+resources/android/
