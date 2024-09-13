@@ -1,14 +1,15 @@
-import {Component, h, State} from "@stencil/core";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {TranslationService} from "../../../../../services/common/translations";
-import {alertController} from "@ionic/core";
-import {SystemService} from "../../../../../services/common/system";
-import {SystemPreference} from "../../../../../interfaces/common/system/system";
-import {Browser} from "@capacitor/browser";
-import {upperFirst} from "lodash";
-import {CallableFunctionsUdiveService} from "../../../../../services/udive/callableFunctions";
+import { Component, h, State } from "@stencil/core";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { TranslationService } from "../../../../../services/common/translations";
+import { alertController } from "@ionic/core";
+import { SystemService } from "../../../../../services/common/system";
+import { SystemPreference } from "../../../../../interfaces/common/system/system";
+import { Browser } from "@capacitor/browser";
+import { upperFirst } from "lodash";
+import { CallableFunctionsUdiveService } from "../../../../../services/udive/callableFunctions";
+import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
 
 @Component({
   tag: "app-user-licences",
@@ -318,8 +319,8 @@ export class AppUserLicences {
       <ion-list>
         <ion-list-header onClick={() => this.purchase("unlimited")}>
           <my-transl
-            tag="purchase-dp4"
-            text="Purchase DecoPlanner 4"
+            tag='purchase-dp4'
+            text='Purchase DecoPlanner 4'
           ></my-transl>
         </ion-list-header>
         {Object.keys(this.prices).map((licence) => (
@@ -331,65 +332,145 @@ export class AppUserLicences {
             {!this.userRoles.hasLicence(this.prices[licence].licence, false) ? (
               [
                 <ion-button
-                  slot="end"
-                  fill="clear"
+                  slot='end'
+                  fill='clear'
                   onClick={() => this.showInfo(licence)}
                 >
-                  <ion-icon name="help-circle"></ion-icon>
+                  <ion-icon name='help-circle'></ion-icon>
                 </ion-button>,
               ]
             ) : (
-              <ion-button slot="end" fill="clear">
-                <ion-icon color="secondary" name="checkmark"></ion-icon>
+              <ion-button slot='end' fill='clear'>
+                <ion-icon color='secondary' name='checkmark'></ion-icon>
               </ion-button>
             )}
           </ion-item>
         ))}
-        {
-          //show only if user does not have unlimited or if he did not buy the trial licence
-          !this.userRoles.licences.unlimited &&
-          !this.userRoles.licences.hasLicence(
-            this.userRoles.licences.trial.level,
-            false
-          ) ? (
-            <ion-item>
-              <my-transl tag="trial-period" text="Trial Period" isLabel />
+        <ion-item>
+          <my-transl tag='trial-period' text='Trial Period' isLabel />
 
-              {this.userRoles.licences.trial.level ? (
-                <ion-note slot="end">
-                  {" "}
-                  {this.userRoles.licences.trialDays() > 0 ? (
-                    <span>
-                      <my-transl
-                        tag={this.userRoles.licences.trial.level}
-                        text={upperFirst(this.userRoles.licences.trial.level)}
-                      ></my-transl>{" "}
-                      - {this.userRoles.licences.trialDays()}{" "}
-                      <my-transl tag="days-remaining" text="days remaining" />
-                    </span>
-                  ) : (
-                    <span>
-                      <my-transl tag="expired" text="Expired" />
-                    </span>
-                  )}
-                </ion-note>
+          {this.userRoles.licences.trial.level ? (
+            <ion-note slot='end'>
+              {" "}
+              {this.userRoles.licences.trialDays() > 0 ? (
+                <span>
+                  <my-transl
+                    tag={this.userRoles.licences.trial.level}
+                    text={upperFirst(this.userRoles.licences.trial.level)}
+                  ></my-transl>{" "}
+                  - {this.userRoles.licences.trialDays()}{" "}
+                  <my-transl tag='days-remaining' text='days remaining' />
+                </span>
               ) : (
-                <ion-button
-                  slot="end"
-                  fill="outline"
-                  onClick={() => this.activateTrial()}
-                >
-                  <ion-label>
-                    <my-transl
-                      tag="activate-trial"
-                      text="Start Trial"
-                    ></my-transl>
-                  </ion-label>
-                </ion-button>
+                <span>
+                  <my-transl
+                    tag={this.userRoles.licences.trial.level}
+                    text={upperFirst(this.userRoles.licences.trial.level)}
+                  ></my-transl>
+                  {" - "}
+                  <my-transl tag='expired' text='Expired' />
+                  {": " + this.userRoles.licences.trialExpiryDate()}
+                </span>
               )}
-            </ion-item>
-          ) : undefined
-        }
+            </ion-note>
+          ) : (
+            <ion-button
+              slot='end'
+              fill='outline'
+              onClick={() => this.activateTrial()}
+            >
+              <ion-label>
+                <my-transl tag='activate-trial' text='Start Trial'></my-transl>
+              </ion-label>
+            </ion-button>
+          )}
+        </ion-item>
+        <ion-item-divider>Actual limitations</ion-item-divider>
+        <ion-item>
+          <ion-label>
+            <my-transl tag='max-deco-time' text='Max Deco Time'></my-transl>
+          </ion-label>
+          <ion-note slot='end'>
+            <span>
+              {UserService.userRoles.licences.getUserLimitations().maxDecoTime +
+                " min"}
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <my-transl tag='max-depth' text='Max Depth'></my-transl>
+          </ion-label>
+          <ion-note slot='end'>
+            <span>
+              {UserService.userRoles.licences.getUserLimitations().maxDepth +
+                " " +
+                DiveToolsService.depthUnit}
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <my-transl tag='max-he' text='Max He'></my-transl>
+          </ion-label>
+          <ion-note slot='end'>
+            <span>
+              {UserService.userRoles.licences.getUserLimitations().maxHe + "%"}
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <my-transl tag='min-o2' text='Min O2'></my-transl>
+          </ion-label>
+          <ion-note slot='end'>
+            <span>
+              {UserService.userRoles.licences.getUserLimitations().minO2 + "%"}
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <my-transl tag='max-o2' text='Max O2'></my-transl>
+          </ion-label>
+          <ion-note slot='end'>
+            <span>
+              {UserService.userRoles.licences.getUserLimitations().maxO2 + "%"}
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <my-transl tag='max-deco-gases' text='Max Deco Gases'></my-transl>
+          </ion-label>
+          <ion-note slot='end'>
+            <span>
+              {UserService.userRoles.licences.getUserLimitations().maxDecoGases}
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <my-transl tag='min-deco-o2' text='Min Deco O2'></my-transl>
+          </ion-label>
+          <ion-note slot='end'>
+            <span>
+              {UserService.userRoles.licences.getUserLimitations().minDecoO2 +
+                "%"}
+            </span>
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <my-transl tag='max-deco-o2' text='Max Deco O2'></my-transl>
+          </ion-label>
+          <ion-note slot='end'>
+            <span>
+              {UserService.userRoles.licences.getUserLimitations().maxDecoO2 +
+                "%"}
+            </span>
+          </ion-note>
+        </ion-item>
       </ion-list>
     ) : undefined;
   }

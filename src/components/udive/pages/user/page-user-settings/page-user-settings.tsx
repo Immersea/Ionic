@@ -78,7 +78,7 @@ export class PageUserSettings {
     this.slider = new Swiper(".slider-user-settings", {
       speed: 400,
       spaceBetween: 100,
-      allowTouchMove: true,
+      allowTouchMove: false,
       autoHeight: true,
     });
     //reset sliders height inside slider
@@ -156,22 +156,16 @@ export class PageUserSettings {
               <swiper-container class='slider-user-settings swiper'>
                 <swiper-wrapper class='swiper-wrapper'>
                   <swiper-slide class='swiper-slide'>
-                    <ion-content class='slide-container'>
-                      <app-user-cover showCover={false}></app-user-cover>
-                      <ion-button
-                        expand='block'
-                        fill='solid'
-                        color='danger'
-                        onClick={() => AuthService.logout()}
-                      >
-                        <ion-icon slot='start' name='log-out'></ion-icon>
-                        <my-transl
-                          tag='logout'
-                          text='Logout'
-                          isLabel
-                        ></my-transl>
-                      </ion-button>
-                    </ion-content>
+                    <app-user-cover showCover={false}></app-user-cover>
+                    <ion-button
+                      expand='block'
+                      fill='solid'
+                      color='danger'
+                      onClick={() => AuthService.logout()}
+                    >
+                      <ion-icon slot='start' name='log-out'></ion-icon>
+                      <my-transl tag='logout' text='Logout' isLabel></my-transl>
+                    </ion-button>
                   </swiper-slide>
                   <swiper-slide class='swiper-slide'>
                     <app-user-cards
@@ -207,9 +201,7 @@ export class PageUserSettings {
                     )}
                   </swiper-slide>
                   <swiper-slide class='swiper-slide'>
-                    <ion-content class='slide-container'>
-                      <app-user-licences></app-user-licences>
-                    </ion-content>
+                    <app-user-licences></app-user-licences>
                   </swiper-slide>
                   {/**
                    * <swiper-slide class="swiper-slide">

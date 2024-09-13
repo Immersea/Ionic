@@ -1,23 +1,23 @@
-import {Component, h, Prop, State, Element} from "@stencil/core";
+import { Component, h, Prop, State, Element } from "@stencil/core";
 
-import {DecoplannerDive} from "../../../../../interfaces/udive/planner/decoplanner-dive";
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
+import { DecoplannerDive } from "../../../../../interfaces/udive/planner/decoplanner-dive";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
 //import { Config } from '../../../../../../providers/config';
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
 //import { DataBase } from '../../../../../../providers/database';
-import {DecoplannerParameters} from "../../../../../interfaces/udive/planner/decoplanner-parameters";
-import {DiveStandardsService} from "../../../../../services/udive/planner/dive-standards";
+import { DecoplannerParameters } from "../../../../../interfaces/udive/planner/decoplanner-parameters";
+import { DiveStandardsService } from "../../../../../services/udive/planner/dive-standards";
 //import { LicenceCheckProvider } from '../../../../../../providers/licence-check';
-import {GasModel} from "../../../../../interfaces/udive/planner/gas-model";
-import {filter, orderBy} from "lodash";
+import { GasModel } from "../../../../../interfaces/udive/planner/gas-model";
+import { filter, orderBy } from "lodash";
 //import { DiveConfigurationsModel } from "../../../interfaces/udive/planner/dive-configurations-model";
-import {DiveConfiguration} from "../../../../../interfaces/udive/planner/dive-configuration";
+import { DiveConfiguration } from "../../../../../interfaces/udive/planner/dive-configuration";
 //import { Tank } from "../../../interfaces/udive/planner/tank";
 
-import {DivePlanModel} from "../../../../../interfaces/udive/planner/dive-plan";
-import {slideHeight} from "../../../../../helpers/utils";
-import {UserService} from "../../../../../services/common/user";
-import {Environment} from "../../../../../global/env";
+import { DivePlanModel } from "../../../../../interfaces/udive/planner/dive-plan";
+import { slideHeight } from "../../../../../helpers/utils";
+import { UserService } from "../../../../../services/common/user";
+import { Environment } from "../../../../../global/env";
 import Swiper from "swiper";
 
 @Component({
@@ -80,11 +80,16 @@ export class ModalDivePlanner {
   @State() showProfiles = false;
 
   @State() titles = [
-    {tag: "plan", icon: "chevron-forward", slotIcon: "end"},
-    {tag: "profile", disabled: true, icon: "chevron-forward", slotIcon: "end"},
-    {tag: "gas", disabled: true, icon: "chevron-forward", slotIcon: "end"},
-    {tag: "charts", disabled: true, icon: "chevron-forward", slotIcon: "end"},
-    {tag: "settings", disabled: true},
+    { tag: "plan", icon: "chevron-forward", slotIcon: "end" },
+    {
+      tag: "profile",
+      disabled: true,
+      icon: "chevron-forward",
+      slotIcon: "end",
+    },
+    { tag: "gas", disabled: true, icon: "chevron-forward", slotIcon: "end" },
+    { tag: "charts", disabled: true, icon: "chevron-forward", slotIcon: "end" },
+    { tag: "settings", disabled: true },
   ];
 
   componentWillLoad() {
@@ -138,9 +143,9 @@ export class ModalDivePlanner {
     DiveStandardsService.getStdGases().forEach((list) => {
       gases.push(list);
     });
-    this.stdGases = filter(gases, {deco: false});
+    this.stdGases = filter(gases, { deco: false });
     this.stdGases = orderBy(this.stdGases, "fromDepth", "asc");
-    this.stdDecoGases = filter(gases, {deco: true});
+    this.stdDecoGases = filter(gases, { deco: true });
     this.stdDecoGases = orderBy(this.stdDecoGases, "fromDepth", "desc");
 
     this.update();
@@ -159,10 +164,12 @@ export class ModalDivePlanner {
       allowTouchMove: false,
       autoHeight: true,
     });
-    this.update();
+    this.setSliderHeight();
   }
 
   setSliderHeight() {
+    this.updateView = !this.updateView;
+
     //reset sliders height inside slider
     const slideContainers = Array.from(
       this.el.getElementsByClassName("slide-container")
@@ -209,7 +216,6 @@ export class ModalDivePlanner {
       showDiveSite: this.showDiveSite,
       showPositionTab: this.showPositionTab,
     };
-
     //check user licence limitations
     if (
       this.dive.getDecoTime() >
@@ -224,8 +230,6 @@ export class ModalDivePlanner {
     this.titles[2].disabled = !this.showProfiles;
     this.titles[3].disabled = !this.showProfiles;
     this.titles[4].disabled = !this.showProfiles;
-    this.updateView = !this.updateView;
-
     this.setSliderHeight();
   }
 
@@ -249,8 +253,8 @@ export class ModalDivePlanner {
     return [
       <ion-header>
         <app-navbar
-          tag="deco-planner"
-          text="Deco Planner"
+          tag='deco-planner'
+          text='Deco Planner'
           extra-title={this.divePlan.configuration.stdName}
           color={Environment.isDecoplanner() ? "gue-blue" : "planner"}
           modal={true}
@@ -259,41 +263,42 @@ export class ModalDivePlanner {
           color={Environment.isDecoplanner() ? "gue-blue" : "planner"}
           swiper={this.slider}
           titles={this.titles}
+          updateBadge={this.updateView}
           noHeader
-          class="nopaddingtop"
+          class='nopaddingtop'
         ></app-header-segment-toolbar>
       </ion-header>,
       <ion-content
-        class="slides"
+        class='slides'
         scrollEvents={true}
         onIonScrollStart={(ev) => this.logScrollStart(ev)}
       >
-        <swiper-container class="slider-dive-planner swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
+        <swiper-container class='slider-dive-planner swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
               <app-decoplanner-plan
                 diveDataToShare={this.diveDataToShare}
                 onUpdateParamsEvent={(params) => this.updateParams(params)}
               />
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <app-decoplanner-profile diveDataToShare={this.diveDataToShare} />
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <app-decoplanner-gas
                 diveDataToShare={this.diveDataToShare}
                 isShown={this.segment == "gas"}
               />
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
-              <ion-content class="slide-container">
+            <swiper-slide class='swiper-slide'>
+              <ion-content class='slide-container'>
                 <app-decoplanner-charts
                   diveDataToShare={this.diveDataToShare}
                   isShown={this.segment == "charts"}
                 />
               </ion-content>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <app-decoplanner-settings
                 diveDataToShare={this.diveDataToShare}
                 onUpdateParamsEvent={(params) => this.updateParams(params)}

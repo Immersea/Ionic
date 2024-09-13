@@ -1,5 +1,5 @@
-import {Component, h, Prop, Host, State, Element, Watch} from "@stencil/core";
-import {TranslationService} from "../../../../../services/common/translations";
+import { Component, h, Prop, Host, State, Element, Watch } from "@stencil/core";
+import { TranslationService } from "../../../../../services/common/translations";
 
 @Component({
   tag: "app-header-segment-toolbar",
@@ -12,10 +12,10 @@ export class AppHeaderSegmentToolbar {
   @Prop() noToolbar = false;
   @State() segmentTitles: any = {};
   @State() updateView = true;
-  @Prop({mutable: true}) segment: number = 0;
-  @Prop({mutable: true}) swiper: any;
+  @Prop({ mutable: true }) segment: number = 0;
+  @Prop({ mutable: true }) swiper: any;
   @Prop() mode: "ios" | "md" = "md";
-  @Prop({mutable: true}) titles: {
+  @Prop({ mutable: true }) titles: {
     tag: string;
     text?: string;
     appendix?: string;
@@ -24,7 +24,7 @@ export class AppHeaderSegmentToolbar {
     slotIcon?: string;
     badge?: number;
   }[];
-  @Prop({mutable: true}) updateBadge = true;
+  @Prop({ mutable: true }) updateBadge = true;
 
   @Watch("swiper")
   setSwiper() {
@@ -102,7 +102,7 @@ export class AppHeaderSegmentToolbar {
     return this.noToolbar ? (
       segment
     ) : (
-      <ion-toolbar class="no-safe-padding">{segment}</ion-toolbar>
+      <ion-toolbar class='no-safe-padding'>{segment}</ion-toolbar>
     );
   }
 

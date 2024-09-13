@@ -1,5 +1,5 @@
-import {DiveConfiguration} from "../../udive/planner/dive-configuration";
-import {Licences} from "../../udive/planner/licences";
+import { DiveConfiguration } from "../../udive/planner/dive-configuration";
+import { Licences } from "../../udive/planner/licences";
 
 export class UserRoles {
   uid: string;
@@ -74,10 +74,6 @@ export class UserRoles {
 
   isGuest() {
     return this.roles.indexOf("guest") != -1;
-  }
-
-  isImmerseaAdmin() {
-    return this.roles.indexOf("immersea-admin") != -1 || this.isSuperAdmin();
   }
 
   hasLicence(licence, withTrial = true) {

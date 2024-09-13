@@ -1,7 +1,7 @@
-import {Component, Prop, Watch, h} from "@stencil/core";
-import {TranslationService} from "../../../../../services/common/translations";
-import {TextMultilanguage} from "../../../../../interfaces/interfaces";
-import {isBoolean, isNull, isNumber, isObject, isString} from "lodash";
+import { Component, Prop, Watch, h } from "@stencil/core";
+import { TranslationService } from "../../../../../services/common/translations";
+import { TextMultilanguage } from "../../../../../interfaces/interfaces";
+import { isBoolean, isNull, isNumber, isObject, isString } from "lodash";
 
 @Component({
   tag: "app-item-detail",
@@ -12,7 +12,7 @@ export class AppItemDetail {
   @Prop() labelTag?: string; //optional to get translation
   @Prop() labelText?: string;
   @Prop() detailTag?: string; //optional to get translation
-  @Prop({mutable: true}) detailText?:
+  @Prop({ mutable: true }) detailText?:
     | string
     | number
     | boolean
@@ -22,6 +22,7 @@ export class AppItemDetail {
   @Prop() lines?: "none" | "full" | "inset" = "none";
   @Prop() isDate? = false;
   @Prop() alignRight? = false;
+  @Prop() labelPosition?: "fixed" | "stacked" | "floating" = "stacked";
   show = false;
 
   componentWillLoad() {
@@ -36,7 +37,7 @@ export class AppItemDetail {
   @Watch("detailText")
   inset() {
     return (
-      <ion-label>
+      <ion-label position={this.labelPosition}>
         {this.labelText ? (
           <p
             style={

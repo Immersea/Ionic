@@ -1,11 +1,11 @@
-import {alertController} from "@ionic/core";
-import {Environment} from "../../../global/env";
-import {TranslationService} from "../../../services/common/translations";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
-import {DiveConfiguration} from "./dive-configuration";
-import {Gas} from "./gas";
-import {addDays, differenceInDays} from "date-fns";
-import {round, toNumber} from "lodash";
+import { alertController } from "@ionic/core";
+import { TranslationService } from "../../../services/common/translations";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
+import { DiveConfiguration } from "./dive-configuration";
+import { Gas } from "./gas";
+import { addDays, differenceInDays } from "date-fns";
+import { round, toNumber } from "lodash";
+import { showDate } from "../../../helpers/utils";
 
 export interface UserLicenceLimitations {
   minO2: number;
@@ -142,11 +142,6 @@ Level 2: 90m depth limit. 4 deco gas limit. Max 90min deco
       hasLicence = this[licence] || this.pro || this.unlimited;
     }
 
-    //DEVELOPMENT LICENCE
-    if (Environment.isDev()) {
-      hasLicence = true;
-    }
-
     return hasLicence;
   }
 
@@ -163,6 +158,18 @@ Level 2: 90m depth limit. 4 deco gas limit. Max 90min deco
       return round(days);
     } else {
       return 0;
+    }
+  }
+
+  trialExpiryDate() {
+    if (this.trial.fromDate) {
+      //let expiry = moment(this.trial.fromDate).add(this.trial.duration, "days");
+      //let days = moment.duration(expiry.diff(moment(new Date()))).asDays();
+      // Add duration in days to the start date
+      const expiry = addDays(this.trial.fromDate, this.trial.duration);
+      return showDate(expiry.toISOString(), "date", true);
+    } else {
+      return showDate(new Date().toISOString(), "date", true);
     }
   }
 
@@ -239,7 +246,7 @@ Level 2: 90m depth limit. 4 deco gas limit. Max 90min deco
           break;
       }
     }
-    const lic = {hasLicence: hasLicence, message: message};
+    const lic = { hasLicence: hasLicence, message: message };
     return lic;
   }
 

@@ -27,7 +27,6 @@ import { Datasheet, DatasheetFilter } from "./interfaces/trasteel/refractories/d
 import { Card } from "./interfaces/udive/user/user-cards";
 import { DiveConfiguration } from "./interfaces/udive/planner/dive-configuration";
 import { UserRoles } from "./interfaces/common/user/user-roles";
-import { ImmerseaLocation } from "./interfaces/immersea/immerseaLocation";
 import { TankModel } from "./interfaces/udive/planner/tank-model";
 import { UserPlans } from "./interfaces/trasteel/users/user-plans";
 import { UserPubicProfile as UserPubicProfile1 } from "./components";
@@ -59,7 +58,6 @@ export { Datasheet, DatasheetFilter } from "./interfaces/trasteel/refractories/d
 export { Card } from "./interfaces/udive/user/user-cards";
 export { DiveConfiguration } from "./interfaces/udive/planner/dive-configuration";
 export { UserRoles } from "./interfaces/common/user/user-roles";
-export { ImmerseaLocation } from "./interfaces/immersea/immerseaLocation";
 export { TankModel } from "./interfaces/udive/planner/tank-model";
 export { UserPlans } from "./interfaces/trasteel/users/user-plans";
 export { UserPubicProfile as UserPubicProfile1 } from "./components";
@@ -267,8 +265,6 @@ export namespace Components {
         "backgroundCoverFill": boolean;
         "url": string;
     }
-    interface AppImmerseaProfile {
-    }
     interface AppInfiniteScroll {
         "groupBy": string[];
         "icon": string;
@@ -300,6 +296,7 @@ export namespace Components {
     | boolean
     | TextMultilanguage;
         "isDate"?: boolean;
+        "labelPosition"?: "fixed" | "stacked" | "floating";
         "labelTag"?: string;
         "labelText"?: string;
         "lines"?: "none" | "full" | "inset";
@@ -588,9 +585,6 @@ export namespace Components {
     interface ModalEditUserRoles {
         "uid": string;
     }
-    interface ModalImmerseaLocationUpdate {
-        "locationId": string;
-    }
     interface ModalOperatingConditionsQuestionnaire {
         "condition": "EAF" | "LF" | "CCM";
         "conditionData": | CustomerConditionEAF
@@ -607,12 +601,6 @@ export namespace Components {
     interface ModalProjectUpdate {
         "duplicateProject": Project;
         "projectId": string;
-    }
-    interface ModalQuillEditor {
-        "immerseaLocation": ImmerseaLocation;
-        "languageSelected": string;
-        "readOnly": boolean;
-        "updateView": boolean;
     }
     interface ModalSearchList {
         "filterBy": string[];
@@ -677,8 +665,6 @@ export namespace Components {
     interface PageClientDetails {
         "clientId": string;
     }
-    interface PageCommunity {
-    }
     interface PageCommunityChatsList {
     }
     interface PageCommunityDashboard {
@@ -691,8 +677,6 @@ export namespace Components {
         "itemId": string;
     }
     interface PageContacts {
-    }
-    interface PageCulture {
     }
     interface PageCustomerDetails {
         "itemId": string;
@@ -758,10 +742,6 @@ export namespace Components {
     }
     interface PageGueMap {
     }
-    interface PageHome {
-    }
-    interface PageImmerseaAdmin {
-    }
     interface PageLoading {
     }
     interface PageLogBook {
@@ -772,8 +752,6 @@ export namespace Components {
         "email": string;
     }
     interface PageMap {
-    }
-    interface PageNews {
     }
     interface PageProjectDetails {
         "itemId": string;
@@ -793,8 +771,6 @@ export namespace Components {
     interface PageSchoolRentals {
     }
     interface PageSchoolWarehouse {
-    }
-    interface PageSea {
     }
     interface PageServiceCenterDetails {
         "centerid": string;
@@ -865,8 +841,6 @@ export namespace Components {
         "hasTrimixlicence": boolean;
         "showBar": boolean;
         "stdGasesList": Array<GasModel>;
-    }
-    interface PopoverInfoPreview {
     }
     interface PopoverLevel {
         "ccr": boolean;
@@ -943,39 +917,6 @@ export namespace Components {
         "stdGasesList": Array<GasModel>;
         "tank": Tank;
         "tanksList": Array<any>;
-    }
-    interface QuillEditor {
-        "bounds": HTMLElement | string;
-        "content": string;
-        "customToolbarPosition": "top" | "bottom";
-        "debug": string;
-        "format": "html" | "text" | "json";
-        "formats": string[];
-        "immerseaLocation": ImmerseaLocation;
-        "modules"?: string;
-        "placeholder": string;
-        "preserveWhitespace": boolean;
-        "readOnly": boolean;
-        "scrollingContainer": HTMLElement | string;
-        "strict": boolean;
-        "styles": string;
-        "theme": string;
-    }
-    interface QuillView {
-        "content": string;
-        "debug": string;
-        "format": "html" | "text" | "json";
-        "formats": string[];
-        "modules"?: string;
-        "preserveWhitespace": boolean;
-        "strict": boolean;
-        "styles": string;
-        "theme": string;
-    }
-    interface QuillViewHtml {
-        "content": any;
-        "debug": string;
-        "theme": string;
     }
 }
 export interface AppAdminTranslationsCustomEvent<T> extends CustomEvent<T> {
@@ -1094,17 +1035,9 @@ export interface AppUserTranslationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLAppUserTranslationElement;
 }
-export interface ModalQuillEditorCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLModalQuillEditorElement;
-}
 export interface PopoverSearchDivingCourseCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLPopoverSearchDivingCourseElement;
-}
-export interface QuillEditorCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLQuillEditorElement;
 }
 declare global {
     interface HTMLAppAdminAdvertisingElement extends Components.AppAdminAdvertising, HTMLStencilElement {
@@ -1491,12 +1424,6 @@ declare global {
     var HTMLAppImageCacheElement: {
         prototype: HTMLAppImageCacheElement;
         new (): HTMLAppImageCacheElement;
-    };
-    interface HTMLAppImmerseaProfileElement extends Components.AppImmerseaProfile, HTMLStencilElement {
-    }
-    var HTMLAppImmerseaProfileElement: {
-        prototype: HTMLAppImmerseaProfileElement;
-        new (): HTMLAppImmerseaProfileElement;
     };
     interface HTMLAppInfiniteScrollElementEventMap {
         "listChanged": any;
@@ -2044,12 +1971,6 @@ declare global {
         prototype: HTMLModalEditUserRolesElement;
         new (): HTMLModalEditUserRolesElement;
     };
-    interface HTMLModalImmerseaLocationUpdateElement extends Components.ModalImmerseaLocationUpdate, HTMLStencilElement {
-    }
-    var HTMLModalImmerseaLocationUpdateElement: {
-        prototype: HTMLModalImmerseaLocationUpdateElement;
-        new (): HTMLModalImmerseaLocationUpdateElement;
-    };
     interface HTMLModalOperatingConditionsQuestionnaireElement extends Components.ModalOperatingConditionsQuestionnaire, HTMLStencilElement {
     }
     var HTMLModalOperatingConditionsQuestionnaireElement: {
@@ -2079,23 +2000,6 @@ declare global {
     var HTMLModalProjectUpdateElement: {
         prototype: HTMLModalProjectUpdateElement;
         new (): HTMLModalProjectUpdateElement;
-    };
-    interface HTMLModalQuillEditorElementEventMap {
-        "edit": any;
-    }
-    interface HTMLModalQuillEditorElement extends Components.ModalQuillEditor, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLModalQuillEditorElementEventMap>(type: K, listener: (this: HTMLModalQuillEditorElement, ev: ModalQuillEditorCustomEvent<HTMLModalQuillEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLModalQuillEditorElementEventMap>(type: K, listener: (this: HTMLModalQuillEditorElement, ev: ModalQuillEditorCustomEvent<HTMLModalQuillEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLModalQuillEditorElement: {
-        prototype: HTMLModalQuillEditorElement;
-        new (): HTMLModalQuillEditorElement;
     };
     interface HTMLModalSearchListElement extends Components.ModalSearchList, HTMLStencilElement {
     }
@@ -2199,12 +2103,6 @@ declare global {
         prototype: HTMLPageClientDetailsElement;
         new (): HTMLPageClientDetailsElement;
     };
-    interface HTMLPageCommunityElement extends Components.PageCommunity, HTMLStencilElement {
-    }
-    var HTMLPageCommunityElement: {
-        prototype: HTMLPageCommunityElement;
-        new (): HTMLPageCommunityElement;
-    };
     interface HTMLPageCommunityChatsListElement extends Components.PageCommunityChatsList, HTMLStencilElement {
     }
     var HTMLPageCommunityChatsListElement: {
@@ -2240,12 +2138,6 @@ declare global {
     var HTMLPageContactsElement: {
         prototype: HTMLPageContactsElement;
         new (): HTMLPageContactsElement;
-    };
-    interface HTMLPageCultureElement extends Components.PageCulture, HTMLStencilElement {
-    }
-    var HTMLPageCultureElement: {
-        prototype: HTMLPageCultureElement;
-        new (): HTMLPageCultureElement;
     };
     interface HTMLPageCustomerDetailsElement extends Components.PageCustomerDetails, HTMLStencilElement {
     }
@@ -2409,18 +2301,6 @@ declare global {
         prototype: HTMLPageGueMapElement;
         new (): HTMLPageGueMapElement;
     };
-    interface HTMLPageHomeElement extends Components.PageHome, HTMLStencilElement {
-    }
-    var HTMLPageHomeElement: {
-        prototype: HTMLPageHomeElement;
-        new (): HTMLPageHomeElement;
-    };
-    interface HTMLPageImmerseaAdminElement extends Components.PageImmerseaAdmin, HTMLStencilElement {
-    }
-    var HTMLPageImmerseaAdminElement: {
-        prototype: HTMLPageImmerseaAdminElement;
-        new (): HTMLPageImmerseaAdminElement;
-    };
     interface HTMLPageLoadingElement extends Components.PageLoading, HTMLStencilElement {
     }
     var HTMLPageLoadingElement: {
@@ -2450,12 +2330,6 @@ declare global {
     var HTMLPageMapElement: {
         prototype: HTMLPageMapElement;
         new (): HTMLPageMapElement;
-    };
-    interface HTMLPageNewsElement extends Components.PageNews, HTMLStencilElement {
-    }
-    var HTMLPageNewsElement: {
-        prototype: HTMLPageNewsElement;
-        new (): HTMLPageNewsElement;
     };
     interface HTMLPageProjectDetailsElement extends Components.PageProjectDetails, HTMLStencilElement {
     }
@@ -2510,12 +2384,6 @@ declare global {
     var HTMLPageSchoolWarehouseElement: {
         prototype: HTMLPageSchoolWarehouseElement;
         new (): HTMLPageSchoolWarehouseElement;
-    };
-    interface HTMLPageSeaElement extends Components.PageSea, HTMLStencilElement {
-    }
-    var HTMLPageSeaElement: {
-        prototype: HTMLPageSeaElement;
-        new (): HTMLPageSeaElement;
     };
     interface HTMLPageServiceCenterDetailsElement extends Components.PageServiceCenterDetails, HTMLStencilElement {
     }
@@ -2667,12 +2535,6 @@ declare global {
         prototype: HTMLPopoverGasBlenderElement;
         new (): HTMLPopoverGasBlenderElement;
     };
-    interface HTMLPopoverInfoPreviewElement extends Components.PopoverInfoPreview, HTMLStencilElement {
-    }
-    var HTMLPopoverInfoPreviewElement: {
-        prototype: HTMLPopoverInfoPreviewElement;
-        new (): HTMLPopoverInfoPreviewElement;
-    };
     interface HTMLPopoverLevelElement extends Components.PopoverLevel, HTMLStencilElement {
     }
     var HTMLPopoverLevelElement: {
@@ -2762,75 +2624,6 @@ declare global {
         prototype: HTMLPopoverTankElement;
         new (): HTMLPopoverTankElement;
     };
-    interface HTMLQuillEditorElementEventMap {
-        "editorInit": any;
-        "editorChange": | {
-        editor: any;
-        event: "text-change";
-        content: any;
-        text: string;
-        html: string;
-        delta: any;
-        oldDelta: any;
-        source: string;
-      }
-    | {
-        editor: any;
-        event: "selection-change";
-        range: any;
-        oldRange: any;
-        source: string;
-      };
-        "editorContentChange": {
-    editor: any;
-    content: any;
-    text: string;
-    html: string;
-    delta: any;
-    oldDelta: any;
-    source: string;
-  };
-        "editorSelectionChange": {
-    editor: any;
-    range: any;
-    oldRange: any;
-    source: string;
-  };
-        "editorFocus": {
-    editor: any;
-    source: string;
-  };
-        "editorBlur": {
-    editor: any;
-    source: string;
-  };
-    }
-    interface HTMLQuillEditorElement extends Components.QuillEditor, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLQuillEditorElementEventMap>(type: K, listener: (this: HTMLQuillEditorElement, ev: QuillEditorCustomEvent<HTMLQuillEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLQuillEditorElementEventMap>(type: K, listener: (this: HTMLQuillEditorElement, ev: QuillEditorCustomEvent<HTMLQuillEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLQuillEditorElement: {
-        prototype: HTMLQuillEditorElement;
-        new (): HTMLQuillEditorElement;
-    };
-    interface HTMLQuillViewElement extends Components.QuillView, HTMLStencilElement {
-    }
-    var HTMLQuillViewElement: {
-        prototype: HTMLQuillViewElement;
-        new (): HTMLQuillViewElement;
-    };
-    interface HTMLQuillViewHtmlElement extends Components.QuillViewHtml, HTMLStencilElement {
-    }
-    var HTMLQuillViewHtmlElement: {
-        prototype: HTMLQuillViewHtmlElement;
-        new (): HTMLQuillViewHtmlElement;
-    };
     interface HTMLElementTagNameMap {
         "app-admin-advertising": HTMLAppAdminAdvertisingElement;
         "app-admin-chats": HTMLAppAdminChatsElement;
@@ -2865,7 +2658,6 @@ declare global {
         "app-geocode": HTMLAppGeocodeElement;
         "app-header-segment-toolbar": HTMLAppHeaderSegmentToolbarElement;
         "app-image-cache": HTMLAppImageCacheElement;
-        "app-immersea-profile": HTMLAppImmerseaProfileElement;
         "app-infinite-scroll": HTMLAppInfiniteScrollElement;
         "app-item-cover": HTMLAppItemCoverElement;
         "app-item-detail": HTMLAppItemDetailElement;
@@ -2932,13 +2724,11 @@ declare global {
         "modal-diving-class-update": HTMLModalDivingClassUpdateElement;
         "modal-diving-school-update": HTMLModalDivingSchoolUpdateElement;
         "modal-edit-user-roles": HTMLModalEditUserRolesElement;
-        "modal-immersea-location-update": HTMLModalImmerseaLocationUpdateElement;
         "modal-operating-conditions-questionnaire": HTMLModalOperatingConditionsQuestionnaireElement;
         "modal-project-applicationunit": HTMLModalProjectApplicationunitElement;
         "modal-project-bricksallocationarea": HTMLModalProjectBricksallocationareaElement;
         "modal-project-quantityunit": HTMLModalProjectQuantityunitElement;
         "modal-project-update": HTMLModalProjectUpdateElement;
-        "modal-quill-editor": HTMLModalQuillEditorElement;
         "modal-search-list": HTMLModalSearchListElement;
         "modal-service-center-update": HTMLModalServiceCenterUpdateElement;
         "modal-shape-type": HTMLModalShapeTypeElement;
@@ -2956,14 +2746,12 @@ declare global {
         "page-chat": HTMLPageChatElement;
         "page-chats-list": HTMLPageChatsListElement;
         "page-client-details": HTMLPageClientDetailsElement;
-        "page-community": HTMLPageCommunityElement;
         "page-community-chats-list": HTMLPageCommunityChatsListElement;
         "page-community-dashboard": HTMLPageCommunityDashboardElement;
         "page-community-dive-trips": HTMLPageCommunityDiveTripsElement;
         "page-community-members": HTMLPageCommunityMembersElement;
         "page-contact-details": HTMLPageContactDetailsElement;
         "page-contacts": HTMLPageContactsElement;
-        "page-culture": HTMLPageCultureElement;
         "page-customer-details": HTMLPageCustomerDetailsElement;
         "page-customers": HTMLPageCustomersElement;
         "page-dashboard": HTMLPageDashboardElement;
@@ -2991,14 +2779,11 @@ declare global {
         "page-diving-warehouse": HTMLPageDivingWarehouseElement;
         "page-gas-blender": HTMLPageGasBlenderElement;
         "page-gue-map": HTMLPageGueMapElement;
-        "page-home": HTMLPageHomeElement;
-        "page-immersea-admin": HTMLPageImmerseaAdminElement;
         "page-loading": HTMLPageLoadingElement;
         "page-log-book": HTMLPageLogBookElement;
         "page-login": HTMLPageLoginElement;
         "page-lostpsw": HTMLPageLostpswElement;
         "page-map": HTMLPageMapElement;
-        "page-news": HTMLPageNewsElement;
         "page-project-details": HTMLPageProjectDetailsElement;
         "page-projects": HTMLPageProjectsElement;
         "page-school-chats-list": HTMLPageSchoolChatsListElement;
@@ -3008,7 +2793,6 @@ declare global {
         "page-school-members": HTMLPageSchoolMembersElement;
         "page-school-rentals": HTMLPageSchoolRentalsElement;
         "page-school-warehouse": HTMLPageSchoolWarehouseElement;
-        "page-sea": HTMLPageSeaElement;
         "page-service-center-details": HTMLPageServiceCenterDetailsElement;
         "page-service-chats-list": HTMLPageServiceChatsListElement;
         "page-service-customers": HTMLPageServiceCustomersElement;
@@ -3034,7 +2818,6 @@ declare global {
         "popover-find-oldcustomer": HTMLPopoverFindOldcustomerElement;
         "popover-gas": HTMLPopoverGasElement;
         "popover-gas-blender": HTMLPopoverGasBlenderElement;
-        "popover-info-preview": HTMLPopoverInfoPreviewElement;
         "popover-level": HTMLPopoverLevelElement;
         "popover-media-loading": HTMLPopoverMediaLoadingElement;
         "popover-media-uploader": HTMLPopoverMediaUploaderElement;
@@ -3048,9 +2831,6 @@ declare global {
         "popover-select-search": HTMLPopoverSelectSearchElement;
         "popover-shapes-filter": HTMLPopoverShapesFilterElement;
         "popover-tank": HTMLPopoverTankElement;
-        "quill-editor": HTMLQuillEditorElement;
-        "quill-view": HTMLQuillViewElement;
-        "quill-view-html": HTMLQuillViewHtmlElement;
     }
 }
 declare namespace LocalJSX {
@@ -3273,8 +3053,6 @@ declare namespace LocalJSX {
         "backgroundCoverFill"?: boolean;
         "url"?: string;
     }
-    interface AppImmerseaProfile {
-    }
     interface AppInfiniteScroll {
         "groupBy"?: string[];
         "icon"?: string;
@@ -3308,6 +3086,7 @@ declare namespace LocalJSX {
     | boolean
     | TextMultilanguage;
         "isDate"?: boolean;
+        "labelPosition"?: "fixed" | "stacked" | "floating";
         "labelTag"?: string;
         "labelText"?: string;
         "lines"?: "none" | "full" | "inset";
@@ -3604,9 +3383,6 @@ declare namespace LocalJSX {
     interface ModalEditUserRoles {
         "uid"?: string;
     }
-    interface ModalImmerseaLocationUpdate {
-        "locationId"?: string;
-    }
     interface ModalOperatingConditionsQuestionnaire {
         "condition"?: "EAF" | "LF" | "CCM";
         "conditionData"?: | CustomerConditionEAF
@@ -3623,13 +3399,6 @@ declare namespace LocalJSX {
     interface ModalProjectUpdate {
         "duplicateProject"?: Project;
         "projectId"?: string;
-    }
-    interface ModalQuillEditor {
-        "immerseaLocation"?: ImmerseaLocation;
-        "languageSelected"?: string;
-        "onEdit"?: (event: ModalQuillEditorCustomEvent<any>) => void;
-        "readOnly"?: boolean;
-        "updateView"?: boolean;
     }
     interface ModalSearchList {
         "filterBy"?: string[];
@@ -3694,8 +3463,6 @@ declare namespace LocalJSX {
     interface PageClientDetails {
         "clientId"?: string;
     }
-    interface PageCommunity {
-    }
     interface PageCommunityChatsList {
     }
     interface PageCommunityDashboard {
@@ -3708,8 +3475,6 @@ declare namespace LocalJSX {
         "itemId"?: string;
     }
     interface PageContacts {
-    }
-    interface PageCulture {
     }
     interface PageCustomerDetails {
         "itemId"?: string;
@@ -3775,10 +3540,6 @@ declare namespace LocalJSX {
     }
     interface PageGueMap {
     }
-    interface PageHome {
-    }
-    interface PageImmerseaAdmin {
-    }
     interface PageLoading {
     }
     interface PageLogBook {
@@ -3789,8 +3550,6 @@ declare namespace LocalJSX {
         "email"?: string;
     }
     interface PageMap {
-    }
-    interface PageNews {
     }
     interface PageProjectDetails {
         "itemId"?: string;
@@ -3810,8 +3569,6 @@ declare namespace LocalJSX {
     interface PageSchoolRentals {
     }
     interface PageSchoolWarehouse {
-    }
-    interface PageSea {
     }
     interface PageServiceCenterDetails {
         "centerid"?: string;
@@ -3882,8 +3639,6 @@ declare namespace LocalJSX {
         "hasTrimixlicence"?: boolean;
         "showBar"?: boolean;
         "stdGasesList"?: Array<GasModel>;
-    }
-    interface PopoverInfoPreview {
     }
     interface PopoverLevel {
         "ccr"?: boolean;
@@ -3962,80 +3717,6 @@ declare namespace LocalJSX {
         "tank"?: Tank;
         "tanksList"?: Array<any>;
     }
-    interface QuillEditor {
-        "bounds"?: HTMLElement | string;
-        "content"?: string;
-        "customToolbarPosition"?: "top" | "bottom";
-        "debug"?: string;
-        "format"?: "html" | "text" | "json";
-        "formats"?: string[];
-        "immerseaLocation"?: ImmerseaLocation;
-        "modules"?: string;
-        "onEditorBlur"?: (event: QuillEditorCustomEvent<{
-    editor: any;
-    source: string;
-  }>) => void;
-        "onEditorChange"?: (event: QuillEditorCustomEvent<| {
-        editor: any;
-        event: "text-change";
-        content: any;
-        text: string;
-        html: string;
-        delta: any;
-        oldDelta: any;
-        source: string;
-      }
-    | {
-        editor: any;
-        event: "selection-change";
-        range: any;
-        oldRange: any;
-        source: string;
-      }>) => void;
-        "onEditorContentChange"?: (event: QuillEditorCustomEvent<{
-    editor: any;
-    content: any;
-    text: string;
-    html: string;
-    delta: any;
-    oldDelta: any;
-    source: string;
-  }>) => void;
-        "onEditorFocus"?: (event: QuillEditorCustomEvent<{
-    editor: any;
-    source: string;
-  }>) => void;
-        "onEditorInit"?: (event: QuillEditorCustomEvent<any>) => void;
-        "onEditorSelectionChange"?: (event: QuillEditorCustomEvent<{
-    editor: any;
-    range: any;
-    oldRange: any;
-    source: string;
-  }>) => void;
-        "placeholder"?: string;
-        "preserveWhitespace"?: boolean;
-        "readOnly"?: boolean;
-        "scrollingContainer"?: HTMLElement | string;
-        "strict"?: boolean;
-        "styles"?: string;
-        "theme"?: string;
-    }
-    interface QuillView {
-        "content"?: string;
-        "debug"?: string;
-        "format"?: "html" | "text" | "json";
-        "formats"?: string[];
-        "modules"?: string;
-        "preserveWhitespace"?: boolean;
-        "strict"?: boolean;
-        "styles"?: string;
-        "theme"?: string;
-    }
-    interface QuillViewHtml {
-        "content"?: any;
-        "debug"?: string;
-        "theme"?: string;
-    }
     interface IntrinsicElements {
         "app-admin-advertising": AppAdminAdvertising;
         "app-admin-chats": AppAdminChats;
@@ -4070,7 +3751,6 @@ declare namespace LocalJSX {
         "app-geocode": AppGeocode;
         "app-header-segment-toolbar": AppHeaderSegmentToolbar;
         "app-image-cache": AppImageCache;
-        "app-immersea-profile": AppImmerseaProfile;
         "app-infinite-scroll": AppInfiniteScroll;
         "app-item-cover": AppItemCover;
         "app-item-detail": AppItemDetail;
@@ -4137,13 +3817,11 @@ declare namespace LocalJSX {
         "modal-diving-class-update": ModalDivingClassUpdate;
         "modal-diving-school-update": ModalDivingSchoolUpdate;
         "modal-edit-user-roles": ModalEditUserRoles;
-        "modal-immersea-location-update": ModalImmerseaLocationUpdate;
         "modal-operating-conditions-questionnaire": ModalOperatingConditionsQuestionnaire;
         "modal-project-applicationunit": ModalProjectApplicationunit;
         "modal-project-bricksallocationarea": ModalProjectBricksallocationarea;
         "modal-project-quantityunit": ModalProjectQuantityunit;
         "modal-project-update": ModalProjectUpdate;
-        "modal-quill-editor": ModalQuillEditor;
         "modal-search-list": ModalSearchList;
         "modal-service-center-update": ModalServiceCenterUpdate;
         "modal-shape-type": ModalShapeType;
@@ -4161,14 +3839,12 @@ declare namespace LocalJSX {
         "page-chat": PageChat;
         "page-chats-list": PageChatsList;
         "page-client-details": PageClientDetails;
-        "page-community": PageCommunity;
         "page-community-chats-list": PageCommunityChatsList;
         "page-community-dashboard": PageCommunityDashboard;
         "page-community-dive-trips": PageCommunityDiveTrips;
         "page-community-members": PageCommunityMembers;
         "page-contact-details": PageContactDetails;
         "page-contacts": PageContacts;
-        "page-culture": PageCulture;
         "page-customer-details": PageCustomerDetails;
         "page-customers": PageCustomers;
         "page-dashboard": PageDashboard;
@@ -4196,14 +3872,11 @@ declare namespace LocalJSX {
         "page-diving-warehouse": PageDivingWarehouse;
         "page-gas-blender": PageGasBlender;
         "page-gue-map": PageGueMap;
-        "page-home": PageHome;
-        "page-immersea-admin": PageImmerseaAdmin;
         "page-loading": PageLoading;
         "page-log-book": PageLogBook;
         "page-login": PageLogin;
         "page-lostpsw": PageLostpsw;
         "page-map": PageMap;
-        "page-news": PageNews;
         "page-project-details": PageProjectDetails;
         "page-projects": PageProjects;
         "page-school-chats-list": PageSchoolChatsList;
@@ -4213,7 +3886,6 @@ declare namespace LocalJSX {
         "page-school-members": PageSchoolMembers;
         "page-school-rentals": PageSchoolRentals;
         "page-school-warehouse": PageSchoolWarehouse;
-        "page-sea": PageSea;
         "page-service-center-details": PageServiceCenterDetails;
         "page-service-chats-list": PageServiceChatsList;
         "page-service-customers": PageServiceCustomers;
@@ -4239,7 +3911,6 @@ declare namespace LocalJSX {
         "popover-find-oldcustomer": PopoverFindOldcustomer;
         "popover-gas": PopoverGas;
         "popover-gas-blender": PopoverGasBlender;
-        "popover-info-preview": PopoverInfoPreview;
         "popover-level": PopoverLevel;
         "popover-media-loading": PopoverMediaLoading;
         "popover-media-uploader": PopoverMediaUploader;
@@ -4253,9 +3924,6 @@ declare namespace LocalJSX {
         "popover-select-search": PopoverSelectSearch;
         "popover-shapes-filter": PopoverShapesFilter;
         "popover-tank": PopoverTank;
-        "quill-editor": QuillEditor;
-        "quill-view": QuillView;
-        "quill-view-html": QuillViewHtml;
     }
 }
 export { LocalJSX as JSX };
@@ -4295,7 +3963,6 @@ declare module "@stencil/core" {
             "app-geocode": LocalJSX.AppGeocode & JSXBase.HTMLAttributes<HTMLAppGeocodeElement>;
             "app-header-segment-toolbar": LocalJSX.AppHeaderSegmentToolbar & JSXBase.HTMLAttributes<HTMLAppHeaderSegmentToolbarElement>;
             "app-image-cache": LocalJSX.AppImageCache & JSXBase.HTMLAttributes<HTMLAppImageCacheElement>;
-            "app-immersea-profile": LocalJSX.AppImmerseaProfile & JSXBase.HTMLAttributes<HTMLAppImmerseaProfileElement>;
             "app-infinite-scroll": LocalJSX.AppInfiniteScroll & JSXBase.HTMLAttributes<HTMLAppInfiniteScrollElement>;
             "app-item-cover": LocalJSX.AppItemCover & JSXBase.HTMLAttributes<HTMLAppItemCoverElement>;
             "app-item-detail": LocalJSX.AppItemDetail & JSXBase.HTMLAttributes<HTMLAppItemDetailElement>;
@@ -4362,13 +4029,11 @@ declare module "@stencil/core" {
             "modal-diving-class-update": LocalJSX.ModalDivingClassUpdate & JSXBase.HTMLAttributes<HTMLModalDivingClassUpdateElement>;
             "modal-diving-school-update": LocalJSX.ModalDivingSchoolUpdate & JSXBase.HTMLAttributes<HTMLModalDivingSchoolUpdateElement>;
             "modal-edit-user-roles": LocalJSX.ModalEditUserRoles & JSXBase.HTMLAttributes<HTMLModalEditUserRolesElement>;
-            "modal-immersea-location-update": LocalJSX.ModalImmerseaLocationUpdate & JSXBase.HTMLAttributes<HTMLModalImmerseaLocationUpdateElement>;
             "modal-operating-conditions-questionnaire": LocalJSX.ModalOperatingConditionsQuestionnaire & JSXBase.HTMLAttributes<HTMLModalOperatingConditionsQuestionnaireElement>;
             "modal-project-applicationunit": LocalJSX.ModalProjectApplicationunit & JSXBase.HTMLAttributes<HTMLModalProjectApplicationunitElement>;
             "modal-project-bricksallocationarea": LocalJSX.ModalProjectBricksallocationarea & JSXBase.HTMLAttributes<HTMLModalProjectBricksallocationareaElement>;
             "modal-project-quantityunit": LocalJSX.ModalProjectQuantityunit & JSXBase.HTMLAttributes<HTMLModalProjectQuantityunitElement>;
             "modal-project-update": LocalJSX.ModalProjectUpdate & JSXBase.HTMLAttributes<HTMLModalProjectUpdateElement>;
-            "modal-quill-editor": LocalJSX.ModalQuillEditor & JSXBase.HTMLAttributes<HTMLModalQuillEditorElement>;
             "modal-search-list": LocalJSX.ModalSearchList & JSXBase.HTMLAttributes<HTMLModalSearchListElement>;
             "modal-service-center-update": LocalJSX.ModalServiceCenterUpdate & JSXBase.HTMLAttributes<HTMLModalServiceCenterUpdateElement>;
             "modal-shape-type": LocalJSX.ModalShapeType & JSXBase.HTMLAttributes<HTMLModalShapeTypeElement>;
@@ -4386,14 +4051,12 @@ declare module "@stencil/core" {
             "page-chat": LocalJSX.PageChat & JSXBase.HTMLAttributes<HTMLPageChatElement>;
             "page-chats-list": LocalJSX.PageChatsList & JSXBase.HTMLAttributes<HTMLPageChatsListElement>;
             "page-client-details": LocalJSX.PageClientDetails & JSXBase.HTMLAttributes<HTMLPageClientDetailsElement>;
-            "page-community": LocalJSX.PageCommunity & JSXBase.HTMLAttributes<HTMLPageCommunityElement>;
             "page-community-chats-list": LocalJSX.PageCommunityChatsList & JSXBase.HTMLAttributes<HTMLPageCommunityChatsListElement>;
             "page-community-dashboard": LocalJSX.PageCommunityDashboard & JSXBase.HTMLAttributes<HTMLPageCommunityDashboardElement>;
             "page-community-dive-trips": LocalJSX.PageCommunityDiveTrips & JSXBase.HTMLAttributes<HTMLPageCommunityDiveTripsElement>;
             "page-community-members": LocalJSX.PageCommunityMembers & JSXBase.HTMLAttributes<HTMLPageCommunityMembersElement>;
             "page-contact-details": LocalJSX.PageContactDetails & JSXBase.HTMLAttributes<HTMLPageContactDetailsElement>;
             "page-contacts": LocalJSX.PageContacts & JSXBase.HTMLAttributes<HTMLPageContactsElement>;
-            "page-culture": LocalJSX.PageCulture & JSXBase.HTMLAttributes<HTMLPageCultureElement>;
             "page-customer-details": LocalJSX.PageCustomerDetails & JSXBase.HTMLAttributes<HTMLPageCustomerDetailsElement>;
             "page-customers": LocalJSX.PageCustomers & JSXBase.HTMLAttributes<HTMLPageCustomersElement>;
             "page-dashboard": LocalJSX.PageDashboard & JSXBase.HTMLAttributes<HTMLPageDashboardElement>;
@@ -4421,14 +4084,11 @@ declare module "@stencil/core" {
             "page-diving-warehouse": LocalJSX.PageDivingWarehouse & JSXBase.HTMLAttributes<HTMLPageDivingWarehouseElement>;
             "page-gas-blender": LocalJSX.PageGasBlender & JSXBase.HTMLAttributes<HTMLPageGasBlenderElement>;
             "page-gue-map": LocalJSX.PageGueMap & JSXBase.HTMLAttributes<HTMLPageGueMapElement>;
-            "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;
-            "page-immersea-admin": LocalJSX.PageImmerseaAdmin & JSXBase.HTMLAttributes<HTMLPageImmerseaAdminElement>;
             "page-loading": LocalJSX.PageLoading & JSXBase.HTMLAttributes<HTMLPageLoadingElement>;
             "page-log-book": LocalJSX.PageLogBook & JSXBase.HTMLAttributes<HTMLPageLogBookElement>;
             "page-login": LocalJSX.PageLogin & JSXBase.HTMLAttributes<HTMLPageLoginElement>;
             "page-lostpsw": LocalJSX.PageLostpsw & JSXBase.HTMLAttributes<HTMLPageLostpswElement>;
             "page-map": LocalJSX.PageMap & JSXBase.HTMLAttributes<HTMLPageMapElement>;
-            "page-news": LocalJSX.PageNews & JSXBase.HTMLAttributes<HTMLPageNewsElement>;
             "page-project-details": LocalJSX.PageProjectDetails & JSXBase.HTMLAttributes<HTMLPageProjectDetailsElement>;
             "page-projects": LocalJSX.PageProjects & JSXBase.HTMLAttributes<HTMLPageProjectsElement>;
             "page-school-chats-list": LocalJSX.PageSchoolChatsList & JSXBase.HTMLAttributes<HTMLPageSchoolChatsListElement>;
@@ -4438,7 +4098,6 @@ declare module "@stencil/core" {
             "page-school-members": LocalJSX.PageSchoolMembers & JSXBase.HTMLAttributes<HTMLPageSchoolMembersElement>;
             "page-school-rentals": LocalJSX.PageSchoolRentals & JSXBase.HTMLAttributes<HTMLPageSchoolRentalsElement>;
             "page-school-warehouse": LocalJSX.PageSchoolWarehouse & JSXBase.HTMLAttributes<HTMLPageSchoolWarehouseElement>;
-            "page-sea": LocalJSX.PageSea & JSXBase.HTMLAttributes<HTMLPageSeaElement>;
             "page-service-center-details": LocalJSX.PageServiceCenterDetails & JSXBase.HTMLAttributes<HTMLPageServiceCenterDetailsElement>;
             "page-service-chats-list": LocalJSX.PageServiceChatsList & JSXBase.HTMLAttributes<HTMLPageServiceChatsListElement>;
             "page-service-customers": LocalJSX.PageServiceCustomers & JSXBase.HTMLAttributes<HTMLPageServiceCustomersElement>;
@@ -4464,7 +4123,6 @@ declare module "@stencil/core" {
             "popover-find-oldcustomer": LocalJSX.PopoverFindOldcustomer & JSXBase.HTMLAttributes<HTMLPopoverFindOldcustomerElement>;
             "popover-gas": LocalJSX.PopoverGas & JSXBase.HTMLAttributes<HTMLPopoverGasElement>;
             "popover-gas-blender": LocalJSX.PopoverGasBlender & JSXBase.HTMLAttributes<HTMLPopoverGasBlenderElement>;
-            "popover-info-preview": LocalJSX.PopoverInfoPreview & JSXBase.HTMLAttributes<HTMLPopoverInfoPreviewElement>;
             "popover-level": LocalJSX.PopoverLevel & JSXBase.HTMLAttributes<HTMLPopoverLevelElement>;
             "popover-media-loading": LocalJSX.PopoverMediaLoading & JSXBase.HTMLAttributes<HTMLPopoverMediaLoadingElement>;
             "popover-media-uploader": LocalJSX.PopoverMediaUploader & JSXBase.HTMLAttributes<HTMLPopoverMediaUploaderElement>;
@@ -4478,9 +4136,6 @@ declare module "@stencil/core" {
             "popover-select-search": LocalJSX.PopoverSelectSearch & JSXBase.HTMLAttributes<HTMLPopoverSelectSearchElement>;
             "popover-shapes-filter": LocalJSX.PopoverShapesFilter & JSXBase.HTMLAttributes<HTMLPopoverShapesFilterElement>;
             "popover-tank": LocalJSX.PopoverTank & JSXBase.HTMLAttributes<HTMLPopoverTankElement>;
-            "quill-editor": LocalJSX.QuillEditor & JSXBase.HTMLAttributes<HTMLQuillEditorElement>;
-            "quill-view": LocalJSX.QuillView & JSXBase.HTMLAttributes<HTMLQuillViewElement>;
-            "quill-view-html": LocalJSX.QuillViewHtml & JSXBase.HTMLAttributes<HTMLQuillViewHtmlElement>;
         }
     }
 }
