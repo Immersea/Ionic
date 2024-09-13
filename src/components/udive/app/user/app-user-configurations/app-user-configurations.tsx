@@ -1,18 +1,18 @@
-import {Component, h, State} from "@stencil/core";
+import { Component, h, State } from "@stencil/core";
 import {
   UserService,
   USERSETTINGSCOLLECTION,
 } from "../../../../../services/common/user";
-import {DiveConfiguration} from "../../../../../interfaces/udive/planner/dive-configuration";
-import {Subscription} from "rxjs";
-import {DatabaseService} from "../../../../../services/common/database";
-import {DiveStandardsService} from "../../../../../services/udive/planner/dive-standards";
-import {cloneDeep, forEach} from "lodash";
-import {alertController} from "@ionic/core";
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
-import {TranslationService} from "../../../../../services/common/translations";
-import {UserSettings} from "../../../../../interfaces/udive/user/user-settings";
-import {RouterService} from "../../../../../services/common/router";
+import { DiveConfiguration } from "../../../../../interfaces/udive/planner/dive-configuration";
+import { Subscription } from "rxjs";
+import { DatabaseService } from "../../../../../services/common/database";
+import { DiveStandardsService } from "../../../../../services/udive/planner/dive-standards";
+import { cloneDeep, forEach } from "lodash";
+import { alertController } from "@ionic/core";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
+import { TranslationService } from "../../../../../services/common/translations";
+import { UserSettings } from "../../../../../interfaces/udive/user/user-settings";
+import { RouterService } from "../../../../../services/common/router";
 
 @Component({
   tag: "app-user-configurations",
@@ -209,74 +209,81 @@ export class AppUserConfigurations {
 
   render() {
     return (
-      <div class="slider-container">
-        <div class="slider-scrollable-container">
-          <ion-grid class="ion-no-padding">
-            <ion-row class="ion-text-start ion-no-padding">
+      <div class='slider-container'>
+        <div class='slider-scrollable-container'>
+          <ion-grid class='ion-no-padding'>
+            <ion-row class='ion-text-start ion-no-padding cards-container'>
               {this.userConfigurations.map((conf, i) => (
                 <ion-col
-                  size-sm="12"
-                  size-md="6"
-                  size-lg="4"
-                  class="ion-no-padding"
+                  size-sm='12'
+                  size-md='6'
+                  size-lg='4'
+                  class='ion-no-padding cards-column'
                 >
                   <ion-card
                     onClick={() => this.viewConfiguration(i)}
-                    class="card-margins"
+                    class='card'
                   >
-                    <ion-card-header>
-                      <ion-item class="ion-no-padding" lines="none">
-                        <ion-button
-                          icon-only
-                          slot="end"
-                          color="danger"
-                          fill="clear"
-                          onClick={(ev) => this.removeConfiguration(ev, i)}
-                        >
-                          <ion-icon name="trash-bin-outline"></ion-icon>
-                        </ion-button>
+                    <div class='card-content'>
+                      <ion-card-header>
+                        <ion-item class='ion-no-padding' lines='none'>
+                          <ion-button
+                            icon-only
+                            slot='end'
+                            color='danger'
+                            fill='clear'
+                            onClick={(ev) => this.removeConfiguration(ev, i)}
+                          >
+                            <ion-icon name='trash-bin-outline'></ion-icon>
+                          </ion-button>
 
-                        <ion-card-title>{conf.stdName}</ion-card-title>
-                      </ion-item>
+                          <ion-card-title>{conf.stdName}</ion-card-title>
+                        </ion-item>
 
-                      <ion-card-subtitle>
-                        <my-transl tag="max-depth" text="Max Depth" />:
-                        {conf.maxDepth} {conf.parameters.depthUnit}
-                      </ion-card-subtitle>
-                    </ion-card-header>
+                        <ion-card-subtitle>
+                          <my-transl tag='max-depth' text='Max Depth' />:
+                          {conf.maxDepth} {conf.parameters.depthUnit}
+                        </ion-card-subtitle>
+                      </ion-card-header>
 
-                    <ion-card-content>
-                      {conf.configuration.bottom.length > 0 ? (
-                        <p>
-                          <my-transl tag="bottom-tanks" text="Bottom Tanks" />:
-                        </p>
-                      ) : undefined}
-                      {conf.configuration.bottom.map((tank) => (
-                        <p>{tank.name + "->" + tank.gas.toString()}</p>
-                      ))}
-                      {conf.configuration.deco.length > 0 ? (
-                        <p>
-                          <my-transl tag="deco-tanks" text="Deco Tanks" />:
-                        </p>
-                      ) : undefined}
-                      {conf.configuration.deco.map((tank) => (
-                        <p>{tank.name + "->" + tank.gas.toString()}</p>
-                      ))}
-                    </ion-card-content>
+                      <ion-card-content>
+                        {conf.configuration.bottom.length > 0 ? (
+                          <p>
+                            <my-transl tag='bottom-tanks' text='Bottom Tanks' />
+                            :
+                          </p>
+                        ) : undefined}
+                        {conf.configuration.bottom.map((tank) => (
+                          <p>{tank.name + "->" + tank.gas.toString()}</p>
+                        ))}
+                        {conf.configuration.deco.length > 0 ? (
+                          <p>
+                            <my-transl tag='deco-tanks' text='Deco Tanks' />:
+                          </p>
+                        ) : undefined}
+                        {conf.configuration.deco.map((tank) => (
+                          <p>{tank.name + "->" + tank.gas.toString()}</p>
+                        ))}
+                      </ion-card-content>
+                    </div>
                   </ion-card>
                 </ion-col>
               ))}
+              {/* Add new card button */}
               <ion-col
-                size-sm="12"
-                size-md="6"
-                size-lg="4"
-                class="ion-no-padding"
+                size-sm='12'
+                size-md='6'
+                size-lg='4'
+                class='ion-no-padding cards-column'
               >
-                <ion-card onClick={() => this.addConfiguration()}>
-                  <ion-card-content class="ion-text-center">
+                <ion-card
+                  class='card add-card'
+                  onClick={() => this.addConfiguration()}
+                >
+                  <ion-card-content class='card-content add-card-content'>
                     <ion-icon
-                      name="add-circle-outline"
-                      style={{fontSize: "100px"}}
+                      name='add-circle-outline'
+                      class='add-icon'
                     ></ion-icon>
                   </ion-card-content>
                 </ion-card>

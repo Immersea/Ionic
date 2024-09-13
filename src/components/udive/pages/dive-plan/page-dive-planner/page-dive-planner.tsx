@@ -37,6 +37,7 @@ export class PageDivePlanner {
   userSettingsSub$: Subscription;
   swiper: Swiper;
   @State() scrollTop = 0;
+  maxLocalPlans = 15;
 
   componentWillLoad() {
     this.userSettingsSub$ = UserService.userSettings$.subscribe(
@@ -91,14 +92,13 @@ export class PageDivePlanner {
   }
 
   async addDivePlan() {
-    const maxLocalPlans = 15;
-    if (this.localPlans.length >= maxLocalPlans) {
+    if (this.localPlans.length >= this.maxLocalPlans) {
       const alert = await alertController.create({
         header: TranslationService.getTransl("max-plans", "Maximum Plans"),
         message: TranslationService.getTransl(
           "max-plans-descr",
           "You can store a maximum of xxx plans. Use the 'Logbook' for additional plans.",
-          { xxx: maxLocalPlans }
+          { xxx: this.maxLocalPlans }
         ),
         buttons: [
           {
@@ -273,73 +273,84 @@ export class PageDivePlanner {
         color={Environment.isDecoplanner() ? "gue-blue" : "planner"}
       ></app-navbar>,
       <ion-content>
-        <ion-fab vertical='top' horizontal='end' slot='fixed' edge>
-          <ion-fab-button
-            onClick={() => this.addDivePlan()}
-            color={Environment.isDecoplanner() ? "gue-blue" : "planner"}
-          >
-            <ion-icon name='add'></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
         {this.localPlans.length > 0 ? (
           <ion-grid class='ion-no-padding'>
-            <ion-row class='ion-no-padding'>
+            <ion-row class='ion-no-padding cards-container'>
               {this.localPlans.map((plan, i) => (
                 <ion-col
                   size-sm='12'
                   size-md='6'
                   size-lg='4'
-                  class='ion-no-padding'
+                  class='ion-no-padding cards-column'
                 >
-                  <ion-card
-                    onClick={() => this.viewDive(i)}
-                    class='card-margins'
-                  >
-                    <ion-card-header>
-                      <ion-card-subtitle>
-                        <ion-item lines='none' class='ion-no-padding'>
-                          <ion-button
-                            icon-only
-                            slot='end'
-                            color='danger'
-                            fill='clear'
-                            onClick={(ev) => this.removeDive(ev, i)}
-                          >
-                            <ion-icon name='trash-bin-outline'></ion-icon>
-                          </ion-button>
-                          <ion-label>
-                            <h1>{plan.configuration.stdName}</h1>
-                          </ion-label>
-                        </ion-item>
-                        {plan.dives[0]
-                          .getProfilePointsDetails()
-                          .map((detail) => (
-                            <p class='ion-text-start'>{detail}</p>
-                          ))}
-                      </ion-card-subtitle>
-                    </ion-card-header>
+                  <ion-card onClick={() => this.viewDive(i)} class='card'>
+                    <div class='card-content'>
+                      <ion-card-header>
+                        <ion-card-subtitle>
+                          <ion-item lines='none' class='ion-no-padding'>
+                            <ion-button
+                              icon-only
+                              slot='end'
+                              color='danger'
+                              fill='clear'
+                              onClick={(ev) => this.removeDive(ev, i)}
+                            >
+                              <ion-icon name='trash-bin-outline'></ion-icon>
+                            </ion-button>
+                            <ion-label>
+                              <h1>{plan.configuration.stdName}</h1>
+                            </ion-label>
+                          </ion-item>
+                          {plan.dives[0]
+                            .getProfilePointsDetails()
+                            .map((detail) => (
+                              <p class='ion-text-start'>{detail}</p>
+                            ))}
+                        </ion-card-subtitle>
+                      </ion-card-header>
 
-                    <ion-card-content>
-                      {plan.configuration.configuration.bottom.length > 0 ? (
-                        <p>
-                          <my-transl tag='bottom-tanks' text='Bottom Tanks' />:
-                        </p>
-                      ) : undefined}
-                      {plan.configuration.configuration.bottom.map((tank) => (
-                        <p>{tank.name + "->" + tank.gas.toString()}</p>
-                      ))}
-                      {plan.configuration.configuration.deco.length > 0 ? (
-                        <p>
-                          <my-transl tag='deco-tanks' text='Deco Tanks' />:
-                        </p>
-                      ) : undefined}
-                      {plan.configuration.configuration.deco.map((tank) => (
-                        <p>{tank.name + "->" + tank.gas.toString()}</p>
-                      ))}
-                    </ion-card-content>
+                      <ion-card-content>
+                        {plan.configuration.configuration.bottom.length > 0 ? (
+                          <p>
+                            <my-transl tag='bottom-tanks' text='Bottom Tanks' />
+                            :
+                          </p>
+                        ) : undefined}
+                        {plan.configuration.configuration.bottom.map((tank) => (
+                          <p>{tank.name + "->" + tank.gas.toString()}</p>
+                        ))}
+                        {plan.configuration.configuration.deco.length > 0 ? (
+                          <p>
+                            <my-transl tag='deco-tanks' text='Deco Tanks' />:
+                          </p>
+                        ) : undefined}
+                        {plan.configuration.configuration.deco.map((tank) => (
+                          <p>{tank.name + "->" + tank.gas.toString()}</p>
+                        ))}
+                      </ion-card-content>
+                    </div>
                   </ion-card>
                 </ion-col>
               ))}
+              {/* Add new card button */}
+              <ion-col
+                size-sm='12'
+                size-md='6'
+                size-lg='4'
+                class='ion-no-padding cards-column'
+              >
+                <ion-card
+                  class='card add-card'
+                  onClick={() => this.addDivePlan()}
+                >
+                  <ion-card-content class='card-content add-card-content'>
+                    <ion-icon
+                      name='add-circle-outline'
+                      class='add-icon'
+                    ></ion-icon>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
             </ion-row>
           </ion-grid>
         ) : undefined}

@@ -100,84 +100,84 @@ export class AppUserCards {
       <div class='slider-container'>
         <div class='slider-scrollable-container'>
           <ion-grid class='ion-no-padding'>
-            <ion-row class='ion-text-start ion-no-padding'>
+            <ion-row class='ion-text-start ion-no-padding cards-container'>
               {this.userCards && this.userCards.cards.length > 0
                 ? this.userCards.cards.map((card, i) => (
                     <ion-col
                       size-sm='12'
                       size-md='6'
                       size-lg='4'
-                      class='ion-no-padding'
+                      class='ion-no-padding cards-column'
                     >
-                      <ion-card
-                        onClick={() => this.addCard(i)}
-                        class='card-margins'
-                      >
-                        {card.imgFront ? (
-                          <img src={card.imgFront} />
-                        ) : undefined}
+                      <ion-card onClick={() => this.addCard(i)} class='card'>
+                        <div class='card-content'>
+                          {card.imgFront ? (
+                            <img src={card.imgFront} />
+                          ) : undefined}
 
-                        <ion-card-header>
-                          <ion-card-subtitle>
-                            <ion-item class='ion-no-padding' lines='none'>
-                              <ion-button
-                                icon-only
-                                slot='end'
-                                color='danger'
-                                fill='clear'
-                                onClick={(ev) => this.removeCard(ev, i)}
-                              >
-                                <ion-icon name='trash-bin-outline'></ion-icon>
-                              </ion-button>
-                              <ion-label>
-                                <h2>{card.course.certificationId}</h2>
-                              </ion-label>
-                            </ion-item>
-                            {card.course.agencyName}
-                          </ion-card-subtitle>
-                        </ion-card-header>
-                        <ion-card-content>
-                          {card.number ? <p>#{card.number}</p> : undefined}
-                          {card.instructor ? (
-                            <p>
-                              <my-transl tag='instructor' text='Instructor' />:{" "}
-                              {card.instructor}
-                            </p>
-                          ) : undefined}
-                          {card.certified ? (
-                            <p>
-                              <my-transl tag='certified' text='Certified' />:{" "}
-                              {showDate(card.certified, "date")}
-                            </p>
-                          ) : undefined}
-                          {card.expiry ? (
-                            <p>
-                              <my-transl tag='expiry' text='Expiry' />:{" "}
-                              {showDate(card.expiry, "date")}
-                            </p>
-                          ) : undefined}
-                          {card.comments ? (
-                            <p>
-                              <my-transl tag='comments' text='Comments' />:{" "}
-                              {card.comments}
-                            </p>
-                          ) : undefined}
-                        </ion-card-content>
+                          <ion-card-header>
+                            <ion-card-subtitle>
+                              <ion-item class='ion-no-padding' lines='none'>
+                                <ion-button
+                                  icon-only
+                                  slot='end'
+                                  color='danger'
+                                  fill='clear'
+                                  onClick={(ev) => this.removeCard(ev, i)}
+                                >
+                                  <ion-icon name='trash-bin-outline'></ion-icon>
+                                </ion-button>
+                                <ion-label>
+                                  <h2>{card.course.certificationId}</h2>
+                                </ion-label>
+                              </ion-item>
+                              {card.course.agencyName}
+                            </ion-card-subtitle>
+                          </ion-card-header>
+                          <ion-card-content>
+                            {card.number ? <p>#{card.number}</p> : undefined}
+                            {card.instructor ? (
+                              <p>
+                                <my-transl tag='instructor' text='Instructor' />
+                                : {card.instructor}
+                              </p>
+                            ) : undefined}
+                            {card.certified ? (
+                              <p>
+                                <my-transl tag='certified' text='Certified' />:{" "}
+                                {showDate(card.certified, "date")}
+                              </p>
+                            ) : undefined}
+                            {card.expiry ? (
+                              <p>
+                                <my-transl tag='expiry' text='Expiry' />:{" "}
+                                {showDate(card.expiry, "date")}
+                              </p>
+                            ) : undefined}
+                            {card.comments ? (
+                              <p>
+                                <my-transl tag='comments' text='Comments' />:{" "}
+                                {card.comments}
+                              </p>
+                            ) : undefined}
+                          </ion-card-content>
+                        </div>
                       </ion-card>
                     </ion-col>
                   ))
                 : undefined}
+              {/* Add new card button */}
               <ion-col
                 size-sm='12'
                 size-md='6'
                 size-lg='4'
-                class='ion-no-padding'
+                class='ion-no-padding cards-column'
               >
-                <ion-card onClick={() => this.addCard()}>
-                  <ion-card-content class='ion-text-center'>
+                <ion-card class='card add-card' onClick={() => this.addCard()}>
+                  <ion-card-content class='card-content add-card-content'>
                     <ion-icon
                       name='add-circle-outline'
-                      style={{ fontSize: "100px" }}
+                      class='add-icon'
                     ></ion-icon>
                   </ion-card-content>
                 </ion-card>

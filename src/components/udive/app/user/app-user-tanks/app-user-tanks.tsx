@@ -1,18 +1,18 @@
-import {Component, h, State} from "@stencil/core";
+import { Component, h, State } from "@stencil/core";
 import {
   UserService,
   USERSETTINGSCOLLECTION,
 } from "../../../../../services/common/user";
-import {Subscription} from "rxjs";
-import {DatabaseService} from "../../../../../services/common/database";
-import {DiveStandardsService} from "../../../../../services/udive/planner/dive-standards";
-import {cloneDeep, forEach, isEqual} from "lodash";
-import {alertController} from "@ionic/core";
-import {TranslationService} from "../../../../../services/common/translations";
-import {UserSettings} from "../../../../../interfaces/udive/user/user-settings";
-import {RouterService} from "../../../../../services/common/router";
-import {DiveToolsService} from "../../../../../services/udive/planner/dive-tools";
-import {TankModel} from "../../../../../interfaces/udive/planner/tank-model";
+import { Subscription } from "rxjs";
+import { DatabaseService } from "../../../../../services/common/database";
+import { DiveStandardsService } from "../../../../../services/udive/planner/dive-standards";
+import { cloneDeep, forEach, isEqual } from "lodash";
+import { alertController } from "@ionic/core";
+import { TranslationService } from "../../../../../services/common/translations";
+import { UserSettings } from "../../../../../interfaces/udive/user/user-settings";
+import { RouterService } from "../../../../../services/common/router";
+import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
+import { TankModel } from "../../../../../interfaces/udive/planner/tank-model";
 
 @Component({
   tag: "app-user-tanks",
@@ -175,105 +175,105 @@ export class AppUserTanks {
 
   render() {
     return (
-      <div class="slider-container">
-        <div class="slider-scrollable-container">
-          <ion-grid class="ion-no-padding">
-            <ion-row class="ion-text-start ion-no-padding">
+      <div class='slider-container'>
+        <div class='slider-scrollable-container'>
+          <ion-grid class='ion-no-padding'>
+            <ion-row class='ion-text-start ion-no-padding cards-container'>
               {this.userTanks.map((tank, i) => (
                 <ion-col
-                  size-sm="12"
-                  size-md="6"
-                  size-lg="4"
-                  class="ion-no-padding"
+                  size-sm='12'
+                  size-md='6'
+                  size-lg='4'
+                  class='ion-no-padding cards-column'
                 >
-                  <ion-card
-                    onClick={() => this.viewTank(i)}
-                    class="card-margins"
-                  >
-                    <ion-card-header>
-                      <ion-item class="ion-no-padding" lines="none">
-                        <ion-button
-                          icon-only
-                          slot="end"
-                          color="danger"
-                          fill="clear"
-                          onClick={(ev) => this.removeTank(ev, i)}
-                        >
-                          <ion-icon name="trash-bin-outline"></ion-icon>
-                        </ion-button>
+                  <ion-card onClick={() => this.viewTank(i)} class='card'>
+                    <div class='card-content'>
+                      <ion-card-header>
+                        <ion-item class='ion-no-padding' lines='none'>
+                          <ion-button
+                            icon-only
+                            slot='end'
+                            color='danger'
+                            fill='clear'
+                            onClick={(ev) => this.removeTank(ev, i)}
+                          >
+                            <ion-icon name='trash-bin-outline'></ion-icon>
+                          </ion-button>
 
-                        <ion-card-title>{tank.name}</ion-card-title>
-                      </ion-item>
+                          <ion-card-title>{tank.name}</ion-card-title>
+                        </ion-item>
 
-                      <ion-card-subtitle>
-                        {TranslationService.getTransl("volume", "Volume") +
-                          " : " +
-                          tank.volume +
-                          " lt" +
-                          (this.userSettings.settings.units != "Metric"
-                            ? " / " +
-                              DiveToolsService.ltToCuFt(tank.volume) +
-                              " cuft"
-                            : "")}
-                      </ion-card-subtitle>
-                    </ion-card-header>
+                        <ion-card-subtitle>
+                          {TranslationService.getTransl("volume", "Volume") +
+                            " : " +
+                            tank.volume +
+                            " lt" +
+                            (this.userSettings.settings.units != "Metric"
+                              ? " / " +
+                                DiveToolsService.ltToCuFt(tank.volume) +
+                                " cuft"
+                              : "")}
+                        </ion-card-subtitle>
+                      </ion-card-header>
 
-                    <ion-card-content>
-                      <ion-grid>
-                        <ion-row>
-                          <ion-col>
-                            {TranslationService.getTransl(
-                              "no_of_tanks",
-                              "Number Of Tanks"
-                            ) +
-                              " : " +
-                              tank.no_of_tanks}
-                          </ion-col>
-                        </ion-row>
-                        <ion-row>
-                          <ion-col>
-                            {TranslationService.getTransl(
-                              "pressure",
-                              "Pressure"
-                            ) +
-                              " : " +
-                              tank.pressure +
-                              " bar" +
-                              (this.userSettings.settings.units != "Metric"
-                                ? " / " +
-                                  DiveToolsService.barToPsi(tank.pressure) +
-                                  " psi"
-                                : "")}
-                          </ion-col>
-                        </ion-row>
-                        {tank.forDeco ? (
+                      <ion-card-content>
+                        <ion-grid>
                           <ion-row>
                             <ion-col>
-                              (
                               {TranslationService.getTransl(
-                                "for-deco",
-                                "For Decompression"
-                              )}
-                              )
+                                "no_of_tanks",
+                                "Number Of Tanks"
+                              ) +
+                                " : " +
+                                tank.no_of_tanks}
                             </ion-col>
                           </ion-row>
-                        ) : undefined}
-                      </ion-grid>
-                    </ion-card-content>
+                          <ion-row>
+                            <ion-col>
+                              {TranslationService.getTransl(
+                                "pressure",
+                                "Pressure"
+                              ) +
+                                " : " +
+                                tank.pressure +
+                                " bar" +
+                                (this.userSettings.settings.units != "Metric"
+                                  ? " / " +
+                                    DiveToolsService.barToPsi(tank.pressure) +
+                                    " psi"
+                                  : "")}
+                            </ion-col>
+                          </ion-row>
+                          {tank.forDeco ? (
+                            <ion-row>
+                              <ion-col>
+                                (
+                                {TranslationService.getTransl(
+                                  "for-deco",
+                                  "For Decompression"
+                                )}
+                                )
+                              </ion-col>
+                            </ion-row>
+                          ) : undefined}
+                        </ion-grid>
+                      </ion-card-content>
+                    </div>
                   </ion-card>
                 </ion-col>
               ))}
+              {/* Add new card button */}
               <ion-col
-                size-sm="12"
-                size-md="6"
-                size-lg="4"
-                class="ion-no-padding"
+                size-sm='12'
+                size-md='6'
+                size-lg='4'
+                class='ion-no-padding cards-column'
               >
-                <ion-card onClick={() => this.addTank()}>
-                  <ion-card-content class="ion-text-center">
+                <ion-card class='card add-card' onClick={() => this.addTank()}>
+                  <ion-card-content class='card-content add-card-content'>
                     <ion-icon
-                      name="add-circle-outline"
-                      style={{fontSize: "100px"}}
+                      name='add-circle-outline'
+                      class='add-icon'
                     ></ion-icon>
                   </ion-card-content>
                 </ion-card>

@@ -7,9 +7,6 @@ export const config: Config = {
   outputTargets: [
     {
       type: "www",
-      serviceWorker: {
-        swSrc: "src/sw.js",
-      },
     },
   ],
   globalScript: "src/global/app.ts",

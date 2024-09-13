@@ -1,1 +1,1 @@
-export const ISDEV = false;
+export const ISDEV = true;

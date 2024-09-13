@@ -11,14 +11,14 @@ enum bundleIds {
   decoplanner_web = "com.gue.decoplanner-mobile-web",
   trasteel = "com.trasteel.app",
 }
-const app_id = bundleIds.decoplanner_android;
+const app_id = bundleIds.decoplanner_ios;
 const app_name = AppNames.decoplanner;
 
 const config: CapacitorConfig = {
   appId: app_id,
   appName: app_name,
   webDir: "www",
-  loggingBehavior: "production", //'none' | 'debug' | 'production';
+  loggingBehavior: "production",
   plugins: {
     PushNotifications: {
       presentationOptions: ["badge", "sound", "alert"],
