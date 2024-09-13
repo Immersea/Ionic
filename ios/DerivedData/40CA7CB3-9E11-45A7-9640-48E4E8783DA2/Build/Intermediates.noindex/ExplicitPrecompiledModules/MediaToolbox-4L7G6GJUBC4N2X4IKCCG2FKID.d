@@ -1,4 +1,0 @@
-moduledependenciestarget: \
-  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/System/Library/Frameworks/CoreFoundation.framework/Modules/module.modulemap \
-  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/System/Library/Frameworks/CoreMedia.framework/Modules/module.modulemap \
-  /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.0.sdk/System/Library/Frameworks/AudioToolbox.framework/Modules/module.modulemap

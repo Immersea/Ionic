@@ -1,2 +1,0 @@
-import{r}from"./p-46038295.js";const o=r("Browser",{web:()=>import("./p-56ca05c8.js").then((r=>new r.BrowserWeb))});export{o as B};
-//# sourceMappingURL=p-a0c4b68c.js.map

@@ -1,6 +1,0 @@
-import{a as o,g as s,c as e}from"./p-cbe60c68.js";import{c as i,a as t,b as n,s as c,d,i as a}from"./p-694b8ade.js";
-/*!
- * (C) Ionic http://ionicframework.com - MIT License
- */
-let f;const r=o=>o&&s(o)||f;const m=(s={})=>{if(typeof window==="undefined"){return}const r=window.document;const m=window;const l=m.Ionic=m.Ionic||{};const p={};if(s._ael){p.ael=s._ael}if(s._rel){p.rel=s._rel}if(s._ce){p.ce=s._ce}o(p);const b=Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({},i(m)),{persistConfig:false}),l.config),t(m)),s);n.reset(b);if(n.getBoolean("persistConfig")){c(m,b)}d(m);l.config=n;l.mode=f=n.get("mode",r.documentElement.getAttribute("mode")||(a(m,"ios")?"ios":"md"));n.set("mode",f);r.documentElement.setAttribute("mode",f);r.documentElement.classList.add(f);if(n.getBoolean("_testing")){n.set("animated",false)}const j=o=>{var s;return(s=o.tagName)===null||s===void 0?void 0:s.startsWith("ION-")};const w=o=>["ios","md"].includes(o);e((o=>{while(o){const s=o.mode||o.getAttribute("mode");if(s){if(w(s)){return s}else if(j(o)){console.warn('Invalid ionic mode: "'+s+'", expected: "ios" or "md"')}}o=o.parentElement}return f}))};export{r as g,m as i};
-//# sourceMappingURL=p-ae1763fb.js.map
