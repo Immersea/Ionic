@@ -4,6 +4,7 @@ const {
   ipcMain,
   shell,
   Menu,
+  session,
   globalShortcut,
 } = require("electron");
 const path = require("path");
@@ -145,8 +146,26 @@ function appWhenReady() {
     app.setName(appName);
     const menu = Menu.buildFromTemplate(menuTemplate);
     Menu.setApplicationMenu(menu);
+    getPermissions();
     createWindow();
   });
+}
+
+/*
+GET GPS Permissions
+*/
+
+function getPermissions() {
+  // Request location permissions (for example, macOS)
+  session.defaultSession.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      if (permission === "geolocation") {
+        callback(true); // Allow geolocation
+      } else {
+        callback(false);
+      }
+    }
+  );
 }
 
 // Create mainWindow, load the rest of the app, etc...
@@ -175,4 +194,53 @@ ipcMain.on("shell:open", () => {
   const pageDirectory = __dirname.replace("app.asar", "app.asar.unpacked");
   const pagePath = path.join("file://", pageDirectory, "index.html");
   shell.openExternal(pagePath);
+});
+
+/***
+ * AUTOUPDATER
+ */
+const { autoUpdater } = require("electron-updater");
+
+async function handleUpdate() {
+  const updateUrl = await checkForUpdate();
+
+  if (updateUrl) {
+    autoUpdater.setFeedURL({
+      provider: "generic",
+      url: updateUrl,
+    });
+
+    autoUpdater.checkForUpdatesAndNotify();
+  }
+}
+
+autoUpdater.on("update-available", (info) => {
+  // Show the release notes from Firestore or the autoUpdater
+  console.log("Release notes:", info.releaseNotes);
+
+  // Optionally notify the user via a dialog box
+  dialog.showMessageBox({
+    type: "info",
+    title: "Update Available",
+    message:
+      "A new version of the app is available. It will be downloaded now.",
+  });
+});
+
+// When an update is available and downloaded
+autoUpdater.on("update-downloaded", () => {
+  dialog
+    .showMessageBox({
+      type: "info",
+      title: "Update Ready",
+      message:
+        "A new version of the app has been downloaded. It will be installed after the app restarts.",
+      buttons: ["Restart Now", "Later"],
+    })
+    .then((result) => {
+      if (result.response === 0) {
+        // Quit the app and install the update
+        autoUpdater.quitAndInstall();
+      }
+    });
 });

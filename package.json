@@ -29,7 +29,7 @@
     "deploy-decoplanner": "npm run switch-to-pwa && npm run start-prod && rm -r ./functions-udive/lib && firebase use udive && firebase deploy --only storage,rules,functions,firestore,hosting:guedecoplanner",
     "deploy-udive-hosting": "npm run switch-to-pwa && npm run start-prod && firebase use udive && firebase deploy --only hosting:udive ",
     "deploy-decoplanner-hosting": "npm run switch-to-pwa && npm run start-prod && firebase use udive && firebase deploy --only hosting:guedecoplanner && firebase deploy --only hosting:guedecoplanner ",
-    "deploy-trasteel-hosting": "npm run switch-to-pwa && npm run start && firebase use trasteel-consumables && firebase deploy --only hosting:trasteel-consumables",
+    "deploy-trasteel-hosting": "npm run switch-to-pwa && npm run start-prod && firebase use trasteel-consumables && firebase deploy --only hosting:trasteel-consumables",
     "deploy-virtual-tours": "firebase use trasteel-consumables && firebase deploy --only hosting:virtual-tours-imrs",
     "deploy-trasteel-signin": "firebase use trasteel-consumables && firebase deploy --only hosting:trasteel-signin",
     "deploy-trasteel-functions": "rm -r ./functions-trasteel/lib && firebase use trasteel-consumables && firebase deploy --only functions",

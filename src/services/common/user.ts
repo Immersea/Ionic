@@ -1,26 +1,26 @@
-import {BehaviorSubject} from "rxjs";
-import {TranslationService} from "./translations";
-import {alertController} from "@ionic/core";
-import {Geolocation, Position} from "@capacitor/geolocation";
+import { BehaviorSubject } from "rxjs";
+import { TranslationService } from "./translations";
+import { alertController } from "@ionic/core";
+import { Geolocation, Position } from "@capacitor/geolocation";
 
-import {RouterService} from "./router";
-import {ChatsSummary} from "../../interfaces/common/chat/chat";
-import {ChatService} from "./chat";
-import {TripSummary} from "../../interfaces/udive/dive-trip/diveTrip";
-import {ClassSummary} from "../../interfaces/udive/diving-class/divingClass";
-import {UserProfile} from "../../interfaces/common/user/user-profile";
-import {UserSettings} from "../../interfaces/udive/user/user-settings";
-import {UserRoles} from "../../interfaces/common/user/user-roles";
-import {UserDivePlans} from "../../interfaces/udive/user/user-dive-plans";
-import {UserCards} from "../../interfaces/udive/user/user-cards";
+import { RouterService } from "./router";
+import { ChatsSummary } from "../../interfaces/common/chat/chat";
+import { ChatService } from "./chat";
+import { TripSummary } from "../../interfaces/udive/dive-trip/diveTrip";
+import { ClassSummary } from "../../interfaces/udive/diving-class/divingClass";
+import { UserProfile } from "../../interfaces/common/user/user-profile";
+import { UserSettings } from "../../interfaces/udive/user/user-settings";
+import { UserRoles } from "../../interfaces/common/user/user-roles";
+import { UserDivePlans } from "../../interfaces/udive/user/user-dive-plans";
+import { UserCards } from "../../interfaces/udive/user/user-cards";
 import {
   MapDataUserPubicProfile,
   UserPubicProfile,
 } from "../../interfaces/common/user/user-public-profile";
-import {StorageService} from "./storage";
-import {DivePlanModel} from "../../interfaces/udive/planner/dive-plan";
-import {DiveConfiguration} from "../../interfaces/udive/planner/dive-configuration";
-import {DatabaseService, SETTINGSCOLLECTIONNAME} from "./database";
+import { StorageService } from "./storage";
+import { DivePlanModel } from "../../interfaces/udive/planner/dive-plan";
+import { DiveConfiguration } from "../../interfaces/udive/planner/dive-configuration";
+import { DatabaseService, SETTINGSCOLLECTIONNAME } from "./database";
 import {
   DIVECENTERSSCOLLECTION,
   DivingCentersService,
@@ -33,9 +33,9 @@ import {
   SERVICECENTERSCOLLECTION,
   ServiceCentersService,
 } from "../udive/serviceCenters";
-import {Environment} from "../../global/env";
-import {UDiveFilterService} from "../udive/ud-db-filter";
-import {UserPreferred} from "../../interfaces/common/user/user-preferred";
+import { Environment } from "../../global/env";
+import { UDiveFilterService } from "../udive/ud-db-filter";
+import { UserPreferred } from "../../interfaces/common/user/user-preferred";
 import {
   DIVECOMMUNITIESCOLLECTION,
   DiveCommunitiesService,
@@ -48,12 +48,12 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import {auth, firestore} from "../../helpers/firebase";
-import {User} from "firebase/auth";
-import {AuthService} from "./auth";
-import {SystemService} from "./system";
-import {TrasteelFilterService} from "../trasteel/common/trs-db-filter";
-import {TankModel} from "../../interfaces/udive/planner/tank-model";
+import { auth, firestore } from "../../helpers/firebase";
+import { User } from "firebase/auth";
+import { AuthService } from "./auth";
+import { SystemService } from "./system";
+import { TrasteelFilterService } from "../trasteel/common/trs-db-filter";
+import { TankModel } from "../../interfaces/udive/planner/tank-model";
 
 export const USERPROFILECOLLECTION = "userProfiles";
 export const USERPUBLICPROFILECOLLECTION = "userPublicProfiles";
@@ -784,6 +784,7 @@ export class UserController {
     return new Promise((resolve, reject) => {
       if (forceUpdate || !this.userGeoposition) {
         Geolocation.getCurrentPosition().then((position) => {
+          console.log("getCurrentPosition", position);
           if (position && position.coords) {
             this.userGeoposition = position;
             resolve(position);

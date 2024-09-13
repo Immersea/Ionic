@@ -61,6 +61,10 @@ export class PageLogin {
     this.trasteelLogin = Environment.isTrasteel();
   }
 
+  componentDidLoad() {
+    SystemService.dismissLoading();
+  }
+
   async sendLink() {
     try {
       await AuthService.sendEmailLink(this.email.value.trim());

@@ -4,8 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Handle Trasteel Sign-In</title>
+    <style>
+      /* Style for the page background and layout */
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0; /* Light gray background */
+        font-family: Arial, sans-serif;
+        color: #333; /* Dark text color for contrast */
+        text-align: center;
+      }
+
+      /* Logo styling */
+      .logo {
+        max-width: 200px;
+        margin-bottom: 20px;
+      }
+
+      /* Close button styling */
+      .close-button {
+        padding: 10px 20px;
+        background-color: #ff6b6b;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        display: none; /* Initially hidden */
+      }
+
+      .close-button:hover {
+        background-color: #ff4d4d;
+      }
+    </style>
   </head>
   <body>
+    <!-- Add your logo here -->
+    <img src="trasteel.png" alt="Logo" class="logo" />
+
+    <h1>Redirecting...</h1>
+
+    <!-- Close button will be displayed after redirection -->
+    <button class="close-button" onclick="window.close()">Close Page</button>
+
     <script>
       // Extract the oobCode, apiKey, mode, and any other parameters from the URL
       const urlParams = new URLSearchParams(window.location.search);
@@ -18,6 +65,12 @@
       if (oobCode && apiKey && mode) {
         // Redirect back to the Electron app using the custom protocol
         window.location.href = `trasteelapp://signInSuccess?oobCode=${oobCode}&apiKey=${apiKey}&mode=${mode}&lang=${lang}`;
+
+        // Show the close button after a slight delay to simulate redirect completion
+        setTimeout(() => {
+          document.querySelector(".close-button").style.display =
+            "inline-block";
+        }, 2000); // Adjust the delay as needed
       } else {
         console.error("Error: Missing required parameters for sign-in.");
       }

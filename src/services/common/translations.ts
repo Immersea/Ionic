@@ -1,15 +1,16 @@
-import {DatabaseService} from "./database";
-import {DocumentData} from "firebase/firestore";
-import {BehaviorSubject} from "rxjs";
-import {compareDates, replaceAll} from "../../helpers/utils";
-import {SystemService, SYSTEMCOLLECTION} from "./system";
+import { DatabaseService } from "./database";
+import { DocumentData } from "firebase/firestore";
+import { BehaviorSubject } from "rxjs";
+import { compareDates, replaceAll } from "../../helpers/utils";
+import { SystemService, SYSTEMCOLLECTION } from "./system";
 import {
   CreateTranslation,
   Translation,
 } from "../../interfaces/common/translations/translations";
-import {Environment} from "../../global/env";
-import {upperFirst} from "lodash";
-import {TextMultilanguage} from "../../components";
+import { Environment } from "../../global/env";
+import { upperFirst } from "lodash";
+import { TextMultilanguage } from "../../components";
+import { UserService } from "./user";
 
 export const TRANSLATIONSCOLLECTION = "translations";
 
@@ -140,7 +141,14 @@ class TranslationController {
   }
 
   async missingTranslation(tag: string, text: string) {
-    if (this.translationsLoaded && tag && !this.missingTranslationsList[tag]) {
+    const isTranslator =
+      UserService.userRoles && UserService.userRoles.isTranslator();
+    if (
+      isTranslator &&
+      this.translationsLoaded &&
+      tag &&
+      !this.missingTranslationsList[tag]
+    ) {
       this.missingTranslationsList[tag] = true;
       const translation = new CreateTranslation(text) as Translation;
       Environment.log("missingTranslation", [tag, translation]);

@@ -1,7 +1,7 @@
 {
   "name": "Trasteel",
   "short_name": "Trasteel",
-  "start_url": "/",
+  "start_url": "",
   "display": "standalone",
   "icons": [
     {

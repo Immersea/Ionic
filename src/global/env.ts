@@ -2,7 +2,7 @@ import { Capacitor } from "@capacitor/core";
 import { isPlatform } from "@ionic/core";
 import { ISDEV } from "./dev";
 import { selectedApp } from "./env-apps";
-import { isElectron } from "../helpers/utils";
+import { isElectron, isLocalhost } from "../helpers/utils";
 
 export enum AppNames {
   udive = "udive",
@@ -37,7 +37,7 @@ enum AppSubTitles {
 export enum AppVersions {
   udive = "beta 1.1.1",
   decoplanner = "1.4.1",
-  trasteel = "1.4.0",
+  trasteel = "1.4.1b",
 }
 
 const firebase_settings = {
@@ -267,7 +267,7 @@ class EnvController {
         this.appName.toLocaleLowerCase() +
         "-signin.web.app/finishSignIn"
       );
-    } else if (this.isDev()) {
+    } else if (this.isDev() && isLocalhost(window.location.href)) {
       return siteUrls.LOCALHOST;
     } else if (this.appName === AppNames.udive) {
       return siteUrls.UDIVE;

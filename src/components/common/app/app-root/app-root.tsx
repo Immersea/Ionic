@@ -19,6 +19,7 @@ import { DatabaseService } from "../../../../services/common/database";
 import { TrasteelRoutingService } from "../../../../services/trasteel/common/routing";
 import { UdiveRoutingService } from "../../../../services/udive/routing";
 import { NotificationsService } from "../../../../services/common/notifications";
+import { ElectronService } from "../../../../services/common/electron";
 
 @Component({
   tag: "app-root",
@@ -165,23 +166,7 @@ export class AppRoot {
       if (!isElectron()) {
         await AuthService.signInLinkReceived(location.href);
       } else {
-        // Ensure that the electronAPI is available before calling
-        if (window["electronAPI"]) {
-          if (window["electronAPI"].onSignInLinkReceived) {
-            // Listen for the 'sign-in-link-received' event from Electron
-            window["electronAPI"].onSignInLinkReceived((url: string) => {
-              console.log("Electron sign-in-link-received", url);
-              // Call the AuthService's method
-              AuthService.signInLinkReceived(url);
-            });
-          }
-          if (window["electronAPI"].onMainLog) {
-            // Listen for logs from the main process
-            window["electronAPI"].onMainLog((log: string) => {
-              console.log("Received main process log:", log);
-            });
-          }
-        }
+        ElectronService.signinInLinkWithElectron();
       }
     } catch {
       //user never logged in

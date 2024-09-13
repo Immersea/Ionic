@@ -483,3 +483,18 @@ export function isElectron() {
     window["electronAPI"].isElectron
   );
 }
+
+export function isLocalhost(url: string): boolean {
+  try {
+    const parsedUrl = new URL(url);
+    const hostname = parsedUrl.hostname;
+
+    // Check if the hostname is one of the localhost addresses
+    return (
+      hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1"
+    );
+  } catch (error) {
+    console.error("Invalid URL:", error);
+    return false;
+  }
+}

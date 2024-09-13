@@ -199,8 +199,8 @@ class AuthController {
       apiKey +
       "&mode=" +
       mode;
-    console.log("signInLinkReceived", parsedUrl, link, oobCode);
     if (link && oobCode) {
+      console.log("signInLinkReceived", parsedUrl, link, oobCode);
       const email = await DatabaseService.getLocalDocument("emailForSignIn");
       this.verifyEmailLink(email, link);
     }
