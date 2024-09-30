@@ -10,6 +10,10 @@ const {
 const path = require("path");
 const httpServer = require("http-server");
 
+const { autoUpdater } = require("electron-updater");
+const log = require("electron-log");
+log.info("App starting...");
+
 let mainWindow;
 let server;
 const port = 8080;
@@ -49,7 +53,7 @@ function getProtocolString() {
 }
 
 function logData(str) {
-  console.log("logData: " + str);
+  log.info("logData: " + str);
   mainWindow.webContents.send("main-log", `Main process: ` + str);
 }
 
@@ -199,48 +203,46 @@ ipcMain.on("shell:open", () => {
 /***
  * AUTOUPDATER
  */
-const { autoUpdater } = require("electron-updater");
 
-async function handleUpdate() {
-  const updateUrl = await checkForUpdate();
+// Log updates
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = "info";
+process.env.GH_TOKEN = "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";
 
-  if (updateUrl) {
-    autoUpdater.setFeedURL({
-      provider: "generic",
-      url: updateUrl,
-    });
-
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-}
-
-autoUpdater.on("update-available", (info) => {
-  // Show the release notes from Firestore or the autoUpdater
-  console.log("Release notes:", info.releaseNotes);
-
-  // Optionally notify the user via a dialog box
-  dialog.showMessageBox({
-    type: "info",
-    title: "Update Available",
-    message:
-      "A new version of the app is available. It will be downloaded now.",
-  });
+autoUpdater.setFeedURL({
+  provider: "github",
+  owner: "Immersea",
+  repo: "trasteel-updates",
+  private: true,
 });
 
-// When an update is available and downloaded
-autoUpdater.on("update-downloaded", () => {
-  dialog
-    .showMessageBox({
-      type: "info",
-      title: "Update Ready",
-      message:
-        "A new version of the app has been downloaded. It will be installed after the app restarts.",
-      buttons: ["Restart Now", "Later"],
-    })
-    .then((result) => {
-      if (result.response === 0) {
-        // Quit the app and install the update
-        autoUpdater.quitAndInstall();
-      }
-    });
+// Check for updates and notify
+autoUpdater.checkForUpdatesAndNotify();
+
+autoUpdater.on("update-available", (info) => {
+  log.info("Update available:", info);
+  // Send message to renderer process
+  mainWindow.webContents.send("update_available", info);
+});
+
+autoUpdater.on("update-downloaded", (info) => {
+  log.info("Update downloaded:", info);
+  // Send message to renderer process
+  mainWindow.webContents.send("update_downloaded", info);
+});
+
+// Handle restart requests from the renderer process
+ipcMain.on("restart_app", () => {
+  autoUpdater.quitAndInstall();
+});
+
+// Optionally, handle errors and other update events
+autoUpdater.on("error", (err) => {
+  log.error("Update error:", err);
+  mainWindow.webContents.send("update_error", err.message || err);
+});
+
+autoUpdater.on("update-not-available", (info) => {
+  log.info("Update not available:", info);
+  mainWindow.webContents.send("update_not_available", info);
 });

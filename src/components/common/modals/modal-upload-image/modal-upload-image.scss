@@ -1,6 +1,4 @@
 modal-upload-image {
-  --width: 70% !important;
-  --height: 70% !important;
   /* Ensure the size of the image fit the container perfectly */
   img {
     display: block;
@@ -16,9 +14,51 @@ modal-upload-image {
     }
   }
 
+  /* Remove default padding from ion-content */
+  ion-content.ion-content-custom {
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+  }
+
+  /* Make the content wrapper fill the entire ion-content */
+  .content-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Image container styling */
+  .img-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* Image styling */
+  .img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* or 'cover' depending on your preference */
+  }
+
+  /* Drop area styling */
   .drop-area {
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    top: 0px;
+    top: 0;
+    left: 0;
   }
 }

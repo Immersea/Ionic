@@ -1,5 +1,5 @@
-import {Component, h, Host, State, Element, Prop} from "@stencil/core";
-import {popoverController} from "@ionic/core";
+import { Component, h, Host, State, Element, Prop } from "@stencil/core";
+import { popoverController } from "@ionic/core";
 
 @Component({
   tag: "popover-find-oldcustomer",
@@ -49,13 +49,13 @@ export class PopoverFindOldCustomer {
           <ion-item>
             {this.newCustomer ? this.newCustomer.fullName : null}
           </ion-item>
-          <ion-item lines="none">
+          <ion-item lines='none'>
             <ion-select
-              color="trasteel"
-              id="selectOwner"
-              interface="action-sheet"
-              label="customers"
-              label-placement="floating"
+              color='trasteel'
+              id='selectOwner'
+              interface='action-sheet'
+              label='customers'
+              label-placement='floating'
               onIonChange={(ev) => this.handleSelect(ev)}
               value={this.newCustomer ? this.newCustomer : null}
             >
@@ -69,7 +69,7 @@ export class PopoverFindOldCustomer {
         </ion-content>
         <ion-footer>
           <app-modal-footer
-            saveTag={{tag: "ok", text: "ok"}}
+            saveTag={{ tag: "ok", text: "ok", color: "success" }}
             onCancelEmit={() => this.close()}
             onSaveEmit={() => this.save()}
           />

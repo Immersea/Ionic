@@ -7,6 +7,7 @@ export const config: Config = {
   outputTargets: [
     {
       type: "www",
+      serviceWorker: null, // Disable service workers
     },
   ],
   globalScript: "src/global/app.ts",

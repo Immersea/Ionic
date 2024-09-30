@@ -1,9 +1,9 @@
-import {Component, h, Host, Element, Prop, State} from "@stencil/core";
-import {popoverController} from "@ionic/core";
-import {CustomerGroup} from "../../../../interfaces/trasteel/customer/customer";
-import {CustomersService} from "../../../../services/trasteel/crm/customers";
-import {TranslationService} from "../../../../services/common/translations";
-import {slugify} from "../../../../helpers/utils";
+import { Component, h, Host, Element, Prop, State } from "@stencil/core";
+import { popoverController } from "@ionic/core";
+import { CustomerGroup } from "../../../../interfaces/trasteel/customer/customer";
+import { CustomersService } from "../../../../services/trasteel/crm/customers";
+import { TranslationService } from "../../../../services/common/translations";
+import { slugify } from "../../../../helpers/utils";
 
 @Component({
   tag: "popover-edit-customer-owner",
@@ -107,13 +107,13 @@ export class PopoverEditCustomerEwner {
           </ion-toolbar>
         </ion-header>
         <ion-content>
-          <ion-item lines="none">
+          <ion-item lines='none'>
             <ion-select
-              color="trasteel"
-              id="selectOwner"
-              interface="action-sheet"
-              label="Customer"
-              label-placement="floating"
+              color='trasteel'
+              id='selectOwner'
+              interface='action-sheet'
+              label='Customer'
+              label-placement='floating'
               disabled={this.newOwnerName && this.newOwnerName.length > 0}
               onIonChange={(ev) => this.handleSelect(ev)}
               value={this.selectedOwner}
@@ -121,27 +121,27 @@ export class PopoverEditCustomerEwner {
           </ion-item>
           <ion-item-divider> - or insert new - </ion-item-divider>
           <app-form-item
-            lines="none"
-            label-tag="name"
-            label-text="Name"
+            lines='none'
+            label-tag='name'
+            label-text='Name'
             value={this.newOwnerName}
-            name="newOwnerName"
-            input-type="string"
+            name='newOwnerName'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
           ></app-form-item>
           {this.group ? (
             <app-form-item
-              lines="full"
-              label-tag="share_perc"
-              label-text="Share Percentage"
+              lines='full'
+              label-tag='share_perc'
+              label-text='Share Percentage'
               value={this.sharePerc}
-              name="sharePerc"
-              input-type="number"
+              name='sharePerc'
+              input-type='number'
               onFormItemChanged={(ev) => this.handleChange(ev)}
               validator={[
                 {
                   name: "minmaxvalue",
-                  options: {min: 0, max: 100},
+                  options: { min: 0, max: 100 },
                 },
               ]}
             ></app-form-item>
@@ -149,7 +149,7 @@ export class PopoverEditCustomerEwner {
         </ion-content>
         <ion-footer>
           <app-modal-footer
-            saveTag={{tag: "ok", text: "ok"}}
+            saveTag={{ tag: "ok", text: "ok", color: "success" }}
             onCancelEmit={() => this.close()}
             onSaveEmit={() => this.save()}
           />

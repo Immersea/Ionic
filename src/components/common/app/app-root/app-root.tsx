@@ -65,7 +65,6 @@ export class AppRoot {
 
     window.addEventListener("resize", setCoverHeight);
     setCoverHeight();
-
     //this.darkTheme();
     UserService.userProfile$.subscribe(async (userProfile: UserProfile) => {
       //wait for user services to start and skip first null userProfile
@@ -145,27 +144,20 @@ export class AppRoot {
     try {
       AuthService.init();
       await SystemService.init();
-      await TranslationService.init(
-        Environment.isUdive() ||
-          Environment.isDecoplanner() ||
-          Environment.isTrasteel()
-          ? "en"
-          : "it"
-      );
-
+      await TranslationService.init("en");
       if (Environment.isUdive() || Environment.isDecoplanner()) {
         await UDiveFilterService.init();
       } else if (Environment.isTrasteel()) {
         await TrasteelFilterService.init();
       }
-      UserService.start();
+      await UserService.start();
       DatabaseService.servicesStarted = true;
       DatabaseService.initServices();
 
       //check email link for user registration
       if (!isElectron()) {
         await AuthService.signInLinkReceived(location.href);
-      } else {
+      } else if (isElectron()) {
         ElectronService.signinInLinkWithElectron();
       }
     } catch {

@@ -7,9 +7,9 @@ import {
   Prop,
   State,
 } from "@stencil/core";
-import {alertController} from "@ionic/core";
-import {TranslationService} from "../../../../../services/common/translations";
-import {round} from "lodash";
+import { alertController } from "@ionic/core";
+import { TranslationService } from "../../../../../services/common/translations";
+import { round } from "lodash";
 @Component({
   tag: "app-dragdrop-file",
   styleUrl: "app-dragdrop-file.scss",
@@ -122,46 +122,47 @@ export class AppDragdropFile {
   }
 
   render() {
-    return [
-      <div id="drop-area">
-        <p>
-          {this.selectedFile ? (
-            [
-              <ion-note>{this.selectedFile.name}</ion-note>,
-              <br />,
-              <ion-note>
-                {round(this.selectedFile.size / 1024 / 1024, 1)}MB
-              </ion-note>,
-            ]
-          ) : (
-            <my-transl
-              tag="dragdrop-file"
-              text="Upload a file with the file dialog or by dragging and
-            dropping the file onto the dashed region"
-            />
-          )}
-        </p>
-      </div>,
-      <form class="my-form">
-        <input
-          type="file"
-          id="fileElem"
-          accept={
-            this.fileType
-              ? this.fileType + "/*"
-              : this.fileTypes && this.fileTypes.length > 0
-                ? this.fileTypes.join(",")
-                : "*/*"
-          }
-          onClick={() => {
-            return false;
-          }}
-          onChange={(ev) => this.handleFiles(ev)}
-        />
-        <label id="labelElem" class="button" htmlFor="fileElem">
-          <my-transl tag="select-file" text="Select a File" />
-        </label>
-      </form>,
-    ];
+    return (
+      <div class='drop-area-container'>
+        <div id='drop-area'>
+          <p>
+            {this.selectedFile ? (
+              [
+                <ion-note>{this.selectedFile.name}</ion-note>,
+                <br />,
+                <ion-note>
+                  {round(this.selectedFile.size / 1024 / 1024, 1)}MB
+                </ion-note>,
+              ]
+            ) : (
+              <my-transl
+                tag='dragdrop-file'
+                text='Upload a file with the file dialog or by dragging and dropping the file onto the dashed region'
+              />
+            )}
+          </p>
+        </div>
+        <form class='my-form'>
+          <input
+            type='file'
+            id='fileElem'
+            accept={
+              this.fileType
+                ? this.fileType + "/*"
+                : this.fileTypes && this.fileTypes.length > 0
+                  ? this.fileTypes.join(",")
+                  : "*/*"
+            }
+            onClick={() => {
+              return false;
+            }}
+            onChange={(ev) => this.handleFiles(ev)}
+          />
+          <label id='labelElem' class='button' htmlFor='fileElem'>
+            <my-transl tag='select-file' text='Select a File' />
+          </label>
+        </form>
+      </div>
+    );
   }
 }

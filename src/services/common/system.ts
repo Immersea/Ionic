@@ -47,6 +47,7 @@ class SystemController {
       if (serviceLocal) {
         this.systemPreferences = serviceLocal;
         this.systemPreferences$.next(this.systemPreferences);
+        resolve(this.systemPreferences);
       }
       this.getDeviceInfo();
     });

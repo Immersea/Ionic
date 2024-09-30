@@ -1,6 +1,6 @@
-import {Component, h, Host, Element, Prop, State} from "@stencil/core";
-import {popoverController} from "@ionic/core";
-import {ShapesService} from "../../../../services/trasteel/refractories/shapes";
+import { Component, h, Host, Element, Prop, State } from "@stencil/core";
+import { popoverController } from "@ionic/core";
+import { ShapesService } from "../../../../services/trasteel/refractories/shapes";
 import {
   Shape,
   ShapeFilter,
@@ -69,10 +69,10 @@ export class PopoverShapesFilter {
                             text: "Shape Type",
                           }}
                           value={this.filter.shapeTypeId}
-                          lines="inset"
+                          lines='inset'
                           selectFn={(ev) => this.handleSelect(ev)}
                           selectOptions={this.shapeTypes}
-                          selectValueId="typeId"
+                          selectValueId='typeId'
                           selectValueText={["typeName", "en"]}
                         ></app-select-search>
                       </ion-col>
@@ -87,14 +87,14 @@ export class PopoverShapesFilter {
                             label-text={key}
                             value={this.filter[key]}
                             name={key}
-                            input-type="number"
+                            input-type='number'
                             onFormItemChanged={(ev) => this.handleFilter(ev)}
                           ></app-form-item>
                         </ion-col>
-                        <ion-col size="1">
+                        <ion-col size='1'>
                           <ion-select
-                            color="trasteel"
-                            interface="action-sheet"
+                            color='trasteel'
+                            interface='action-sheet'
                             onIonChange={(ev) =>
                               (this.filter[key + "_operator"] = ev.detail.value)
                             }
@@ -135,7 +135,7 @@ export class PopoverShapesFilter {
         </ion-content>
         <ion-footer>
           <app-modal-footer
-            saveTag={{tag: "filter", text: "Filter"}}
+            saveTag={{ tag: "filter", text: "Filter", color: "success" }}
             onCancelEmit={() => this.close()}
             onSaveEmit={() => this.save()}
           />

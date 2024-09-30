@@ -1,5 +1,5 @@
-import {Component, h, Host, State, Element, Prop} from "@stencil/core";
-import {popoverController} from "@ionic/core";
+import { Component, h, Host, State, Element, Prop } from "@stencil/core";
+import { popoverController } from "@ionic/core";
 import {
   ProjectAreaQualityShape,
   AutoFillCourses,
@@ -68,7 +68,7 @@ export class PopoverProjectAutofill {
         <ion-header translucent>
           <ion-toolbar>
             <ion-title>
-              <my-transl tag="auto-fill" text="Auto Fill" />
+              <my-transl tag='auto-fill' text='Auto Fill' />
             </ion-title>
           </ion-toolbar>
         </ion-header>
@@ -77,117 +77,117 @@ export class PopoverProjectAutofill {
             {this.bottom
               ? [
                   <app-form-item
-                    label-tag="bottom-radius"
-                    label-text="Bottom Radius"
+                    label-tag='bottom-radius'
+                    label-text='Bottom Radius'
                     value={this.autoFillCourses.startRadius}
-                    name="startRadius"
-                    input-type="number"
+                    name='startRadius'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="repair-sets"
-                    label-text="Repair Sets"
+                    label-tag='repair-sets'
+                    label-text='Repair Sets'
                     value={this.autoFillCourses.repairSets}
-                    name="repairSets"
-                    input-type="number"
+                    name='repairSets'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                 ]
               : [
                   <app-form-item
-                    label-tag="from-course"
-                    label-text="From Course"
+                    label-tag='from-course'
+                    label-text='From Course'
                     value={this.autoFillCourses.fromCourse}
-                    name="fromCourse"
-                    input-type="number"
+                    name='fromCourse'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="to-course"
-                    label-text="To Course"
+                    label-tag='to-course'
+                    label-text='To Course'
                     value={this.autoFillCourses.toCourse}
-                    name="toCourse"
-                    input-type="number"
+                    name='toCourse'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="step"
-                    label-text="Step"
+                    label-tag='step'
+                    label-text='Step'
                     value={this.autoFillCourses.step}
-                    name="step"
-                    input-type="number"
+                    name='step'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="layer"
-                    label-text="Layer"
+                    label-tag='layer'
+                    label-text='Layer'
                     value={this.autoFillCourses.layer}
-                    name="layer"
-                    input-type="number"
+                    name='layer'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="start-angle"
-                    label-text="Start Angle"
-                    appendText=" °"
+                    label-tag='start-angle'
+                    label-text='Start Angle'
+                    appendText=' °'
                     value={this.autoFillCourses.startAngle}
-                    name="startAngle"
-                    input-type="number"
+                    name='startAngle'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="end-angle"
-                    label-text="End Angle"
-                    appendText=" °"
+                    label-tag='end-angle'
+                    label-text='End Angle'
+                    appendText=' °'
                     value={this.autoFillCourses.endAngle}
-                    name="endAngle"
-                    input-type="number"
+                    name='endAngle'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
-                  <ion-item detail={false} lines="none">
+                  <ion-item detail={false} lines='none'>
                     <ion-label>
                       <ion-note>
-                        <my-transl tag="width" text="Width"></my-transl>
+                        <my-transl tag='width' text='Width'></my-transl>
                         {" °"}
                       </ion-note>
                     </ion-label>
-                    <div slot="end">
+                    <div slot='end'>
                       <ion-note>{this.width}</ion-note>
                     </div>
                   </ion-item>,
                   <app-form-item
-                    label-tag="start-height"
-                    label-text="Start Height"
-                    appendText=" (mm)"
+                    label-tag='start-height'
+                    label-text='Start Height'
+                    appendText=' (mm)'
                     value={this.autoFillCourses.startHeight}
-                    name="startHeight"
-                    input-type="number"
+                    name='startHeight'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="start-radius"
-                    label-text="Start Radius"
-                    appendText=" (mm)"
+                    label-tag='start-radius'
+                    label-text='Start Radius'
+                    appendText=' (mm)'
                     value={this.autoFillCourses.startRadius}
-                    name="startRadius"
-                    input-type="number"
+                    name='startRadius'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="radius-step"
-                    label-text="Radius Step"
-                    appendText=" (mm)"
+                    label-tag='radius-step'
+                    label-text='Radius Step'
+                    appendText=' (mm)'
                     value={this.autoFillCourses.radiusStep}
-                    name="radiusStep"
-                    input-type="number"
+                    name='radiusStep'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   <app-form-item
-                    label-tag="repair-sets"
-                    label-text="Repair Sets"
+                    label-tag='repair-sets'
+                    label-text='Repair Sets'
                     value={this.autoFillCourses.repairSets}
-                    name="repairSets"
-                    input-type="number"
+                    name='repairSets'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleAutofill(ev)}
                   ></app-form-item>,
                   this.shapes.map((shape, index) => (
@@ -195,7 +195,7 @@ export class PopoverProjectAutofill {
                       label-text={"Q.ty Pos. " + shape.position}
                       value={this.autoFillCourses.quantityShape[index]}
                       name={shape.shapeId}
-                      input-type="number"
+                      input-type='number'
                       onFormItemChanged={(ev) =>
                         this.handleAutofillShapes(index, ev)
                       }
@@ -206,7 +206,7 @@ export class PopoverProjectAutofill {
         </ion-content>
         <ion-footer>
           <app-modal-footer
-            saveTag={{tag: "auto-fill", text: "Auto Fill"}}
+            saveTag={{ tag: "auto-fill", text: "Auto Fill", color: "success" }}
             disableSave={this.disableSave}
             onCancelEmit={() => this.close()}
             onSaveEmit={() => this.save()}

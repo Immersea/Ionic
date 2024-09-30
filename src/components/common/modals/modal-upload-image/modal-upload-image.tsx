@@ -1,6 +1,7 @@
-import { Component, h, Prop, Element, State, Host } from "@stencil/core";
+import { Component, h, Prop, Element, State } from "@stencil/core";
 import Cropper from "cropperjs";
 import { modalController } from "@ionic/core";
+import { Environment } from "../../../../global/env";
 
 @Component({
   tag: "modal-upload-image",
@@ -94,29 +95,39 @@ export class ModalUploadImage {
   }
 
   render() {
-    return (
-      <Host style={{ backgroundColor: "darkgrey" }}>
-        <ion-fab vertical='top' horizontal='end' slot='fixed'>
-          <ion-fab-button
-            size='small'
-            color='success'
-            onClick={() => this.close()}
-          >
-            <ion-icon name='checkmark'></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-        <div class={this.round ? "img-container rounded" : "img-container"}>
-          <img id='image' src='' />
-        </div>
-        {this.showDropArea ? (
-          <div class='drop-area'>
-            <app-dragdrop-file
-              fileType='image'
-              onFileSelected={(event) => this.updatePhotoURL(event)}
-            ></app-dragdrop-file>
+    return [
+      <ion-header>
+        <app-navbar
+          tag='image-uploader'
+          text='Image Uploader'
+          color={Environment.getAppColor()}
+          modal={true}
+        ></app-navbar>
+      </ion-header>,
+      <ion-content class='ion-content-custom'>
+        <div class='content-wrapper'>
+          <div class={this.round ? "img-container rounded" : "img-container"}>
+            <img id='image' src='' />
           </div>
-        ) : undefined}
-      </Host>
-    );
+          {this.showDropArea ? (
+            <div class='drop-area'>
+              <app-dragdrop-file
+                fileType='image'
+                onFileSelected={(event) => this.updatePhotoURL(event)}
+              ></app-dragdrop-file>
+            </div>
+          ) : undefined}
+        </div>
+      </ion-content>,
+      <app-modal-footer
+        showSave={false}
+        cancelTag={{
+          tag: "upload",
+          text: "Upload",
+          color: "success",
+        }}
+        onCancelEmit={() => this.close()}
+      />,
+    ];
   }
 }

@@ -1,42 +1,72 @@
 app-dragdrop-file {
+  /* Added .drop-area-container to wrap the drop area and form */
+  .drop-area-container {
+    min-height: 300px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Places the form below the drop area */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Updated #drop-area styles */
   #drop-area {
-    border: 2px dashed white;
+    flex: 1; /* Takes up all available vertical space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 2px dashed var(--ion-color-primary);
     border-radius: 20px;
-    width: 90%;
-    height: var(--coverHeight);
-    margin: 0 auto 0 auto;
+    box-sizing: border-box;
     padding: 20px;
     text-align: center;
     visibility: visible;
   }
+
+  /* Existing highlight styles */
   #drop-area.highlight {
     border-color: var(--ion-color-primary) !important;
     border-style: solid !important;
     border-width: 5px !important;
   }
+
+  /* Styles for the paragraph inside #drop-area */
   p {
     margin-top: 0;
-    color: white;
+    color: var(--ion-color-primary);
   }
+
+  /* Keep existing ion-note styles */
   ion-note {
     padding: 0;
   }
+
+  /* Adjusted .my-form styles */
   .my-form {
     text-align: center;
+    margin-top: 10px; /* Space between the drop area and the form */
   }
+
+  /* Existing button styles */
   .button {
     display: inline-block;
-    margin: 20px 0 20px 0;
+    margin: 20px 0;
     padding: 20px;
     background-color: var(--ion-color-primary);
     color: var(--ion-color-primary-contrast);
     cursor: pointer;
     border-radius: 5px;
   }
+
   .button:hover {
     background: var(--ion-color-tertiary);
     color: var(--ion-color-tertiary-contrast);
   }
+
+  /* Keep the file input hidden */
   #fileElem {
     display: none;
   }

@@ -200,7 +200,6 @@ class AuthController {
       "&mode=" +
       mode;
     if (link && oobCode) {
-      console.log("signInLinkReceived", parsedUrl, link, oobCode);
       const email = await DatabaseService.getLocalDocument("emailForSignIn");
       this.verifyEmailLink(email, link);
     }
@@ -208,7 +207,6 @@ class AuthController {
 
   async verifyEmailLink(email: string, link: string) {
     const signin = isSignInWithEmailLink(auth, link);
-    console.log("verifyEmailLink", email, link, signin);
     const emailForSignIn = "emailForSignIn";
     if (signin) {
       let result;
@@ -221,10 +219,8 @@ class AuthController {
           );
           result = await signInWithCredential(auth, credential);
         } else {
-          console.log("signInWithEmailLink", auth, email, link);
           result = await signInWithEmailLink(auth, email, link);
         }
-        console.log("result", result, !isElectron());
         //reset link for web environment removing variables
         if (!isElectron() && history && history.replaceState) {
           history.replaceState({}, document.title, link.split("?")[0]);

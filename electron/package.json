@@ -25,6 +25,11 @@
         "to": "resources/www"
       }
     ],
+    "publish": {
+      "provider": "github",
+      "owner": "Immersea",
+      "repo": "trasteel-updates"
+    },
     "mac": {
       "category": "public.app-category.productivity",
       "icon": "assets/icons/trasteel/icon512.png",
@@ -71,6 +76,8 @@
   "license": "ISC",
   "description": "Native Electron version of the app",
   "dependencies": {
+    "electron-log": "^5.2.0",
+    "electron-updater": "^6.3.4",
     "http-server": "^14.1.1"
   },
   "devDependencies": {

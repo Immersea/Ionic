@@ -1,15 +1,15 @@
-import {Component, h, Host, Element, Prop, State} from "@stencil/core";
-import {popoverController} from "@ionic/core";
-import {TranslationService} from "../../../../services/common/translations";
+import { Component, h, Host, Element, Prop, State } from "@stencil/core";
+import { popoverController } from "@ionic/core";
+import { TranslationService } from "../../../../services/common/translations";
 import {
   DatasheetFamily,
   DatasheetFilter,
   DatasheetMajorFamily,
   DatasheetPropertyName,
 } from "../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
-import {FirebaseFilterCondition} from "../../../../interfaces/common/system/system";
-import {cloneDeep, isNull, isString} from "lodash";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
+import { FirebaseFilterCondition } from "../../../../interfaces/common/system/system";
+import { cloneDeep, isNull, isString } from "lodash";
 
 @Component({
   tag: "popover-datasheets-filter",
@@ -117,15 +117,15 @@ export class PopoverDatasheetsFilter {
         </ion-header>
         <ion-content>
           <ion-segment
-            mode="ios"
-            color="trasteel"
+            mode='ios'
+            color='trasteel'
             onIonChange={(ev) => this.segmentChanged(ev)}
-            value="base"
+            value='base'
           >
-            <ion-segment-button value="base">
+            <ion-segment-button value='base'>
               <ion-label>Base</ion-label>
             </ion-segment-button>
-            <ion-segment-button value="advanced">
+            <ion-segment-button value='advanced'>
               <ion-label>Advanced</ion-label>
             </ion-segment-button>
           </ion-segment>
@@ -134,13 +134,13 @@ export class PopoverDatasheetsFilter {
               ? [
                   <ion-item>
                     <ion-select
-                      color="trasteel"
-                      interface="action-sheet"
+                      color='trasteel'
+                      interface='action-sheet'
                       label={TranslationService.getTransl(
                         "majorFamily",
                         "Major Family"
                       )}
-                      label-placement="floating"
+                      label-placement='floating'
                       onIonChange={(ev) => this.handleMajorFamilySelect(ev)}
                       value={this.filter.majorFamilyId}
                     >
@@ -153,10 +153,10 @@ export class PopoverDatasheetsFilter {
                   </ion-item>,
                   <ion-item>
                     <ion-select
-                      color="trasteel"
-                      interface="action-sheet"
+                      color='trasteel'
+                      interface='action-sheet'
                       label={TranslationService.getTransl("family", "Family")}
-                      label-placement="floating"
+                      label-placement='floating'
                       onIonChange={(ev) => this.handleFamilySelect(ev)}
                       value={this.filter.familyId}
                     >
@@ -168,10 +168,10 @@ export class PopoverDatasheetsFilter {
                     </ion-select>
                   </ion-item>,
                   <app-form-item
-                    label-text="Show Old Products"
+                    label-text='Show Old Products'
                     value={this.filter.oldProduct}
-                    name="oldProduct"
-                    input-type="boolean"
+                    name='oldProduct'
+                    input-type='boolean'
                     onFormItemChanged={(ev) => this.handleFilter(ev)}
                   ></app-form-item>,
                 ]
@@ -180,21 +180,21 @@ export class PopoverDatasheetsFilter {
                     <ion-row>
                       <ion-col>
                         <app-select-search
-                          color="trasteel"
+                          color='trasteel'
                           value={this.newFilterCondition.valueName}
-                          lines="none"
+                          lines='none'
                           disabled={this.propertyNames.length == 0}
                           selectFn={(ev) => this.selectPropertyName(ev)}
                           selectOptions={this.propertyNames}
-                          selectValueId="nameId"
+                          selectValueId='nameId'
                           selectValueText={["nameName"]}
                         ></app-select-search>
                       </ion-col>
-                      <ion-col size="3">
-                        <ion-item lines="none">
+                      <ion-col size='3'>
+                        <ion-item lines='none'>
                           <ion-select
-                            color="trasteel"
-                            interface="action-sheet"
+                            color='trasteel'
+                            interface='action-sheet'
                             onIonChange={(ev) => this.selectOperator(ev)}
                             value={this.newFilterCondition.operator}
                           >
@@ -221,20 +221,20 @@ export class PopoverDatasheetsFilter {
                       <ion-col>
                         <app-form-item
                           value={this.newFilterCondition.value}
-                          name="typical"
-                          input-type="number"
+                          name='typical'
+                          input-type='number'
                           onFormItemChanged={(ev) => this.selectValue(ev)}
                         ></app-form-item>
                       </ion-col>
 
-                      <ion-col size="3">
+                      <ion-col size='3'>
                         <ion-button
                           icon-only
-                          fill="outline"
+                          fill='outline'
                           onClick={() => this.addNewProperty()}
                           disabled={!this.showAddNewProperty}
                         >
-                          <ion-icon name="add" color="primary"></ion-icon>
+                          <ion-icon name='add' color='primary'></ion-icon>
                         </ion-button>
                       </ion-col>
                     </ion-row>
@@ -256,10 +256,10 @@ export class PopoverDatasheetsFilter {
                       </ion-label>
                       <ion-button
                         icon-only
-                        fill="clear"
+                        fill='clear'
                         onClick={() => this.deleteCondition(index)}
                       >
-                        <ion-icon name="trash" color="danger"></ion-icon>
+                        <ion-icon name='trash' color='danger'></ion-icon>
                       </ion-button>
                     </ion-item>
                   )),
@@ -268,7 +268,7 @@ export class PopoverDatasheetsFilter {
         </ion-content>
         <ion-footer>
           <app-modal-footer
-            saveTag={{tag: "filter", text: "Filter"}}
+            saveTag={{ tag: "filter", text: "Filter", color: "success" }}
             onCancelEmit={() => this.close()}
             onSaveEmit={() => this.save()}
           />

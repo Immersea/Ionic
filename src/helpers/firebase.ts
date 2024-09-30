@@ -23,7 +23,7 @@ export const firebaseApp = initializeApp(Environment.getFirebaseSettings());
 
 function whichAuth() {
   let auth;
-  if (Capacitor.isNativePlatform() && isElectron()) {
+  if (Capacitor.isNativePlatform() && !isElectron()) {
     auth = initializeAuth(firebaseApp, {
       persistence: indexedDBLocalPersistence,
     });

@@ -343,10 +343,10 @@ export namespace Components {
     interface AppMenu {
     }
     interface AppModalFooter {
-        "cancelTag": { tag: string; text: string; };
+        "cancelTag": { tag: string; text: string; color: string; };
         "color": any;
         "disableSave": boolean;
-        "saveTag": { tag: string; text: string; };
+        "saveTag": { tag: string; text: string; color: string; };
         "showSave": boolean;
     }
     interface AppMultilanguageText {
@@ -3133,12 +3133,12 @@ declare namespace LocalJSX {
     interface AppMenu {
     }
     interface AppModalFooter {
-        "cancelTag"?: { tag: string; text: string; };
+        "cancelTag"?: { tag: string; text: string; color: string; };
         "color"?: any;
         "disableSave"?: boolean;
         "onCancelEmit"?: (event: AppModalFooterCustomEvent<any>) => void;
         "onSaveEmit"?: (event: AppModalFooterCustomEvent<any>) => void;
-        "saveTag"?: { tag: string; text: string; };
+        "saveTag"?: { tag: string; text: string; color: string; };
         "showSave"?: boolean;
     }
     interface AppMultilanguageText {

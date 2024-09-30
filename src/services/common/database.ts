@@ -1,4 +1,4 @@
-import {firestore} from "../../helpers/firebase";
+import { firestore } from "../../helpers/firebase";
 import {
   DocumentData,
   Firestore,
@@ -23,36 +23,36 @@ import {
   Query,
   getDocFromCache,
 } from "firebase/firestore";
-import {BehaviorSubject, Observable} from "rxjs";
-import {compareDates, listDifferences} from "../../helpers/utils";
-import {StorageService} from "./storage";
-import {USERPROFILECOLLECTION, UserService} from "./user";
-import {SystemService} from "./system";
-import {Environment} from "../../global/env";
-import {Geopoint, distanceBetween, geohashQueryBounds} from "geofire-common";
-import {ProjectsService} from "../trasteel/refractories/projects";
-import {DatasheetsService} from "../trasteel/refractories/datasheets";
-import {ShapesService} from "../trasteel/refractories/shapes";
-import {CustomersService} from "../trasteel/crm/customers";
-import {DivingClassesService} from "../udive/divingClasses";
-import {ServiceCentersService} from "../udive/serviceCenters";
-import {DivingSchoolsService} from "../udive/divingSchools";
-import {DiveSitesService} from "../udive/diveSites";
-import {DiveCommunitiesService} from "../udive/diveCommunities";
-import {DivingCentersService} from "../udive/divingCenters";
-import {UDiveFilterService} from "../udive/ud-db-filter";
-import {DivePlansService} from "../udive/divePlans";
-import {NotificationsService} from "./notifications";
-import {UserRoles} from "../../interfaces/common/user/user-roles";
-import {UserSettings} from "../../interfaces/udive/user/user-settings";
-import {UserProfile} from "../../interfaces/common/user/user-profile";
-import {TrasteelFilterService} from "../trasteel/common/trs-db-filter";
-import {ContactsService} from "../trasteel/crm/contacts";
+import { BehaviorSubject, Observable } from "rxjs";
+import { compareDates, listDifferences } from "../../helpers/utils";
+import { StorageService } from "./storage";
+import { USERPROFILECOLLECTION, UserService } from "./user";
+import { SystemService } from "./system";
+import { Environment } from "../../global/env";
+import { Geopoint, distanceBetween, geohashQueryBounds } from "geofire-common";
+import { ProjectsService } from "../trasteel/refractories/projects";
+import { DatasheetsService } from "../trasteel/refractories/datasheets";
+import { ShapesService } from "../trasteel/refractories/shapes";
+import { CustomersService } from "../trasteel/crm/customers";
+import { DivingClassesService } from "../udive/divingClasses";
+import { ServiceCentersService } from "../udive/serviceCenters";
+import { DivingSchoolsService } from "../udive/divingSchools";
+import { DiveSitesService } from "../udive/diveSites";
+import { DiveCommunitiesService } from "../udive/diveCommunities";
+import { DivingCentersService } from "../udive/divingCenters";
+import { UDiveFilterService } from "../udive/ud-db-filter";
+import { DivePlansService } from "../udive/divePlans";
+import { NotificationsService } from "./notifications";
+import { UserRoles } from "../../interfaces/common/user/user-roles";
+import { UserSettings } from "../../interfaces/udive/user/user-settings";
+import { UserProfile } from "../../interfaces/common/user/user-profile";
+import { TrasteelFilterService } from "../trasteel/common/trs-db-filter";
+import { ContactsService } from "../trasteel/crm/contacts";
 //import {UserPlansService} from "../trasteel/crm/user-plans";
-import {alertController} from "@ionic/core";
-import {CallableFunctionsService} from "./callableFunctions";
-import {FirebaseFilterCondition} from "../../interfaces/common/system/system";
-import {isEqual, isNumber, toNumber} from "lodash";
+import { alertController } from "@ionic/core";
+import { CallableFunctionsService } from "./callableFunctions";
+import { FirebaseFilterCondition } from "../../interfaces/common/system/system";
+import { isEqual, isNumber, toNumber } from "lodash";
 
 export const PUBLICCOLLECTIONNAME = "public";
 export const SETTINGSCOLLECTIONNAME = "settings";
@@ -588,7 +588,7 @@ class DatabaseController {
           if (docSnap.exists()) {
             resolve(docSnap.data());
           } else {
-            reject({message: "No such document exists online.", error: null});
+            reject({ message: "No such document exists online.", error: null });
           }
         } catch (error) {
           if (error.message === "Request timed out") {
@@ -601,7 +601,7 @@ class DatabaseController {
               if (cachedDocSnap.exists()) {
                 resolve(cachedDocSnap.data());
               } else {
-                reject({message: "No such document in cache.", error: null});
+                reject({ message: "No such document in cache.", error: null });
               }
             } catch (cacheError) {
               reject({
@@ -1074,7 +1074,7 @@ class DatabaseController {
       const results = new Map<string, DocumentData>();
       querySnapshots.forEach((snapshot) => {
         snapshot.forEach((doc) => {
-          results.set(doc.id, {id: doc.id, ...doc.data()});
+          results.set(doc.id, { id: doc.id, ...doc.data() });
         });
       });
 

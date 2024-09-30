@@ -4,7 +4,10 @@ android/
 ios/
 dist/
 /vt/
+.stencil/
+.firebase/
 electron/dist/
 electron/www/
 resources/ios/
 resources/android/
+.DS_Store
