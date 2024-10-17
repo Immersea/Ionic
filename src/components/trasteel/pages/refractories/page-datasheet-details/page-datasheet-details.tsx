@@ -1,13 +1,13 @@
-import {Component, Prop, State, h} from "@stencil/core";
-import {Datasheet} from "../../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../../services/trasteel/refractories/datasheets";
+import { Component, Prop, State, h } from "@stencil/core";
+import { Datasheet } from "../../../../../interfaces/trasteel/refractories/datasheets";
+import { DatasheetsService } from "../../../../../services/trasteel/refractories/datasheets";
 import Swiper from "swiper";
-import {TranslationService} from "../../../../../services/common/translations";
-import {SystemService} from "../../../../../services/common/system";
-import {TrasteelService} from "../../../../../services/trasteel/common/services";
-import {RouterService} from "../../../../../services/common/router";
-import {toString} from "lodash";
-import {Environment} from "../../../../../global/env";
+import { TranslationService } from "../../../../../services/common/translations";
+import { SystemService } from "../../../../../services/common/system";
+import { TrasteelService } from "../../../../../services/trasteel/common/services";
+import { RouterService } from "../../../../../services/common/router";
+import { toString } from "lodash";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "page-datasheet-details",
@@ -18,11 +18,11 @@ export class PageDatasheetDetails {
   @State() datasheet: Datasheet;
   @State() updateView = true;
   titles = [
-    {tag: "information", text: "Information"},
-    {tag: "properties", text: "Properties"},
-    {tag: "reference", text: "Reference"},
-    {tag: "comments", text: "Comments"},
-    {tag: "files", text: "Files", disabled: true},
+    { tag: "information", text: "Information" },
+    { tag: "properties", text: "Properties" },
+    { tag: "reference", text: "Reference" },
+    { tag: "comments", text: "Comments" },
+    { tag: "files", text: "Files", disabled: true },
   ];
   @State() slider: Swiper;
 
@@ -108,40 +108,39 @@ export class PageDatasheetDetails {
       </ion-header>,
       <ion-header>
         <ion-toolbar>
-          <ion-grid class="ion-no-padding">
+          <ion-grid class='ion-no-padding'>
             <ion-row>
               <ion-col>
                 <app-header-segment-toolbar
                   color={Environment.getAppColor()}
                   swiper={this.slider}
                   titles={this.titles}
-                  noToolbar
                 ></app-header-segment-toolbar>
               </ion-col>
-              <ion-col size="1">
+              <ion-col size='1'>
                 <ion-button
-                  fill="clear"
-                  expand="full"
-                  color="trasteel"
+                  fill='clear'
+                  expand='full'
+                  color='trasteel'
                   icon-only
                   onClick={() => this.exportDatasheet()}
                 >
-                  <ion-icon name="download"></ion-icon>
+                  <ion-icon name='download'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
         </ion-toolbar>
       </ion-header>,
-      <ion-content class="slides">
-        <swiper-container class="slider-detail-datasheet swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
-              <ion-list class="ion-no-padding">
+      <ion-content class='slides'>
+        <swiper-container class='slider-detail-datasheet swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
+              <ion-list class='ion-no-padding'>
                 <app-item-detail
-                  lines="none"
-                  labelTag="principal"
-                  labelText="Principal"
+                  lines='none'
+                  labelTag='principal'
+                  labelText='Principal'
                   detailText={
                     DatasheetsService.getDatasheetMajorFamilies(
                       this.datasheet.majorFamilyId
@@ -153,9 +152,9 @@ export class PageDatasheetDetails {
                   }
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelTag="product"
-                  labelText="Product"
+                  lines='none'
+                  labelTag='product'
+                  labelText='Product'
                   detailText={
                     DatasheetsService.getDatasheetFamilies(
                       this.datasheet.familyId
@@ -167,9 +166,9 @@ export class PageDatasheetDetails {
                   }
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelTag="category"
-                  labelText="Category"
+                  lines='none'
+                  labelTag='category'
+                  labelText='Category'
                   detailText={
                     DatasheetsService.getDatasheetCategories(
                       this.datasheet.categoriesId
@@ -181,47 +180,47 @@ export class PageDatasheetDetails {
                   }
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="tech-no"
-                  label-text="Tech. #"
+                  lines='none'
+                  label-tag='tech-no'
+                  label-text='Tech. #'
                   detailText={this.datasheet.techNo}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="revision-no"
-                  label-text="Revision #"
+                  lines='none'
+                  label-tag='revision-no'
+                  label-text='Revision #'
                   detailText={toString(this.datasheet.revisionNo)}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="old"
-                  label-text="Old"
+                  lines='none'
+                  label-tag='old'
+                  label-text='Old'
                   detailText={this.datasheet.oldProduct}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="issued-on-date"
-                  label-text="Issued on Date"
+                  lines='none'
+                  label-tag='issued-on-date'
+                  label-text='Issued on Date'
                   detailText={new Date(
                     this.datasheet.issuedOnDate
                   ).toLocaleDateString()}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="product-name"
-                  label-text="Product Name"
+                  lines='none'
+                  label-tag='product-name'
+                  label-text='Product Name'
                   detailText={this.datasheet.productName}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="classification"
-                  label-text="Classification"
+                  lines='none'
+                  label-tag='classification'
+                  label-text='Classification'
                   detailText={this.datasheet.classification}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="application"
-                  label-text="Application"
+                  lines='none'
+                  label-tag='application'
+                  label-text='Application'
                   detailText={this.datasheet.application}
                 ></app-item-detail>
               </ion-list>
@@ -230,12 +229,12 @@ export class PageDatasheetDetails {
                   <ion-row>
                     <ion-col>
                       <ion-button
-                        color="danger"
-                        fill="outline"
-                        expand="block"
+                        color='danger'
+                        fill='outline'
+                        expand='block'
                         onClick={() => this.deleteDs()}
                       >
-                        <ion-icon name="trash" slot="start"></ion-icon>
+                        <ion-icon name='trash' slot='start'></ion-icon>
                         <ion-label>
                           {TranslationService.getTransl("delete", "Delete")}
                         </ion-label>
@@ -243,12 +242,12 @@ export class PageDatasheetDetails {
                     </ion-col>
                     <ion-col>
                       <ion-button
-                        color="secondary"
-                        fill="outline"
-                        expand="block"
+                        color='secondary'
+                        fill='outline'
+                        expand='block'
                         onClick={() => this.duplicateDatasheet(true)}
                       >
-                        <ion-icon name="copy" slot="start"></ion-icon>
+                        <ion-icon name='copy' slot='start'></ion-icon>
                         <ion-label>
                           {TranslationService.getTransl("revision", "Revision")}
                         </ion-label>
@@ -256,12 +255,12 @@ export class PageDatasheetDetails {
                     </ion-col>
                     <ion-col>
                       <ion-button
-                        color="tertiary"
-                        fill="outline"
-                        expand="block"
+                        color='tertiary'
+                        fill='outline'
+                        expand='block'
                         onClick={() => this.duplicateDatasheet(false)}
                       >
-                        <ion-icon name="duplicate" slot="start"></ion-icon>
+                        <ion-icon name='duplicate' slot='start'></ion-icon>
                         <ion-label>
                           {TranslationService.getTransl("copy", "Copy")}
                         </ion-label>
@@ -271,39 +270,39 @@ export class PageDatasheetDetails {
                 </ion-grid>
               ) : undefined}
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
-              <div id="properties-grid">
+            <swiper-slide class='swiper-slide'>
+              <div id='properties-grid'>
                 <ion-grid>
                   <ion-row>
-                    <ion-col class="centered">
+                    <ion-col class='centered'>
                       <small>
                         {TranslationService.getTransl("type", "Type")}
                       </small>
                     </ion-col>
-                    <ion-col class="centered">
+                    <ion-col class='centered'>
                       <small>
                         {TranslationService.getTransl("name", "Name")}
                       </small>
                     </ion-col>
-                    <ion-col class="centered">
+                    <ion-col class='centered'>
                       <small>
                         {TranslationService.getTransl("typical", "Typical")}
                       </small>
                     </ion-col>
-                    <ion-col class="centered">
+                    <ion-col class='centered'>
                       <small>
                         {TranslationService.getTransl("prefix", "Prefix")}
                       </small>
                     </ion-col>
-                    <ion-col class="centered">
+                    <ion-col class='centered'>
                       <small>
                         {TranslationService.getTransl("from", "From")}
                       </small>
                     </ion-col>
-                    <ion-col class="centered">
+                    <ion-col class='centered'>
                       <small>{TranslationService.getTransl("to", "To")}</small>
                     </ion-col>
-                    <ion-col size="1" class="centered">
+                    <ion-col size='1' class='centered'>
                       <small>
                         {TranslationService.getTransl("show", "Show")}
                       </small>
@@ -313,7 +312,7 @@ export class PageDatasheetDetails {
                     <ion-row>
                       <ion-col>
                         <app-item-detail
-                          lines="none"
+                          lines='none'
                           detailText={
                             DatasheetsService.getDatasheetPropertyTypes(
                               property.type
@@ -323,7 +322,7 @@ export class PageDatasheetDetails {
                       </ion-col>
                       <ion-col>
                         <app-item-detail
-                          lines="none"
+                          lines='none'
                           detailText={
                             DatasheetsService.getDatasheetPropertyNames(
                               "id",
@@ -332,33 +331,33 @@ export class PageDatasheetDetails {
                           }
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <app-item-detail
-                          lines="none"
+                          lines='none'
                           detailText={property.typical}
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <app-item-detail
-                          lines="none"
+                          lines='none'
                           detailText={property.prefix}
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <app-item-detail
-                          lines="none"
+                          lines='none'
                           detailText={property.lower}
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <app-item-detail
-                          lines="none"
+                          lines='none'
                           detailText={property.higher}
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col size="1" class="centered showbool">
+                      <ion-col size='1' class='centered showbool'>
                         <app-item-detail
-                          lines="none"
+                          lines='none'
                           detailText={property.show}
                         ></app-item-detail>
                       </ion-col>
@@ -367,45 +366,45 @@ export class PageDatasheetDetails {
                 </ion-grid>
               </div>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <ion-list>
                 <app-item-detail
-                  lines="none"
-                  label-tag="producer"
-                  label-text="Producer"
+                  lines='none'
+                  label-tag='producer'
+                  label-text='Producer'
                   detailText={this.datasheet.producerName}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="producer-ref-quality"
-                  label-text="Producer Reference Quality"
+                  lines='none'
+                  label-tag='producer-ref-quality'
+                  label-text='Producer Reference Quality'
                   detailText={this.datasheet.producerReferenceQuality}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="competitor-ref-quality"
-                  label-text="Competitor Reference Quality"
+                  lines='none'
+                  label-tag='competitor-ref-quality'
+                  label-text='Competitor Reference Quality'
                   detailText={this.datasheet.competitorReferenceQuality}
                 ></app-item-detail>
               </ion-list>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <ion-list>
                 <app-item-detail
-                  lines="none"
-                  label-tag="comments"
-                  label-text="Comments"
+                  lines='none'
+                  label-tag='comments'
+                  label-text='Comments'
                   detailText={this.datasheet.comments}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="performance-comments"
-                  label-text="Performance Comments"
+                  lines='none'
+                  label-tag='performance-comments'
+                  label-text='Performance Comments'
                   detailText={this.datasheet.performanceComments}
                 ></app-item-detail>
               </ion-list>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">FILES - TO BE DONE</swiper-slide>
+            <swiper-slide class='swiper-slide'>FILES - TO BE DONE</swiper-slide>
           </swiper-wrapper>
         </swiper-container>
       </ion-content>,

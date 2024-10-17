@@ -296,7 +296,7 @@ export namespace Components {
     | boolean
     | TextMultilanguage;
         "isDate"?: boolean;
-        "labelPosition"?: "fixed" | "stacked" | "floating";
+        "labelPosition"?: any;
         "labelTag"?: string;
         "labelText"?: string;
         "lines"?: "none" | "full" | "inset";
@@ -3086,7 +3086,7 @@ declare namespace LocalJSX {
     | boolean
     | TextMultilanguage;
         "isDate"?: boolean;
-        "labelPosition"?: "fixed" | "stacked" | "floating";
+        "labelPosition"?: any;
         "labelTag"?: string;
         "labelText"?: string;
         "lines"?: "none" | "full" | "inset";

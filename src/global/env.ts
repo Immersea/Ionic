@@ -37,7 +37,7 @@ enum AppSubTitles {
 export enum AppVersions {
   udive = "beta 1.1.1",
   decoplanner = "1.4.2",
-  trasteel = "1.4.2",
+  trasteel = "1.4.3",
 }
 
 const firebase_settings = {
@@ -118,7 +118,7 @@ class EnvController {
     let title = "";
     let subtitle = "";
     let $webapptitle = document.querySelector(
-      'meta[name="apple-mobile-web-app-title"]'
+      'meta[name="mobile-web-app-title"]'
     ) as HTMLMetaElement;
     let $description = document.querySelector(
       'meta[name="description"]'

@@ -48,6 +48,10 @@ export class AppHeaderSegmentToolbar {
     });
   }
 
+  componentDidLoad() {
+    this.updateSwiper();
+  }
+
   async slideChanged(swiper) {
     this.updateSwiper();
     this.segment = swiper.activeIndex;

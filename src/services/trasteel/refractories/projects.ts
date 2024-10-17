@@ -1,10 +1,10 @@
-import {alertController} from "@ionic/core";
-import {DatabaseService, SETTINGSCOLLECTIONNAME} from "../../common/database";
-import {TranslationService} from "../../common/translations";
-import {TrasteelFilterService} from "../common/trs-db-filter";
-import {capitalize, cloneDeep, orderBy} from "lodash";
-import {RouterService} from "../../common/router";
-import {BehaviorSubject} from "rxjs";
+import { alertController } from "@ionic/core";
+import { DatabaseService, SETTINGSCOLLECTIONNAME } from "../../common/database";
+import { TranslationService } from "../../common/translations";
+import { TrasteelFilterService } from "../common/trs-db-filter";
+import { capitalize, cloneDeep, orderBy } from "lodash";
+import { RouterService } from "../../common/router";
+import { BehaviorSubject } from "rxjs";
 import {
   ApplicationUnit,
   AutoFillCourses,
@@ -15,14 +15,14 @@ import {
   ProjectSettings,
   QuantityUnit,
 } from "../../../interfaces/trasteel/refractories/projects";
-import {ShapesService} from "./shapes";
+import { ShapesService } from "./shapes";
 import {
   AreaShape,
   Shape,
 } from "../../../interfaces/trasteel/refractories/shapes";
-import {DatasheetsService} from "./datasheets";
-import {formatNumber, roundDecimals} from "../../../helpers/utils";
-import {UserService} from "../../common/user";
+import { DatasheetsService } from "./datasheets";
+import { formatNumber, roundDecimals } from "../../../helpers/utils";
+import { UserService } from "../../common/user";
 
 export const PROJECTSCOLLECTION = "projects";
 
@@ -235,6 +235,7 @@ export class ProjectsController {
                             (area.includeSafety ? area.includeSafety : 0))) /
                         100
                       : 0);*/
+
               qtyPerSetRepair += includeRepair
                 ? ((area.onlyForRepair
                     ? 1
@@ -255,12 +256,14 @@ export class ProjectsController {
         let unitWeight = 0;
         //check if special shape
         if (shape.specialShapeVolume > 0) {
-          unitWeight = shapeItem.getWeightForVolume(
-            shape.specialShapeVolume,
-            area.density
-          );
+          unitWeight = shapeItem
+            ? shapeItem.getWeightForVolume(
+                shape.specialShapeVolume,
+                area.density
+              )
+            : 0;
         } else {
-          unitWeight = shapeItem.getWeight(area.density);
+          unitWeight = shapeItem ? shapeItem.getWeight(area.density) : 0;
         }
         const qtyPerSetMT = roundDecimals(
           (qtyPerSet * unitWeight) / 1000,
@@ -295,7 +298,11 @@ export class ProjectsController {
                 (a) => a.id == area.datasheetId
               ).techNo
             : null,
-          shape: shape.shapeId ? shapeItem.shapeName : null,
+          shape: shape.shapeId
+            ? shapeItem && shapeItem.shapeName
+              ? shapeItem.shapeName
+              : null
+            : null,
           includeSafety: area.includeSafety,
           weightPerPiece: formatNumber(unitWeight),
           qtyPerSetPcs: formatNumber(qtyPerSet),
@@ -444,13 +451,21 @@ export class ProjectsController {
     return {
       projectSummary: projectSummary,
       totals: {
-        qtyPerSetPcs: formatNumber(qtyPerSetPcsTotal),
+        qtyPerSetPcs: formatNumber(qtyPerSetPcsTotal + qtyPerSetPcsRepairTotal),
         qtyPerSetMT: formatNumber(
-          roundDecimals(qtyPerSetMTTotal, weightDecimals)
+          roundDecimals(
+            qtyPerSetMTTotal + qtyPerSetMTRepairTotal,
+            weightDecimals
+          )
         ),
-        qtyPcs: formatNumber(qtyPerSetPcsTotal * project.setsAmount),
+        qtyPcs: formatNumber(
+          (qtyPerSetPcsTotal + qtyPerSetPcsRepairTotal) * project.setsAmount
+        ),
         qtyMT: formatNumber(
-          roundDecimals(qtyPerSetMTTotal * project.setsAmount, weightDecimals)
+          roundDecimals(
+            (qtyPerSetMTTotal + qtyPerSetMTRepairTotal) * project.setsAmount,
+            weightDecimals
+          )
         ),
       },
     };
@@ -513,7 +528,7 @@ export class ProjectsController {
         ? [bricksAllocationArea]
         : [
             new BricksAllocationArea({
-              bricksAllocationAreaName: {en: id},
+              bricksAllocationAreaName: { en: id },
               bricksAllocationAreaId: id,
             }),
           ];
@@ -533,7 +548,12 @@ export class ProjectsController {
       );
       return applicationUnits
         ? [applicationUnits]
-        : [new ApplicationUnit({applicationName: {en: id}, applicationId: id})];
+        : [
+            new ApplicationUnit({
+              applicationName: { en: id },
+              applicationId: id,
+            }),
+          ];
     } else {
       return orderBy(this.applicationUnits, ["applicationName.en"], "asc");
     }
@@ -546,7 +566,12 @@ export class ProjectsController {
       );
       return quantityUnits
         ? [quantityUnits]
-        : [new QuantityUnit({quantityUnitName: {en: id}, quantityUnitId: id})];
+        : [
+            new QuantityUnit({
+              quantityUnitName: { en: id },
+              quantityUnitId: id,
+            }),
+          ];
     } else {
       return orderBy(this.quantityUnits, ["quantityUnitName.en"], "asc");
     }
@@ -625,15 +650,19 @@ export class ProjectsController {
       project.projectAreaQuality[areaIndex].shapes[shapeIndex]
         .specialShapeVolume > 0
     ) {
-      unitWeight = areaShapes[areaIndex].shapes[shapeIndex].getWeightForVolume(
-        project.projectAreaQuality[areaIndex].shapes[shapeIndex]
-          .specialShapeVolume,
-        project.projectAreaQuality[areaIndex].density
-      );
+      unitWeight = areaShapes[areaIndex].shapes[shapeIndex]
+        ? areaShapes[areaIndex].shapes[shapeIndex].getWeightForVolume(
+            project.projectAreaQuality[areaIndex].shapes[shapeIndex]
+              .specialShapeVolume,
+            project.projectAreaQuality[areaIndex].density
+          )
+        : 0;
     } else {
-      unitWeight = areaShapes[areaIndex].shapes[shapeIndex].getWeight(
-        project.projectAreaQuality[areaIndex].density
-      );
+      unitWeight = areaShapes[areaIndex].shapes[shapeIndex]
+        ? areaShapes[areaIndex].shapes[shapeIndex].getWeight(
+            project.projectAreaQuality[areaIndex].density
+          )
+        : 0;
     }
     const v =
       unitWeight *

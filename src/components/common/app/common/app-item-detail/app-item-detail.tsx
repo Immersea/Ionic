@@ -22,7 +22,7 @@ export class AppItemDetail {
   @Prop() lines?: "none" | "full" | "inset" = "none";
   @Prop() isDate? = false;
   @Prop() alignRight? = false;
-  @Prop() labelPosition?: "fixed" | "stacked" | "floating" = "stacked";
+  @Prop() labelPosition?;
   show = false;
 
   componentWillLoad() {

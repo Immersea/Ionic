@@ -1,17 +1,17 @@
-import {Component, Prop, State, h} from "@stencil/core";
-import {Project} from "../../../../../interfaces/trasteel/refractories/projects";
-import {TranslationService} from "../../../../../services/common/translations";
+import { Component, Prop, State, h } from "@stencil/core";
+import { Project } from "../../../../../interfaces/trasteel/refractories/projects";
+import { TranslationService } from "../../../../../services/common/translations";
 import Swiper from "swiper";
-import {ProjectsService} from "../../../../../services/trasteel/refractories/projects";
-import {CustomersService} from "../../../../../services/trasteel/crm/customers";
-import {ShapesService} from "../../../../../services/trasteel/refractories/shapes";
-import {DatasheetsService} from "../../../../../services/trasteel/refractories/datasheets";
-import {SystemService} from "../../../../../services/common/system";
-import {AreaShape} from "../../../../../interfaces/trasteel/refractories/shapes";
-import {RouterService} from "../../../../../services/common/router";
-import {TrasteelService} from "../../../../../services/trasteel/common/services";
-import {toString} from "lodash";
-import {Environment} from "../../../../../global/env";
+import { ProjectsService } from "../../../../../services/trasteel/refractories/projects";
+import { CustomersService } from "../../../../../services/trasteel/crm/customers";
+import { ShapesService } from "../../../../../services/trasteel/refractories/shapes";
+import { DatasheetsService } from "../../../../../services/trasteel/refractories/datasheets";
+import { SystemService } from "../../../../../services/common/system";
+import { AreaShape } from "../../../../../interfaces/trasteel/refractories/shapes";
+import { RouterService } from "../../../../../services/common/router";
+import { TrasteelService } from "../../../../../services/trasteel/common/services";
+import { toString } from "lodash";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "page-project-details",
@@ -27,11 +27,11 @@ export class PageProjectDetails {
   @State() areaShapes: AreaShape[] = [];
 
   titles = [
-    {tag: "summary", text: "Summary"},
-    {tag: "information", text: "Information"},
-    {tag: "shaped", text: "Shaped", disabled: false},
-    {tag: "unshaped", text: "Unshaped", disabled: false},
-    {tag: "files", text: "Files", disabled: true},
+    { tag: "summary", text: "Summary" },
+    { tag: "information", text: "Information" },
+    { tag: "shaped", text: "Shaped", disabled: false },
+    { tag: "unshaped", text: "Unshaped", disabled: false },
+    { tag: "files", text: "Files", disabled: true },
   ];
   @State() slider: Swiper;
 
@@ -108,7 +108,7 @@ export class PageProjectDetails {
       <ion-header>
         <app-navbar
           text={this.project.projectLocalId}
-          color="trasteel"
+          color='trasteel'
           backButton={true}
           rightButtonText={
             TrasteelService.isRefraDBAdmin()
@@ -127,12 +127,11 @@ export class PageProjectDetails {
         color={Environment.getAppColor()}
         swiper={this.slider}
         titles={this.titles}
-        noToolbar
       ></app-header-segment-toolbar>,
-      <ion-content class="slides">
-        <swiper-container class="slider-detail-project swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
+      <ion-content class='slides'>
+        <swiper-container class='slider-detail-project swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
               {/* SUMMARY */}
               <app-page-project-summary
                 project={this.project}
@@ -140,12 +139,12 @@ export class PageProjectDetails {
                 updateSummary={this.updateSummary}
               ></app-page-project-summary>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
-              <ion-list class="ion-no-padding" id="project-grid">
+            <swiper-slide class='swiper-slide'>
+              <ion-list class='ion-no-padding' id='project-grid'>
                 <app-item-detail
-                  lines="none"
-                  label-tag="customer"
-                  label-text="Customer"
+                  lines='none'
+                  label-tag='customer'
+                  label-text='Customer'
                   detailText={
                     this.project.customerId
                       ? CustomersService.getCustomersDetails(
@@ -159,45 +158,45 @@ export class PageProjectDetails {
                   }
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="project-name"
-                  label-text="Project Name"
+                  lines='none'
+                  label-tag='project-name'
+                  label-text='Project Name'
                   detailText={this.project.projectLocalId}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="technical-docs-caption"
-                  label-text="Technical Docs Caption"
+                  lines='none'
+                  label-tag='technical-docs-caption'
+                  label-text='Technical Docs Caption'
                   detailText={this.project.docsCaption}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="project-description"
-                  label-text="Project Description"
+                  lines='none'
+                  label-tag='project-description'
+                  label-text='Project Description'
                   detailText={this.project.projectDescription}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="drawing-no"
-                  label-text="Drawing No."
+                  lines='none'
+                  label-tag='drawing-no'
+                  label-text='Drawing No.'
                   detailText={this.project.drawing}
                 ></app-item-detail>
                 <ion-grid>
                   <ion-row>
                     <ion-col>
                       <app-item-detail
-                        lines="none"
-                        label-tag="drawing-date"
-                        label-text="Drawing Date"
+                        lines='none'
+                        label-tag='drawing-date'
+                        label-text='Drawing Date'
                         detailText={this.project.drawingDate}
                         isDate={true}
                       ></app-item-detail>
                     </ion-col>
                     <ion-col>
                       <app-item-detail
-                        lines="none"
-                        label-tag="project-finished-date"
-                        label-text="Project Finished Date"
+                        lines='none'
+                        label-tag='project-finished-date'
+                        label-text='Project Finished Date'
                         detailText={this.project.finishedDate}
                         isDate={true}
                       ></app-item-detail>
@@ -208,17 +207,17 @@ export class PageProjectDetails {
                   <ion-row>
                     <ion-col>
                       <app-item-detail
-                        lines="none"
-                        label-tag="capacity"
-                        label-text="Capacity"
+                        lines='none'
+                        label-tag='capacity'
+                        label-text='Capacity'
                         detailText={toString(this.project.steelAmount)}
                       ></app-item-detail>
                     </ion-col>
                     <ion-col>
                       <app-item-detail
-                        lines="none"
-                        label-tag="application-unit"
-                        label-text="Application Unit"
+                        lines='none'
+                        label-tag='application-unit'
+                        label-text='Application Unit'
                         detailText={
                           ProjectsService.getApplicationUnits(
                             this.project.applicationId
@@ -229,38 +228,38 @@ export class PageProjectDetails {
                   </ion-row>
                 </ion-grid>
                 <app-item-detail
-                  lines="none"
-                  label-tag="steel-amount"
-                  label-text="Steel Amount"
+                  lines='none'
+                  label-tag='steel-amount'
+                  label-text='Steel Amount'
                   detailText={toString(this.project.steelAmount)}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="steel-density"
-                  label-text="Steel Density"
-                  appendText=" (g/sm3)"
+                  lines='none'
+                  label-tag='steel-density'
+                  label-text='Steel Density'
+                  appendText=' (g/sm3)'
                   detailText={toString(this.project.liquidMetalDensity)}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  label-tag="guaranteed-lifetime"
-                  label-text="Guaranteed Lifetime"
-                  appendText=" (heats)"
+                  lines='none'
+                  label-tag='guaranteed-lifetime'
+                  label-text='Guaranteed Lifetime'
+                  appendText=' (heats)'
                   detailText={this.project.guaranteedLife}
                 ></app-item-detail>
               </ion-list>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <div>
                 <ion-toolbar>
                   <ion-segment
-                    mode="ios"
+                    mode='ios'
                     scrollable
                     onIonChange={(ev) => this.allocationAreaSegmentChanged(ev)}
                     value={this.allocationAreaSegment}
                   >
                     {this.project.projectAreaQuality.map((area, index) => (
-                      <ion-segment-button value={index} layout="icon-start">
+                      <ion-segment-button value={index} layout='icon-start'>
                         <ion-label>
                           {(area.bricksAllocationAreaId
                             ? ProjectsService.getBricksAllocationAreas(
@@ -289,8 +288,8 @@ export class PageProjectDetails {
                             <ion-col>
                               <app-item-detail
                                 showItem={false}
-                                label-tag="bricks-allocation-area"
-                                label-text="Bricks Allocation Area"
+                                label-tag='bricks-allocation-area'
+                                label-text='Bricks Allocation Area'
                                 detailText={
                                   ProjectsService.getBricksAllocationAreas(
                                     area.bricksAllocationAreaId
@@ -303,19 +302,19 @@ export class PageProjectDetails {
                             <ion-col>
                               <app-item-detail
                                 showItem={false}
-                                label-tag="quality"
-                                label-text="Quality"
+                                label-tag='quality'
+                                label-text='Quality'
                                 detailText={DatasheetsService.getDatasheetName(
                                   area.datasheetId
                                 )}
                               ></app-item-detail>
                             </ion-col>
-                            <ion-col size="4">
+                            <ion-col size='4'>
                               <app-item-detail
                                 showItem={false}
-                                label-tag="density"
-                                label-text="Density"
-                                appendText=" (g/cm3)"
+                                label-tag='density'
+                                label-text='Density'
+                                appendText=' (g/cm3)'
                                 detailText={toString(area.density)}
                               ></app-item-detail>
                             </ion-col>
@@ -324,17 +323,17 @@ export class PageProjectDetails {
                             <ion-col>
                               <app-item-detail
                                 showItem={false}
-                                label-tag="include-safety"
-                                label-text="Include Safety"
+                                label-tag='include-safety'
+                                label-text='Include Safety'
                                 appendText={" %"}
                                 detailText={toString(area.includeSafety)}
                               ></app-item-detail>
                             </ion-col>
-                            <ion-col size="4">
+                            <ion-col size='4'>
                               <app-item-detail
                                 showItem={false}
-                                label-tag="only-for-repair"
-                                label-text="Only for repair"
+                                label-tag='only-for-repair'
+                                label-text='Only for repair'
                                 detailText={area.onlyForRepair}
                               ></app-item-detail>
                             </ion-col>
@@ -343,17 +342,17 @@ export class PageProjectDetails {
                             <ion-col>
                               <app-item-detail
                                 showItem={false}
-                                label-tag="comments"
-                                label-text="Comments"
+                                label-tag='comments'
+                                label-text='Comments'
                                 detailText={toString(area.comments)}
                               ></app-item-detail>
                             </ion-col>
                           </ion-row>
-                          <div class="positions-box">
+                          <div class='positions-box'>
                             {area.shapes
                               ? area.shapes.map((shape, positionIndex) => (
                                   <ion-row>
-                                    <ion-col size="3">
+                                    <ion-col size='3'>
                                       <app-item-detail
                                         showItem={false}
                                         label-tag={
@@ -379,7 +378,7 @@ export class PageProjectDetails {
                                         )}
                                       ></app-item-detail>
                                     </ion-col>
-                                    <ion-col size="2">
+                                    <ion-col size='2'>
                                       <app-item-detail
                                         showItem={false}
                                         labelTag={
@@ -404,7 +403,7 @@ export class PageProjectDetails {
                                         }
                                       ></app-item-detail>
                                     </ion-col>
-                                    <ion-col size="2">
+                                    <ion-col size='2'>
                                       <app-item-detail
                                         showItem={false}
                                         labelTag={
@@ -444,21 +443,21 @@ export class PageProjectDetails {
                               : undefined}
                           </div>
                         </ion-grid>
-                        <div id="responsive-grid">
+                        <div id='responsive-grid'>
                           <ion-grid>
-                            <ion-row class="header ion-align-items-center ion-justify-content-center ext-row">
-                              <ion-col size="12" size-lg="12">
+                            <ion-row class='header ion-align-items-center ion-justify-content-center ext-row'>
+                              <ion-col size='12' size-lg='12'>
                                 <ion-row>
                                   <ion-col
-                                    size="12"
-                                    size-lg="4"
-                                    class="ext-col"
+                                    size='12'
+                                    size-lg='4'
+                                    class='ext-col'
                                   >
-                                    <ion-row class="inner-row1">
+                                    <ion-row class='inner-row1'>
                                       <ion-col
-                                        size="3"
-                                        size-lg="3"
-                                        class="inner-col"
+                                        size='3'
+                                        size-lg='3'
+                                        class='inner-col'
                                       >
                                         {TranslationService.getTransl(
                                           "course",
@@ -466,9 +465,9 @@ export class PageProjectDetails {
                                         )}
                                       </ion-col>
                                       <ion-col
-                                        size="3"
-                                        size-lg="3"
-                                        class="inner-col"
+                                        size='3'
+                                        size-lg='3'
+                                        class='inner-col'
                                       >
                                         {TranslationService.getTransl(
                                           "start",
@@ -476,9 +475,9 @@ export class PageProjectDetails {
                                         ) + " °"}
                                       </ion-col>
                                       <ion-col
-                                        size="3"
-                                        size-lg="3"
-                                        class="inner-col"
+                                        size='3'
+                                        size-lg='3'
+                                        class='inner-col'
                                       >
                                         {TranslationService.getTransl(
                                           "end",
@@ -486,9 +485,9 @@ export class PageProjectDetails {
                                         ) + " °"}
                                       </ion-col>
                                       <ion-col
-                                        size="3"
-                                        size-lg="3"
-                                        class="inner-col"
+                                        size='3'
+                                        size-lg='3'
+                                        class='inner-col'
                                       >
                                         {TranslationService.getTransl(
                                           "radius",
@@ -498,42 +497,42 @@ export class PageProjectDetails {
                                     </ion-row>
                                   </ion-col>
                                   <ion-col
-                                    size="12"
-                                    size-lg="8"
-                                    class="ext-col"
+                                    size='12'
+                                    size-lg='8'
+                                    class='ext-col'
                                   >
-                                    <ion-row class="inner-row2">
-                                      <ion-col size="2" class="inner-col">
+                                    <ion-row class='inner-row2'>
+                                      <ion-col size='2' class='inner-col'>
                                         {"Pos. " +
                                           area.shapes.map(
                                             (shape) => shape.position
                                           )}
                                       </ion-col>
-                                      <ion-col size="2" class="inner-col">
+                                      <ion-col size='2' class='inner-col'>
                                         {TranslationService.getTransl(
                                           "quantity",
                                           "Quantity"
                                         )}
                                       </ion-col>
-                                      <ion-col size="2" class="inner-col">
+                                      <ion-col size='2' class='inner-col'>
                                         {TranslationService.getTransl(
                                           "sum",
                                           "Sum"
                                         )}
                                       </ion-col>
-                                      <ion-col size="2" class="inner-col">
+                                      <ion-col size='2' class='inner-col'>
                                         {TranslationService.getTransl(
                                           "repair-sets",
                                           "Repair Sets"
                                         )}
                                       </ion-col>
-                                      <ion-col size="2" class="inner-col">
+                                      <ion-col size='2' class='inner-col'>
                                         {TranslationService.getTransl(
                                           "weight",
                                           "Weight"
                                         ) + " (Kg)"}
                                       </ion-col>
-                                      <ion-col size="2" class="inner-col">
+                                      <ion-col size='2' class='inner-col'>
                                         {TranslationService.getTransl(
                                           "row-weight",
                                           "Row Weight"
@@ -545,58 +544,58 @@ export class PageProjectDetails {
                               </ion-col>
                             </ion-row>
                             {area.courses.map((course, courseIndex) => [
-                              <ion-row class="ion-align-items-center ion-justify-content-center ext-row">
-                                <ion-col size="12" size-lg="12">
+                              <ion-row class='ion-align-items-center ion-justify-content-center ext-row'>
+                                <ion-col size='12' size-lg='12'>
                                   <ion-row>
                                     <ion-col
-                                      size="12"
-                                      size-lg="4"
-                                      class="ext-col"
+                                      size='12'
+                                      size-lg='4'
+                                      class='ext-col'
                                     >
-                                      <ion-row class="inner-row1">
+                                      <ion-row class='inner-row1'>
                                         <ion-col
-                                          size="3"
-                                          size-lg="3"
-                                          class="inner-col"
+                                          size='3'
+                                          size-lg='3'
+                                          class='inner-col'
                                         >
                                           {course.courseNumber}
                                         </ion-col>
                                         <ion-col
-                                          size="3"
-                                          size-lg="3"
-                                          class="inner-col"
+                                          size='3'
+                                          size-lg='3'
+                                          class='inner-col'
                                         >
                                           {course.startAngle}
                                         </ion-col>
                                         <ion-col
-                                          size="3"
-                                          size-lg="3"
-                                          class="inner-col"
+                                          size='3'
+                                          size-lg='3'
+                                          class='inner-col'
                                         >
                                           {course.endAngle}
                                         </ion-col>
                                         <ion-col
-                                          size="3"
-                                          size-lg="3"
-                                          class="inner-col"
+                                          size='3'
+                                          size-lg='3'
+                                          class='inner-col'
                                         >
                                           {course.innerRadius}
                                         </ion-col>
                                       </ion-row>
                                     </ion-col>
                                     <ion-col
-                                      size="12"
-                                      size-lg="8"
-                                      class="ext-col"
+                                      size='12'
+                                      size-lg='8'
+                                      class='ext-col'
                                     >
                                       {area.shapes.map((shape, shapeIndex) => (
-                                        <ion-row class="inner-row2">
-                                          <ion-col size="2" class="inner-col">
+                                        <ion-row class='inner-row2'>
+                                          <ion-col size='2' class='inner-col'>
                                             {ShapesService.getShapeName(
                                               shape.shapeId
                                             )}
                                           </ion-col>
-                                          <ion-col size="2" class="inner-col">
+                                          <ion-col size='2' class='inner-col'>
                                             {course.quantityShapes.length > 0 &&
                                             course.quantityShapes[shapeIndex]
                                               ? course.quantityShapes[
@@ -605,7 +604,7 @@ export class PageProjectDetails {
                                               : 0}
                                           </ion-col>
                                           <ion-col
-                                            size="2"
+                                            size='2'
                                             class={
                                               "inner-col" +
                                               (shapeIndex > 0
@@ -620,7 +619,7 @@ export class PageProjectDetails {
                                               : undefined}
                                           </ion-col>
                                           <ion-col
-                                            size="2"
+                                            size='2'
                                             class={
                                               "inner-col" +
                                               (shapeIndex > 0
@@ -632,7 +631,7 @@ export class PageProjectDetails {
                                               ? course.repairSets
                                               : undefined}
                                           </ion-col>
-                                          <ion-col size="2" class="inner-col">
+                                          <ion-col size='2' class='inner-col'>
                                             {ProjectsService.getAreaCourseWeightForShape(
                                               this.project,
                                               this.areaShapes,
@@ -642,7 +641,7 @@ export class PageProjectDetails {
                                             )}
                                           </ion-col>
                                           <ion-col
-                                            size="2"
+                                            size='2'
                                             class={
                                               "inner-col" +
                                               (shapeIndex > 0
@@ -665,7 +664,7 @@ export class PageProjectDetails {
                                   </ion-row>
                                 </ion-col>
                               </ion-row>,
-                              <ion-row class="separator">
+                              <ion-row class='separator'>
                                 <ion-col></ion-col>
                               </ion-row>,
                             ])}
@@ -677,26 +676,29 @@ export class PageProjectDetails {
                 ))}
               </div>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <div>
                 <ion-grid>
                   {this.project.projectMass.map((mass) => [
                     <ion-row
-                      style={{"padding-left": "16px", "padding-right": "16px"}}
+                      style={{
+                        "padding-left": "16px",
+                        "padding-right": "16px",
+                      }}
                     >
                       <ion-col>
                         <app-item-detail
                           showItem={false}
-                          label-tag="position"
-                          label-text="Position"
+                          label-tag='position'
+                          label-text='Position'
                           detailText={toString(mass.position)}
                         ></app-item-detail>
                       </ion-col>
                       <ion-col>
                         <app-item-detail
                           showItem={false}
-                          label-tag="application-area"
-                          label-text="Application Area"
+                          label-tag='application-area'
+                          label-text='Application Area'
                           detailText={
                             ProjectsService.getBricksAllocationAreas(
                               mass.bricksAllocationAreaId
@@ -706,13 +708,16 @@ export class PageProjectDetails {
                       </ion-col>
                     </ion-row>,
                     <ion-row
-                      style={{"padding-left": "16px", "padding-right": "16px"}}
+                      style={{
+                        "padding-left": "16px",
+                        "padding-right": "16px",
+                      }}
                     >
                       <ion-col>
                         <app-item-detail
                           showItem={false}
-                          label-tag="quality"
-                          label-text="Quality"
+                          label-tag='quality'
+                          label-text='Quality'
                           detailText={DatasheetsService.getDatasheetName(
                             mass.datasheetId
                           )}
@@ -721,29 +726,32 @@ export class PageProjectDetails {
                       <ion-col>
                         <app-item-detail
                           showItem={false}
-                          label-tag="density"
-                          label-text="Density"
-                          appendText=" (g/cm3)"
+                          label-tag='density'
+                          label-text='Density'
+                          appendText=' (g/cm3)'
                           detailText={mass.density}
                         ></app-item-detail>
                       </ion-col>
                     </ion-row>,
                     <ion-row
-                      style={{"padding-left": "16px", "padding-right": "16px"}}
+                      style={{
+                        "padding-left": "16px",
+                        "padding-right": "16px",
+                      }}
                     >
                       <ion-col>
                         <app-item-detail
                           showItem={false}
-                          label-tag="quantity"
-                          label-text="Quantity"
+                          label-tag='quantity'
+                          label-text='Quantity'
                           detailText={toString(mass.quantity)}
                         ></app-item-detail>
                       </ion-col>
                       <ion-col>
                         <app-item-detail
                           showItem={false}
-                          label-tag="unit"
-                          label-text="Unit"
+                          label-tag='unit'
+                          label-text='Unit'
                           detailText={
                             mass.quantityUnit
                               ? ProjectsService.getQuantityUnits(
@@ -753,7 +761,7 @@ export class PageProjectDetails {
                           }
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col size="1">
+                      <ion-col size='1'>
                         <p
                           style={{
                             "text-align": "center",
@@ -766,13 +774,13 @@ export class PageProjectDetails {
                       <ion-col>
                         <app-item-detail
                           showItem={false}
-                          label-tag="weight-per-unit"
-                          label-text="Weight per Unit"
-                          appendText=" (Kg)"
+                          label-tag='weight-per-unit'
+                          label-text='Weight per Unit'
+                          appendText=' (Kg)'
                           detailText={mass.weightPerUnitKg}
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col size="1">
+                      <ion-col size='1'>
                         <p
                           style={{
                             "text-align": "center",
@@ -785,21 +793,21 @@ export class PageProjectDetails {
                       <ion-col>
                         <app-item-detail
                           showItem={false}
-                          label-tag="total-weight"
-                          label-text="Total Weight"
-                          appendText=" (MT)"
+                          label-tag='total-weight'
+                          label-text='Total Weight'
+                          appendText=' (MT)'
                           detailText={mass.totalWeightMT}
                         ></app-item-detail>
                       </ion-col>
                     </ion-row>,
-                    <ion-row class="separator">
+                    <ion-row class='separator'>
                       <ion-col></ion-col>
                     </ion-row>,
                   ])}
                 </ion-grid>
               </div>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">file - to do</swiper-slide>
+            <swiper-slide class='swiper-slide'>file - to do</swiper-slide>
           </swiper-wrapper>
         </swiper-container>
       </ion-content>,

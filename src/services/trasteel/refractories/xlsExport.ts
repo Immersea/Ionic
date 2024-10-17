@@ -745,7 +745,6 @@ export class XLSXExportController {
     let bricksAreaColumn = startBricksAreaColumn;
     //create course summary and group by similar area, quality and position
     const projectAreaQuality = {};
-    console.log("project", project);
     project.projectAreaQuality.forEach((areaQuality, areaIndex) => {
       const positions = [];
       areaQuality.shapes.forEach((shape, shapeIndex) => {
@@ -766,11 +765,21 @@ export class XLSXExportController {
         if (!shapeOK) {
           shape["shape"] = areaShapes[areaIndex].shapes[shapeIndex];
           projectAreaQuality[index].shapes.push(shape);
+          //also also to repair set if existing
+          if (projectAreaQuality[index + rep]) {
+            projectAreaQuality[index + rep].shapes.push(shape);
+          }
         }
         //sum to previous
         areaQuality.courses.forEach((course) => {
           let found = false;
-          for (let oldCourse of projectAreaQuality[index].courses) {
+          for (let i = 0; i < projectAreaQuality[index].courses.length; i++) {
+            let oldCourse = projectAreaQuality[index].courses[i];
+            let oldCourseRep = null;
+            //also add to repair set if existing
+            if (projectAreaQuality[index + rep]) {
+              oldCourseRep = projectAreaQuality[index + rep].courses[i];
+            }
             if (course.courseNumber == oldCourse.courseNumber) {
               found = true;
               //find shape
@@ -785,6 +794,22 @@ export class XLSXExportController {
                 oldCourse.quantityShapes.push(oldQtyShape);
               } else {
                 oldQtyShape.quantity += courseQtyShape.quantity;
+              }
+              //again for repair
+              if (oldCourseRep) {
+                //find shape
+                let oldQtyShapeRep = oldCourseRep.quantityShapes.find(
+                  (x) => x.shapeId == shape.shapeId
+                );
+                const courseQtyShapeRep = course.quantityShapes.find(
+                  (x) => x.shapeId == shape.shapeId
+                );
+                if (!oldQtyShapeRep) {
+                  oldQtyShapeRep = cloneDeep(courseQtyShapeRep);
+                  oldCourseRep.quantityShapes.push(oldQtyShapeRep);
+                } else {
+                  oldQtyShapeRep.quantity += courseQtyShapeRep.quantity;
+                }
               }
               break;
             }
@@ -805,13 +830,16 @@ export class XLSXExportController {
                   projectAreaQuality[index]
                 );
               }
-              projectAreaQuality[index + rep].courses.push(addCourse);
+              projectAreaQuality[index + rep].courses.push(
+                cloneDeep(addCourse)
+              );
             }
-            projectAreaQuality[index].courses.push(addCourse);
+            projectAreaQuality[index].courses.push(cloneDeep(addCourse));
           }
         });
       });
     });
+
     for (
       let areaIndex = 0;
       areaIndex < Object.keys(projectAreaQuality).length;

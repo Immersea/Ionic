@@ -157,7 +157,7 @@ export class AppFormItem {
     if (this.validator) this._validator = getValidator<string>(this.validator);
   }
 
-  handleChange(ev) {
+  handleChange(ev, language?) {
     if (this.inputType == "boolean") {
       if (
         ev.detail &&
@@ -184,7 +184,7 @@ export class AppFormItem {
       this._valid = this.validator ? this._validator.validate(text) : true;
       this.isValid.emit(this._valid);
       this.multiLanguage
-        ? (this.value[this.selectedLanguage] = text)
+        ? (this.value[language ? language : this.selectedLanguage] = text)
         : this.inputType == "number"
           ? (this.value = parseFloat(text))
           : (this.value = text);
@@ -442,7 +442,7 @@ export class AppFormItem {
                             : null
                         }
                         label-placement={this.labelPosition}
-                        onIonInput={(ev) => this.handleChange(ev)}
+                        onIonInput={(ev) => this.handleChange(ev, language)}
                         onIonBlur={() => this.handleBlur()}
                         onIonFocus={(ev) => this.handleFocus(ev)}
                         value={this.value[language]}
@@ -477,7 +477,7 @@ export class AppFormItem {
                         this.labelTag ? this.labelPosition : null
                       }
                       placeholder={this.placeholder}
-                      onIonInput={(ev) => this.handleChange(ev)}
+                      onIonInput={(ev) => this.handleChange(ev, language)}
                       onIonFocus={(ev) => this.handleFocus(ev)}
                       value={this.value[language]}
                     />

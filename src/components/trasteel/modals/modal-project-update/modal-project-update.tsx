@@ -1,11 +1,23 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {alertController, modalController, popoverController} from "@ionic/core";
-import {cloneDeep, isString, max, maxBy, orderBy, some, toNumber} from "lodash";
-import {Subscription} from "rxjs";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import {
+  alertController,
+  modalController,
+  popoverController,
+} from "@ionic/core";
+import {
+  cloneDeep,
+  isString,
+  max,
+  maxBy,
+  orderBy,
+  some,
+  toNumber,
+} from "lodash";
+import { Subscription } from "rxjs";
 import Swiper from "swiper";
-import {UserProfile} from "../../../../interfaces/common/user/user-profile";
-import {UserService} from "../../../../services/common/user";
-import {TranslationService} from "../../../../services/common/translations";
+import { UserProfile } from "../../../../interfaces/common/user/user-profile";
+import { UserService } from "../../../../services/common/user";
+import { TranslationService } from "../../../../services/common/translations";
 import {
   Project,
   ProjectAreaQuality,
@@ -14,16 +26,16 @@ import {
   ProjectMass,
   AutoFillCourses,
 } from "../../../../interfaces/trasteel/refractories/projects";
-import {ProjectsService} from "../../../../services/trasteel/refractories/projects";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {CustomersService} from "../../../../services/trasteel/crm/customers";
-import {MapDataCustomer} from "../../../../interfaces/trasteel/customer/customer";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
-import {ShapesService} from "../../../../services/trasteel/refractories/shapes";
-import {Shape} from "../../../../interfaces/trasteel/refractories/shapes";
-import {roundDecimals} from "../../../../helpers/utils";
-import {RouterService} from "../../../../services/common/router";
+import { ProjectsService } from "../../../../services/trasteel/refractories/projects";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { CustomersService } from "../../../../services/trasteel/crm/customers";
+import { MapDataCustomer } from "../../../../interfaces/trasteel/customer/customer";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
+import { ShapesService } from "../../../../services/trasteel/refractories/shapes";
+import { Shape } from "../../../../interfaces/trasteel/refractories/shapes";
+import { roundDecimals } from "../../../../helpers/utils";
+import { RouterService } from "../../../../services/common/router";
 
 @Component({
   tag: "modal-project-update",
@@ -31,13 +43,13 @@ import {RouterService} from "../../../../services/common/router";
 })
 export class ModalProjectUpdate {
   @Element() el: HTMLElement;
-  @Prop({mutable: true}) projectId: string = undefined;
+  @Prop({ mutable: true }) projectId: string = undefined;
   @Prop() duplicateProject: Project = undefined;
   @State() project: Project;
   @State() updateView = true;
   @State() scrollTop = 0;
   @State() allocationAreaSegment: any = "add";
-  @State() areaShapes: {areaIndex: number; shapes: Shape[]}[] = [];
+  @State() areaShapes: { areaIndex: number; shapes: Shape[] }[] = [];
   @State() lastPosition = 1;
   @State() positions = [];
   @State() previousMassItems = null;
@@ -50,15 +62,16 @@ export class ModalProjectUpdate {
   lastSelectedRowIndex: number = null;
   validProject = false;
   titles = [
-    {tag: "summary", text: "Summary", disabled: false},
-    {tag: "information", text: "Information", disabled: false},
-    {tag: "shaped", text: "Shaped", disabled: false},
-    {tag: "unshaped", text: "Unshaped", disabled: false},
-    {tag: "files", text: "Files", disabled: true},
+    { tag: "summary", text: "Summary", disabled: false },
+    { tag: "information", text: "Information", disabled: false },
+    { tag: "shaped", text: "Shaped", disabled: false },
+    { tag: "unshaped", text: "Unshaped", disabled: false },
+    { tag: "files", text: "Files", disabled: true },
   ];
   @State() slider: Swiper;
   userProfile: UserProfile;
   userProfileSub$: Subscription;
+  reorderGroup: any;
 
   async componentWillLoad() {
     this.userProfileSub$ = UserService.userProfile$.subscribe(
@@ -167,43 +180,44 @@ export class ModalProjectUpdate {
         this.validateProject();
       });
     }
-    const reorderGroup = document.querySelector("ion-reorder-group");
-    reorderItems(this.project.projectAreaQuality);
+    this.reorderGroup = document.querySelector("ion-reorder-group");
+    this.reorderItems();
 
-    reorderGroup.addEventListener("ionItemReorder", ({detail}) => {
+    this.reorderGroup.addEventListener("ionItemReorder", ({ detail }) => {
       // Finish the reorder and position the item in the DOM based on
       // where the gesture ended. Update the items variable to the
       // new order of items
       this.project.projectAreaQuality = detail.complete(
         this.project.projectAreaQuality
       );
-      // Reorder the items in the DOM
-      reorderItems(this.project.projectAreaQuality);
       // After complete is called the items will be in the new order
-      this.validateProject();
+      // Reorder the items in the DOM
+      this.reorderItems();
     });
+  }
 
-    function reorderItems(items: ProjectAreaQuality[]) {
-      reorderGroup.replaceChildren();
-      let reordered = "";
-      for (const area of items) {
-        reordered += `
-        <ion-item>
-          <ion-label>
-            ${
-              area.bricksAllocationAreaId
-                ? ProjectsService.getBricksAllocationAreas(
-                    area.bricksAllocationAreaId
-                  )[0].bricksAllocationAreaName.en
-                : null
-            }
-          </ion-label>
-          <ion-reorder slot="end"></ion-reorder>
-        </ion-item>
-      `;
-      }
-      reorderGroup.innerHTML = reordered;
+  reorderItems() {
+    const items = this.project.projectAreaQuality;
+    this.reorderGroup.replaceChildren();
+    let reordered = "";
+    for (const area of items) {
+      reordered += `
+      <ion-item>
+        <ion-label>
+          ${
+            area.bricksAllocationAreaId
+              ? ProjectsService.getBricksAllocationAreas(
+                  area.bricksAllocationAreaId
+                )[0].bricksAllocationAreaName.en
+              : null
+          }
+        </ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+      </ion-item>
+    `;
     }
+    this.reorderGroup.innerHTML = reordered;
+    this.validateProject();
   }
 
   disconnectedCallback() {
@@ -361,6 +375,7 @@ export class ModalProjectUpdate {
     this.allocationAreaSegment = this.project.projectAreaQuality.length - 1;
     this.updateUndoHistory();
     this.updateSlider();
+    this.reorderItems();
   }
 
   selectApplicationUnit(ev) {
@@ -377,6 +392,7 @@ export class ModalProjectUpdate {
     this.selectedRows = [];
     this.updateUndoHistory();
     this.updateSlider();
+    this.reorderItems();
   }
 
   async deleteAllocationArea(index) {
@@ -406,6 +422,7 @@ export class ModalProjectUpdate {
             this.allocationAreaSegment =
               this.project.projectAreaQuality.length > 0 ? 0 : "add";
             this.updateUndoHistory();
+            this.reorderItems();
           },
         },
       ],
@@ -439,12 +456,14 @@ export class ModalProjectUpdate {
       ev.detail.value;
     this.updateUndoHistory();
     this.updateSlider();
+    this.reorderItems();
   }
 
   handleAllocationAreaChange(index, ev) {
     this.project.projectAreaQuality[index][ev.detail.name] = ev.detail.value;
     this.updateUndoHistory();
     this.updateSlider();
+    this.reorderItems();
   }
 
   handleSpecialShapeVolume(index, positionIndex, ev) {
@@ -1028,13 +1047,13 @@ export class ModalProjectUpdate {
           segment={1}
         ></app-header-segment-toolbar>
         <ion-content
-          class="slides"
+          class='slides'
           onIonScroll={(ev) => (this.scrollTop = ev.detail.scrollTop)}
         >
-          <swiper-container class="slider-edit-project swiper">
-            <swiper-wrapper class="swiper-wrapper">
+          <swiper-container class='slider-edit-project swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
               {/** SUMMARY */}
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-page-project-summary
                   project={this.project}
                   areaShapes={this.areaShapes}
@@ -1042,16 +1061,16 @@ export class ModalProjectUpdate {
                 ></app-page-project-summary>
               </swiper-slide>
               {/** INFORMATION */}
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding project-grid">
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding project-grid'>
                   <ion-item
                     button
-                    lines="inset"
+                    lines='inset'
                     onClick={() => this.openSelectCustomer()}
                   >
                     <ion-label>
-                      <p class="small">
-                        <my-transl tag="customer" text="Customer"></my-transl>*
+                      <p class='small'>
+                        <my-transl tag='customer' text='Customer'></my-transl>*
                       </p>
                       <h2>
                         {this.selectedCustomer
@@ -1061,84 +1080,84 @@ export class ModalProjectUpdate {
                     </ion-label>
                   </ion-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="project-name"
-                    label-text="Project Name"
+                    lines='inset'
+                    label-tag='project-name'
+                    label-text='Project Name'
                     value={this.project.projectLocalId}
-                    name="projectLocalId"
-                    input-type="text"
+                    name='projectLocalId'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="technical-docs-caption"
-                    label-text="Technical Docs Caption"
+                    lines='inset'
+                    label-tag='technical-docs-caption'
+                    label-text='Technical Docs Caption'
                     value={this.project.docsCaption}
-                    name="docsCaption"
-                    input-type="text"
+                    name='docsCaption'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="project-description"
-                    label-text="Project Description"
+                    lines='inset'
+                    label-tag='project-description'
+                    label-text='Project Description'
                     value={this.project.projectDescription}
-                    name="projectDescription"
-                    input-type="text"
+                    name='projectDescription'
+                    input-type='text'
                     textRows={2}
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="drawing-no"
-                    label-text="Drawing No."
+                    lines='inset'
+                    label-tag='drawing-no'
+                    label-text='Drawing No.'
                     value={this.project.drawing}
-                    name="drawing"
-                    input-type="text"
+                    name='drawing'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="sets-no"
-                    label-text="No. of sets"
+                    lines='inset'
+                    label-tag='sets-no'
+                    label-text='No. of sets'
                     value={this.project.setsAmount}
-                    name="setsAmount"
-                    input-type="number"
+                    name='setsAmount'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                   <ion-item-divider>
                     <my-transl
-                      tag="project-dates"
-                      text="Project Dates"
+                      tag='project-dates'
+                      text='Project Dates'
                     ></my-transl>
                   </ion-item-divider>
                   <ion-grid>
                     <ion-row>
                       <ion-col>
                         <app-form-item
-                          lines="inset"
-                          label-tag="drawing-date"
-                          label-text="Drawing Date"
+                          lines='inset'
+                          label-tag='drawing-date'
+                          label-text='Drawing Date'
                           value={this.project.drawingDate}
-                          name="drawingDate"
-                          input-type="date"
-                          date-presentation="date"
+                          name='drawingDate'
+                          input-type='date'
+                          date-presentation='date'
                           prefer-wheel={false}
                           onFormItemChanged={(ev) => this.handleChange(ev)}
                         ></app-form-item>
                       </ion-col>
                       <ion-col>
                         <app-form-item
-                          lines="inset"
-                          label-tag="project-finished-date"
-                          label-text="Project Finished Date"
+                          lines='inset'
+                          label-tag='project-finished-date'
+                          label-text='Project Finished Date'
                           value={this.project.finishedDate}
-                          name="finishedDate"
-                          input-type="date"
-                          date-presentation="date"
+                          name='finishedDate'
+                          input-type='date'
+                          date-presentation='date'
                           prefer-wheel={false}
                           onFormItemChanged={(ev) => this.handleChange(ev)}
                         ></app-form-item>
@@ -1146,18 +1165,18 @@ export class ModalProjectUpdate {
                     </ion-row>
                   </ion-grid>
                   <ion-item-divider>
-                    <my-transl tag="other-data" text="Other Data"></my-transl>
+                    <my-transl tag='other-data' text='Other Data'></my-transl>
                   </ion-item-divider>
                   <ion-grid>
                     <ion-row>
                       <ion-col>
                         <app-form-item
-                          label-tag="capacity"
-                          label-text="Capacity"
-                          appendText=" (MT)"
+                          label-tag='capacity'
+                          label-text='Capacity'
+                          appendText=' (MT)'
                           value={this.project.steelAmount}
-                          name="steelAmount"
-                          input-type="number"
+                          name='steelAmount'
+                          input-type='number'
                           onFormItemChanged={(ev) => this.handleChange(ev)}
                         ></app-form-item>
                       </ion-col>
@@ -1172,56 +1191,56 @@ export class ModalProjectUpdate {
                               ? this.project.applicationId
                               : null
                           }
-                          lines="inset"
+                          lines='inset'
                           selectFn={(ev) => this.selectApplicationUnit(ev)}
                           selectOptions={ProjectsService.getApplicationUnits()}
-                          selectValueId="applicationId"
+                          selectValueId='applicationId'
                           selectValueText={["applicationName", "en"]}
                         ></app-select-search>
                       </ion-col>
                     </ion-row>
                   </ion-grid>
                   <app-form-item
-                    label-tag="steel-amount"
-                    label-text="Steel Amount"
-                    appendText=" (MT)"
+                    label-tag='steel-amount'
+                    label-text='Steel Amount'
+                    appendText=' (MT)'
                     value={this.project.steelAmount}
-                    name="steelAmount"
-                    input-type="number"
+                    name='steelAmount'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="steel-density"
-                    label-text="Steel Density"
-                    appendText=" (g/cm3)"
+                    label-tag='steel-density'
+                    label-text='Steel Density'
+                    appendText=' (g/cm3)'
                     value={this.project.liquidMetalDensity}
-                    name="liquidMetalDensity"
-                    input-type="number"
+                    name='liquidMetalDensity'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="guaranteed-lifetime"
-                    label-text="Guaranteed Lifetime"
-                    appendText=" (heats)"
+                    label-tag='guaranteed-lifetime'
+                    label-text='Guaranteed Lifetime'
+                    appendText=' (heats)'
                     value={this.project.guaranteedLife}
-                    name="guaranteedLife"
-                    input-type="number"
+                    name='guaranteedLife'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                 </ion-list>
                 {this.projectId ? (
-                  <ion-footer class="ion-no-border">
+                  <ion-footer class='ion-no-border'>
                     <ion-toolbar>
                       <ion-button
-                        expand="block"
-                        fill="outline"
-                        color="danger"
+                        expand='block'
+                        fill='outline'
+                        color='danger'
                         onClick={() => this.deleteProject()}
                       >
-                        <ion-icon slot="start" name="trash"></ion-icon>
+                        <ion-icon slot='start' name='trash'></ion-icon>
                         <my-transl
-                          tag="delete"
-                          text="Delete"
+                          tag='delete'
+                          text='Delete'
                           isLabel
                         ></my-transl>
                       </ion-button>
@@ -1230,28 +1249,28 @@ export class ModalProjectUpdate {
                 ) : undefined}
               </swiper-slide>
               {/** SHAPED */}
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <div>
                   <ion-toolbar>
-                    <ion-grid class="ion-no-padding">
+                    <ion-grid class='ion-no-padding'>
                       <ion-row>
-                        <ion-col size="1">
+                        <ion-col size='1'>
                           <ion-button
-                            id="click-trigger"
+                            id='click-trigger'
                             icon-only
-                            fill="clear"
-                            size="small"
+                            fill='clear'
+                            size='small'
                           >
                             <ion-icon
-                              name="reorder-four"
-                              color="trasteel"
+                              name='reorder-four'
+                              color='trasteel'
                             ></ion-icon>
                           </ion-button>
                           <ion-popover
-                            trigger="click-trigger"
-                            trigger-action="click"
+                            trigger='click-trigger'
+                            trigger-action='click'
                           >
-                            <ion-content class="ion-padding">
+                            <ion-content class='ion-padding'>
                               <ion-list>
                                 <ion-reorder-group
                                   disabled={false}
@@ -1262,7 +1281,7 @@ export class ModalProjectUpdate {
                         </ion-col>
                         <ion-col>
                           <ion-segment
-                            mode="ios"
+                            mode='ios'
                             scrollable
                             onIonChange={(ev) =>
                               this.allocationAreaSegmentChanged(ev)
@@ -1273,7 +1292,7 @@ export class ModalProjectUpdate {
                               (area, index) => (
                                 <ion-segment-button
                                   value={index}
-                                  layout="icon-start"
+                                  layout='icon-start'
                                 >
                                   <ion-label>
                                     {area.bricksAllocationAreaId
@@ -1286,9 +1305,9 @@ export class ModalProjectUpdate {
                               )
                             )}
                             <ion-segment-button
-                              value="add"
+                              value='add'
                               onClick={() => this.addAllocationArea()}
-                              layout="icon-start"
+                              layout='icon-start'
                             >
                               <ion-label>
                                 {"+ " +
@@ -1311,35 +1330,35 @@ export class ModalProjectUpdate {
                             <ion-row>
                               <ion-col>
                                 <app-select-search
-                                  class="reduce-padding"
+                                  class='reduce-padding'
                                   label={{
                                     tag: "bricks-allocation-area",
                                     text: "Bricks Allocation Area",
                                   }}
-                                  labelAddText="*"
+                                  labelAddText='*'
                                   value={area.bricksAllocationAreaId}
-                                  lines="inset"
+                                  lines='inset'
                                   selectFn={(ev) =>
                                     this.selectAllocationArea(index, ev)
                                   }
                                   selectOptions={ProjectsService.getBricksAllocationAreas()}
-                                  selectValueId="bricksAllocationAreaId"
+                                  selectValueId='bricksAllocationAreaId'
                                   selectValueText={[
                                     "bricksAllocationAreaName",
                                     "en",
                                   ]}
                                 ></app-select-search>
                               </ion-col>
-                              <ion-col size="1">
+                              <ion-col size='1'>
                                 <ion-button
-                                  fill="clear"
-                                  color="danger"
+                                  fill='clear'
+                                  color='danger'
                                   icon-only
                                   onClick={() =>
                                     this.deleteAllocationArea(index)
                                   }
                                 >
-                                  <ion-icon name="trash"></ion-icon>
+                                  <ion-icon name='trash'></ion-icon>
                                 </ion-button>
                               </ion-col>
                             </ion-row>
@@ -1347,17 +1366,17 @@ export class ModalProjectUpdate {
                               <ion-col>
                                 <ion-item
                                   button
-                                  lines="inset"
+                                  lines='inset'
                                   onClick={() =>
                                     this.openSelectDataSheet(area, index)
                                   }
-                                  class="reduce-padding"
+                                  class='reduce-padding'
                                 >
                                   <ion-label>
-                                    <p class="small">
+                                    <p class='small'>
                                       <my-transl
-                                        tag="datasheet"
-                                        text="Datasheet"
+                                        tag='datasheet'
+                                        text='Datasheet'
                                       ></my-transl>
                                     </p>
                                     <h2>
@@ -1370,15 +1389,15 @@ export class ModalProjectUpdate {
                                   </ion-label>
                                 </ion-item>
                               </ion-col>
-                              <ion-col size="4">
+                              <ion-col size='4'>
                                 <app-form-item
-                                  lines="inset"
-                                  label-tag="density"
-                                  label-text="Density"
-                                  appendText=" (g/cm3)"
+                                  lines='inset'
+                                  label-tag='density'
+                                  label-text='Density'
+                                  appendText=' (g/cm3)'
                                   value={area.density}
-                                  name="density"
-                                  input-type="number"
+                                  name='density'
+                                  input-type='number'
                                   onFormItemChanged={(ev) =>
                                     this.handleAllocationAreaChange(index, ev)
                                   }
@@ -1388,28 +1407,28 @@ export class ModalProjectUpdate {
                             <ion-row>
                               <ion-col>
                                 <app-form-item
-                                  lines="inset"
-                                  class="reduce-padding"
-                                  label-tag="include-safety"
-                                  label-text="Include Safety"
+                                  lines='inset'
+                                  class='reduce-padding'
+                                  label-tag='include-safety'
+                                  label-text='Include Safety'
                                   appendText={" %"}
                                   value={area.includeSafety}
-                                  name="includeSafety"
-                                  input-type="number"
-                                  inputStep="1"
+                                  name='includeSafety'
+                                  input-type='number'
+                                  inputStep='1'
                                   onFormItemChanged={(ev) =>
                                     this.handleAllocationAreaChange(index, ev)
                                   }
                                 ></app-form-item>
                               </ion-col>
-                              <ion-col size="4">
+                              <ion-col size='4'>
                                 <app-form-item
-                                  lines="inset"
-                                  label-tag="only-for-repair"
-                                  label-text="Only for repair"
+                                  lines='inset'
+                                  label-tag='only-for-repair'
+                                  label-text='Only for repair'
                                   value={area.onlyForRepair}
-                                  name="onlyForRepair"
-                                  input-type="boolean"
+                                  name='onlyForRepair'
+                                  input-type='boolean'
                                   onFormItemChanged={(ev) =>
                                     this.handleAllocationAreaChange(index, ev)
                                   }
@@ -1419,24 +1438,24 @@ export class ModalProjectUpdate {
                             <ion-row>
                               <ion-col>
                                 <app-form-item
-                                  lines="inset"
-                                  class="reduce-padding"
-                                  label-tag="comments"
-                                  label-text="Comments"
+                                  lines='inset'
+                                  class='reduce-padding'
+                                  label-tag='comments'
+                                  label-text='Comments'
                                   value={area.comments}
-                                  name="comments"
-                                  input-type="string"
+                                  name='comments'
+                                  input-type='string'
                                   onFormItemChanged={(ev) =>
                                     this.handleAllocationAreaChange(index, ev)
                                   }
                                 ></app-form-item>
                               </ion-col>
                             </ion-row>
-                            <div class="positions-box ion-no-padding project-grid">
+                            <div class='positions-box ion-no-padding project-grid'>
                               {area.shapes
                                 ? area.shapes.map((shape, positionIndex) => (
                                     <ion-row>
-                                      <ion-col size="3">
+                                      <ion-col size='3'>
                                         <app-form-item
                                           showItem={false}
                                           label-tag={
@@ -1450,9 +1469,9 @@ export class ModalProjectUpdate {
                                               : null
                                           }
                                           value={shape.position}
-                                          name="position"
-                                          input-type="number"
-                                          inputStep="1"
+                                          name='position'
+                                          input-type='number'
+                                          inputStep='1'
                                           debounce={300}
                                           onFormItemChanged={(ev) =>
                                             this.handleAllocationAreaPositionChange(
@@ -1461,13 +1480,13 @@ export class ModalProjectUpdate {
                                               ev
                                             )
                                           }
-                                          class="reduce-padding-top"
+                                          class='reduce-padding-top'
                                         ></app-form-item>
                                       </ion-col>
                                       <ion-col>
                                         <ion-item
                                           button
-                                          lines="none"
+                                          lines='none'
                                           onClick={() =>
                                             this.openSelectShape(
                                               area.shapes[positionIndex]
@@ -1476,7 +1495,7 @@ export class ModalProjectUpdate {
                                               positionIndex
                                             )
                                           }
-                                          class="reduce-padding-top"
+                                          class='reduce-padding-top'
                                         >
                                           <ion-label>
                                             {positionIndex == 0 ? (
@@ -1487,8 +1506,8 @@ export class ModalProjectUpdate {
                                                 }}
                                               >
                                                 <my-transl
-                                                  tag="shape"
-                                                  text="Shape"
+                                                  tag='shape'
+                                                  text='Shape'
                                                 ></my-transl>
                                               </p>
                                             ) : null}
@@ -1505,7 +1524,7 @@ export class ModalProjectUpdate {
                                           </ion-label>
                                         </ion-item>
                                       </ion-col>
-                                      <ion-col size="2">
+                                      <ion-col size='2'>
                                         <app-item-detail
                                           showItem={false}
                                           labelTag={
@@ -1520,6 +1539,9 @@ export class ModalProjectUpdate {
                                           detailText={
                                             this.areaShapes &&
                                             this.areaShapes[index] &&
+                                            this.areaShapes[index].shapes[
+                                              positionIndex
+                                            ] &&
                                             this.areaShapes[index].shapes[
                                               positionIndex
                                             ].radius > 0
@@ -1538,7 +1560,7 @@ export class ModalProjectUpdate {
                                           }
                                         ></app-item-detail>
                                       </ion-col>
-                                      <ion-col size="2">
+                                      <ion-col size='2'>
                                         {
                                           //check if special shape - add possibility to change the value
                                           this.areaShapes &&
@@ -1586,8 +1608,8 @@ export class ModalProjectUpdate {
                                                       .shapes[positionIndex]
                                                       .volume
                                               }
-                                              input-type="number"
-                                              inputStep="1"
+                                              input-type='number'
+                                              inputStep='1'
                                               debounce={300}
                                               onFormItemChanged={(ev) =>
                                                 this.handleSpecialShapeVolume(
@@ -1596,7 +1618,7 @@ export class ModalProjectUpdate {
                                                   ev
                                                 )
                                               }
-                                              class="reduce-padding-top"
+                                              class='reduce-padding-top'
                                             ></app-form-item>
                                           ) : (
                                             <app-item-detail
@@ -1621,6 +1643,9 @@ export class ModalProjectUpdate {
                                                 this.areaShapes[index] &&
                                                 this.areaShapes[index].shapes[
                                                   positionIndex
+                                                ] &&
+                                                this.areaShapes[index].shapes[
+                                                  positionIndex
                                                 ].getWeight(area.density) > 0
                                                   ? this.areaShapes[
                                                       index
@@ -1634,10 +1659,10 @@ export class ModalProjectUpdate {
                                         }
                                       </ion-col>
                                       {area.courses.length == 0 ? (
-                                        <ion-col size="1">
+                                        <ion-col size='1'>
                                           <ion-button
-                                            fill="clear"
-                                            color="danger"
+                                            fill='clear'
+                                            color='danger'
                                             icon-only
                                             onClick={() =>
                                               this.deleteAllocationAreaPosition(
@@ -1646,7 +1671,7 @@ export class ModalProjectUpdate {
                                               )
                                             }
                                           >
-                                            <ion-icon name="trash"></ion-icon>
+                                            <ion-icon name='trash'></ion-icon>
                                           </ion-button>
                                         </ion-col>
                                       ) : undefined}
@@ -1657,10 +1682,10 @@ export class ModalProjectUpdate {
                                 <ion-row>
                                   <ion-col>
                                     <ion-button
-                                      expand="block"
-                                      fill="outline"
-                                      size="small"
-                                      color="trasteel"
+                                      expand='block'
+                                      fill='outline'
+                                      size='small'
+                                      color='trasteel'
                                       disabled={this.disableAddPositionButton(
                                         index
                                       )}
@@ -1681,10 +1706,10 @@ export class ModalProjectUpdate {
                             <ion-row>
                               <ion-col>
                                 <ion-button
-                                  expand="block"
-                                  fill="outline"
-                                  size="small"
-                                  color="trasteel"
+                                  expand='block'
+                                  fill='outline'
+                                  size='small'
+                                  color='trasteel'
                                   disabled={this.disableAddCourses(area)}
                                   onClick={() => this.autoFillCourses(index)}
                                 >
@@ -1696,10 +1721,10 @@ export class ModalProjectUpdate {
                               </ion-col>
                               <ion-col>
                                 <ion-button
-                                  expand="block"
-                                  fill="outline"
-                                  size="small"
-                                  color="trasteel"
+                                  expand='block'
+                                  fill='outline'
+                                  size='small'
+                                  color='trasteel'
                                   disabled={this.disableAddCourses(area)}
                                   onClick={() => {
                                     ProjectsService.recalculateExistingCourses(
@@ -1718,58 +1743,58 @@ export class ModalProjectUpdate {
                               </ion-col>
                             </ion-row>
                           </ion-grid>
-                          <div id="responsive-grid">
+                          <div id='responsive-grid'>
                             <ion-grid>
-                              <ion-row class="header ion-align-items-center ion-justify-content-center ext-row">
-                                <ion-col size="11" size-lg="11">
+                              <ion-row class='header ion-align-items-center ion-justify-content-center ext-row'>
+                                <ion-col size='11' size-lg='11'>
                                   <ion-row>
                                     <ion-col
-                                      size="12"
-                                      size-lg="4"
-                                      class="ext-col"
+                                      size='12'
+                                      size-lg='4'
+                                      class='ext-col'
                                     >
-                                      <ion-row class="inner-row1">
+                                      <ion-row class='inner-row1'>
                                         <ion-col
-                                          size="3"
-                                          size-lg="3"
-                                          class="inner-col"
+                                          size='3'
+                                          size-lg='3'
+                                          class='inner-col'
                                         >
                                           <ion-button
-                                            expand="full"
-                                            fill="clear"
-                                            size="small"
-                                            color="light"
-                                            class="ion-no-padding"
+                                            expand='full'
+                                            fill='clear'
+                                            size='small'
+                                            color='light'
+                                            class='ion-no-padding'
                                             onClick={() =>
                                               this.reorderCourses(index)
                                             }
                                           >
-                                            <ion-label color="light">
+                                            <ion-label color='light'>
                                               {TranslationService.getTransl(
                                                 "course",
                                                 "Course"
                                               )}
                                             </ion-label>
                                             <ion-icon
-                                              color="light"
-                                              slot="end"
-                                              name="swap-vertical-outline"
+                                              color='light'
+                                              slot='end'
+                                              name='swap-vertical-outline'
                                             ></ion-icon>
                                           </ion-button>
                                         </ion-col>
                                         <ion-col
-                                          size="3"
-                                          size-lg="3"
-                                          class="inner-col"
+                                          size='3'
+                                          size-lg='3'
+                                          class='inner-col'
                                         >
                                           <ion-button
-                                            expand="full"
-                                            fill="clear"
-                                            color="light"
-                                            size="small"
-                                            class="ion-no-padding"
+                                            expand='full'
+                                            fill='clear'
+                                            color='light'
+                                            size='small'
+                                            class='ion-no-padding'
                                           >
-                                            <ion-label color="light">
+                                            <ion-label color='light'>
                                               {TranslationService.getTransl(
                                                 "start",
                                                 "Start"
@@ -1778,18 +1803,18 @@ export class ModalProjectUpdate {
                                           </ion-button>
                                         </ion-col>
                                         <ion-col
-                                          size="3"
-                                          size-lg="3"
-                                          class="inner-col"
+                                          size='3'
+                                          size-lg='3'
+                                          class='inner-col'
                                         >
                                           <ion-button
-                                            expand="full"
-                                            fill="clear"
-                                            color="light"
-                                            size="small"
-                                            class="ion-no-padding"
+                                            expand='full'
+                                            fill='clear'
+                                            color='light'
+                                            size='small'
+                                            class='ion-no-padding'
                                           >
-                                            <ion-label color="light">
+                                            <ion-label color='light'>
                                               {TranslationService.getTransl(
                                                 "end",
                                                 "End"
@@ -1798,17 +1823,17 @@ export class ModalProjectUpdate {
                                           </ion-button>
                                         </ion-col>
                                         <ion-col
-                                          size="3"
-                                          size-lg="3"
-                                          class="inner-col"
+                                          size='3'
+                                          size-lg='3'
+                                          class='inner-col'
                                         >
                                           <ion-button
-                                            expand="full"
-                                            fill="clear"
-                                            size="small"
-                                            class="ion-no-padding"
+                                            expand='full'
+                                            fill='clear'
+                                            size='small'
+                                            class='ion-no-padding'
                                           >
-                                            <ion-label color="light">
+                                            <ion-label color='light'>
                                               {TranslationService.getTransl(
                                                 "radius",
                                                 "Radius"
@@ -1819,42 +1844,42 @@ export class ModalProjectUpdate {
                                       </ion-row>
                                     </ion-col>
                                     <ion-col
-                                      size="12"
-                                      size-lg="8"
-                                      class="ext-col"
+                                      size='12'
+                                      size-lg='8'
+                                      class='ext-col'
                                     >
-                                      <ion-row class="inner-row2">
-                                        <ion-col size="2" class="inner-col">
+                                      <ion-row class='inner-row2'>
+                                        <ion-col size='2' class='inner-col'>
                                           {"Pos. " +
                                             area.shapes.map(
                                               (shape) => shape.position
                                             )}
                                         </ion-col>
-                                        <ion-col size="2" class="inner-col">
+                                        <ion-col size='2' class='inner-col'>
                                           {TranslationService.getTransl(
                                             "quantity",
                                             "Quantity"
                                           )}
                                         </ion-col>
-                                        <ion-col size="2" class="inner-col">
+                                        <ion-col size='2' class='inner-col'>
                                           {TranslationService.getTransl(
                                             "sum",
                                             "Sum"
                                           )}
                                         </ion-col>
-                                        <ion-col size="2" class="inner-col">
+                                        <ion-col size='2' class='inner-col'>
                                           {TranslationService.getTransl(
                                             "repair-sets",
                                             "Repair Sets"
                                           )}
                                         </ion-col>
-                                        <ion-col size="2" class="inner-col">
+                                        <ion-col size='2' class='inner-col'>
                                           {TranslationService.getTransl(
                                             "weight",
                                             "Weight"
                                           ) + " (Kg)"}
                                         </ion-col>
-                                        <ion-col size="2" class="inner-col">
+                                        <ion-col size='2' class='inner-col'>
                                           {TranslationService.getTransl(
                                             "row-weight",
                                             "Row Weight"
@@ -1864,7 +1889,7 @@ export class ModalProjectUpdate {
                                     </ion-col>
                                   </ion-row>
                                 </ion-col>
-                                <ion-col size="1" size-lg="1">
+                                <ion-col size='1' size-lg='1'>
                                   {TranslationService.getTransl(
                                     "duplicate",
                                     "Duplicate"
@@ -1890,25 +1915,25 @@ export class ModalProjectUpdate {
                                     this.handleCourseRowClick(courseIndex, ev)
                                   }
                                 >
-                                  <ion-col size="11" size-lg="11">
+                                  <ion-col size='11' size-lg='11'>
                                     <ion-row>
                                       <ion-col
-                                        size="12"
-                                        size-lg="4"
-                                        class="ext-col"
+                                        size='12'
+                                        size-lg='4'
+                                        class='ext-col'
                                       >
-                                        <ion-row class="inner-row1">
+                                        <ion-row class='inner-row1'>
                                           <ion-col
-                                            size="3"
-                                            size-lg="3"
-                                            class="inner-col"
+                                            size='3'
+                                            size-lg='3'
+                                            class='inner-col'
                                           >
                                             <app-form-item
                                               shortItem
                                               value={course.courseNumber}
-                                              name="courseNumber"
-                                              input-type="number"
-                                              inputStep="1"
+                                              name='courseNumber'
+                                              input-type='number'
+                                              inputStep='1'
                                               debounce={300}
                                               onFormItemChanged={(ev) =>
                                                 this.handleAreaCourse(
@@ -1923,16 +1948,16 @@ export class ModalProjectUpdate {
                                             ></app-form-item>
                                           </ion-col>
                                           <ion-col
-                                            size="3"
-                                            size-lg="3"
-                                            class="inner-col"
+                                            size='3'
+                                            size-lg='3'
+                                            class='inner-col'
                                           >
                                             <app-form-item
                                               shortItem
                                               value={course.startAngle}
-                                              name="startAngle"
-                                              input-type="number"
-                                              inputStep="1"
+                                              name='startAngle'
+                                              input-type='number'
+                                              inputStep='1'
                                               onFormItemChanged={(ev) =>
                                                 this.handleAreaCourse(
                                                   course,
@@ -1944,16 +1969,16 @@ export class ModalProjectUpdate {
                                             ></app-form-item>
                                           </ion-col>
                                           <ion-col
-                                            size="3"
-                                            size-lg="3"
-                                            class="inner-col"
+                                            size='3'
+                                            size-lg='3'
+                                            class='inner-col'
                                           >
                                             <app-form-item
                                               shortItem
                                               value={course.endAngle}
-                                              name="endAngle"
-                                              input-type="number"
-                                              inputStep="1"
+                                              name='endAngle'
+                                              input-type='number'
+                                              inputStep='1'
                                               onFormItemChanged={(ev) =>
                                                 this.handleAreaCourse(
                                                   course,
@@ -1965,16 +1990,16 @@ export class ModalProjectUpdate {
                                             ></app-form-item>
                                           </ion-col>
                                           <ion-col
-                                            size="3"
-                                            size-lg="3"
-                                            class="inner-col"
+                                            size='3'
+                                            size-lg='3'
+                                            class='inner-col'
                                           >
                                             <app-form-item
                                               shortItem
                                               value={course.innerRadius}
-                                              name="innerRadius"
-                                              input-type="number"
-                                              inputStep="1"
+                                              name='innerRadius'
+                                              input-type='number'
+                                              inputStep='1'
                                               onFormItemChanged={(ev) =>
                                                 this.handleAreaCourse(
                                                   course,
@@ -1988,16 +2013,16 @@ export class ModalProjectUpdate {
                                         </ion-row>
                                       </ion-col>
                                       <ion-col
-                                        size="12"
-                                        size-lg="8"
-                                        class="ext-col"
+                                        size='12'
+                                        size-lg='8'
+                                        class='ext-col'
                                       >
                                         {area.shapes.map(
                                           (shape, shapeIndex) => (
-                                            <ion-row class="inner-row2">
+                                            <ion-row class='inner-row2'>
                                               <ion-col
-                                                size="2"
-                                                class="inner-col"
+                                                size='2'
+                                                class='inner-col'
                                               >
                                                 <app-item-detail
                                                   showItem={false}
@@ -2007,8 +2032,8 @@ export class ModalProjectUpdate {
                                                 ></app-item-detail>
                                               </ion-col>
                                               <ion-col
-                                                size="2"
-                                                class="inner-col"
+                                                size='2'
+                                                class='inner-col'
                                               >
                                                 <app-form-item
                                                   shortItem
@@ -2035,9 +2060,9 @@ export class ModalProjectUpdate {
                                                         ].quantity
                                                       : 0
                                                   }
-                                                  name="quantity"
-                                                  input-type="number"
-                                                  inputStep="1"
+                                                  name='quantity'
+                                                  input-type='number'
+                                                  inputStep='1'
                                                   onFormItemChanged={(ev) =>
                                                     this.handleAreaCourseQuantity(
                                                       course,
@@ -2049,7 +2074,7 @@ export class ModalProjectUpdate {
                                                 ></app-form-item>
                                               </ion-col>
                                               <ion-col
-                                                size="2"
+                                                size='2'
                                                 class={
                                                   "inner-col" +
                                                   (shapeIndex > 0
@@ -2069,7 +2094,7 @@ export class ModalProjectUpdate {
                                                 ></app-item-detail>
                                               </ion-col>
                                               <ion-col
-                                                size="2"
+                                                size='2'
                                                 class={
                                                   "inner-col" +
                                                   (shapeIndex > 0
@@ -2081,9 +2106,9 @@ export class ModalProjectUpdate {
                                                   <app-form-item
                                                     shortItem
                                                     value={course.repairSets}
-                                                    name="repairSets"
-                                                    input-type="number"
-                                                    inputStep="1"
+                                                    name='repairSets'
+                                                    input-type='number'
+                                                    inputStep='1'
                                                     disabled={
                                                       area.onlyForRepair
                                                     }
@@ -2097,8 +2122,8 @@ export class ModalProjectUpdate {
                                                 ) : undefined}
                                               </ion-col>
                                               <ion-col
-                                                size="2"
-                                                class="inner-col"
+                                                size='2'
+                                                class='inner-col'
                                               >
                                                 <app-item-detail
                                                   showItem={false}
@@ -2112,7 +2137,7 @@ export class ModalProjectUpdate {
                                                 ></app-item-detail>
                                               </ion-col>
                                               <ion-col
-                                                size="2"
+                                                size='2'
                                                 class={
                                                   "inner-col" +
                                                   (shapeIndex > 0
@@ -2140,12 +2165,12 @@ export class ModalProjectUpdate {
                                       </ion-col>
                                     </ion-row>
                                   </ion-col>
-                                  <ion-col size="1" size-lg="1">
+                                  <ion-col size='1' size-lg='1'>
                                     <ion-button
-                                      fill="clear"
-                                      color="primary"
+                                      fill='clear'
+                                      color='primary'
                                       icon-only
-                                      class="button-no-margin"
+                                      class='button-no-margin'
                                       onClick={() =>
                                         this.duplicateAreaCourse(
                                           index,
@@ -2153,13 +2178,13 @@ export class ModalProjectUpdate {
                                         )
                                       }
                                     >
-                                      <ion-icon name="copy"></ion-icon>
+                                      <ion-icon name='copy'></ion-icon>
                                     </ion-button>
                                     <ion-button
-                                      fill="clear"
-                                      color="danger"
+                                      fill='clear'
+                                      color='danger'
                                       icon-only
-                                      class="button-no-margin"
+                                      class='button-no-margin'
                                       onClick={() =>
                                         this.deleteAreaCourse(
                                           index,
@@ -2167,21 +2192,21 @@ export class ModalProjectUpdate {
                                         )
                                       }
                                     >
-                                      <ion-icon name="trash"></ion-icon>
+                                      <ion-icon name='trash'></ion-icon>
                                     </ion-button>
                                   </ion-col>
                                 </ion-row>,
-                                <ion-row class="separator">
+                                <ion-row class='separator'>
                                   <ion-col></ion-col>
                                 </ion-row>,
                               ])}
                             </ion-grid>
 
                             <ion-button
-                              expand="block"
-                              fill="outline"
-                              size="small"
-                              color="trasteel"
+                              expand='block'
+                              fill='outline'
+                              size='small'
+                              color='trasteel'
                               disabled={this.disableAddCourses(area)}
                               onClick={() => this.addAreaCourses(index)}
                             >
@@ -2199,18 +2224,18 @@ export class ModalProjectUpdate {
                 </div>
               </swiper-slide>
               {/** UNSHAPED */}
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <div>
                   <ion-grid>
                     {this.project.projectMass.map((mass, index) => [
                       <ion-row>
                         <ion-col>
                           <app-form-item
-                            label-tag="position"
-                            label-text="Position"
+                            label-tag='position'
+                            label-text='Position'
                             value={mass.position}
-                            name="position"
-                            input-type="number"
+                            name='position'
+                            input-type='number'
                             onFormItemBlur={(ev) =>
                               this.handleMassPositionBlur(index, ev)
                             }
@@ -2222,14 +2247,14 @@ export class ModalProjectUpdate {
                               tag: "application-area",
                               text: "Application Area",
                             }}
-                            labelAddText="*"
+                            labelAddText='*'
                             value={mass.bricksAllocationAreaId}
-                            lines="inset"
+                            lines='inset'
                             selectFn={(ev) =>
                               this.selectMassApplicationArea(index, ev)
                             }
                             selectOptions={ProjectsService.getBricksAllocationAreas()}
-                            selectValueId="bricksAllocationAreaId"
+                            selectValueId='bricksAllocationAreaId'
                             selectValueText={["bricksAllocationAreaName", "en"]}
                           ></app-select-search>
                         </ion-col>
@@ -2238,16 +2263,16 @@ export class ModalProjectUpdate {
                         <ion-col>
                           <ion-item
                             button
-                            lines="inset"
+                            lines='inset'
                             onClick={() =>
                               this.openSelectDataSheet(mass, index, true)
                             }
                           >
                             <ion-label>
-                              <p class="small">
+                              <p class='small'>
                                 <my-transl
-                                  tag="datasheet"
-                                  text="Datasheet"
+                                  tag='datasheet'
+                                  text='Datasheet'
                                 ></my-transl>
                               </p>
                               <h2>
@@ -2262,12 +2287,12 @@ export class ModalProjectUpdate {
                         </ion-col>
                         <ion-col>
                           <app-form-item
-                            label-tag="density"
-                            label-text="Density"
-                            appendText=" (g/cm3)"
+                            label-tag='density'
+                            label-text='Density'
+                            appendText=' (g/cm3)'
                             value={mass.density}
-                            name="density"
-                            input-type="number"
+                            name='density'
+                            input-type='number'
                             onFormItemChanged={(ev) =>
                               this.handleMassChange(index, ev)
                             }
@@ -2277,7 +2302,7 @@ export class ModalProjectUpdate {
                       <ion-row>
                         <ion-col>
                           <ion-label>
-                            <ion-item lines="none">
+                            <ion-item lines='none'>
                               <ion-label>
                                 <p
                                   style={{
@@ -2287,8 +2312,8 @@ export class ModalProjectUpdate {
                                   }}
                                 >
                                   <my-transl
-                                    tag="quantity"
-                                    text="Quantity"
+                                    tag='quantity'
+                                    text='Quantity'
                                   ></my-transl>
                                 </p>
                                 <h2
@@ -2304,11 +2329,11 @@ export class ModalProjectUpdate {
                         </ion-col>
                         <ion-col>
                           <ion-select
-                            color="trasteel"
-                            id="selectMassQtyUnit"
-                            interface="action-sheet"
+                            color='trasteel'
+                            id='selectMassQtyUnit'
+                            interface='action-sheet'
                             label={TranslationService.getTransl("unit", "Unit")}
-                            label-placement="floating"
+                            label-placement='floating'
                             onIonChange={(ev) =>
                               this.selectMassQtyUnit(index, ev)
                             }
@@ -2321,7 +2346,7 @@ export class ModalProjectUpdate {
                             ))}
                           </ion-select>
                         </ion-col>
-                        <ion-col size="1">
+                        <ion-col size='1'>
                           <p
                             style={{
                               "text-align": "center",
@@ -2333,18 +2358,18 @@ export class ModalProjectUpdate {
                         </ion-col>
                         <ion-col>
                           <app-form-item
-                            label-tag="weight-per-unit"
-                            label-text="Weight per Unit"
-                            appendText=" (Kg)"
+                            label-tag='weight-per-unit'
+                            label-text='Weight per Unit'
+                            appendText=' (Kg)'
                             value={mass.weightPerUnitKg}
-                            name="weightPerUnitKg"
-                            input-type="number"
+                            name='weightPerUnitKg'
+                            input-type='number'
                             onFormItemChanged={(ev) =>
                               this.handleMassChange(index, ev)
                             }
                           ></app-form-item>
                         </ion-col>
-                        <ion-col size="1">
+                        <ion-col size='1'>
                           <p
                             style={{
                               "text-align": "center",
@@ -2356,19 +2381,19 @@ export class ModalProjectUpdate {
                         </ion-col>
                         <ion-col>
                           <app-form-item
-                            label-tag="total-weight"
-                            label-text="Total Weight"
-                            appendText=" (MT)"
+                            label-tag='total-weight'
+                            label-text='Total Weight'
+                            appendText=' (MT)'
                             value={mass.totalWeightMT}
-                            name="totalWeightMT"
-                            input-type="number"
+                            name='totalWeightMT'
+                            input-type='number'
                             onFormItemChanged={(ev) =>
                               this.handleMassChange(index, ev)
                             }
                           ></app-form-item>
                         </ion-col>
                         <ion-col
-                          size="1"
+                          size='1'
                           style={{
                             "text-align": "center",
                           }}
@@ -2377,26 +2402,26 @@ export class ModalProjectUpdate {
                             style={{
                               "padding-top": "12px",
                             }}
-                            fill="clear"
-                            color="danger"
+                            fill='clear'
+                            color='danger'
                             icon-only
                             onClick={() => this.deleteProjectMass(index)}
                           >
-                            <ion-icon name="trash"></ion-icon>
+                            <ion-icon name='trash'></ion-icon>
                           </ion-button>
                         </ion-col>
                       </ion-row>,
-                      <ion-row class="separator">
+                      <ion-row class='separator'>
                         <ion-col></ion-col>
                       </ion-row>,
                     ])}
                     <ion-row>
                       <ion-col>
                         <ion-button
-                          expand="block"
-                          fill="outline"
-                          size="small"
-                          color="trasteel"
+                          expand='block'
+                          fill='outline'
+                          size='small'
+                          color='trasteel'
                           onClick={() => this.addProjectMasses()}
                         >
                           {"+ " +
@@ -2411,7 +2436,7 @@ export class ModalProjectUpdate {
                 </div>
               </swiper-slide>
               {/** FILES */}
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 FILES - TO BE DONE
               </swiper-slide>
             </swiper-wrapper>

@@ -1,15 +1,15 @@
-import {Component, Prop, State, h} from "@stencil/core";
+import { Component, Prop, State, h } from "@stencil/core";
 import {
   Shape,
   ShapeType,
 } from "../../../../../interfaces/trasteel/refractories/shapes";
-import {ShapesService} from "../../../../../services/trasteel/refractories/shapes";
-import {SystemService} from "../../../../../services/common/system";
-import {TrasteelService} from "../../../../../services/trasteel/common/services";
+import { ShapesService } from "../../../../../services/trasteel/refractories/shapes";
+import { SystemService } from "../../../../../services/common/system";
+import { TrasteelService } from "../../../../../services/trasteel/common/services";
 import Swiper from "swiper";
-import {Environment} from "../../../../../global/env";
-import {TranslationService} from "../../../../../services/common/translations";
-import {RouterService} from "../../../../../services/common/router";
+import { Environment } from "../../../../../global/env";
+import { TranslationService } from "../../../../../services/common/translations";
+import { RouterService } from "../../../../../services/common/router";
 
 @Component({
   tag: "page-shape-details",
@@ -22,8 +22,8 @@ export class PageShapeDetails {
   @State() updateView = true;
 
   titles = [
-    {tag: "information", text: "Information"},
-    {tag: "drawing", text: "Drawing", disabled: false},
+    { tag: "information", text: "Information" },
+    { tag: "drawing", text: "Drawing", disabled: false },
   ];
   @State() slider: Swiper;
 
@@ -115,7 +115,7 @@ export class PageShapeDetails {
       <ion-header>
         <app-navbar
           text={this.shape.shapeName}
-          color="trasteel"
+          color='trasteel'
           backButton={true}
           rightButtonText={
             TrasteelService.isRefraDBAdmin()
@@ -134,153 +134,152 @@ export class PageShapeDetails {
         color={Environment.getAppColor()}
         swiper={this.slider}
         titles={this.titles}
-        noToolbar
       ></app-header-segment-toolbar>,
-      <ion-content class="slides">
-        <swiper-container class="slider-detail-shapes swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
-              <ion-list class="ion-no-padding">
+      <ion-content class='slides'>
+        <swiper-container class='slider-detail-shapes swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
+              <ion-list class='ion-no-padding'>
                 <app-item-detail
-                  lines="none"
-                  labelTag="shape_type"
-                  labelText="Shape Type"
+                  lines='none'
+                  labelTag='shape_type'
+                  labelText='Shape Type'
                   detailText={
                     ShapesService.getShapeTypeName(this.shape.shapeTypeId)["en"]
                   }
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelTag="name"
-                  labelText="Name"
+                  lines='none'
+                  labelTag='name'
+                  labelText='Name'
                   detailText={this.shape.shapeName}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelTag="shortName"
-                  labelText="Short Name"
+                  lines='none'
+                  labelTag='shortName'
+                  labelText='Short Name'
                   detailText={this.shape.shapeShortName}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="H"
+                  lines='none'
+                  labelText='H'
                   detailText={this.shape.H}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="H1"
+                  lines='none'
+                  labelText='H1'
                   detailText={this.shape.H1}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="H2"
+                  lines='none'
+                  labelText='H2'
                   detailText={this.shape.H2}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="L"
+                  lines='none'
+                  labelText='L'
                   detailText={this.shape.L}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="L1"
+                  lines='none'
+                  labelText='L1'
                   detailText={this.shape.L1}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="La"
+                  lines='none'
+                  labelText='La'
                   detailText={this.shape.La}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="Lb"
+                  lines='none'
+                  labelText='Lb'
                   detailText={this.shape.Lb}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="A"
+                  lines='none'
+                  labelText='A'
                   detailText={this.shape.A}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="A1"
+                  lines='none'
+                  labelText='A1'
                   detailText={this.shape.A1}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="B"
+                  lines='none'
+                  labelText='B'
                   detailText={this.shape.B}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="B1"
+                  lines='none'
+                  labelText='B1'
                   detailText={this.shape.B1}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="ANG"
+                  lines='none'
+                  labelText='ANG'
                   detailText={this.shape.ANG}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="ANG1"
+                  lines='none'
+                  labelText='ANG1'
                   detailText={this.shape.ANG1}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="D"
+                  lines='none'
+                  labelText='D'
                   detailText={this.shape.D}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="D1"
+                  lines='none'
+                  labelText='D1'
                   detailText={this.shape.D1}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="D2"
+                  lines='none'
+                  labelText='D2'
                   detailText={this.shape.D2}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="D3"
+                  lines='none'
+                  labelText='D3'
                   detailText={this.shape.D3}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="D4"
+                  lines='none'
+                  labelText='D4'
                   detailText={this.shape.D4}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="De"
+                  lines='none'
+                  labelText='De'
                   detailText={this.shape.De}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="Di"
+                  lines='none'
+                  labelText='Di'
                   detailText={this.shape.Di}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="N"
+                  lines='none'
+                  labelText='N'
                   detailText={this.shape.N}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="Radius"
+                  lines='none'
+                  labelText='Radius'
                   appendText={this.shape.radius_max > 0 ? " MIN" : null}
                   detailText={this.shape.radius}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="Radius"
-                  appendText=" MAX"
+                  lines='none'
+                  labelText='Radius'
+                  appendText=' MAX'
                   detailText={this.shape.radius_max}
                 ></app-item-detail>
                 <app-item-detail
-                  lines="none"
-                  labelText="Volume"
+                  lines='none'
+                  labelText='Volume'
                   detailText={this.shape.volume}
                 ></app-item-detail>
               </ion-list>
@@ -289,12 +288,12 @@ export class PageShapeDetails {
                   <ion-row>
                     <ion-col>
                       <ion-button
-                        color="danger"
-                        fill="outline"
-                        expand="block"
+                        color='danger'
+                        fill='outline'
+                        expand='block'
                         onClick={() => this.deleteShape()}
                       >
-                        <ion-icon name="trash" slot="start"></ion-icon>
+                        <ion-icon name='trash' slot='start'></ion-icon>
                         <ion-label>
                           {TranslationService.getTransl("delete", "Delete")}
                         </ion-label>
@@ -302,12 +301,12 @@ export class PageShapeDetails {
                     </ion-col>
                     <ion-col>
                       <ion-button
-                        color="tertiary"
-                        fill="outline"
-                        expand="block"
+                        color='tertiary'
+                        fill='outline'
+                        expand='block'
                         onClick={() => this.duplicateShape()}
                       >
-                        <ion-icon name="duplicate" slot="start"></ion-icon>
+                        <ion-icon name='duplicate' slot='start'></ion-icon>
                         <ion-label>
                           {TranslationService.getTransl("copy", "Copy")}
                         </ion-label>
@@ -318,7 +317,7 @@ export class PageShapeDetails {
               ) : undefined}
             </swiper-slide>
             {this.shape.dwg ? (
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-banner
                   heightPx={500}
                   backgroundCoverFill={false}
