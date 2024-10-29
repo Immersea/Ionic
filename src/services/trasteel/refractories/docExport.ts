@@ -19,7 +19,7 @@ export class DOCExportController {
   async generateDocument(project: Project, lang = "en") {
     try {
       const arrayBuffer = await this.loadTemplate(
-        "assets/trasteel/template.docx"
+        `${window.location.origin}/assets/trasteel/template.docx`
       );
       const zip = new PizZip(arrayBuffer);
       const doc = new Docxtemplater(zip, {

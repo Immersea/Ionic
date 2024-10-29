@@ -5,12 +5,12 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "assets/icon/icon192_decoplanner.png",
+      "src": "./assets/icon/icon192_decoplanner.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "assets/icon/icon512_decoplanner.png",
+      "src": "./assets/icon/icon512_decoplanner.png",
       "sizes": "512x512",
       "type": "image/png"
     }

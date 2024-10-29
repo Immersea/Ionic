@@ -11,7 +11,7 @@ export class Page404 {
     return [
       <app-navbar color={Environment.getAppColor()} tag='404' text='404' />,
       <ion-content>
-        <img class='logo' src={"assets/images/" + Environment.getAppLogo()} />
+        <img class='logo' src={"/assets/images/" + Environment.getAppLogo()} />
         <ion-item lines='none'>
           <ion-label>
             <h1>Page Not Found</h1>

@@ -37,7 +37,7 @@ enum AppSubTitles {
 export enum AppVersions {
   udive = "beta 1.1.1",
   decoplanner = "1.4.2",
-  trasteel = "1.4.3",
+  trasteel = "1.4.8",
 }
 
 const firebase_settings = {
@@ -205,14 +205,14 @@ class EnvController {
     let favicon = null;
     let touchicon = null;
     if (this.isUdive()) {
-      favicon = "assets/icon/favicon_udive.ico";
-      touchicon = "assets/icon/apple-touch-icon-udive.ico";
+      favicon = "./assets/icon/favicon_udive.ico";
+      touchicon = "./assets/icon/apple-touch-icon-udive.ico";
     } else if (this.isDecoplanner()) {
-      favicon = "assets/icon/favicon_decoplanner.ico";
-      touchicon = "assets/icon/apple-touch-icon-decoplanner.ico";
+      favicon = "./assets/icon/favicon_decoplanner.ico";
+      touchicon = "./assets/icon/apple-touch-icon-decoplanner.ico";
     } else if (this.isTrasteel()) {
-      favicon = "assets/icon/favicon_trasteel.ico";
-      touchicon = "assets/icon/apple-touch-icon-trasteel.ico";
+      favicon = "./assets/icon/favicon_trasteel.ico";
+      touchicon = "./assets/icon/apple-touch-icon-trasteel.ico";
     }
     let $favicon = document.querySelector(
       'link[rel="icon"]'

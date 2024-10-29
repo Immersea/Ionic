@@ -95,7 +95,7 @@ export class PageSupport {
         <app-banner
           scrollTopValue={this.scrollTop}
           heightPx={250}
-          link='assets/images/Jarrod-Stargate.jpg'
+          link='/assets/images/Jarrod-Stargate.jpg'
         ></app-banner>
         <app-form-item
           label-tag='email'

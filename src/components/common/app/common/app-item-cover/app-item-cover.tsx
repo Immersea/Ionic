@@ -34,7 +34,7 @@ export class AppItemCover {
                     src={
                       this.item.photoURL
                         ? this.item.photoURL
-                        : "assets/images/avatar.png"
+                        : "/assets/images/avatar.png"
                     }
                     alt={this.item.displayName}
                   />

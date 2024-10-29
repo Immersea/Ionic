@@ -97,7 +97,7 @@ export class AppMenu {
               <img
                 slot='start'
                 class='logo'
-                src={"assets/images/" + Environment.getAppLogo()}
+                src={"/assets/images/" + Environment.getAppLogo()}
               />
               <ion-title>{Environment.getAppTitle()}</ion-title>
               {Environment.getAppSubTitle() && !isPlatform("ios") ? (

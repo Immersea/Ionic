@@ -132,30 +132,18 @@ export class ModalProjectUpdate {
 
   async loadProject() {
     await ProjectsService.downloadProjectSettings();
+
     if (this.projectId) {
       try {
+        SystemService.replaceLoadingMessage("Loading project...");
         const res = await ProjectsService.getProject(this.projectId);
         this.project = res;
-        if (this.project.projectAreaQuality.length > 0) {
-          this.allocationAreaSegment = 0;
-        }
-        this.areaShapes = await ProjectsService.loadShapesForApplication(
-          this.project
-        );
-        this.resetPositions();
-        //select customer
-        this.selectedCustomer = CustomersService.getCustomersDetails(
-          this.project.customerId
-        );
-        //check allocation areas
-        await ProjectsService.checkBricksAllocationAreasForProject(
-          this.project
-        );
       } catch (error) {
         SystemService.dismissLoading();
         RouterService.goBack();
       }
     } else {
+      //duplicate project
       this.project = new Project(this.duplicateProject);
       if (this.duplicateProject)
         this.project.projectLocalId = "NEW-" + this.project.projectLocalId;
@@ -164,6 +152,21 @@ export class ModalProjectUpdate {
         [UserService.userRoles.uid]: ["owner"],
       };
     }
+    if (this.project.projectAreaQuality.length > 0) {
+      this.allocationAreaSegment = 0;
+    }
+    SystemService.replaceLoadingMessage("Loading Shapes...");
+    this.areaShapes = await ProjectsService.loadShapesForApplication(
+      this.project,
+      true
+    );
+    this.resetPositions();
+    //select customer
+    this.selectedCustomer = CustomersService.getCustomersDetails(
+      this.project.customerId
+    );
+    //check allocation areas
+    await ProjectsService.checkBricksAllocationAreasForProject(this.project);
     this.updateUndoHistory();
   }
 

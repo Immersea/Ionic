@@ -182,8 +182,10 @@ class SystemController {
       | "deleting"
       | "deleted"
       | "error"
-      | "saved",
-    showBackdrop = true
+      | "saved"
+      | "custom",
+    showBackdrop = true,
+    customMessage = null
   ) {
     let showMessage = "";
     switch (message) {
@@ -220,6 +222,9 @@ class SystemController {
       case "error":
         showMessage = TranslationService.getTransl("error", "Error");
         break;
+      case "custom":
+        showMessage = customMessage;
+        break;
     }
     this.loading = await loadingController.create({
       mode: "ios",
@@ -232,12 +237,21 @@ class SystemController {
     await this.loading.present();
   }
 
+  async replaceLoadingMessage(message: string) {
+    if (!this.loading) {
+      await this.presentLoading("custom", true, message);
+    } else {
+      this.loading.message = message;
+    }
+  }
+
   async dismissLoading() {
     //dismiss all active loading controllers
     let openLoading = await loadingController.getTop();
     if (openLoading) {
       await loadingController.dismiss();
       //loop to search other loadings
+      this.loading = null;
       setTimeout(() => this.dismissLoading(), 100);
     }
   }

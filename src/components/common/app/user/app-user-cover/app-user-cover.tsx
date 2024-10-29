@@ -57,7 +57,7 @@ export class AppUserCover {
               style={{
                 backgroundImage: this.userProfile.coverURL
                   ? "url(" + this.userProfile.coverURL + ")"
-                  : "url('./assets/images/friendship2SM.jpg')",
+                  : "url('/assets/images/friendship2SM.jpg')",
               }}
             >
               <slot />
@@ -72,7 +72,7 @@ export class AppUserCover {
                 src={
                   this.userProfile.photoURL
                     ? this.userProfile.photoURL
-                    : "assets/images/avatar.png"
+                    : "/assets/images/avatar.png"
                 }
                 alt={this.userProfile.displayName}
               />
@@ -82,7 +82,7 @@ export class AppUserCover {
           <div
             class='cover-main'
             style={{
-              backgroundImage: "url('./assets/images/friendship2SM.jpg')",
+              backgroundImage: "url('/assets/images/friendship2SM.jpg')",
             }}
           >
             <slot />

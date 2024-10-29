@@ -1,7 +1,10 @@
-import {Media} from "../../../interfaces/common/media/media";
-import {convertTextMultiLanguage, roundDecimals} from "../../../helpers/utils";
-import {TextMultilanguage} from "../../interfaces";
-import {toNumber} from "lodash";
+import { Media } from "../../../interfaces/common/media/media";
+import {
+  convertTextMultiLanguage,
+  roundDecimals,
+} from "../../../helpers/utils";
+import { TextMultilanguage } from "../../interfaces";
+import { toNumber } from "lodash";
 
 export class ShapeFilter {
   shapeTypeId: string;
@@ -117,7 +120,7 @@ export class Shape {
 
   getWeight(density): number {
     return density > 0
-      ? roundDecimals(this.getVolume() * parseFloat(density), this.decimals)
+      ? roundDecimals(this.volume * parseFloat(density), this.decimals)
       : 0;
   }
 
@@ -174,7 +177,7 @@ export class ShapeType {
     this.typeName =
       data && data.typeName
         ? convertTextMultiLanguage(data.typeName)
-        : {en: null};
+        : { en: null };
     this.decimals = data && data.decimals ? data.decimals : 2;
     this.dwg = data && data.dwg ? new Media(data.dwg) : new Media();
   }

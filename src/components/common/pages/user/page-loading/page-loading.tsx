@@ -53,7 +53,7 @@ export class PageLoading {
           {Environment.getAppSubTitle()}
         </ion-title>
         <img
-          src={"assets/images/" + Environment.getAppLogo()}
+          src={"/assets/images/" + Environment.getAppLogo()}
           class='loading-svg'
           alt='Loading...'
           style={{ visibility: "visible" }}

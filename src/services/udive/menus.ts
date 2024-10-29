@@ -124,7 +124,7 @@ export class MenuController {
               text: "Deco Planner",
               url: "/deco-planner",
               iconType: "custom",
-              icon: "assets/images/dp4.svg",
+              icon: "/assets/images/dp4.svg",
             },
             {
               tag: "gas-blender",
@@ -155,7 +155,7 @@ export class MenuController {
               text: "Deco Planner",
               url: "/deco-planner",
               iconType: "custom",
-              icon: "assets/images/dp4.svg",
+              icon: "/assets/images/dp4.svg",
             },
             {
               tag: "logbook",
@@ -267,7 +267,7 @@ export class MenuController {
             text: "Deco Planner",
             url: "/deco-planner",
             iconType: "custom",
-            icon: "assets/images/dp4.svg",
+            icon: "/assets/images/dp4.svg",
           },
           {
             tag: "gas-blender",

@@ -23,6 +23,7 @@ import {
 import { DatasheetsService } from "./datasheets";
 import { formatNumber, roundDecimals } from "../../../helpers/utils";
 import { UserService } from "../../common/user";
+import { SystemService } from "../../common/system";
 
 export const PROJECTSCOLLECTION = "projects";
 
@@ -141,7 +142,10 @@ export class ProjectsController {
     });
   }
 
-  async loadShapesForApplication(project): Promise<AreaShape[]> {
+  async loadShapesForApplication(
+    project,
+    showLoading = false
+  ): Promise<AreaShape[]> {
     return new Promise(async (resolve) => {
       const areaShapes = [];
       for (let index = 0; index < project.projectAreaQuality.length; index++) {
@@ -158,6 +162,11 @@ export class ProjectsController {
           positionIndex++
         ) {
           const shape = areaQuality.shapes[positionIndex];
+          if (showLoading) {
+            SystemService.replaceLoadingMessage(
+              "Loading " + shape.shapeId + "..."
+            );
+          }
           const shapeValue = await ShapesService.getShape(shape.shapeId);
           shapeValue["shapeId"] = shape.shapeId;
           areaShapes[index].shapes.push(shapeValue);

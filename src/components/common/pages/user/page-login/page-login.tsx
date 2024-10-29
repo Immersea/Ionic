@@ -368,7 +368,7 @@ export class PageLogin {
           <app-banner
             scrollTopValue={this.scrollTop}
             heightPx={250}
-            link='./assets/images/friendship2SM.jpg'
+            link='/assets/images/friendship2SM.jpg'
           ></app-banner>
         ) : undefined}
         <ion-grid>

@@ -155,7 +155,7 @@ export class XLSXExportController {
       repairSet,
       masses
     ).projectSummary;
-    await SystemService.presentLoading("please-wait", true);
+    await SystemService.replaceLoadingMessage("Calculating quantity table...");
     const template = await this.importTemplate();
     //get  worksheet
     const qtyWorksheet = template.getWorksheet("quantity");
@@ -405,6 +405,7 @@ export class XLSXExportController {
     //masses
     //group by area
     if (masses) {
+      SystemService.replaceLoadingMessage("Calculating masses table...");
       let massGrouped = {};
       for (
         let massIndex = 0;
@@ -601,6 +602,7 @@ export class XLSXExportController {
     }
 
     //add totals
+    SystemService.replaceLoadingMessage("Calculating totals...");
     let totRow = (totalMasses > totalBricks ? totalMasses : totalBricks) + 3;
     if (
       project.projectAreaQuality.length > 0 &&
@@ -712,7 +714,7 @@ export class XLSXExportController {
     if (!lang) {
       lang = await this.selectLanguage();
     }
-    await SystemService.presentLoading("please-wait", true);
+    await SystemService.replaceLoadingMessage("Calculating Assembly table...");
     const template = await this.importTemplate();
     const rep = "_*repair*_";
     //get  worksheet
@@ -1281,7 +1283,7 @@ export class XLSXExportController {
   }
 
   async exportShapes(project: Project, shapeAreas: AreaShape[], lang) {
-    await SystemService.presentLoading("please-wait", true);
+    await SystemService.replaceLoadingMessage("Exporting shapes...");
     const tabColor = "FF99CC";
     const workbook = new Workbook();
     const template = await this.importTemplate();
@@ -1441,6 +1443,9 @@ export class XLSXExportController {
           }
           const shapeGroup = shapes[shapeIndex];
           const shape = shapeGroup.shape as Shape;
+          SystemService.replaceLoadingMessage(
+            "Exporting shape " + shape.shapeName + "..."
+          );
           const row = worksheet.getRow(startRowNumber);
           const density = shapeGroup.density;
           const position = shapeGroup.position;
@@ -1949,9 +1954,9 @@ export class XLSXExportController {
     if (!lang) {
       lang = await this.selectLanguage();
     }
-    await SystemService.presentLoading("please-wait", true);
     const tabColor = "993300";
-    await DatasheetsService.downloadDatasheetSettings();
+    await DatasheetsService.downloadDatasheetSettings(true);
+    await SystemService.replaceLoadingMessage("Exporting Datasheets...");
     const workbook = new Workbook();
     const template = await this.importTemplate();
     //get shapes worksheet
@@ -1974,6 +1979,9 @@ export class XLSXExportController {
       let analysisRowNumber = 16;
       let startRowNumber = 19;
       const datasheetId = Object.keys(datasheetIDs)[datasheetIndex];
+      SystemService.replaceLoadingMessage(
+        "Exporting datasheet " + datasheetId + "..."
+      );
       const datasheet = await DatasheetsService.getDatasheet(datasheetId);
       const worksheet = cloneDeep(datasheetsWorksheet);
       //fill translated values
@@ -3121,7 +3129,7 @@ export class XLSXExportController {
   async importTemplate(): Promise<Workbook> {
     const template = new Workbook();
     const file = await (
-      await fetch("assets/trasteel/template.xlsx")
+      await fetch(`${window.location.origin}/assets/trasteel/template.xlsx`)
     ).arrayBuffer();
     await template.xlsx.load(file);
     return template;

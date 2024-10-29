@@ -37,6 +37,7 @@ export class PageProjectDetails {
 
   async componentWillLoad() {
     if (this.itemId) {
+      SystemService.replaceLoadingMessage("Loading project...");
       await this.loadProject();
     } else {
       SystemService.dismissLoading();
@@ -50,10 +51,13 @@ export class PageProjectDetails {
       project
         ? (this.project = project)
         : (this.project = await ProjectsService.getProject(this.itemId));
+      SystemService.replaceLoadingMessage("Loading Shapes...");
       this.areaShapes = await ProjectsService.loadShapesForApplication(
-        this.project
+        this.project,
+        true
       );
       //check allocation areas
+      SystemService.replaceLoadingMessage("Checking Project...");
       await ProjectsService.checkBricksAllocationAreasForProject(this.project);
       this.updateSummary = !this.updateSummary;
       this.titles[2].disabled = this.project.projectAreaQuality.length == 0;

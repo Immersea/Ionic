@@ -217,7 +217,7 @@ export class AppMapPopup {
               src={
                 this.propObject.item.photoURL
                   ? this.propObject.item.photoURL
-                  : "assets/images/avatar.png"
+                  : "/assets/images/avatar.png"
               }
             />
           </ion-thumbnail>

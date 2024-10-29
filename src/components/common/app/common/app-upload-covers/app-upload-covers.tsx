@@ -181,7 +181,7 @@ export class AppUploadCovers {
                   src={
                     this.item.photoURL
                       ? this.item.photoURL
-                      : "assets/images/avatar.png"
+                      : "/assets/images/avatar.png"
                   }
                 />
                 <ion-button

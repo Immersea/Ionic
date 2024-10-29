@@ -1,10 +1,10 @@
-import {alertController, popoverController} from "@ionic/core";
-import {DatabaseService, SETTINGSCOLLECTIONNAME} from "../../common/database";
-import {TranslationService} from "../../common/translations";
-import {TrasteelFilterService} from "../common/trs-db-filter";
-import {cloneDeep, isNumber, max, orderBy, toNumber, toString} from "lodash";
-import {RouterService} from "../../common/router";
-import {BehaviorSubject} from "rxjs";
+import { alertController, popoverController } from "@ionic/core";
+import { DatabaseService, SETTINGSCOLLECTIONNAME } from "../../common/database";
+import { TranslationService } from "../../common/translations";
+import { TrasteelFilterService } from "../common/trs-db-filter";
+import { cloneDeep, isNumber, max, orderBy, toNumber, toString } from "lodash";
+import { RouterService } from "../../common/router";
+import { BehaviorSubject } from "rxjs";
 import {
   Datasheet,
   DatasheetCategory,
@@ -17,13 +17,14 @@ import {
   DatasheetSettings,
   MapDataDatasheet,
 } from "../../../interfaces/trasteel/refractories/datasheets";
-import {UserService} from "../../common/user";
+import { UserService } from "../../common/user";
 import {
   Project,
   ProjectAreaQuality,
 } from "../../../interfaces/trasteel/refractories/projects";
-import {XLSXExportService} from "./xlsExport";
-import {FirebaseFilterCondition} from "../../../interfaces/common/system/system";
+import { XLSXExportService } from "./xlsExport";
+import { FirebaseFilterCondition } from "../../../interfaces/common/system/system";
+import { SystemService } from "../../common/system";
 
 export const DATASHEETSCOLLECTION = "datasheets";
 
@@ -87,7 +88,7 @@ export class DatasheetsController {
   async duplicateDatasheet(id, revision) {
     const ds = await this.getDatasheet(id);
     return await RouterService.openModal("modal-datasheet-update", {
-      duplicateDatasheet: {id: id, datasheet: ds},
+      duplicateDatasheet: { id: id, datasheet: ds },
       revision: revision,
     });
   }
@@ -212,7 +213,7 @@ export class DatasheetsController {
     return new Promise(async (resolve) => {
       const modal = await RouterService.openModal("modal-search-list", {
         list: this.datasheetsList.filter((x) => x.oldProduct == false),
-        searchTitle: {tag: "datasheet", text: "Datasheet"},
+        searchTitle: { tag: "datasheet", text: "Datasheet" },
         item: selectedItem,
         showField: "productName",
         filterBy: ["productName", "familyId", "techNo", "majorFamilyId"],
@@ -247,7 +248,7 @@ export class DatasheetsController {
     return new Promise(async (resolve, reject) => {
       const popover = await popoverController.create({
         component: "popover-datasheets-filter",
-        componentProps: {filter},
+        componentProps: { filter },
         event: null,
         translucent: true,
       });
@@ -336,11 +337,17 @@ export class DatasheetsController {
   SUB-COLLECTIONS & SETTINGS
   */
 
-  async downloadDatasheetSettings(): Promise<DatasheetSettings> {
+  async downloadDatasheetSettings(
+    showLoading = false
+  ): Promise<DatasheetSettings> {
     let settings = new DatasheetSettings();
     if (UserService.isLoggedin()) {
       //download if user logged in
       try {
+        if (showLoading)
+          SystemService.replaceLoadingMessage(
+            "Downloading datasheet settings..."
+          );
         settings = await DatabaseService.getDocument(
           DATASHEETSCOLLECTION,
           SETTINGSCOLLECTIONNAME
