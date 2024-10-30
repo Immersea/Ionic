@@ -8,8 +8,8 @@
     "www/"
   ],
   "scripts": {
-    "start": "stencil build --dev --watch --serve",
-    "start-prod": "npm run switch-to-prod && stencil build --watch --serve && npm run switch-to-dev",
+    "start": "NODE_OPTIONS=--max-old-space-size=4096 stencil build --dev --watch --serve",
+    "start-prod": "npm run switch-to-prod && NODE_OPTIONS=--max-old-space-size=4096 stencil build --watch --serve && npm run switch-to-dev",
     "start-electron-dev": "npm start && npm run --prefix electron start",
     "start-electron-prod": "npm run start-prod && npm run --prefix electron build",
     "build-android-dev": "npm run switch-to-native && cp -r ./capacitor.config.android-dev.ts ./capacitor.config.ts && npx cap sync android && npx cap open android && npm start && npm run switch-to-pwa",
