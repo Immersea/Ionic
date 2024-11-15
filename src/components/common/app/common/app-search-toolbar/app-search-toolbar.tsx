@@ -10,7 +10,7 @@ import {
 } from "@stencil/core";
 import {Environment} from "../../../../../global/env";
 import {DatabaseService} from "../../../../../services/common/database";
-import {includes, orderBy, toLower, uniq} from "lodash";
+import {orderBy, uniq} from "lodash";
 
 const TITLE = "app-search-toolbar-";
 
@@ -69,15 +69,40 @@ export class AppSearchToolbar {
   filterList() {
     let filterList = [];
     if (this.searchString) {
-      const search = toLower(this.searchString);
+      const searchString = this.searchString.toLowerCase();
+      let regex;
+  
+      // Handle different wildcard search patterns
+      if (searchString.startsWith('*') && searchString.endsWith('*')) {
+        // Match anywhere in the text
+        const pattern = searchString.slice(1, -1);
+        regex = new RegExp(`${pattern}`, 'i');
+      } else if (searchString.startsWith('*')) {
+        // Match text ending with search term
+        const pattern = searchString.slice(1);
+        regex = new RegExp(`${pattern}$`, 'i');
+      } else if (searchString.endsWith('*')) {
+        // Match text starting with search term
+        const pattern = searchString.slice(0, -1);
+        regex = new RegExp(`^${pattern}`, 'i');
+      } else if (searchString.includes('*')) {
+        // Match text that starts and ends with specific terms, with anything in between
+        const [start, end] = searchString.split('*');
+        regex = new RegExp(`^${start}.*${end}$`, 'i');
+      } else {
+        // Exact match or match beginning
+        regex = new RegExp(`^${searchString}`, 'i');
+      }
+  
       let filters = [];
       this.filterBy.forEach((key) => {
         filters = [
           ...filters,
-          ...this.list.filter((x) => includes(toLower(x[key]), search)),
+          ...this.list.filter((x) => regex.test(x[key].toLowerCase())),
         ];
       });
-      //remove duplicates
+  
+      // Remove duplicates
       filterList = uniq(filters);
     } else {
       filterList = this.list;
