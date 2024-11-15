@@ -63,6 +63,7 @@ export class PageProjectDetails {
       this.titles[2].disabled = this.project.projectAreaQuality.length == 0;
       this.titles[3].disabled = this.project.projectMass.length == 0;
       this.updateSlider();
+      SystemService.dismissLoading();
     } catch (error) {
       SystemService.dismissLoading();
       RouterService.goBack();

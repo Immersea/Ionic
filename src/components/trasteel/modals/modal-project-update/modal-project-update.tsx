@@ -371,11 +371,12 @@ export class ModalProjectUpdate {
 
   addAllocationArea() {
     this.project.projectAreaQuality.push(new ProjectAreaQuality());
+    const index = this.project.projectAreaQuality.length - 1;
     this.areaShapes.push({
-      areaIndex: this.project.projectAreaQuality.length - 1,
+      areaIndex: index,
       shapes: [],
     });
-    this.allocationAreaSegment = this.project.projectAreaQuality.length - 1;
+    this.allocationAreaSegment = index;
     this.updateUndoHistory();
     this.updateSlider();
     this.reorderItems();
@@ -442,6 +443,13 @@ export class ModalProjectUpdate {
     this.resetPositions();
     this.updateUndoHistory();
     this.updateSlider();
+    const positionIndex =
+      this.project.projectAreaQuality[index].shapes.length - 1;
+    this.openSelectShape(
+      this.project.projectAreaQuality[index].shapes[positionIndex].shapeId,
+      index,
+      positionIndex
+    );
   }
 
   deleteAllocationAreaPosition(index, positionIndex) {
@@ -1333,6 +1341,7 @@ export class ModalProjectUpdate {
                             <ion-row>
                               <ion-col>
                                 <app-select-search
+                                  id={"bricks-allocation-area-search-" + index}
                                   class='reduce-padding'
                                   label={{
                                     tag: "bricks-allocation-area",
