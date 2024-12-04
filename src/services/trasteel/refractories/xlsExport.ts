@@ -62,6 +62,16 @@ export class XLSXExportController {
     });
   }
 
+  getColumnLetter(colNum: number): string {
+    let letter = "";
+    while (colNum > 0) {
+      const remainder = (colNum - 1) % 26;
+      letter = String.fromCharCode(65 + remainder) + letter;
+      colNum = Math.floor((colNum - 1) / 26);
+    }
+    return letter;
+  }
+
   async exportSummary(
     project: Project,
     areaShapes,
@@ -84,7 +94,7 @@ export class XLSXExportController {
       masses,
       lang
     );
-    this.cloneWorksheet(workbook, quantityWorksheet, "Summary", {
+    this.cloneWorksheet(workbook, quantityWorksheet.worksheet, "Summary", {
       properties: { tabColor: { argb: tabColor } },
     });
 
@@ -95,13 +105,14 @@ export class XLSXExportController {
   }
 
   async exportQuantityAssembly(project: Project, areaShapes, lang?) {
-    //check language
+    // Check language
     if (!lang) {
       lang = await this.selectLanguage();
     }
     const tabColor = "FFCC00";
     const workbook = new Workbook();
-    //create quantity
+
+    // Create quantity sheet (QT)
     const quantityWorksheet = await this.exportQuantity(
       project,
       areaShapes,
@@ -110,19 +121,31 @@ export class XLSXExportController {
       true,
       lang
     );
-    this.cloneWorksheet(workbook, quantityWorksheet, "QT", {
-      properties: { tabColor: { argb: tabColor } },
-    });
-    //create assembly
+
+    // Create assembly sheet (AT)
     const assemblyWorksheet = await this.exportAssembly(
       project,
       areaShapes,
       lang
     );
-    this.cloneWorksheet(workbook, assemblyWorksheet, "AT", {
+
+    this.cloneWorksheet(
+      workbook,
+      this.remapQuantityAssembly(
+        quantityWorksheet.worksheet,
+        quantityWorksheet.mapping,
+        assemblyWorksheet.mapping
+      ),
+      "QT",
+      {
+        properties: { tabColor: { argb: tabColor } },
+      }
+    );
+
+    this.cloneWorksheet(workbook, assemblyWorksheet.worksheet, "AT", {
       properties: { tabColor: { argb: tabColor } },
     });
-
+    // Save workbook
     this.saveWorkbook(
       workbook,
       "qty-assembly-" + slugify(project.projectLocalId) + ".xlsx"
@@ -136,7 +159,7 @@ export class XLSXExportController {
     repairSet = true,
     masses = true,
     lang?
-  ): Promise<Worksheet> {
+  ): Promise<{ worksheet: Worksheet; mapping: any }> {
     //check language
     if (!lang) {
       lang = await this.selectLanguage();
@@ -229,9 +252,13 @@ export class XLSXExportController {
       if (groupedByArea[key].length > 0)
         groupedByAreaArray.push(groupedByArea[key]);
     });
+
+    const mapping = {};
+
     groupedByAreaArray.map((groupArea, groupAreaIndex) => {
       let firstRow = bricksAreaRow + 1;
       let totalRow = bricksAreaRow + 3;
+      let mapArea = null;
       groupArea.map((area, areaIndex) => {
         //copy first header
         if (areaIndex == 0 && groupAreaIndex > 0) {
@@ -254,6 +281,7 @@ export class XLSXExportController {
           this.cloneRows(worksheet, 5, 17, bricksSampleArea, bricksAreaRow);
           //fill the first row title
           //remove _*repair*_
+          mapArea = area.areaId;
           const areaId = replace(area.areaId, "_*repair*_", "");
           worksheet.getCell(bricksAreaRow, 2).value =
             SystemService.getValueForLanguage(
@@ -285,6 +313,10 @@ export class XLSXExportController {
         row.getCell(16).value = {
           formula: "N" + (bricksAreaRow + 1) + "*L" + (bricksAreaRow + 1),
         };
+        //add map
+        mapping[mapArea + "-" + area.position + "-" + area.quality] =
+          row.number;
+
         if (areaIndex < groupArea.length - 1) {
           //add new row
           worksheet.insertRow(bricksAreaRow + 2, [], "i");
@@ -392,7 +424,6 @@ export class XLSXExportController {
         }
       });
     });
-
     //no Bricks
     if (project.projectAreaQuality.length == 0) {
       //delete area
@@ -702,14 +733,14 @@ export class XLSXExportController {
     row.getCell(6).numFmt = mtFmt;
 
     SystemService.dismissLoading();
-    return worksheet;
+    return { worksheet: worksheet, mapping: mapping };
   }
 
   async exportAssembly(
     project: Project,
     areaShapes,
     lang?
-  ): Promise<Worksheet> {
+  ): Promise<{ worksheet: Worksheet; mapping: any }> {
     //check language
     if (!lang) {
       lang = await this.selectLanguage();
@@ -747,6 +778,7 @@ export class XLSXExportController {
     let bricksAreaColumn = startBricksAreaColumn;
     //create course summary and group by similar area, quality and position
     const projectAreaQuality = {};
+    const mapping = {};
     project.projectAreaQuality.forEach((areaQuality, areaIndex) => {
       const positions = [];
       areaQuality.shapes.forEach((shape, shapeIndex) => {
@@ -855,6 +887,7 @@ export class XLSXExportController {
       area.shapes = orderBy(area.shapes, "position");
       const firstColumn = bricksAreaColumn;
       let lastColumn = bricksAreaColumn + 1;
+      let mapArea = null;
       for (let posIndex = 0; posIndex < area.shapes.length; posIndex++) {
         const shape = area.shapes[posIndex];
         mergeRows.forEach((row) => {
@@ -869,6 +902,7 @@ export class XLSXExportController {
           false,
           startBricksAreaColumn
         );
+        mapArea = area.bricksAllocationAreaId;
         worksheet.getCell(7, bricksAreaColumn).value =
           SystemService.getValueForLanguage(
             ProjectsService.getBricksAllocationAreas(
@@ -902,6 +936,8 @@ export class XLSXExportController {
         }
         worksheet.getCell(12, bricksAreaColumn).value = unitWeight;
         worksheet.getCell(13, bricksAreaColumn).value = "Pc";
+        mapping[mapArea + "-" + shape.position + "-" + area.quality] =
+          bricksAreaColumn;
         bricksAreaColumn = bricksAreaColumn + 2;
         lastColumn = lastColumn + 2;
       }
@@ -1109,6 +1145,7 @@ export class XLSXExportController {
           safetyCell.value = { formula: formulaSafety };
 
           //update formula for weight
+          mapping["weightRow"] = courseRow + 5;
           const weightRow = worksheet.getRow(courseRow + 5);
           const weightCell = weightRow.getCell(index);
           const refWeightCell = weightRow.getCell("E");
@@ -1273,13 +1310,30 @@ export class XLSXExportController {
         bricksAreaColumn = bricksAreaColumn + 2;
       }
     }
-
     //set formats
     worksheet.getRow(courseRow + 4).numFmt = mtFmt;
     worksheet.getRow(courseRow + 10).numFmt = pcsFmt;
     worksheet.getRow(courseRow + 11).numFmt = pcsFmt;
     SystemService.dismissLoading();
-    return worksheet;
+    return { worksheet, mapping };
+  }
+
+  remapQuantityAssembly(quantityWorksheet, qtMapping, atMapping): Worksheet {
+    const atMapWeightRow = atMapping["weightRow"];
+    Object.keys(qtMapping).map((areaKey) => {
+      const qtRow = qtMapping[areaKey];
+      //find same area in atMapping
+      const atColumn = atMapping[areaKey];
+      //write link to AT cell
+      const columnString = this.getColumnLetter(atColumn);
+      quantityWorksheet.getCell("H" + qtRow).value = {
+        formula: "=AT!" + columnString + (atMapWeightRow - 1).toString(),
+      };
+      quantityWorksheet.getCell("I" + qtRow).value = {
+        formula: "=AT!" + columnString + atMapWeightRow.toString(),
+      };
+    });
+    return quantityWorksheet;
   }
 
   async exportShapes(project: Project, shapeAreas: AreaShape[], lang) {
@@ -3029,6 +3083,66 @@ export class XLSXExportController {
       }
     }
   }
+
+  cloneWorksheet(
+    workbook: Workbook,
+    templateWorksheet: Worksheet,
+    name: string,
+    options
+  ): Worksheet {
+    // Create a new worksheet in the workbook
+    const worksheet = workbook.addWorksheet(name, options);
+
+    // Copy basic worksheet properties
+    const propertiesToClone = [
+      "views",
+      "pageSetup",
+      "headerFooter",
+      "rowBreaks",
+      "autoFilter",
+      "conditionalFormattings",
+      "dataValidations",
+      "sheetProtection",
+      "tables",
+    ];
+    propertiesToClone.forEach((property) => {
+      if (templateWorksheet[property]) {
+        worksheet[property] = cloneDeep(templateWorksheet[property]);
+      }
+    });
+
+    // Clone columns
+    templateWorksheet.columns.forEach((col, colIndex) => {
+      const targetCol = worksheet.getColumn(colIndex + 1);
+      Object.assign(targetCol, col);
+    });
+
+    // Clone rows and cells
+    templateWorksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
+      const targetRow = worksheet.getRow(rowNumber);
+      targetRow.height = row.height;
+      row.eachCell({ includeEmpty: true }, (cell, cellNumber) => {
+        const targetCell = targetRow.getCell(cellNumber);
+        targetCell.value = cloneDeep(cell.value); // Clone cell value
+        targetCell.style = cloneDeep(cell.style); // Clone cell styles
+        targetCell.border = cloneDeep(cell.border);
+        targetCell.fill = cloneDeep(cell.fill);
+        targetCell.font = cloneDeep(cell.font);
+        targetCell.alignment = cloneDeep(cell.alignment);
+      });
+      targetRow.commit();
+    });
+
+    // Clone merged cells using model.merges
+    const mergedCells = templateWorksheet.model.merges || [];
+    mergedCells.forEach((mergeRange) => {
+      worksheet.mergeCells(mergeRange);
+    });
+
+    return worksheet;
+  }
+  /*
+
   cloneWorksheet(
     workbook: Workbook,
     templateWorksheet: Worksheet,
@@ -3037,42 +3151,7 @@ export class XLSXExportController {
   ): Worksheet {
     // create a sheet with red tab colour and shapeType
     const worksheet = workbook.addWorksheet(name, options);
-    /*worksheet.views = templateWorksheet.views;
-    worksheet.model.merges = templateWorksheet.model.merges;
-    worksheet.model.pageSetup = templateWorksheet.model.pageSetup;
-    worksheet.model.properties = templateWorksheet.model.properties;
-    worksheet.model.rowBreaks = templateWorksheet.model.rowBreaks;
-    worksheet.model.headerFooter = templateWorksheet.model.headerFooter;
-    worksheet.model.views = templateWorksheet.model.views;
-    templateWorksheet.columns.forEach((col, colIndex) => {
-      var targetCol = worksheet.getColumn(colIndex + 1);
-      col.border ? (targetCol.border = col.border) : undefined;
-      col.defn ? (targetCol.defn = col.defn) : undefined;
-      col.fill ? (targetCol.fill = col.fill) : undefined;
-      col.numFmt ? (targetCol.numFmt = col.numFmt) : undefined;
-      col.header ? (targetCol.header = col.header) : undefined;
-      col.style ? (targetCol.style = col.style) : undefined;
-      col.hidden ? (targetCol.hidden = col.hidden) : undefined;
-      col.width ? (targetCol.width = col.width) : undefined;
-    });
-    templateWorksheet.eachRow({includeEmpty: true}, (row, rowNumber) => {
-      var targetRow = worksheet.getRow(rowNumber);
-      row.alignment ? (targetRow.alignment = row.alignment) : undefined;
-      row.hidden ? (targetRow.hidden = row.hidden) : undefined;
-      row.numFmt ? (targetRow.numFmt = row.numFmt) : undefined;
-      row.height ? (targetRow.height = row.height) : undefined;
-      row.eachCell({includeEmpty: true}, (cell, cellNumber) => {
-        const targetCell = targetRow.getCell(cellNumber);
-        targetCell.fill ? (targetCell.fill = cell.fill) : undefined;
-        targetCell.font ? (targetCell.font = cell.font) : undefined;
-        targetCell.name ? (targetCell.name = cell.name) : undefined;
-        targetCell.note ? (targetCell.note = cell.note) : undefined;
-        targetCell.border ? (targetCell.border = cell.border) : undefined;
-        targetCell.value ? (targetCell.value = cell.value) : undefined;
-        targetCell.model ? (targetCell.model = cell.model) : undefined;
-      });
-      row.commit();
-    });*/
+    
     const values = [
       "_columns",
       "_keys",
@@ -3094,7 +3173,7 @@ export class XLSXExportController {
     });
 
     return worksheet;
-  }
+  }*/
 
   async addRefraLogo(
     workbook: Workbook,

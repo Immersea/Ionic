@@ -37,7 +37,7 @@ enum AppSubTitles {
 export enum AppVersions {
   udive = "beta 1.1.1",
   decoplanner = "1.4.2",
-  trasteel = "1.4.8",
+  trasteel = "1.4.11",
 }
 
 const firebase_settings = {

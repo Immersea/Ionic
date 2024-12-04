@@ -629,7 +629,9 @@ export class ModalProjectUpdate {
       }
     });
     // Sort the array
-    this.positions = orderBy(this.positions, null, "asc");
+    if (this.positions.length > 0)
+      this.positions = orderBy(this.positions, null, "asc");
+
     //update last Position
 
     // Initialize variables to track the empty positions and maximum number
@@ -651,6 +653,9 @@ export class ModalProjectUpdate {
     this.lastPosition = firstEmptyPosition
       ? firstEmptyPosition
       : max(this.positions) + 1;
+
+    //for empty projects
+    if (isNaN(this.lastPosition)) this.lastPosition = 1;
   }
 
   addAreaCourses(areaIndex) {

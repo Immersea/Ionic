@@ -8,9 +8,9 @@ import {
   Host,
   Method,
 } from "@stencil/core";
-import {Environment} from "../../../../../global/env";
-import {DatabaseService} from "../../../../../services/common/database";
-import {orderBy, uniq} from "lodash";
+import { Environment } from "../../../../../global/env";
+import { DatabaseService } from "../../../../../services/common/database";
+import { orderBy, uniq } from "lodash";
 
 const TITLE = "app-search-toolbar-";
 
@@ -20,7 +20,7 @@ const TITLE = "app-search-toolbar-";
 })
 export class AppSearchToolbar {
   @Element() el: HTMLElement;
-  @Prop({mutable: true}) list: any[] = [];
+  @Prop({ mutable: true }) list: any[] = [];
   @Prop() searchTitle: string;
   @Prop() orderFields: string[] = [];
   @Prop() color: string = Environment.getAppColor();
@@ -71,37 +71,38 @@ export class AppSearchToolbar {
     if (this.searchString) {
       const searchString = this.searchString.toLowerCase();
       let regex;
-  
+
       // Handle different wildcard search patterns
-      if (searchString.startsWith('*') && searchString.endsWith('*')) {
+      if (searchString.startsWith("*") && searchString.endsWith("*")) {
         // Match anywhere in the text
         const pattern = searchString.slice(1, -1);
-        regex = new RegExp(`${pattern}`, 'i');
-      } else if (searchString.startsWith('*')) {
+        regex = new RegExp(`${pattern}`, "i");
+      } else if (searchString.startsWith("*")) {
         // Match text ending with search term
         const pattern = searchString.slice(1);
-        regex = new RegExp(`${pattern}$`, 'i');
-      } else if (searchString.endsWith('*')) {
+        regex = new RegExp(`${pattern}$`, "i");
+      } else if (searchString.endsWith("*")) {
         // Match text starting with search term
         const pattern = searchString.slice(0, -1);
-        regex = new RegExp(`^${pattern}`, 'i');
-      } else if (searchString.includes('*')) {
+        regex = new RegExp(`^${pattern}`, "i");
+      } else if (searchString.includes("*")) {
         // Match text that starts and ends with specific terms, with anything in between
-        const [start, end] = searchString.split('*');
-        regex = new RegExp(`^${start}.*${end}$`, 'i');
+        const [start, end] = searchString.split("*");
+        regex = new RegExp(`^${start}.*${end}$`, "i");
       } else {
         // Exact match or match beginning
-        regex = new RegExp(`^${searchString}`, 'i');
+        regex = new RegExp(`^${searchString}`, "i");
       }
-  
       let filters = [];
       this.filterBy.forEach((key) => {
         filters = [
           ...filters,
-          ...this.list.filter((x) => regex.test(x[key].toLowerCase())),
+          ...this.list.filter(
+            (x) => x[key] && regex.test(x[key].toLowerCase()) // Ensure x[key] exists before accessing
+          ),
         ];
       });
-  
+
       // Remove duplicates
       filterList = uniq(filters);
     } else {
@@ -131,7 +132,7 @@ export class AppSearchToolbar {
         <ion-toolbar color={this.color}>
           <ion-searchbar
             animated={true}
-            show-cancel-button="focus"
+            show-cancel-button='focus'
             debounce={250}
             value={this.searchString}
             placeholder={this.placeholder}
