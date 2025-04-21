@@ -1,10 +1,10 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {DiveTrip} from "../../../../../interfaces/udive/dive-trip/diveTrip";
-import {TranslationService} from "../../../../../services/common/translations";
-import {modalController} from "@ionic/core";
-import {isString, orderBy, toNumber} from "lodash";
-import {UserService} from "../../../../../services/common/user";
-import {DiveTripsService} from "../../../../../services/udive/diveTrips";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { DiveTrip } from "../../../../../interfaces/udive/dive-trip/diveTrip";
+import { TranslationService } from "../../../../../services/common/translations";
+import { modalController } from "@ionic/core";
+import { isString, orderBy, toNumber } from "lodash";
+import { UserService } from "../../../../../services/common/user";
+import { DiveTripsService } from "../../../../../services/udive/diveTrips";
 import Swiper from "swiper";
 
 @Component({
@@ -20,7 +20,7 @@ export class ModalDiveTripUpdate {
   @State() updateView = true;
   @State() validTrip = false;
   placeholder: string;
-  @State() titles = [{tag: "dives"}, {tag: "team"}, {tag: "bookings"}];
+  @State() titles = [{ tag: "dives" }, { tag: "team" }, { tag: "bookings" }];
   @State() slider: Swiper;
 
   async componentWillLoad() {
@@ -114,11 +114,11 @@ export class ModalDiveTripUpdate {
     return (
       <Host>
         <ion-header>
-          <ion-toolbar color="divetrip">
+          <ion-toolbar color='divetrip'>
             <ion-title>
               <ion-input
                 placeholder={this.placeholder + "..."}
-                inputmode="text"
+                inputmode='text'
                 onIonInput={(ev) => this.setTitle(ev)}
                 value={this.diveTrip.displayName}
               ></ion-input>
@@ -126,18 +126,18 @@ export class ModalDiveTripUpdate {
           </ion-toolbar>
         </ion-header>
         <app-header-segment-toolbar
-          color="divetrip"
+          color='divetrip'
           swiper={this.slider}
           titles={this.titles}
         ></app-header-segment-toolbar>
-        <ion-content class="slides">
-          <swiper-container class="slider-dive-trip swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
+        <ion-content class='slides'>
+          <swiper-container class='slider-dive-trip swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
                 <ion-grid>
-                  <ion-row class="ion-text-start">
+                  <ion-row class='ion-text-start'>
                     {this.diveTrip.tripDives.map((trip, i) => (
-                      <ion-col size-sm="12" size-md="6" size-lg="4">
+                      <ion-col size-sm='12' size-md='6' size-lg='4'>
                         <app-dive-trip-card
                           tripDive={trip}
                           editable={true}
@@ -153,12 +153,12 @@ export class ModalDiveTripUpdate {
                         />
                       </ion-col>
                     ))}
-                    <ion-col size-sm="12" size-md="6" size-lg="4">
+                    <ion-col size-sm='12' size-md='6' size-lg='4'>
                       <ion-card onClick={() => this.addDiveTrip()}>
-                        <ion-card-content class="ion-text-center">
+                        <ion-card-content class='ion-text-center'>
                           <ion-icon
-                            name="add-circle-outline"
-                            style={{fontSize: "130px"}}
+                            name='add-circle-outline'
+                            style={{ fontSize: "130px" }}
                           ></ion-icon>
                         </ion-card-content>
                       </ion-card>
@@ -166,7 +166,7 @@ export class ModalDiveTripUpdate {
                   </ion-row>
                 </ion-grid>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-users-list
                   item={this.diveTrip}
                   editable
@@ -174,11 +174,11 @@ export class ModalDiveTripUpdate {
                 />
               </swiper-slide>
 
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-grid>
                   <ion-row>
                     {Object.keys(this.diveTrip.tripDives).map((i) => (
-                      <ion-col size-sm="12" size-md="12" size-lg="12">
+                      <ion-col size-sm='12' size-md='12' size-lg='12'>
                         <app-dive-trip-bookings
                           diveTrip={this.diveTrip}
                           diveTripId={this.diveTripId}

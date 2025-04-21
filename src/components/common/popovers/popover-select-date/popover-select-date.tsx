@@ -1,9 +1,9 @@
-import {Component, h, Host, Element, Prop, State} from "@stencil/core";
-import {Environment} from "../../../../global/env";
-import {toZonedTime} from "date-fns-tz";
-import {format, formatISO, isValid, parse} from "date-fns";
-import {showDate} from "../../../../helpers/utils";
-import {Maskito} from "@maskito/core";
+import { Component, h, Host, Element, Prop, State } from "@stencil/core";
+import { Environment } from "../../../../global/env";
+import { toZonedTime } from "date-fns-tz";
+import { format, formatISO, isValid, parse } from "date-fns";
+import { showDate } from "../../../../helpers/utils";
+import { Maskito } from "@maskito/core";
 import {
   maskitoDateOptionsGenerator,
   maskitoDateTimeOptionsGenerator,
@@ -17,7 +17,7 @@ export class PopoverSelectDate {
   @Element() el: HTMLElement;
   @State() inputValue: string;
 
-  @Prop() value: string;
+  @Prop({ mutable: true }) value: string;
   @Prop() labelTag?: string;
   @Prop() labelText?: string;
   @Prop() labelReplace?: any;
@@ -127,7 +127,7 @@ export class PopoverSelectDate {
             value={formatISO(this.localTime)}
           >
             {this.showDateTitle ? (
-              <span slot="title">
+              <span slot='title'>
                 {this.labelTag ? (
                   <my-transl
                     tag={this.labelTag}
@@ -146,11 +146,11 @@ export class PopoverSelectDate {
           this.datePresentation == "date" ? (
             <ion-item>
               <ion-input
-                id="dateInput"
-                fill="outline"
-                type="text"
+                id='dateInput'
+                fill='outline'
+                type='text'
                 debounce={300}
-                inputmode="numeric"
+                inputmode='numeric'
                 value={this.inputValue}
                 onIonInput={(ev) => this.handleInputChange(ev)}
               ></ion-input>

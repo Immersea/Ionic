@@ -3,8 +3,8 @@
  * Models a single profile point of a dive
  *
  */
-import {round, toNumber} from "lodash";
-import {Gas} from "./gas";
+import { round, toNumber } from "lodash";
+import { Gas } from "./gas";
 //import { FormBuilder, Validators } from '@angular/forms';
 //import { CustomValidators } from '../../components/validators/form-validators'
 

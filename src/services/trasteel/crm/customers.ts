@@ -1,11 +1,11 @@
-import {StorageService} from "../../common/storage";
-import {alertController} from "@ionic/core";
-import {DatabaseService, SETTINGSCOLLECTIONNAME} from "../../common/database";
-import {TranslationService} from "../../common/translations";
-import {TrasteelFilterService} from "../common/trs-db-filter";
-import {orderBy} from "lodash";
-import {RouterService} from "../../common/router";
-import {BehaviorSubject} from "rxjs";
+import { StorageService } from "../../common/storage";
+import { alertController } from "@ionic/core";
+import { DatabaseService, SETTINGSCOLLECTIONNAME } from "../../common/database";
+import { TranslationService } from "../../common/translations";
+import { TrasteelFilterService } from "../common/trs-db-filter";
+import { orderBy } from "lodash";
+import { RouterService } from "../../common/router";
+import { BehaviorSubject } from "rxjs";
 import {
   Customer,
   CustomerGroup,
@@ -158,7 +158,7 @@ export class CustomersController {
     }
   }
 
-  getCustomerTypes(id?): {typeId: string; typeName: string}[] {
+  getCustomerTypes(id?): { typeId: string; typeName: string }[] {
     if (id) {
       return [this.customerTypes.find((x) => x.typeId == id)];
     } else {
@@ -181,7 +181,7 @@ export class CustomersController {
       const modal = await RouterService.openModal("modal-search-list", {
         list: this.customersList,
         item: selectedCustomer,
-        searchTitle: {tag: "customer", text: "Customer"},
+        searchTitle: { tag: "customer", text: "Customer" },
         showField: "fullName",
         filterBy: ["fullName"],
         orderBy: ["fullName"],

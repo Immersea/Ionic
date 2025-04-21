@@ -1,14 +1,14 @@
-import {Component, h, Prop, Element, State} from "@stencil/core";
-import {popoverController, isPlatform} from "@ionic/core";
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
-import {DiveConfiguration} from "../../../../../interfaces/udive/planner/dive-configuration";
-import {GasModel} from "../../../../../interfaces/udive/planner/gas-model";
-import {Tank} from "../../../../../interfaces/udive/planner/tank";
-import {cloneDeep, filter, indexOf, orderBy, toString} from "lodash";
-import {DiveStandardsService} from "../../../../../services/udive/planner/dive-standards";
-import {Environment} from "../../../../../global/env";
-import {DiveToolsService} from "../../../../../services/udive/planner/dive-tools";
-import {UserService} from "../../../../../services/common/user";
+import { Component, h, Prop, Element, State } from "@stencil/core";
+import { popoverController, isPlatform } from "@ionic/core";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
+import { DiveConfiguration } from "../../../../../interfaces/udive/planner/dive-configuration";
+import { GasModel } from "../../../../../interfaces/udive/planner/gas-model";
+import { Tank } from "../../../../../interfaces/udive/planner/tank";
+import { cloneDeep, filter, indexOf, orderBy, toString } from "lodash";
+import { DiveStandardsService } from "../../../../../services/udive/planner/dive-standards";
+import { Environment } from "../../../../../global/env";
+import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
+import { UserService } from "../../../../../services/common/user";
 //import { LicenceCheckProvider } from '../../../providers/licence-check';
 
 @Component({
@@ -52,13 +52,13 @@ export class ModalDiveConfiguration {
     let gases = DiveStandardsService.getStdGases();
     gases = orderBy(gases, "fromDepth", "asc");
 
-    this.bottomGases = filter(gases, {deco: false});
-    this.decoGases = filter(gases, {deco: true});
+    this.bottomGases = filter(gases, { deco: false });
+    this.decoGases = filter(gases, { deco: true });
 
     let tanks = UserService.userSettings.userTanks;
     tanks = orderBy(tanks, "volume");
-    const bottomTanks = filter(tanks, {forDeco: false});
-    const decoTanks = filter(tanks, {forDeco: true});
+    const bottomTanks = filter(tanks, { forDeco: false });
+    const decoTanks = filter(tanks, { forDeco: true });
     this.bottomTanks = [];
     bottomTanks.forEach((tank) => {
       this.bottomTanks.push(tank.getTank());
@@ -204,8 +204,8 @@ export class ModalDiveConfiguration {
   render() {
     return [
       <app-navbar
-        tag="dive-configuration"
-        text="Dive Configuration"
+        tag='dive-configuration'
+        text='Dive Configuration'
         color={Environment.getAppColor()}
         modal={true}
       ></app-navbar>,
@@ -213,12 +213,12 @@ export class ModalDiveConfiguration {
       <ion-content>
         <ion-list>
           <ion-list-header>Copy from standard configuration</ion-list-header>
-          <ion-row class="scrollx" id="scrollTankGas">
+          <ion-row class='scrollx' id='scrollTankGas'>
             {this.userStdConfigurations
               ? this.userStdConfigurations.map((conf) => (
-                  <ion-col class="item">
+                  <ion-col class='item'>
                     <ion-button
-                      shape="round"
+                      shape='round'
                       color={Environment.getAppColor()}
                       onClick={() => this.copyConfiguration(conf)}
                     >
@@ -229,10 +229,10 @@ export class ModalDiveConfiguration {
               : undefined}
             {this.stdConfigurations
               ? this.stdConfigurations.map((conf) => (
-                  <ion-col class="item">
+                  <ion-col class='item'>
                     <ion-button
-                      shape="round"
-                      color="success"
+                      shape='round'
+                      color='success'
                       onClick={() => this.copyConfiguration(conf)}
                     >
                       DP-{conf.stdName}
@@ -242,72 +242,72 @@ export class ModalDiveConfiguration {
               : undefined}
           </ion-row>
           <app-form-item
-            label-tag="configuration-name"
-            label-text="Configuration Name"
+            label-tag='configuration-name'
+            label-text='Configuration Name'
             value={this.diveConfig.stdName}
-            name="stdName"
-            input-type="text"
+            name='stdName'
+            input-type='text'
             onFormItemChanged={(ev) => this.inputHandler(ev)}
             validator={["required"]}
             onIsValid={(ev) => this.validateForm("name", ev.detail)}
           ></app-form-item>
           <app-form-item
-            label-tag="max-depth"
-            label-text="Max Depth (xxx)"
-            labelReplace={{xxx: this.diveConfig.parameters.depthUnit}}
+            label-tag='max-depth'
+            label-text='Max Depth (xxx)'
+            labelReplace={{ xxx: this.diveConfig.parameters.depthUnit }}
             value={toString(this.diveConfig.maxDepth)}
-            name="maxDepth"
-            input-type="number"
+            name='maxDepth'
+            input-type='number'
             onFormItemChanged={(ev) => this.inputHandler(ev)}
             validator={[
               "required",
               {
                 name: "minvalue",
-                options: {min: 1},
+                options: { min: 1 },
               },
             ]}
             onIsValid={(ev) => this.validateForm("depth", ev.detail)}
           ></app-form-item>
           <app-form-item
-            label-tag="max-time"
-            label-text="Max Time (min)"
+            label-tag='max-time'
+            label-text='Max Time (min)'
             value={toString(this.diveConfig.maxTime)}
-            name="maxTime"
-            input-type="number"
+            name='maxTime'
+            input-type='number'
             onFormItemChanged={(ev) => this.inputHandler(ev)}
             validator={[
               "required",
               {
                 name: "minvalue",
-                options: {min: 1},
+                options: { min: 1 },
               },
             ]}
             onIsValid={(ev) => this.validateForm("time", ev.detail)}
           ></app-form-item>
           <ion-list-header>
             <my-transl
-              tag="tanks-configuration"
-              text="Tank(s) Configuration"
+              tag='tanks-configuration'
+              text='Tank(s) Configuration'
               isLabel
             />
           </ion-list-header>
           <ion-list-header>
-            <ion-grid class="ion-no-padding">
+            <ion-grid class='ion-no-padding'>
               <ion-row>
                 <ion-col>
-                  <my-transl tag="bottom" text="Bottom" isLabel />
+                  <my-transl tag='bottom' text='Bottom' isLabel />
                 </ion-col>
-                <ion-col size="1">
-                  <ion-row class="ion-text-center">
+                <ion-col size='1'>
+                  <ion-row class='ion-text-center'>
                     <ion-button
                       icon-only
-                      fill="clear"
-                      color="primary"
+                      fill='clear'
+                      color='primary'
                       onClick={(ev) =>
                         this.addTank(this.screenWidth >= 500 ? ev : null, true)
                       }
                     >
-                      <ion-icon name="add-circle"></ion-icon>
+                      <ion-icon name='add-circle'></ion-icon>
                     </ion-button>
                   </ion-row>
                 </ion-col>
@@ -316,15 +316,15 @@ export class ModalDiveConfiguration {
           </ion-list-header>
           {this.diveConfig.configuration.bottom.length > 0 ? (
             <ion-grid>
-              <ion-row class="ion-text-center">
+              <ion-row class='ion-text-center'>
                 {this.diveConfig.configuration.bottom.map((tank, i) => (
-                  <ion-col size="12" size-sm>
+                  <ion-col size='12' size-sm>
                     {tank.name ? (
                       <ion-card>
-                        <ion-card-header class="ion-text-center">
+                        <ion-card-header class='ion-text-center'>
                           {tank.name}
                         </ion-card-header>
-                        <ion-card-content class="ion-text-center">
+                        <ion-card-content class='ion-text-center'>
                           <p>{tank.gas.toString()}</p>
                           <p>
                             {tank.pressure}
@@ -332,13 +332,13 @@ export class ModalDiveConfiguration {
                             {DiveToolsService.volumeUnit}
                           </p>
                         </ion-card-content>
-                        <ion-grid class="ion-no-padding">
+                        <ion-grid class='ion-no-padding'>
                           <ion-row>
                             <ion-col>
                               <ion-button
                                 icon-left
-                                fill="clear"
-                                size="small"
+                                fill='clear'
+                                size='small'
                                 onClick={(ev) =>
                                   this.addTank(
                                     this.screenWidth >= 500 ? ev : null,
@@ -347,19 +347,19 @@ export class ModalDiveConfiguration {
                                   )
                                 }
                               >
-                                <ion-icon name="create"></ion-icon>
-                                <my-transl tag="edit" text="Edit" />
+                                <ion-icon name='create'></ion-icon>
+                                <my-transl tag='edit' text='Edit' />
                               </ion-button>
                             </ion-col>
                             <ion-col>
                               <ion-button
                                 icon-left
-                                fill="clear"
-                                size="small"
+                                fill='clear'
+                                size='small'
                                 onClick={() => this.deleteTank(true, i)}
                               >
-                                <ion-icon name="trash"></ion-icon>
-                                <my-transl tag="delete" text="Delete" />
+                                <ion-icon name='trash'></ion-icon>
+                                <my-transl tag='delete' text='Delete' />
                               </ion-button>
                             </ion-col>
                           </ion-row>
@@ -373,22 +373,22 @@ export class ModalDiveConfiguration {
           ) : undefined}
 
           <ion-list-header>
-            <ion-grid class="ion-no-padding">
+            <ion-grid class='ion-no-padding'>
               <ion-row>
                 <ion-col>
-                  <my-transl tag="deco" text="Deco" isLabel />
+                  <my-transl tag='deco' text='Deco' isLabel />
                 </ion-col>
-                <ion-col size="1">
-                  <ion-row class="ion-text-center">
+                <ion-col size='1'>
+                  <ion-row class='ion-text-center'>
                     <ion-button
                       icon-only
-                      fill="clear"
-                      color="primary"
+                      fill='clear'
+                      color='primary'
                       onClick={(ev) =>
                         this.addTank(this.screenWidth >= 500 ? ev : null, false)
                       }
                     >
-                      <ion-icon name="add-circle"></ion-icon>
+                      <ion-icon name='add-circle'></ion-icon>
                     </ion-button>
                   </ion-row>
                 </ion-col>
@@ -396,16 +396,16 @@ export class ModalDiveConfiguration {
             </ion-grid>
           </ion-list-header>
           {this.diveConfig.configuration.deco.length > 0 ? (
-            <ion-grid class="ion-no-padding">
-              <ion-row class="ion-text-center">
+            <ion-grid class='ion-no-padding'>
+              <ion-row class='ion-text-center'>
                 {this.diveConfig.configuration.deco.map((tank, i) => (
-                  <ion-col size="12" size-sm>
+                  <ion-col size='12' size-sm>
                     {tank.name ? (
                       <ion-card>
-                        <ion-card-header class="ion-text-center">
+                        <ion-card-header class='ion-text-center'>
                           {tank.name}
                         </ion-card-header>
-                        <ion-card-content class="ion-text-center">
+                        <ion-card-content class='ion-text-center'>
                           <p>{tank.gas.toString()}</p>
                           <p>
                             {tank.pressure}
@@ -413,13 +413,13 @@ export class ModalDiveConfiguration {
                             {DiveToolsService.volumeUnit}
                           </p>
                         </ion-card-content>
-                        <ion-grid class="ion-no-padding">
+                        <ion-grid class='ion-no-padding'>
                           <ion-row>
                             <ion-col>
                               <ion-button
                                 icon-left
-                                fill="clear"
-                                size="small"
+                                fill='clear'
+                                size='small'
                                 onClick={(ev) =>
                                   this.addTank(
                                     this.screenWidth >= 500 ? ev : null,
@@ -428,19 +428,19 @@ export class ModalDiveConfiguration {
                                   )
                                 }
                               >
-                                <ion-icon name="create"></ion-icon>
-                                <my-transl tag="edit" text="Edit" />
+                                <ion-icon name='create'></ion-icon>
+                                <my-transl tag='edit' text='Edit' />
                               </ion-button>
                             </ion-col>
                             <ion-col>
                               <ion-button
                                 icon-left
-                                fill="clear"
-                                size="small"
+                                fill='clear'
+                                size='small'
                                 onClick={() => this.deleteTank(false, i)}
                               >
-                                <ion-icon name="trash"></ion-icon>
-                                <my-transl tag="delete" text="Delete" />
+                                <ion-icon name='trash'></ion-icon>
+                                <my-transl tag='delete' text='Delete' />
                               </ion-button>
                             </ion-col>
                           </ion-row>

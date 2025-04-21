@@ -1,13 +1,13 @@
-import {Component, State, h} from "@stencil/core";
-import {MapDataContact} from "../../../../../interfaces/trasteel/contact/contact";
+import { Component, State, h } from "@stencil/core";
+import { MapDataContact } from "../../../../../interfaces/trasteel/contact/contact";
 import {
   CONTACTSCOLLECTION,
   ContactsService,
 } from "../../../../../services/trasteel/crm/contacts";
-import {TrasteelFilterService} from "../../../../../services/trasteel/common/trs-db-filter";
-import {CustomersService} from "../../../../../services/trasteel/crm/customers";
-import {cloneDeep} from "lodash";
-import {TrasteelService} from "../../../../../services/trasteel/common/services";
+import { TrasteelFilterService } from "../../../../../services/trasteel/common/trs-db-filter";
+import { CustomersService } from "../../../../../services/trasteel/crm/customers";
+import { cloneDeep } from "lodash";
+import { TrasteelService } from "../../../../../services/trasteel/common/services";
 
 @Component({
   tag: "page-contacts",
@@ -45,25 +45,25 @@ export class PageContacts {
     return [
       <ion-header>
         <app-navbar
-          tag="contacts"
-          text="Contacts"
-          color="trasteel"
+          tag='contacts'
+          text='Contacts'
+          color='trasteel'
         ></app-navbar>
         <app-search-toolbar
-          searchTitle="contacts"
+          searchTitle='contacts'
           list={this.contactsList}
           orderFields={["lastName", "firstName"]}
-          color="trasteel"
-          placeholder="Search by name"
+          color='trasteel'
+          placeholder='Search by name'
           filterBy={["lastName", "firstName", "customerId"]}
           onFilteredList={(ev) => (this.filteredContactsList = ev.detail)}
         ></app-search-toolbar>
       </ion-header>,
       <ion-content>
         {TrasteelService.isCustomerDBAdmin() ? (
-          <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
-            <ion-fab-button onClick={() => this.addContact()} color="trasteel">
-              <ion-icon name="add"></ion-icon>
+          <ion-fab vertical='top' horizontal='end' slot='fixed' edge>
+            <ion-fab-button onClick={() => this.addContact()} color='trasteel'>
+              <ion-icon name='add'></ion-icon>
             </ion-fab-button>
           </ion-fab>
         ) : undefined}
@@ -71,7 +71,7 @@ export class PageContacts {
           list={this.filteredContactsList}
           loading={this.loading}
           showFields={["lastName", "firstName"]}
-          returnField="id"
+          returnField='id'
           groupBy={["customerId"]}
           icon={TrasteelFilterService.getMapDocs(CONTACTSCOLLECTION).icon.name}
           onItemClicked={(ev) =>

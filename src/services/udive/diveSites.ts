@@ -1,16 +1,16 @@
-import {StorageService} from "../common/storage";
-import {alertController} from "@ionic/core";
-import {DatabaseService} from "../common/database";
+import { StorageService } from "../common/storage";
+import { alertController } from "@ionic/core";
+import { DatabaseService } from "../common/database";
 import {
   DiveSite,
   MapDataDiveSite,
 } from "../../interfaces/udive/dive-site/diveSite";
-import {TranslationService} from "../common/translations";
-import {UDiveFilterService} from "./ud-db-filter";
-import {orderBy} from "lodash";
-import {RouterService} from "../common/router";
-import {BehaviorSubject} from "rxjs";
-import {DivingCentersService} from "./divingCenters";
+import { TranslationService } from "../common/translations";
+import { UDiveFilterService } from "./ud-db-filter";
+import { orderBy } from "lodash";
+import { RouterService } from "../common/router";
+import { BehaviorSubject } from "rxjs";
+import { DivingCentersService } from "./divingCenters";
 
 export const DIVESITESCOLLECTION = "diveSites";
 
@@ -40,7 +40,7 @@ export class DiveSitesController {
   }
 
   async presentDiveSiteUpdate(id?) {
-    await RouterService.openModal("modal-dive-site-update", {diveSiteId: id});
+    await RouterService.openModal("modal-dive-site-update", { diveSiteId: id });
   }
 
   async presentDiveSiteDetails(id, newdive = false) {

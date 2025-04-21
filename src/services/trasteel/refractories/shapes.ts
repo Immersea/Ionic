@@ -1,11 +1,11 @@
-import {StorageService} from "../../common/storage";
-import {alertController, popoverController} from "@ionic/core";
-import {DatabaseService, SETTINGSCOLLECTIONNAME} from "../../common/database";
-import {TranslationService} from "../../common/translations";
-import {TrasteelFilterService} from "../common/trs-db-filter";
-import {orderBy} from "lodash";
-import {RouterService} from "../../common/router";
-import {BehaviorSubject} from "rxjs";
+import { StorageService } from "../../common/storage";
+import { alertController, popoverController } from "@ionic/core";
+import { DatabaseService, SETTINGSCOLLECTIONNAME } from "../../common/database";
+import { TranslationService } from "../../common/translations";
+import { TrasteelFilterService } from "../common/trs-db-filter";
+import { orderBy } from "lodash";
+import { RouterService } from "../../common/router";
+import { BehaviorSubject } from "rxjs";
 import {
   AreaShape,
   MapDataShape,
@@ -14,18 +14,18 @@ import {
   ShapeSettings,
   ShapeType,
 } from "../../../interfaces/trasteel/refractories/shapes";
-import {DocumentReference} from "firebase/firestore";
-import {UserService} from "../../common/user";
-import {TextMultilanguage} from "../../../components";
+import { DocumentReference } from "firebase/firestore";
+import { UserService } from "../../common/user";
+import { TextMultilanguage } from "../../../components";
 import {
   Project,
   ProjectAreaQuality,
   ProjectAreaQualityShape,
 } from "../../../interfaces/trasteel/refractories/projects";
-import {XLSXExportService} from "./xlsExport";
-import {DatasheetsService} from "./datasheets";
-import {MapDataDatasheet} from "../../../interfaces/trasteel/refractories/datasheets";
-import {FirebaseFilterCondition} from "../../../interfaces/common/system/system";
+import { XLSXExportService } from "./xlsExport";
+import { DatasheetsService } from "./datasheets";
+import { MapDataDatasheet } from "../../../interfaces/trasteel/refractories/datasheets";
+import { FirebaseFilterCondition } from "../../../interfaces/common/system/system";
 
 export const SHAPESCOLLECTION = "shapes";
 
@@ -74,7 +74,7 @@ export class ShapesController {
   async duplicateShape(id) {
     const shape = await this.getShape(id);
     return await RouterService.openModal("modal-shape-update", {
-      duplicateShape: {id: id, shape: shape},
+      duplicateShape: { id: id, shape: shape },
     });
   }
 
@@ -186,7 +186,7 @@ export class ShapesController {
         showField: "shapeName",
         filterBy: ["shapeName", "shapeTypeId"],
         orderBy: ["shapeName"],
-        searchTitle: {tag: "shapes", text: "Shapes"},
+        searchTitle: { tag: "shapes", text: "Shapes" },
         placeholder: "Search by shape name or type",
         filterObject: new ShapeFilter(),
         filterPopup: this.openShapeFilter,
@@ -205,7 +205,7 @@ export class ShapesController {
     return new Promise(async (resolve, reject) => {
       const popover = await popoverController.create({
         component: "popover-shapes-filter",
-        componentProps: {filter},
+        componentProps: { filter },
         cssClass: "popover-shapes-filter",
         event: null,
         translucent: true,
@@ -282,7 +282,7 @@ export class ShapesController {
   }
 
   async exportShapes(
-    basket: {shape: MapDataShape; datasheet: MapDataDatasheet}[],
+    basket: { shape: MapDataShape; datasheet: MapDataDatasheet }[],
     lang
   ) {
     const project = new Project();
@@ -297,7 +297,7 @@ export class ShapesController {
       const datasheet = await DatasheetsService.getDatasheet(item.datasheet.id);
       const density = datasheet.getDensity();
       const projectAreaQualityShape = new ProjectAreaQualityShape();
-      projectAreaQualityShape.position = 0;
+      projectAreaQualityShape.position = index + 1;
       projectAreaQualityShape.shapeId = shape["shapeId"];
       projectAreaQuality.shapes.push(projectAreaQualityShape);
       projectAreaQuality.datasheetId = item.datasheet.id;
@@ -352,7 +352,7 @@ export class ShapesController {
   }
   getShapeTypeName(id): TextMultilanguage {
     const type = this.shapeTypes.find((x) => x.typeId == id);
-    return type ? type.typeName : {en: id};
+    return type ? type.typeName : { en: id };
   }
 
   async editShapeTypes() {
@@ -382,7 +382,7 @@ export class ShapesController {
     await DatabaseService.updateDocument(
       SHAPESCOLLECTION,
       SETTINGSCOLLECTIONNAME,
-      {shapeTypes: this.shapeTypes}
+      { shapeTypes: this.shapeTypes }
     );
   }
 

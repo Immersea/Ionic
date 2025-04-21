@@ -1,11 +1,11 @@
-import {toNumber} from "lodash";
+import { toNumber } from "lodash";
 import {
   CustomerProductionData,
   CustomerLocation,
   CustomerConditions,
 } from "./customerLocation";
-import {MapService, Position} from "../../../services/common/map";
-import {LngLat, LngLatLike} from "mapbox-gl";
+import { MapService, Position } from "../../../services/common/map";
+import { LngLat, LngLatLike } from "mapbox-gl";
 
 export class GlobalSteelPlantsDB {
   plant_ID: string;
@@ -329,49 +329,49 @@ export class GlobalSteelPlantsProductionDB {
       data && data["Plant name (English)"]
         ? data["Plant name (English)"]
         : null;
-    this.crude_steel_production = {_2019: null, _2020: null, _2021: null};
+    this.crude_steel_production = { _2019: null, _2020: null, _2021: null };
     this.crude_steel_production._2019 =
       data && data["Crude steel production 2019 (ttpa)"]
         ? !isNaN(toNumber(data["Crude steel production 2019 (ttpa)"]))
           ? toNumber(data["Crude steel production 2019 (ttpa)"])
           : data["Crude steel production 2019 (ttpa)"]
         : null;
-    this.BOF_steel_production = {_2019: null, _2020: null, _2021: null};
+    this.BOF_steel_production = { _2019: null, _2020: null, _2021: null };
     this.BOF_steel_production._2019 =
       data && data["BOF steel production 2019 (ttpa)"]
         ? !isNaN(toNumber(data["BOF steel production 2019 (ttpa)"]))
           ? toNumber(data["BOF steel production 2019 (ttpa)"])
           : data["BOF steel production 2019 (ttpa)"]
         : null;
-    this.EAF_steel_production = {_2019: null, _2020: null, _2021: null};
+    this.EAF_steel_production = { _2019: null, _2020: null, _2021: null };
     this.EAF_steel_production._2019 =
       data && data["EAF steel production 2019 (ttpa)"]
         ? !isNaN(toNumber(data["EAF steel production 2019 (ttpa)"]))
           ? toNumber(data["EAF steel production 2019 (ttpa)"])
           : data["EAF steel production 2019 (ttpa)"]
         : null;
-    this.OHF_steel_production = {_2019: null, _2020: null, _2021: null};
+    this.OHF_steel_production = { _2019: null, _2020: null, _2021: null };
     this.OHF_steel_production._2019 =
       data && data["OHF steel production 2019 (ttpa)"]
         ? !isNaN(toNumber(data["OHF steel production 2019 (ttpa)"]))
           ? toNumber(data["OHF steel production 2019 (ttpa)"])
           : data["OHF steel production 2019 (ttpa)"]
         : null;
-    this.iron_production = {_2019: null, _2020: null, _2021: null};
+    this.iron_production = { _2019: null, _2020: null, _2021: null };
     this.iron_production._2019 =
       data && data["Iron production 2019 (ttpa)"]
         ? !isNaN(toNumber(data["Iron production 2019 (ttpa)"]))
           ? toNumber(data["Iron production 2019 (ttpa)"])
           : data["Iron production 2019 (ttpa)"]
         : null;
-    this.BF_production = {_2019: null, _2020: null, _2021: null};
+    this.BF_production = { _2019: null, _2020: null, _2021: null };
     this.BF_production._2019 =
       data && data["BF production 2019 (ttpa)"]
         ? !isNaN(toNumber(data["BF production 2019 (ttpa)"]))
           ? toNumber(data["BF production 2019 (ttpa)"])
           : data["BF production 2019 (ttpa)"]
         : null;
-    this.DRI_production = {_2019: null, _2020: null, _2021: null};
+    this.DRI_production = { _2019: null, _2020: null, _2021: null };
     this.DRI_production._2019 =
       data && data["DRI production 2019 (ttpa)"]
         ? !isNaN(toNumber(data["DRI production 2019 (ttpa)"]))
@@ -626,7 +626,7 @@ export class Customer {
     this.conditions =
       data && data.conditions
         ? new CustomerConditions(data.conditions)
-        : {EAF: [], LF: [], CCM: []};
+        : { EAF: [], LF: [], CCM: [] };
     this.productionData =
       data && data.productionData
         ? new CustomerProductionData(data.productionData)

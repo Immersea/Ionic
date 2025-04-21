@@ -1,17 +1,17 @@
-import {Component, h, Prop, State, Watch, Element} from "@stencil/core";
+import { Component, h, Prop, State, Watch, Element } from "@stencil/core";
 
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
-import {DecoplannerParameters} from "../../../../../interfaces/udive/planner/decoplanner-parameters";
-import {orderBy, toString} from "lodash";
-import {GasBlenderService} from "../../../../../services/udive/planner/gas-blender";
-import {TranslationService} from "../../../../../services/common/translations";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
+import { DecoplannerParameters } from "../../../../../interfaces/udive/planner/decoplanner-parameters";
+import { orderBy, toString } from "lodash";
+import { GasBlenderService } from "../../../../../services/udive/planner/gas-blender";
+import { TranslationService } from "../../../../../services/common/translations";
 
-import {DecoplannerDive} from "../../../../../interfaces/udive/planner/decoplanner-dive";
-import {Environment} from "../../../../../global/env";
+import { DecoplannerDive } from "../../../../../interfaces/udive/planner/decoplanner-dive";
+import { Environment } from "../../../../../global/env";
 import FusionCharts from "fusioncharts";
-import {FusionchartsService} from "../../../../../services/common/fusioncharts";
-import {slideHeight} from "../../../../../helpers/utils";
-import {DiveToolsService} from "../../../../../services/udive/planner/dive-tools";
+import { FusionchartsService } from "../../../../../services/common/fusioncharts";
+import { slideHeight } from "../../../../../helpers/utils";
+import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
 
 @Component({
   tag: "app-decoplanner-charts",
@@ -331,7 +331,7 @@ export class AppDecoplannerCharts {
         legendShadow: "0",
         legendItemFontSize: "10",
         legendItemFontColor: "#666666",
-        export: {enabled: false},
+        export: { enabled: false },
       },
       categories: [
         {
@@ -516,7 +516,7 @@ export class AppDecoplannerCharts {
       columns: {
         column: columnIds,
       },
-      dataset: [{data: this.heatMapDataSet}],
+      dataset: [{ data: this.heatMapDataSet }],
       colorRange: {
         gradient: "1",
         minValue: "-100",
@@ -737,25 +737,25 @@ export class AppDecoplannerCharts {
 
   render() {
     return [
-      <div class="ion-no-padding">
+      <div class='ion-no-padding'>
         <ion-row>
           <ion-col>
             <ion-segment
               onIonChange={(ev) => this.segmentChartChanged(ev)}
               color={Environment.getAppColor()}
-              mode="ios"
+              mode='ios'
               value={this.renderedChart}
             >
-              <ion-segment-button value="profile-chart">
+              <ion-segment-button value='profile-chart'>
                 <ion-label>{this.segmentTitles.profiles}</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="runtime-chart">
+              <ion-segment-button value='runtime-chart'>
                 <ion-label>{this.segmentTitles.runtime}</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="depth-chart">
+              <ion-segment-button value='depth-chart'>
                 <ion-label>{this.segmentTitles.depth}</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="heatmap-chart">
+              <ion-segment-button value='heatmap-chart'>
                 <ion-label>{this.segmentTitles.heatmap}</ion-label>
               </ion-segment-button>
             </ion-segment>
@@ -763,15 +763,15 @@ export class AppDecoplannerCharts {
         </ion-row>
       </div>,
       <ion-fab
-        vertical="top"
-        horizontal="start"
-        slot="fixed"
-        style={{paddingTop: "50px"}}
+        vertical='top'
+        horizontal='start'
+        slot='fixed'
+        style={{ paddingTop: "50px" }}
       >
-        <ion-fab-button size="small">
-          <ion-icon name="funnel"></ion-icon>
+        <ion-fab-button size='small'>
+          <ion-icon name='funnel'></ion-icon>
         </ion-fab-button>
-        <ion-fab-list side="end" style={{paddingTop: "55px"}}>
+        <ion-fab-list side='end' style={{ paddingTop: "55px" }}>
           {this.parameters.configuration != "OC" &&
           this.renderedChart !== "profile-chart" ? (
             <ion-fab-button onClick={() => this.switchCharts("CCR")}>
@@ -785,13 +785,13 @@ export class AppDecoplannerCharts {
           ) : undefined}
 
           <ion-fab-button onClick={() => this.presentFiltersPopover()}>
-            <ion-icon name="options"></ion-icon>
+            <ion-icon name='options'></ion-icon>
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>,
       <div
-        id="chart-container"
-        style={{height: toString(this.screenHeight - 150) + "px"}}
+        id='chart-container'
+        style={{ height: toString(this.screenHeight - 150) + "px" }}
       ></div>,
     ];
   }

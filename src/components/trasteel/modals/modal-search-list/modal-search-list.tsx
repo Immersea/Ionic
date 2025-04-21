@@ -1,9 +1,9 @@
-import {Component, h, Host, State, Element, Prop} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {cloneDeep} from "lodash";
-import {Environment} from "../../../../global/env";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
-import {ShapesService} from "../../../../services/trasteel/refractories/shapes";
+import { Component, h, Host, State, Element, Prop } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { cloneDeep } from "lodash";
+import { Environment } from "../../../../global/env";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
+import { ShapesService } from "../../../../services/trasteel/refractories/shapes";
 
 @Component({
   tag: "modal-search-list",
@@ -11,7 +11,7 @@ import {ShapesService} from "../../../../services/trasteel/refractories/shapes";
 })
 export class ModalSearchList {
   @Prop() list: any[];
-  @Prop() searchTitle: {tag: string; text: string};
+  @Prop() searchTitle: { tag: string; text: string };
   nonFilteredList: any[];
   @Prop() item: any;
   @Prop() showField: string;
@@ -89,18 +89,18 @@ export class ModalSearchList {
             }}
             rightButtonFc={this.close}
           ></app-navbar>
-          <ion-grid class="ion-no-padding">
-            <ion-row class="ion-no-padding">
+          <ion-grid class='ion-no-padding'>
+            <ion-row class='ion-no-padding'>
               {this.filterObject ? (
-                <ion-col size="1" class="ion-no-padding">
+                <ion-col size='1' class='ion-no-padding'>
                   <ion-toolbar color={Environment.getAppColor()}>
                     <ion-button
-                      fill="clear"
-                      expand="full"
+                      fill='clear'
+                      expand='full'
                       icon-only
                       onClick={() => this.openFilter()}
                     >
-                      <ion-icon name="filter" color="light"></ion-icon>
+                      <ion-icon name='filter' color='light'></ion-icon>
                     </ion-button>
                   </ion-toolbar>
                 </ion-col>
@@ -108,12 +108,12 @@ export class ModalSearchList {
 
               <ion-col
                 size={this.filterObject ? "11" : "12"}
-                class="ion-no-padding"
+                class='ion-no-padding'
               >
                 <app-search-toolbar
                   list={this.list}
                   orderFields={[this.showField]}
-                  color="trasteel"
+                  color='trasteel'
                   placeholder={this.placeholder ? this.placeholder : "search"}
                   filterBy={this.filterBy}
                   onFilteredList={(ev) => (this.filteredList = ev.detail)}
@@ -128,10 +128,10 @@ export class ModalSearchList {
                 <ion-breadcrumbs>
                   <ion-button
                     icon-only
-                    fill="clear"
+                    fill='clear'
                     onClick={() => this.clearFilter()}
                   >
-                    <ion-icon color="danger" name="trash"></ion-icon>
+                    <ion-icon color='danger' name='trash'></ion-icon>
                   </ion-button>
                   <ion-breadcrumb></ion-breadcrumb>
                   {Object.keys(this.filterObject).map((key) =>

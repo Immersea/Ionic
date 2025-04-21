@@ -1,12 +1,11 @@
-import {Validator} from "./validator";
-import {TranslateText} from "../interfaces/common/translations/translations";
-import {isString} from "lodash";
+import { Validator } from "./validator";
+import { TranslateText } from "../interfaces/common/translations/translations";
 
 export function getMinValueValidator(min: number): Validator<string> {
   return {
     validate: (value: string | number) => {
-      if (isString(value)) value = parseFloat(value);
-      return value >= min;
+      const num = typeof value === "string" ? parseFloat(value) : value;
+      return num >= min;
     },
     errorMessage: getErrorMessage(min),
   };

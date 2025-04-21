@@ -80,10 +80,13 @@ export namespace Components {
     interface AppAdminDiveTrips {
         "filterByOrganisierId": string;
         "filterByTrips": any;
+        "future": boolean;
     }
     interface AppAdminDivingClasses {
         "filterByClasses": any;
         "filterByOrganisierId": string;
+        "future": boolean;
+        "school": boolean;
     }
     interface AppAdminTranslations {
         "language": string;
@@ -148,8 +151,8 @@ export namespace Components {
         "updateStudentsList": () => Promise<boolean>;
     }
     interface AppDiveCourseActivities {
+        "activities": Activity[];
         "editable": boolean;
-        "schedule": Activity[];
         "showDiveLocation": boolean;
     }
     interface AppDiveCourseCard {
@@ -183,7 +186,6 @@ export namespace Components {
     interface AppDivingClassSchedule {
         "divingClass": DivingClass;
         "editable": boolean;
-        "updateClassSchedule": () => Promise<void>;
     }
     interface AppDragdropFile {
         "autoOpen": boolean;
@@ -402,7 +404,7 @@ export namespace Components {
     }
     interface AppSelectSearch {
         "disabled": boolean;
-        "label": {tag: string; text: string};
+        "label": { tag: string; text: string };
         "labelAddText": string;
         "lines": "inset" | "full" | "none";
         "placeholder": string;
@@ -522,7 +524,7 @@ export namespace Components {
     }
     interface ModalDatasheetUpdate {
         "datasheetId": string;
-        "duplicateDatasheet": {id: string; datasheet: Datasheet};
+        "duplicateDatasheet": { id: string; datasheet: Datasheet };
         "revision": boolean;
     }
     interface ModalDiveCard {
@@ -611,7 +613,7 @@ export namespace Components {
         "list": any[];
         "orderBy": string[];
         "placeholder": string;
-        "searchTitle": {tag: string; text: string};
+        "searchTitle": { tag: string; text: string };
         "showField": string;
     }
     interface ModalServiceCenterUpdate {
@@ -620,7 +622,7 @@ export namespace Components {
     interface ModalShapeType {
     }
     interface ModalShapeUpdate {
-        "duplicateShape": {id: string; shape: Shape};
+        "duplicateShape": { id: string; shape: Shape };
         "shapeId": string;
     }
     interface ModalTankConfiguration {
@@ -1222,7 +1224,7 @@ declare global {
         new (): HTMLAppDiveClassBookingsElement;
     };
     interface HTMLAppDiveCourseActivitiesElementEventMap {
-        "scheduleEmit": Activity[];
+        "updateEmit": Activity[];
     }
     interface HTMLAppDiveCourseActivitiesElement extends Components.AppDiveCourseActivities, HTMLStencilElement {
         addEventListener<K extends keyof HTMLAppDiveCourseActivitiesElementEventMap>(type: K, listener: (this: HTMLAppDiveCourseActivitiesElement, ev: AppDiveCourseActivitiesCustomEvent<HTMLAppDiveCourseActivitiesElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1324,6 +1326,7 @@ declare global {
     };
     interface HTMLAppDivingClassScheduleElementEventMap {
         "scheduleEmit": any;
+        "updateEmit": boolean;
     }
     interface HTMLAppDivingClassScheduleElement extends Components.AppDivingClassSchedule, HTMLStencilElement {
         addEventListener<K extends keyof HTMLAppDivingClassScheduleElementEventMap>(type: K, listener: (this: HTMLAppDivingClassScheduleElement, ev: AppDivingClassScheduleCustomEvent<HTMLAppDivingClassScheduleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2846,10 +2849,13 @@ declare namespace LocalJSX {
     interface AppAdminDiveTrips {
         "filterByOrganisierId"?: string;
         "filterByTrips"?: any;
+        "future"?: boolean;
     }
     interface AppAdminDivingClasses {
         "filterByClasses"?: any;
         "filterByOrganisierId"?: string;
+        "future"?: boolean;
+        "school"?: boolean;
     }
     interface AppAdminTranslations {
         "language"?: string;
@@ -2918,9 +2924,9 @@ declare namespace LocalJSX {
         "editable"?: boolean;
     }
     interface AppDiveCourseActivities {
+        "activities"?: Activity[];
         "editable"?: boolean;
-        "onScheduleEmit"?: (event: AppDiveCourseActivitiesCustomEvent<Activity[]>) => void;
-        "schedule"?: Activity[];
+        "onUpdateEmit"?: (event: AppDiveCourseActivitiesCustomEvent<Activity[]>) => void;
         "showDiveLocation"?: boolean;
     }
     interface AppDiveCourseCard {
@@ -2963,6 +2969,7 @@ declare namespace LocalJSX {
         "divingClass"?: DivingClass;
         "editable"?: boolean;
         "onScheduleEmit"?: (event: AppDivingClassScheduleCustomEvent<any>) => void;
+        "onUpdateEmit"?: (event: AppDivingClassScheduleCustomEvent<boolean>) => void;
     }
     interface AppDragdropFile {
         "autoOpen"?: boolean;
@@ -3195,7 +3202,7 @@ declare namespace LocalJSX {
     }
     interface AppSelectSearch {
         "disabled"?: boolean;
-        "label"?: {tag: string; text: string};
+        "label"?: { tag: string; text: string };
         "labelAddText"?: string;
         "lines"?: "inset" | "full" | "none";
         "placeholder"?: string;
@@ -3320,7 +3327,7 @@ declare namespace LocalJSX {
     }
     interface ModalDatasheetUpdate {
         "datasheetId"?: string;
-        "duplicateDatasheet"?: {id: string; datasheet: Datasheet};
+        "duplicateDatasheet"?: { id: string; datasheet: Datasheet };
         "revision"?: boolean;
     }
     interface ModalDiveCard {
@@ -3409,7 +3416,7 @@ declare namespace LocalJSX {
         "list"?: any[];
         "orderBy"?: string[];
         "placeholder"?: string;
-        "searchTitle"?: {tag: string; text: string};
+        "searchTitle"?: { tag: string; text: string };
         "showField"?: string;
     }
     interface ModalServiceCenterUpdate {
@@ -3418,7 +3425,7 @@ declare namespace LocalJSX {
     interface ModalShapeType {
     }
     interface ModalShapeUpdate {
-        "duplicateShape"?: {id: string; shape: Shape};
+        "duplicateShape"?: { id: string; shape: Shape };
         "shapeId"?: string;
     }
     interface ModalTankConfiguration {

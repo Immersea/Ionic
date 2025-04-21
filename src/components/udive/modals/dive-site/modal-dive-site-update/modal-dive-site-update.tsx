@@ -1,7 +1,7 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {DiveSite} from "../../../../../interfaces/udive/dive-site/diveSite";
-import {TranslationService} from "../../../../../services/common/translations";
-import {modalController, alertController} from "@ionic/core";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { DiveSite } from "../../../../../interfaces/udive/dive-site/diveSite";
+import { TranslationService } from "../../../../../services/common/translations";
+import { modalController, alertController } from "@ionic/core";
 import {
   cloneDeep,
   each,
@@ -11,20 +11,20 @@ import {
   toNumber,
   toString,
 } from "lodash";
-import {DiveConfiguration} from "../../../../../interfaces/udive/planner/dive-configuration";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
+import { DiveConfiguration } from "../../../../../interfaces/udive/planner/dive-configuration";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
 import {
   DiveSitesService,
   DIVESITESCOLLECTION,
 } from "../../../../../services/udive/diveSites";
-import {UserProfile} from "../../../../../interfaces/common/user/user-profile";
-import {UserSettings} from "../../../../../interfaces/udive/user/user-settings";
-import {mapHeight} from "../../../../../helpers/utils";
-import {RouterService} from "../../../../../services/common/router";
+import { UserProfile } from "../../../../../interfaces/common/user/user-profile";
+import { UserSettings } from "../../../../../interfaces/udive/user/user-settings";
+import { mapHeight } from "../../../../../helpers/utils";
+import { RouterService } from "../../../../../services/common/router";
 import Swiper from "swiper";
-import {MapService} from "../../../../../services/common/map";
-import {Environment} from "../../../../../global/env";
+import { MapService } from "../../../../../services/common/map";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "modal-dive-site-update",
@@ -38,11 +38,11 @@ export class ModalDiveSiteUpdate {
   @State() updateView = true;
   @State() validSite = false;
   @State() titles = [
-    {tag: "map"},
-    {tag: "position"},
-    {tag: "information"},
-    {tag: "dive-profiles", text: "Dive Profiles"},
-    {tag: "team"},
+    { tag: "map" },
+    { tag: "position" },
+    { tag: "information" },
+    { tag: "dive-profiles", text: "Dive Profiles" },
+    { tag: "team" },
   ];
   @State() slider: Swiper;
   draggableMarkerPosition: any;
@@ -367,89 +367,89 @@ export class ModalDiveSiteUpdate {
           swiper={this.slider}
           titles={this.titles}
         ></app-header-segment-toolbar>
-        <ion-content class="slides">
-          <swiper-container class="slider-dive-site swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
-                <div id="map-container">
+        <ion-content class='slides'>
+          <swiper-container class='slider-dive-site swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
+                <div id='map-container'>
                   <app-map
-                    id="map"
-                    pageId="dive-sites"
+                    id='map'
+                    pageId='dive-sites'
                     draggableMarkerPosition={this.draggableMarkerPosition}
                     onDragMarkerEnd={(ev) => this.updateLocation(ev)}
                   ></app-map>
                 </div>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-coordinates
                   coordinates={this.draggableMarkerPosition}
                   onCoordinatesEmit={(ev) => this.updateLocation(ev)}
                   onAddressEmit={(ev) => this.updateAddress(ev)}
                 ></app-coordinates>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding">
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding'>
                   <ion-list-header>
                     <my-transl
-                      tag="general-information"
-                      text="General Information"
+                      tag='general-information'
+                      text='General Information'
                       isLabel
                     />
                   </ion-list-header>
                   <ion-item>
                     <ion-label>
-                      <my-transl tag="site-type" text="Site Type" />
+                      <my-transl tag='site-type' text='Site Type' />
                     </ion-label>
                     <ion-select
-                      id="dive-type-select"
+                      id='dive-type-select'
                       onIonChange={(ev) => this.updateParam("type", ev)}
                       value={this.diveSite.type}
                     ></ion-select>
                   </ion-item>
                   <ion-item>
                     <ion-label>
-                      <my-transl tag="entry-type" text="Entry Type" />
+                      <my-transl tag='entry-type' text='Entry Type' />
                     </ion-label>
                     <ion-select
-                      id="entry-type-select"
+                      id='entry-type-select'
                       onIonChange={(ev) => this.updateParam("entryType", ev)}
                       value={this.diveSite.information.entryType}
                     ></ion-select>
                   </ion-item>
                   <app-form-item
-                    label-tag="name"
-                    label-text="Name"
+                    label-tag='name'
+                    label-text='Name'
                     value={this.diveSite.displayName}
-                    name="displayName"
-                    input-type="text"
+                    name='displayName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="description"
-                    label-text="Description"
+                    label-tag='description'
+                    label-text='Description'
                     value={this.diveSite.description}
-                    name="description"
+                    name='description'
                     textRows={5}
-                    input-type="text"
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <ion-list-header>
                     <ion-label>
-                      <my-transl tag="site-details" text="Site Details" />
+                      <my-transl tag='site-details' text='Site Details' />
                     </ion-label>
                   </ion-list-header>
-                  <ion-grid class="ion-no-padding">
+                  <ion-grid class='ion-no-padding'>
                     <ion-row>
                       <ion-col>
                         <app-form-item
-                          label-tag="min-depth"
-                          label-text="Min. Depth"
-                          append-text=" (m)"
+                          label-tag='min-depth'
+                          label-text='Min. Depth'
+                          append-text=' (m)'
                           value={toString(this.diveSite.information.minDepth)}
-                          name="minDepth"
-                          input-type="number"
+                          name='minDepth'
+                          input-type='number'
                           onFormItemChanged={(ev) =>
                             this.handleInformationChange(ev)
                           }
@@ -458,12 +458,12 @@ export class ModalDiveSiteUpdate {
                       </ion-col>
                       <ion-col>
                         <app-form-item
-                          label-tag="max-depth"
-                          label-text="Max. Depth"
-                          append-text=" (m)"
+                          label-tag='max-depth'
+                          label-text='Max. Depth'
+                          append-text=' (m)'
                           value={toString(this.diveSite.information.maxDepth)}
-                          name="maxDepth"
-                          input-type="number"
+                          name='maxDepth'
+                          input-type='number'
                           onFormItemChanged={(ev) =>
                             this.handleInformationChange(ev)
                           }
@@ -473,34 +473,34 @@ export class ModalDiveSiteUpdate {
                     </ion-row>
                   </ion-grid>
                   <app-form-item
-                    label-tag="avg-vis"
-                    label-text="Average Visibility"
-                    append-text=" (m)"
+                    label-tag='avg-vis'
+                    label-text='Average Visibility'
+                    append-text=' (m)'
                     value={toString(this.diveSite.information.avgViz)}
-                    name="avgViz"
-                    input-type="text"
+                    name='avgViz'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleInformationChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <ion-list-header>
                     <my-transl
-                      tag="water-temp"
-                      text="Water Temperature"
-                      append-text=" (°C)"
+                      tag='water-temp'
+                      text='Water Temperature'
+                      append-text=' (°C)'
                       isLabel
                     />
                   </ion-list-header>
-                  <ion-grid class="ion-no-padding">
+                  <ion-grid class='ion-no-padding'>
                     <ion-row>
                       <ion-col>
                         <app-form-item
-                          label-tag="spring"
-                          label-text="Spring"
+                          label-tag='spring'
+                          label-text='Spring'
                           value={toString(
                             this.diveSite.information.waterTemp.spring
                           )}
-                          name="waterTemp.spring"
-                          input-type="number"
+                          name='waterTemp.spring'
+                          input-type='number'
                           onFormItemChanged={(ev) =>
                             this.handleInformationChange(ev)
                           }
@@ -509,13 +509,13 @@ export class ModalDiveSiteUpdate {
                       </ion-col>
                       <ion-col>
                         <app-form-item
-                          label-tag="summer"
-                          label-text="Summer"
+                          label-tag='summer'
+                          label-text='Summer'
                           value={toString(
                             this.diveSite.information.waterTemp.summer
                           )}
-                          name="waterTemp.summer"
-                          input-type="number"
+                          name='waterTemp.summer'
+                          input-type='number'
                           onFormItemChanged={(ev) =>
                             this.handleInformationChange(ev)
                           }
@@ -526,13 +526,13 @@ export class ModalDiveSiteUpdate {
                     <ion-row>
                       <ion-col>
                         <app-form-item
-                          label-tag="autumn"
-                          label-text="Autumn"
+                          label-tag='autumn'
+                          label-text='Autumn'
                           value={toString(
                             this.diveSite.information.waterTemp.autumn
                           )}
-                          name="waterTemp.autumn"
-                          input-type="number"
+                          name='waterTemp.autumn'
+                          input-type='number'
                           onFormItemChanged={(ev) =>
                             this.handleInformationChange(ev)
                           }
@@ -541,13 +541,13 @@ export class ModalDiveSiteUpdate {
                       </ion-col>
                       <ion-col>
                         <app-form-item
-                          label-tag="winter"
-                          label-text="Winter"
+                          label-tag='winter'
+                          label-text='Winter'
                           value={toString(
                             this.diveSite.information.waterTemp.winter
                           )}
-                          name="waterTemp.winter"
-                          input-type="number"
+                          name='waterTemp.winter'
+                          input-type='number'
                           onFormItemChanged={(ev) =>
                             this.handleInformationChange(ev)
                           }
@@ -558,10 +558,10 @@ export class ModalDiveSiteUpdate {
                   </ion-grid>
                   <ion-item>
                     <ion-label>
-                      <my-transl tag="seabed-comp" text="Seabed Composition" />
+                      <my-transl tag='seabed-comp' text='Seabed Composition' />
                     </ion-label>
                     <ion-select
-                      id="seabed-comp-select"
+                      id='seabed-comp-select'
                       multiple
                       onIonChange={(ev) =>
                         this.updateParam("seabedComposition", ev)
@@ -572,10 +572,10 @@ export class ModalDiveSiteUpdate {
 
                   <ion-item>
                     <ion-label>
-                      <my-transl tag="seabed-cover" text="Seabed Cover" />
+                      <my-transl tag='seabed-cover' text='Seabed Cover' />
                     </ion-label>
                     <ion-select
-                      id="seabed-cover-select"
+                      id='seabed-cover-select'
                       multiple
                       onIonChange={(ev) => this.updateParam("seabedCover", ev)}
                       value={this.diveSite.information.seabedCover}
@@ -583,11 +583,11 @@ export class ModalDiveSiteUpdate {
                   </ion-item>
                 </ion-list>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-grid>
-                  <ion-row class="ion-text-start">
+                  <ion-row class='ion-text-start'>
                     {this.diveSite.divePlans.map((plan, i) => (
-                      <ion-col size-sm="12" size-md="6" size-lg="4">
+                      <ion-col size-sm='12' size-md='6' size-lg='4'>
                         <app-dive-plan-card
                           divePlan={plan}
                           edit={true}
@@ -596,12 +596,12 @@ export class ModalDiveSiteUpdate {
                         />
                       </ion-col>
                     ))}
-                    <ion-col size-sm="12" size-md="6" size-lg="4">
+                    <ion-col size-sm='12' size-md='6' size-lg='4'>
                       <ion-card onClick={() => this.addDivePlan()}>
-                        <ion-card-content class="ion-text-center">
+                        <ion-card-content class='ion-text-center'>
                           <ion-icon
-                            name="add-circle-outline"
-                            style={{fontSize: "130px"}}
+                            name='add-circle-outline'
+                            style={{ fontSize: "130px" }}
                           ></ion-icon>
                         </ion-card-content>
                       </ion-card>
@@ -609,7 +609,7 @@ export class ModalDiveSiteUpdate {
                   </ion-row>
                 </ion-grid>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-users-list
                   item={this.diveSite}
                   editable

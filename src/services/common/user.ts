@@ -190,11 +190,10 @@ export class UserController {
       USERSETTINGSCOLLECTION
     );
     if (localUser) {
-      this.userProfile = new UserProfile(localUser);
+      this.updateUserProfile(localUser);
       this.userRoles = new UserRoles(localUserRoles);
       this.userChats = localUserChats;
       this.userSettings = new UserSettings(localUserSettings);
-      this.userProfile$.next(this.userProfile);
       this.userRoles$.next(this.userRoles);
       this.userChats$.next(this.userChats);
       this.userSettings$.next(this.userSettings);
@@ -285,20 +284,15 @@ export class UserController {
         (obs) => {
           this.userProfileSub = obs.subscribe((userProfile) => {
             if (userProfile) {
-              this.userProfile = new UserProfile(userProfile);
-              DatabaseService.saveLocalDocument(
-                USERPROFILECOLLECTION,
-                this.userProfile
-              );
+              this.updateUserProfile(userProfile);
               AuthService.dismissLoading();
-              this.userProfile$.next(this.userProfile);
               //set user for chat
               ChatService.resetChatUser();
             } else {
               //user not existing
               //show login page
+              this.updateUserProfile(null);
               AuthService.dismissLoading();
-              this.userProfile$.next(null);
             }
           });
         },
@@ -394,7 +388,7 @@ export class UserController {
             USERDIVINGCLASSESCOLLECTION
           ),
           (userDivingClasses) => {
-            this.userDivingClasses = userDivingClasses;
+            this.userDivingClasses = userDivingClasses.data();
             DatabaseService.saveLocalDocument(
               USERDIVINGCLASSESCOLLECTION,
               this.userDivingClasses

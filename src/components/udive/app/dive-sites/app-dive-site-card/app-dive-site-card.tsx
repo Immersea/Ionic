@@ -13,6 +13,10 @@ export class AppDiveSiteCard {
   @Prop() edit = false;
   @Event() removeEmit: EventEmitter<any>;
 
+  componentDidLoad() {
+    console.log("this.startlocation", this.startlocation, this.diveSite);
+  }
+
   removeDiveSite(ev) {
     ev.stopPropagation();
     this.removeEmit.emit(this.diveSite.id);
@@ -53,8 +57,12 @@ export class AppDiveSiteCard {
                   <my-transl tag='distance' text='Distance'></my-transl>,
                   ": " +
                     distance(
-                      this.startlocation.latitude,
-                      this.startlocation.longitude,
+                      this.startlocation.latitude
+                        ? this.startlocation.latitude
+                        : this.startlocation.position.geopoint.latitude,
+                      this.startlocation.longitude
+                        ? this.startlocation.longitude
+                        : this.startlocation.position.geopoint.longitude,
                       this.diveSite.position.geopoint.latitude,
                       this.diveSite.position.geopoint.longitude
                     ),

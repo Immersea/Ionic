@@ -1,4 +1,4 @@
-import {isNumber, round} from "lodash";
+import round from "lodash/round";
 
 export class DiveTools {
   depthToPressFactor = 10.1325; // 10.1325 if meters 33. , if feets
@@ -952,7 +952,7 @@ export class DiveTools {
   feetToMeters(feet, decimals?) {
     var input = Number(feet);
     let res = input / this.conversions.feetPerMeter;
-    if (isNumber(decimals)) {
+    if (typeof decimals === "number") {
       res = round(res, decimals);
     }
     return res;
@@ -961,7 +961,7 @@ export class DiveTools {
   metersToFeet(meters, decimals?) {
     var input = Number(meters);
     let res = input * this.conversions.feetPerMeter;
-    if (isNumber(decimals)) {
+    if (typeof decimals === "number") {
       res = round(res, decimals);
     }
     return res;

@@ -1,14 +1,14 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {isString, toNumber, toString} from "lodash";
-import {Certification} from "../../../../../interfaces/udive/diving-class/divingClass";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { isString, toNumber, toString } from "lodash";
+import { Certification } from "../../../../../interfaces/udive/diving-class/divingClass";
 import {
   SystemService,
   SYSTEMCOLLECTION,
 } from "../../../../../services/common/system";
-import {DivePlanModel} from "../../../../../interfaces/udive/planner/dive-plan";
+import { DivePlanModel } from "../../../../../interfaces/udive/planner/dive-plan";
 import Swiper from "swiper";
-import {Environment} from "../../../../../global/env";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "modal-dive-certification-update",
@@ -22,7 +22,7 @@ export class ModalDiveCertificationUpdate {
   @State() newCert: boolean = false;
   @State() updateView = false;
   certGroups: any;
-  @State() titles = [{tag: "details"}, {tag: "schedule"}];
+  @State() titles = [{ tag: "details" }, { tag: "schedule" }];
   @State() slider: Swiper;
 
   async componentWillLoad() {
@@ -116,52 +116,52 @@ export class ModalDiveCertificationUpdate {
           swiper={this.slider}
           titles={this.titles}
         ></app-header-segment-toolbar>
-        <ion-content class="slides">
-          <swiper-container class="slider-dive-cert swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
+        <ion-content class='slides'>
+          <swiper-container class='slider-dive-cert swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
                 <ion-list>
                   <app-form-item
-                    label-tag="unique-id"
-                    label-text="Unique ID"
+                    label-tag='unique-id'
+                    label-text='Unique ID'
                     value={this.diveCertification.id}
                     disabled={!this.newCert}
-                    name="id"
-                    input-type="text"
+                    name='id'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleCertChange(ev)}
                     onIsValid={(ev) => this.uniqueIdValid(ev)}
                     validator={[
                       "required",
                       {
                         name: "uniqueid",
-                        options: {type: null},
+                        options: { type: null },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="name"
-                    label-text="Name"
+                    label-tag='name'
+                    label-text='Name'
                     value={this.diveCertification.name}
-                    name="name"
-                    input-type="text"
+                    name='name'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleCertChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="max-depth"
-                    label-text="Max. Depth"
+                    label-tag='max-depth'
+                    label-text='Max. Depth'
                     value={toString(this.diveCertification.maxDepth)}
-                    name="maxDepth"
-                    input-type="number"
+                    name='maxDepth'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleCertChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="max-students"
-                    label-text="Max. number of students"
+                    label-tag='max-students'
+                    label-text='Max. number of students'
                     value={toString(this.diveCertification.numberOfStudents)}
-                    name="numberOfStudents"
-                    input-type="number"
+                    name='numberOfStudents'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleCertChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
@@ -172,7 +172,7 @@ export class ModalDiveCertificationUpdate {
                       onIonChange={(ev) =>
                         this.updateCertGroup(ev.detail.value)
                       }
-                      interface="popover"
+                      interface='popover'
                     >
                       {this.certGroups.map((group) => (
                         <ion-select-option value={group.tag}>
@@ -183,13 +183,10 @@ export class ModalDiveCertificationUpdate {
                   </ion-item>
                 </ion-list>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-dive-course-activities
-                  schedule={this.diveCertification.activities}
+                  activities={this.diveCertification.activities}
                   showDiveLocation={false}
-                  onScheduleEmit={(ev) =>
-                    (this.diveCertification.activities = ev.detail)
-                  }
                   editable={true}
                 />
               </swiper-slide>

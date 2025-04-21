@@ -1,5 +1,5 @@
-import {has, isBoolean, isString, toNumber} from "lodash";
-import {LocationIQ, MapService, Position} from "../../../services/common/map";
+import { has, isBoolean, isString, toNumber } from "lodash";
+import { LocationIQ, MapService, Position } from "../../../services/common/map";
 
 export class CustomerLocation {
   plant_name_en: string;

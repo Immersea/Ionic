@@ -8,11 +8,14 @@ import {
   EventEmitter,
   Prop,
 } from "@stencil/core";
-import {SearchTag, CollectionGroup} from "../../../../../interfaces/interfaces";
-import {UDiveFilterService} from "../../../../../services/udive/ud-db-filter";
-import {UserService} from "../../../../../services/common/user";
-import {Subscription} from "rxjs";
-import {Environment} from "../../../../../global/env";
+import {
+  SearchTag,
+  CollectionGroup,
+} from "../../../../../interfaces/interfaces";
+import { UDiveFilterService } from "../../../../../services/udive/ud-db-filter";
+import { UserService } from "../../../../../services/common/user";
+import { Subscription } from "rxjs";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "app-search-filter",
@@ -45,7 +48,7 @@ export class AppSearchFilter {
     this.filterButtonTypes = UDiveFilterService.getMapDocs();
   }
   disconnectedCallback() {
-    this.userSub.unsubscribe();
+    this.userSub ? this.userSub.unsubscribe() : undefined;
     this.tags = [];
     this.searchFilterEmit.emit(this.tags);
   }
@@ -66,7 +69,7 @@ export class AppSearchFilter {
   }
 
   searchInputChange(str) {
-    const search = {name: str, type: "search"};
+    const search = { name: str, type: "search" };
     //pass search value to search filter
     this.addTag(search);
   }
@@ -90,27 +93,27 @@ export class AppSearchFilter {
         {!this.hideToolbar ? (
           <ion-toolbar color={Environment.getAppColor()}>
             <ion-grid>
-              <ion-row class="ion-text-center">
-                <ion-col size="1">
+              <ion-row class='ion-text-center'>
+                <ion-col size='1'>
                   <ion-menu-button />
                 </ion-col>
                 <ion-col>
                   <my-transl
-                    tag="looking-for"
-                    text="What are you looking for?"
+                    tag='looking-for'
+                    text='What are you looking for?'
                   />
                 </ion-col>
-                <ion-col size="1"></ion-col>
+                <ion-col size='1'></ion-col>
               </ion-row>
               <ion-row>
                 {Object.keys(this.filterButtonTypes).map((button) => (
-                  <ion-col class="ion-no-padding">
+                  <ion-col class='ion-no-padding'>
                     <ion-tab-button
                       color={Environment.getAppColor()}
-                      layout="icon-bottom"
+                      layout='icon-bottom'
                       onClick={() =>
                         !this.checkButtonEnabled(button)
-                          ? this.addTag({type: "filter", name: button})
+                          ? this.addTag({ type: "filter", name: button })
                           : this.removeFilterTag(button)
                       }
                     >
@@ -141,17 +144,19 @@ export class AppSearchFilter {
           </ion-toolbar>
         ) : (
           [
-            <ion-fab vertical="top" horizontal="end" slot="fixed">
-              <ion-fab-button class="fab-icon">
-                <ion-icon name="filter"></ion-icon>
+            <ion-fab vertical='top' horizontal='end' slot='fixed'>
+              <ion-fab-button class='fab-icon'>
+                <ion-icon name='filter'></ion-icon>
               </ion-fab-button>
-              <ion-fab-list side="start">
+              <ion-fab-list side='start'>
                 {Object.keys(this.filterButtonTypes).map((button) => (
                   <ion-fab-button
                     style={{
                       "--background": this.filterButtonTypes[button].icon.color,
                     }}
-                    onClick={() => this.addTag({type: "filter", name: button})}
+                    onClick={() =>
+                      this.addTag({ type: "filter", name: button })
+                    }
                     disabled={this.tags.find((el) => el.name == button) != null}
                   >
                     {this.filterButtonTypes[button].icon.type == "ionicon" ? (
@@ -178,8 +183,8 @@ export class AppSearchFilter {
           />
         ) : undefined}
 
-        <div class="search-tags">
-          <ion-grid class="ion-no-padding ion-no-margin ion-text-end">
+        <div class='search-tags'>
+          <ion-grid class='ion-no-padding ion-no-margin ion-text-end'>
             {this.tags.map((tag, i) => (
               <ion-row>
                 <ion-col>
@@ -222,7 +227,7 @@ export class AppSearchFilter {
                         : this.filterButtonTypes[tag.name].name}
                     </ion-label>
                     <ion-icon
-                      name="close-circle"
+                      name='close-circle'
                       color={
                         tag.type == "filter"
                           ? this.filterButtonTypes[tag.name].icon.color

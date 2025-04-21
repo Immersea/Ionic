@@ -1,10 +1,10 @@
-import {Component, h, Host, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {cloneDeep, isString} from "lodash";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {DatasheetPropertyType} from "../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
+import { Component, h, Host, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { cloneDeep, isString } from "lodash";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { DatasheetPropertyType } from "../../../../interfaces/trasteel/refractories/datasheets";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
 
 @Component({
   tag: "modal-datasheet-propertytype",
@@ -106,7 +106,7 @@ export class ModalDatasheetPropertyType {
             <ion-row>
               <ion-col>
                 <app-select-search
-                  color="trasteel"
+                  color='trasteel'
                   label={{
                     tag: "datasheet_major_family",
                     text: "Datasheet Major Family",
@@ -116,52 +116,52 @@ export class ModalDatasheetPropertyType {
                       ? this.datasheetPropertyTypes[this.index].typeId
                       : this.datasheetPropertyTypes[0].typeId
                   }
-                  lines="none"
-                  label-placement="floating"
+                  lines='none'
+                  label-placement='floating'
                   selectFn={(ev) => this.selectType(ev)}
                   selectOptions={this.datasheetPropertyTypes}
-                  selectValueId="typeId"
+                  selectValueId='typeId'
                   selectValueText={["typeName"]}
                   disabled={!this.validDatasheetPropertyType}
                 ></app-select-search>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetPropertyType}
                   onClick={() => this.addDatasheetPropertyType()}
                 >
-                  <ion-icon name="add" slot="start" />
+                  <ion-icon name='add' slot='start' />
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetPropertyType}
                   onClick={() => this.duplicateDatasheetPropertyType()}
                 >
-                  <ion-icon slot="start" name="duplicate"></ion-icon>
+                  <ion-icon slot='start' name='duplicate'></ion-icon>
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   disabled={this.datasheetPropertyTypes.length == 0}
                   onClick={() => this.deleteDatasheetPropertyType()}
                 >
-                  <ion-icon slot="start" name="trash"></ion-icon>
+                  <ion-icon slot='start' name='trash'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
           <app-form-item
-            label-text="ID"
+            label-text='ID'
             value={this.datasheetPropertyType.typeId}
-            name="typeId"
-            input-type="string"
+            name='typeId'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
@@ -175,39 +175,39 @@ export class ModalDatasheetPropertyType {
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="Name"
+            label-text='Name'
             value={this.datasheetPropertyType.typeName}
-            name="typeName"
-            input-type="string"
+            name='typeName'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
           <app-form-item
-            label-text="Value Left Description"
+            label-text='Value Left Description'
             value={this.datasheetPropertyType.typeLeft}
-            name="typeLeft"
-            input-type="text"
+            name='typeLeft'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
           ></app-form-item>
           <app-form-item
-            label-text="Value Right Description"
+            label-text='Value Right Description'
             value={this.datasheetPropertyType.typeRight}
-            name="typeRight"
-            input-type="text"
+            name='typeRight'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
           ></app-form-item>
           <app-form-item
-            label-text="Value Limit Description"
+            label-text='Value Limit Description'
             value={this.datasheetPropertyType.typeLimit}
-            name="typeLimit"
-            input-type="text"
+            name='typeLimit'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
           ></app-form-item>
         </ion-content>

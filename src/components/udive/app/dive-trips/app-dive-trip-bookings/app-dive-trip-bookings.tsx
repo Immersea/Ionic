@@ -1,16 +1,16 @@
-import {Component, h, Prop, State, Element} from "@stencil/core";
-import {TranslationService} from "../../../../../services/common/translations";
+import { Component, h, Prop, State, Element } from "@stencil/core";
+import { TranslationService } from "../../../../../services/common/translations";
 import {
   TripDive,
   TeamMember,
   DiveTrip,
 } from "../../../../../interfaces/udive/dive-trip/diveTrip";
-import {isNumber, orderBy, toNumber} from "lodash";
-import {UserService} from "../../../../../services/common/user";
-import {DiveTripsService} from "../../../../../services/udive/diveTrips";
-import {Subscription} from "rxjs";
-import {format} from "date-fns";
-import {Environment} from "../../../../../global/env";
+import { isNumber, orderBy, toNumber } from "lodash";
+import { UserService } from "../../../../../services/common/user";
+import { DiveTripsService } from "../../../../../services/udive/diveTrips";
+import { Subscription } from "rxjs";
+import { format } from "date-fns";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "app-dive-trip-bookings",
@@ -62,7 +62,7 @@ export class AppDiveTripBookings {
   }
 
   disconnectedCallback() {
-    this.userSub.unsubscribe();
+    this.userSub ? this.userSub.unsubscribe() : undefined;
   }
 
   async updateBookingsList() {
@@ -215,37 +215,37 @@ export class AppDiveTripBookings {
       <ion-card>
         <ion-card-header>
           <ion-card-title>
-            <ion-item class="ion-no-padding" lines="none">
+            <ion-item class='ion-no-padding' lines='none'>
               <ion-label>
                 {format(this.tripDive.divePlan.dives[0].date, "PP")}
               </ion-label>
             </ion-item>
           </ion-card-title>
           <ion-card-subtitle>
-            <ion-item class="ion-no-padding" lines="none">
+            <ion-item class='ion-no-padding' lines='none'>
               <ion-label>
                 {this.tripDive.divePlan.title +
                   " -> " +
                   TranslationService.getTransl(
                     "max-participants",
                     "Max xxx participants",
-                    {xxx: this.tripDive.numberOfParticipants}
+                    { xxx: this.tripDive.numberOfParticipants }
                   )}
               </ion-label>
               {this.editable &&
               this.tripDive.bookings &&
               this.tripDive.bookings.length > 0 ? (
                 !this.isEditing ? (
-                  <ion-button slot="end" onClick={() => this.editBookings()}>
-                    <my-transl tag="edit" text="Edit" />
+                  <ion-button slot='end' onClick={() => this.editBookings()}>
+                    <my-transl tag='edit' text='Edit' />
                   </ion-button>
                 ) : (
                   [
-                    <ion-button slot="end" onClick={() => this.addTeam()}>
-                      <my-transl tag="add-team" text="Add Team" />
+                    <ion-button slot='end' onClick={() => this.addTeam()}>
+                      <my-transl tag='add-team' text='Add Team' />
                     </ion-button>,
-                    <ion-button slot="end" onClick={() => this.saveBookings()}>
-                      <my-transl tag="save" text="Save" />
+                    <ion-button slot='end' onClick={() => this.saveBookings()}>
+                      <my-transl tag='save' text='Save' />
                     </ion-button>,
                   ]
                 )
@@ -256,7 +256,7 @@ export class AppDiveTripBookings {
         <ion-card-content>
           {!this.editable ? (
             <ion-segment
-              mode="ios"
+              mode='ios'
               color={Environment.getAppColor()}
               disabled={this.waitingRequest}
               onIonChange={(ev) => this.addBooking(ev)}
@@ -266,16 +266,16 @@ export class AppDiveTripBookings {
                   : ""
               }
             >
-              <ion-segment-button value="" layout="icon-start">
-                <ion-icon name="close-outline"></ion-icon>
+              <ion-segment-button value='' layout='icon-start'>
+                <ion-icon name='close-outline'></ion-icon>
                 <ion-label>{this.segmentTitles.notinterested}</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="false" layout="icon-start">
-                <ion-icon name="help-outline"></ion-icon>
+              <ion-segment-button value='false' layout='icon-start'>
+                <ion-icon name='help-outline'></ion-icon>
                 <ion-label>{this.segmentTitles.interested}</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="true" layout="icon-start">
-                <ion-icon name="checkmark-outline"></ion-icon>
+              <ion-segment-button value='true' layout='icon-start'>
+                <ion-icon name='checkmark-outline'></ion-icon>
                 <ion-label>{this.segmentTitles.attend}</ion-label>
               </ion-segment-button>
             </ion-segment>
@@ -287,7 +287,7 @@ export class AppDiveTripBookings {
               onIonItemReorder={(ev) => this.reorderTeams(ev)}
             >
               {this.waitingRequest && !this.userBooking ? (
-                <app-skeletons skeleton="diveTripBooking" />
+                <app-skeletons skeleton='diveTripBooking' />
               ) : undefined}
               {this.bookingsList.map((booking, k) =>
                 isNumber(booking) ? (
@@ -295,42 +295,42 @@ export class AppDiveTripBookings {
                     <ion-label>Team {booking + 1}</ion-label>
                   </ion-item-divider>
                 ) : booking.uid == this.userId && this.waitingRequest ? (
-                  <app-skeletons skeleton="diveTripBooking" />
+                  <app-skeletons skeleton='diveTripBooking' />
                 ) : (
                   <ion-item>
                     {!this.isEditing && booking.user.photoURL ? (
-                      <ion-avatar slot="start">
+                      <ion-avatar slot='start'>
                         <ion-img src={booking.user.photoURL} />
                       </ion-avatar>
                     ) : (
-                      <ion-reorder slot="start"></ion-reorder>
+                      <ion-reorder slot='start'></ion-reorder>
                     )}
                     <ion-label>{booking.user.displayName}</ion-label>
                     {booking.confirmedUser ? (
                       <ion-icon
-                        slot="end"
-                        color="success"
-                        name="checkmark-outline"
+                        slot='end'
+                        color='success'
+                        name='checkmark-outline'
                       ></ion-icon>
                     ) : (
                       <ion-icon
-                        slot="end"
-                        color="warning"
-                        name="help-outline"
+                        slot='end'
+                        color='warning'
+                        name='help-outline'
                       ></ion-icon>
                     )}
                     {!this.isEditing ? (
                       booking.confirmedOrganiser ? (
                         <ion-icon
-                          slot="end"
-                          color="success"
-                          name="checkmark-outline"
+                          slot='end'
+                          color='success'
+                          name='checkmark-outline'
                         ></ion-icon>
                       ) : (
                         <ion-icon
-                          slot="end"
-                          color="warning"
-                          name="help-outline"
+                          slot='end'
+                          color='warning'
+                          name='help-outline'
                         ></ion-icon>
                       )
                     ) : (
@@ -339,28 +339,28 @@ export class AppDiveTripBookings {
                           maxWidth: "40%",
                           marginLeft: "15%",
                         }}
-                        slot="end"
-                        mode="ios"
+                        slot='end'
+                        mode='ios'
                         color={Environment.getAppColor()}
                         onIonChange={(ev) => this.updateBooking(k, ev)}
                         value={booking.confirmedOrganiser.toString()}
                       >
-                        <ion-segment-button value="">
+                        <ion-segment-button value=''>
                           <ion-icon
-                            color="danger"
-                            name="close-outline"
+                            color='danger'
+                            name='close-outline'
                           ></ion-icon>
                         </ion-segment-button>
-                        <ion-segment-button value="false">
+                        <ion-segment-button value='false'>
                           <ion-icon
-                            color="warning"
-                            name="help-outline"
+                            color='warning'
+                            name='help-outline'
                           ></ion-icon>
                         </ion-segment-button>
-                        <ion-segment-button value="true">
+                        <ion-segment-button value='true'>
                           <ion-icon
-                            color="success"
-                            name="checkmark-outline"
+                            color='success'
+                            name='checkmark-outline'
                           ></ion-icon>
                         </ion-segment-button>
                       </ion-segment>
@@ -371,9 +371,9 @@ export class AppDiveTripBookings {
             </ion-reorder-group>
             {this.availableSpots.map(() => (
               <ion-item>
-                <ion-icon slot="start" name="person-add-outline"></ion-icon>
+                <ion-icon slot='start' name='person-add-outline'></ion-icon>
                 <ion-label>
-                  <my-transl tag="available" text="Available" />
+                  <my-transl tag='available' text='Available' />
                 </ion-label>
               </ion-item>
             ))}

@@ -8,17 +8,17 @@ import {
   Element,
   State,
 } from "@stencil/core";
-import {TranslationService} from "../../../../services/common/translations";
+import { TranslationService } from "../../../../services/common/translations";
 import {
   CustomerLocation,
   CustomerLocationElectrodesData,
   LocationType,
 } from "../../../../interfaces/trasteel/customer/customerLocation";
-import {MapService} from "../../../../services/common/map";
-import {alertController} from "@ionic/core";
-import {roundDecimals} from "../../../../helpers/utils";
-import {isNumber, toNumber} from "lodash";
-import {Environment} from "../../../../global/env";
+import { MapService } from "../../../../services/common/map";
+import { alertController } from "@ionic/core";
+import { roundDecimals } from "../../../../helpers/utils";
+import { isNumber, toNumber } from "lodash";
+import { Environment } from "../../../../global/env";
 
 @Component({
   tag: "app-location",
@@ -205,16 +205,16 @@ export class AppLocation {
       <Host>
         {this.editable
           ? [
-              <ion-item lines="none">
+              <ion-item lines='none'>
                 <ion-select
-                  color="trasteel"
-                  id="selectLocation"
-                  interface="action-sheet"
+                  color='trasteel'
+                  id='selectLocation'
+                  interface='action-sheet'
                   label={TranslationService.getTransl(
                     "loc_type",
                     "Location Type"
                   )}
-                  label-placement="floating"
+                  label-placement='floating'
                   onIonChange={(ev) => {
                     this.selectLocationType(ev);
                   }}
@@ -226,20 +226,20 @@ export class AppLocation {
                 ></ion-select>
                 <ion-button
                   icon-only
-                  fill="clear"
-                  slot="end"
+                  fill='clear'
+                  slot='end'
                   onClick={() => this.deleteItem()}
                 >
                   <ion-icon
-                    slot="icon-only"
-                    name="trash"
-                    color="danger"
+                    slot='icon-only'
+                    name='trash'
+                    color='danger'
                   ></ion-icon>
                 </ion-button>
               </ion-item>,
               <app-form-item
-                label-tag="address"
-                label-text="Address"
+                label-tag='address'
+                label-text='Address'
                 value={
                   this.location &&
                   this.location.location &&
@@ -247,9 +247,9 @@ export class AppLocation {
                     ? this.location.location.display_name
                     : null
                 }
-                name="address"
-                input-type="text"
-                lines="full"
+                name='address'
+                input-type='text'
+                lines='full'
                 onFormLocationSelected={(ev) => this.selectLocation(ev.detail)}
                 onFormLocationsFound={() => this.updateSlider()}
                 validator={["address"]}
@@ -258,23 +258,23 @@ export class AppLocation {
           : undefined}
         <ion-toolbar>
           <ion-segment
-            mode="ios"
+            mode='ios'
             color={Environment.getAppColor()}
             scrollable
             onIonChange={(ev) => this.segmentChanged(ev)}
             value={this.segment}
           >
             {!this.editable ? (
-              <ion-segment-button value="address" layout="icon-start">
+              <ion-segment-button value='address' layout='icon-start'>
                 <ion-label>
                   {TranslationService.getTransl("address", "Address")}
                 </ion-label>
               </ion-segment-button>
             ) : undefined}
-            <ion-segment-button value="plantConfiguration" layout="icon-start">
+            <ion-segment-button value='plantConfiguration' layout='icon-start'>
               <ion-label>{this.segmentTitles.plantConfiguration}</ion-label>
             </ion-segment-button>
-            <ion-segment-button value="electrodesData" layout="icon-start">
+            <ion-segment-button value='electrodesData' layout='icon-start'>
               <ion-label>{this.segmentTitles.electrodesData}</ion-label>
             </ion-segment-button>
           </ion-segment>
@@ -282,9 +282,9 @@ export class AppLocation {
         {this.segment == "address" ? (
           <div>
             <app-item-detail
-              lines="none"
-              labelTag="country"
-              labelText="Country"
+              lines='none'
+              labelTag='country'
+              labelText='Country'
               detailText={
                 this.location.location.address.country
                   ? this.location.location.address.country
@@ -292,9 +292,9 @@ export class AppLocation {
               }
             ></app-item-detail>
             <app-item-detail
-              lines="none"
-              labelTag="state"
-              labelText="State"
+              lines='none'
+              labelTag='state'
+              labelText='State'
               detailText={
                 this.location.location.address.state
                   ? this.location.location.address.state
@@ -302,9 +302,9 @@ export class AppLocation {
               }
             ></app-item-detail>
             <app-item-detail
-              lines="none"
-              labelTag="county"
-              labelText="County"
+              lines='none'
+              labelTag='county'
+              labelText='County'
               detailText={
                 this.location.location.address.county
                   ? this.location.location.address.county
@@ -312,9 +312,9 @@ export class AppLocation {
               }
             ></app-item-detail>
             <app-item-detail
-              lines="none"
-              labelTag="city"
-              labelText="City"
+              lines='none'
+              labelTag='city'
+              labelText='City'
               detailText={
                 this.location.location.address.city
                   ? this.location.location.address.city
@@ -322,9 +322,9 @@ export class AppLocation {
               }
             ></app-item-detail>
             <app-item-detail
-              lines="none"
-              labelTag="suburb"
-              labelText="Suburb"
+              lines='none'
+              labelTag='suburb'
+              labelText='Suburb'
               detailText={
                 this.location.location.address.suburb
                   ? this.location.location.address.suburb
@@ -332,9 +332,9 @@ export class AppLocation {
               }
             ></app-item-detail>
             <app-item-detail
-              lines="none"
-              labelTag="postcode"
-              labelText="Postcode"
+              lines='none'
+              labelTag='postcode'
+              labelText='Postcode'
               detailText={
                 this.location.location.address.postcode
                   ? this.location.location.address.postcode
@@ -342,9 +342,9 @@ export class AppLocation {
               }
             ></app-item-detail>
             <app-item-detail
-              lines="none"
-              labelTag="road"
-              labelText="Road"
+              lines='none'
+              labelTag='road'
+              labelText='Road'
               detailText={
                 this.location.location.address.road
                   ? this.location.location.address.road
@@ -358,9 +358,9 @@ export class AppLocation {
             {!this.editable
               ? [
                   <app-item-detail
-                    lines="none"
-                    labelTag="gem-wiki-page"
-                    labelText="Gem Wiki Page"
+                    lines='none'
+                    labelTag='gem-wiki-page'
+                    labelText='Gem Wiki Page'
                     detailText={
                       this.location.gem_wiki_page_en
                         ? this.location.gem_wiki_page_en
@@ -368,9 +368,9 @@ export class AppLocation {
                     }
                   ></app-item-detail>,
                   <app-item-detail
-                    lines="none"
-                    labelTag="gem-wiki-page-other"
-                    labelText="Gem Wiki Page Other"
+                    lines='none'
+                    labelTag='gem-wiki-page-other'
+                    labelText='Gem Wiki Page Other'
                     detailText={
                       this.location.gem_wiki_page_other
                         ? this.location.gem_wiki_page_other
@@ -380,247 +380,247 @@ export class AppLocation {
                 ]
               : undefined}
             <app-form-item
-              lines="none"
-              labelTag="status"
-              labelText="Status"
+              lines='none'
+              labelTag='status'
+              labelText='Status'
               value={this.location.status ? this.location.status : null}
-              name="status"
-              input-type="text"
+              name='status'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="category-steel-product"
-              labelText="Category Steel Product"
+              lines='none'
+              labelTag='category-steel-product'
+              labelText='Category Steel Product'
               value={
                 this.location.category_steel_product
                   ? this.location.category_steel_product
                   : null
               }
-              name="category_steel_product"
-              input-type="text"
+              name='category_steel_product'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="steel-product"
-              labelText="Steel Products"
+              lines='none'
+              labelTag='steel-product'
+              labelText='Steel Products'
               value={
                 this.location.steel_products
                   ? this.location.steel_products
                   : null
               }
-              name="steel_products"
-              input-type="text"
+              name='steel_products'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="steel_sector_end_users"
-              labelText="Steel Sector End Users"
+              lines='none'
+              labelTag='steel_sector_end_users'
+              labelText='Steel Sector End Users'
               value={
                 this.location.steel_sector_end_users
                   ? this.location.steel_sector_end_users
                   : null
               }
-              name="steel_sector_end_users"
-              input-type="text"
+              name='steel_sector_end_users'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="main-production-equipment"
-              labelText="Main Production Equipment"
+              lines='none'
+              labelTag='main-production-equipment'
+              labelText='Main Production Equipment'
               value={
                 this.location.main_production_equipment
                   ? this.location.main_production_equipment
                   : null
               }
-              name="main_production_equipment"
-              input-type="text"
+              name='main_production_equipment'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="main-production-process"
-              labelText="Main Production Process"
+              lines='none'
+              labelTag='main-production-process'
+              labelText='Main Production Process'
               value={
                 this.location.main_production_process
                   ? this.location.main_production_process
                   : null
               }
-              name="main_production_process"
-              input-type="text"
+              name='main_production_process'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="detailed-production-equipment"
-              labelText="Detailed Production Equipment"
+              lines='none'
+              labelTag='detailed-production-equipment'
+              labelText='Detailed Production Equipment'
               value={
                 this.location.detailed_production_equipment
                   ? this.location.detailed_production_equipment
                   : null
               }
-              name="detailed_production_equipment"
-              input-type="text"
+              name='detailed_production_equipment'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="workforce-size"
-              labelText="Workforce Size"
+              lines='none'
+              labelTag='workforce-size'
+              labelText='Workforce Size'
               value={
                 this.location.workforce_size
                   ? this.location.workforce_size
                   : null
               }
-              name="workforce_size"
-              input-type="number"
+              name='workforce_size'
+              input-type='number'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="proposed-date"
-              labelText="Proposed Date"
+              lines='none'
+              labelTag='proposed-date'
+              labelText='Proposed Date'
               value={
                 this.location.proposed_date &&
                 this.location.proposed_date != "unknown"
                   ? this.location.proposed_date
                   : null
               }
-              name="proposed_date"
-              input-type="number"
+              name='proposed_date'
+              input-type='number'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="construction-date"
-              labelText="Construction Date"
+              lines='none'
+              labelTag='construction-date'
+              labelText='Construction Date'
               value={
                 this.location.construction_date &&
                 this.location.construction_date != "unknown"
                   ? this.location.construction_date
                   : null
               }
-              name="construction_date"
-              input-type="number"
+              name='construction_date'
+              input-type='number'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="plant-age"
-              labelText="Plant Age"
+              lines='none'
+              labelTag='plant-age'
+              labelText='Plant Age'
               value={this.location.plant_age ? this.location.plant_age : null}
-              name="plant_age"
-              input-type="number"
+              name='plant_age'
+              input-type='number'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="start-date"
-              labelText="Start Date"
+              lines='none'
+              labelTag='start-date'
+              labelText='Start Date'
               value={
                 this.location.start_date && this.location.start_date !== "N/A"
                   ? this.location.start_date
                   : null
               }
-              name="start_date"
-              input-type="number"
+              name='start_date'
+              input-type='number'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="closed-date"
-              labelText="Closed Date"
+              lines='none'
+              labelTag='closed-date'
+              labelText='Closed Date'
               value={
                 this.location.closed_date && this.location.closed_date !== "N/A"
                   ? this.location.closed_date
                   : null
               }
-              name="closed_date"
-              input-type="number"
+              name='closed_date'
+              input-type='number'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="power-source"
-              labelText="Power Source"
+              lines='none'
+              labelTag='power-source'
+              labelText='Power Source'
               value={
                 this.location.power_source ? this.location.power_source : null
               }
-              name="power_source"
-              input-type="text"
+              name='power_source'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="met-coal-source"
-              labelText="Met Coal Source"
+              lines='none'
+              labelTag='met-coal-source'
+              labelText='Met Coal Source'
               value={
                 this.location.met_coal_source
                   ? this.location.met_coal_source
                   : null
               }
-              name="met_coal_source"
-              input-type="text"
+              name='met_coal_source'
+              input-type='text'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="responsible_steel_certification"
-              labelText="Responsible Steel Certification"
+              lines='none'
+              labelTag='responsible_steel_certification'
+              labelText='Responsible Steel Certification'
               value={
                 this.location.responsible_steel_certification &&
                 this.location.responsible_steel_certification !== "N/A"
                   ? this.location.responsible_steel_certification
                   : null
               }
-              name="responsible_steel_certification"
-              input-type="boolean"
+              name='responsible_steel_certification'
+              input-type='boolean'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="ISO_14001"
-              labelText="ISO 14001"
+              lines='none'
+              labelTag='ISO_14001'
+              labelText='ISO 14001'
               value={
                 this.location.ISO_14001 && this.location.ISO_14001 !== "N/A"
                   ? this.location.ISO_14001
                   : null
               }
-              name="ISO_14001"
-              input-type="boolean"
+              name='ISO_14001'
+              input-type='boolean'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
             <app-form-item
-              lines="none"
-              labelTag="ISO_50001"
-              labelText="ISO 50001"
+              lines='none'
+              labelTag='ISO_50001'
+              labelText='ISO 50001'
               value={
                 this.location.ISO_50001 && this.location.ISO_50001 !== "N/A"
                   ? this.location.ISO_50001
                   : null
               }
-              name="ISO_50001"
-              input-type="boolean"
+              name='ISO_50001'
+              input-type='boolean'
               readonly={!this.editable}
               onFormItemChanged={(ev) => this.handleLocationChange(ev)}
             ></app-form-item>
@@ -630,21 +630,21 @@ export class AppLocation {
           <div>
             <ion-toolbar>
               <ion-segment
-                mode="ios"
+                mode='ios'
                 scrollable
                 onIonChange={(ev) => this.electrodeSegmentChanged(ev)}
                 value={this.electrodeSegment}
               >
                 {this.location.electrodesData.map((electrode, index) => (
-                  <ion-segment-button value={index} layout="icon-start">
+                  <ion-segment-button value={index} layout='icon-start'>
                     <ion-label>{electrode.application}</ion-label>
                   </ion-segment-button>
                 ))}
                 {this.editable ? (
                   <ion-segment-button
-                    value="add"
+                    value='add'
                     onClick={() => this.addElectrode()}
-                    layout="icon-start"
+                    layout='icon-start'
                   >
                     <ion-label>+</ion-label>
                   </ion-segment-button>
@@ -659,14 +659,14 @@ export class AppLocation {
                       ? [
                           <ion-item>
                             <ion-select
-                              color="trasteel"
-                              id="application"
-                              interface="action-sheet"
+                              color='trasteel'
+                              id='application'
+                              interface='action-sheet'
                               label={TranslationService.getTransl(
                                 "application",
                                 "Application"
                               )}
-                              label-placement="floating"
+                              label-placement='floating'
                               onIonChange={(ev) => {
                                 electrode.application = ev.detail.value;
                                 this.handleElectrodeChange();
@@ -677,10 +677,10 @@ export class AppLocation {
                                   : null
                               }
                             >
-                              <ion-select-option value="EAF">
+                              <ion-select-option value='EAF'>
                                 EAF
                               </ion-select-option>
-                              <ion-select-option value="LF">
+                              <ion-select-option value='LF'>
                                 LF
                               </ion-select-option>
                             </ion-select>
@@ -691,9 +691,9 @@ export class AppLocation {
                                 ? electrode.application
                                 : null
                             }
-                            name="application"
-                            input-type="text"
-                            lines="full"
+                            name='application'
+                            input-type='text'
+                            lines='full'
                             onFormItemChanged={(ev) =>
                               this.handleElectrodeItemChange(ev)
                             }
@@ -701,242 +701,242 @@ export class AppLocation {
                         ]
                       : undefined}
                     <app-form-item
-                      label-tag="diameter"
-                      label-text="Diameter"
+                      label-tag='diameter'
+                      label-text='Diameter'
                       appendText={" (mm)"}
                       value={
                         electrode && electrode.dia_in_mm
                           ? electrode.dia_in_mm
                           : null
                       }
-                      name="dia_in_mm"
+                      name='dia_in_mm'
                       readonly={!this.editable}
-                      input-type="number"
-                      lines="full"
+                      input-type='number'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="diameter"
-                      label-text="Diameter"
+                      label-tag='diameter'
+                      label-text='Diameter'
                       appendText={" (inches)"}
                       value={
                         electrode && electrode.dia_in_inches
                           ? electrode.dia_in_inches
                           : null
                       }
-                      name="dia_in_inches"
+                      name='dia_in_inches'
                       readonly={!this.editable}
-                      input-type="number"
-                      lines="full"
+                      input-type='number'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="length"
-                      label-text="Length"
+                      label-tag='length'
+                      label-text='Length'
                       appendText={" (mm)"}
                       value={
                         electrode && electrode.length_in_mm
                           ? electrode.length_in_mm
                           : null
                       }
-                      name="length_in_mm"
+                      name='length_in_mm'
                       readonly={!this.editable}
-                      input-type="number"
-                      lines="full"
+                      input-type='number'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="length"
-                      label-text="Length"
+                      label-tag='length'
+                      label-text='Length'
                       appendText={" (inches)"}
                       value={
                         electrode && electrode.length_in_inches
                           ? electrode.length_in_inches
                           : null
                       }
-                      name="length_in_inches"
+                      name='length_in_inches'
                       readonly={!this.editable}
-                      input-type="number"
-                      lines="full"
+                      input-type='number'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="grade"
-                      label-text="Grade"
+                      label-tag='grade'
+                      label-text='Grade'
                       value={
                         electrode && electrode.grade ? electrode.grade : null
                       }
-                      name="grade"
+                      name='grade'
                       readonly={!this.editable}
-                      input-type="text"
-                      lines="full"
+                      input-type='text'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="pin-nom-dia"
-                      label-text="Pin Nominal Diameter"
+                      label-tag='pin-nom-dia'
+                      label-text='Pin Nominal Diameter'
                       appendText={" (mm)"}
                       value={
                         electrode && electrode.pin_nominal_dia_in_mm
                           ? electrode.pin_nominal_dia_in_mm
                           : null
                       }
-                      name="pin_nominal_dia_in_mm"
+                      name='pin_nominal_dia_in_mm'
                       readonly={!this.editable}
-                      input-type="number"
-                      lines="full"
+                      input-type='number'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="pin-nom-dia"
-                      label-text="Pin Nominal Diameter"
+                      label-tag='pin-nom-dia'
+                      label-text='Pin Nominal Diameter'
                       appendText={" (inches)"}
                       value={
                         electrode && electrode.pin_nominal_dia_in_inches
                           ? electrode.pin_nominal_dia_in_inches
                           : null
                       }
-                      name="pin_nominal_dia_in_inches"
+                      name='pin_nominal_dia_in_inches'
                       readonly={!this.editable}
-                      input-type="number"
-                      lines="full"
+                      input-type='number'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="pin-size"
-                      label-text="Pin Size"
+                      label-tag='pin-size'
+                      label-text='Pin Size'
                       appendText={" (mm)"}
                       value={
                         electrode && electrode.pin_size_in_mm
                           ? electrode.pin_size_in_mm
                           : null
                       }
-                      name="pin_size_in_mm"
+                      name='pin_size_in_mm'
                       readonly={!this.editable}
-                      input-type="text"
-                      lines="full"
+                      input-type='text'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="pin-size"
-                      label-text="Pin Size"
+                      label-tag='pin-size'
+                      label-text='Pin Size'
                       appendText={" (inches)"}
                       value={
                         electrode && electrode.pin_size_in_inches
                           ? electrode.pin_size_in_inches
                           : null
                       }
-                      name="pin_size_in_inches"
+                      name='pin_size_in_inches'
                       readonly={!this.editable}
-                      input-type="text"
-                      lines="full"
+                      input-type='text'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="tpi"
-                      label-text="TPI"
+                      label-tag='tpi'
+                      label-text='TPI'
                       value={electrode && electrode.TPI ? electrode.TPI : null}
-                      name="TPI"
+                      name='TPI'
                       readonly={!this.editable}
-                      input-type="text"
-                      lines="full"
+                      input-type='text'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
 
                     <app-form-item
-                      label-tag="pin-length-code"
-                      label-text="Pin Length Code"
+                      label-tag='pin-length-code'
+                      label-text='Pin Length Code'
                       value={
                         electrode && electrode.pin_length_type_code
                           ? electrode.pin_length_type_code
                           : null
                       }
-                      name="pin_length_type_code"
+                      name='pin_length_type_code'
                       readonly={!this.editable}
-                      input-type="text"
-                      lines="full"
+                      input-type='text'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="pin-length"
-                      label-text="Pin Length"
+                      label-tag='pin-length'
+                      label-text='Pin Length'
                       value={
                         electrode && electrode.pin_length
                           ? electrode.pin_length
                           : null
                       }
-                      name="pin_length"
+                      name='pin_length'
                       readonly={!this.editable}
-                      input-type="text"
-                      lines="full"
+                      input-type='text'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="dust-groove"
-                      label-text="Dust Groove"
+                      label-tag='dust-groove'
+                      label-text='Dust Groove'
                       value={
                         electrode && electrode.dust_groove
                           ? electrode.dust_groove
                           : null
                       }
-                      name="dust_groove"
+                      name='dust_groove'
                       readonly={!this.editable}
-                      input-type="boolean"
-                      lines="full"
+                      input-type='boolean'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="pitch-plug"
-                      label-text="Pitch Plug"
+                      label-tag='pitch-plug'
+                      label-text='Pitch Plug'
                       value={
                         electrode && electrode.pitch_plug
                           ? electrode.pitch_plug
                           : null
                       }
-                      name="pitch_plug"
+                      name='pitch_plug'
                       readonly={!this.editable}
-                      input-type="boolean"
-                      lines="full"
+                      input-type='boolean'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }
                     ></app-form-item>
                     <app-form-item
-                      label-tag="preset"
-                      label-text="Preset"
+                      label-tag='preset'
+                      label-text='Preset'
                       value={
                         electrode && electrode.preset ? electrode.preset : null
                       }
-                      name="preset"
+                      name='preset'
                       readonly={!this.editable}
-                      input-type="boolean"
-                      lines="full"
+                      input-type='boolean'
+                      lines='full'
                       onFormItemChanged={(ev) =>
                         this.handleElectrodeItemChange(ev)
                       }

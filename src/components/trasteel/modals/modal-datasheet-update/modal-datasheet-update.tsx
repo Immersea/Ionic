@@ -1,18 +1,18 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {isString} from "lodash";
-import {Subscription} from "rxjs";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { isString } from "lodash";
+import { Subscription } from "rxjs";
 import Swiper from "swiper";
-import {UserProfile} from "../../../../interfaces/common/user/user-profile";
-import {UserService} from "../../../../services/common/user";
-import {TranslationService} from "../../../../services/common/translations";
+import { UserProfile } from "../../../../interfaces/common/user/user-profile";
+import { UserService } from "../../../../services/common/user";
+import { TranslationService } from "../../../../services/common/translations";
 import {
   Datasheet,
   DatasheetProperty,
 } from "../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
 
 @Component({
   tag: "modal-datasheet-update",
@@ -20,8 +20,8 @@ import {SystemService} from "../../../../services/common/system";
 })
 export class ModalDatasheetUpdate {
   @Element() el: HTMLElement;
-  @Prop({mutable: true}) datasheetId: string = undefined;
-  @Prop() duplicateDatasheet: {id: string; datasheet: Datasheet} = undefined;
+  @Prop({ mutable: true }) datasheetId: string = undefined;
+  @Prop() duplicateDatasheet: { id: string; datasheet: Datasheet } = undefined;
   @Prop() revision: boolean;
   @State() datasheet: Datasheet;
   @State() updateView = true;
@@ -30,11 +30,11 @@ export class ModalDatasheetUpdate {
 
   validDatasheet = false;
   titles = [
-    {tag: "information", text: "Information", disabled: false},
-    {tag: "properties", text: "Properties", disabled: false},
-    {tag: "reference", text: "Reference", disabled: false},
-    {tag: "comments", text: "Comments", disabled: false},
-    {tag: "files", text: "Files", disabled: true},
+    { tag: "information", text: "Information", disabled: false },
+    { tag: "properties", text: "Properties", disabled: false },
+    { tag: "reference", text: "Reference", disabled: false },
+    { tag: "comments", text: "Comments", disabled: false },
+    { tag: "files", text: "Files", disabled: true },
   ];
   @State() slider: Swiper;
   userProfile: UserProfile;
@@ -298,150 +298,150 @@ export class ModalDatasheetUpdate {
           titles={this.titles}
         ></app-header-segment-toolbar>
         <ion-content
-          class="slides"
+          class='slides'
           onIonScroll={(ev) => (this.scrollTop = ev.detail.scrollTop)}
         >
-          <swiper-container class="slider-edit-datasheet swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding">
+          <swiper-container class='slider-edit-datasheet swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding'>
                   <app-select-search
-                    color="trasteel"
-                    label={{tag: "principal", text: "Principal"}}
-                    labelAddText="*"
+                    color='trasteel'
+                    label={{ tag: "principal", text: "Principal" }}
+                    labelAddText='*'
                     value={
                       this.datasheet && this.datasheet.majorFamilyId
                         ? this.datasheet.majorFamilyId
                         : null
                     }
-                    lines="inset"
+                    lines='inset'
                     selectFn={(ev) => this.selectMajorFamily(ev)}
                     selectOptions={DatasheetsService.getDatasheetMajorFamilies()}
-                    selectValueId="majorFamilyId"
+                    selectValueId='majorFamilyId'
                     selectValueText={["majorFamilyName"]}
                   ></app-select-search>
                   <app-select-search
-                    color="trasteel"
-                    label={{tag: "product", text: "Product"}}
-                    labelAddText="*"
+                    color='trasteel'
+                    label={{ tag: "product", text: "Product" }}
+                    labelAddText='*'
                     value={
                       this.datasheet && this.datasheet.familyId
                         ? this.datasheet.familyId
                         : null
                     }
-                    lines="inset"
+                    lines='inset'
                     selectFn={(ev) => this.selectFamily(ev)}
                     selectOptions={DatasheetsService.getDatasheetFamilies()}
-                    selectValueId="familyId"
+                    selectValueId='familyId'
                     selectValueText={["familyName"]}
                   ></app-select-search>
                   <app-select-search
-                    color="trasteel"
-                    label={{tag: "category", text: "Category"}}
-                    labelAddText="*"
+                    color='trasteel'
+                    label={{ tag: "category", text: "Category" }}
+                    labelAddText='*'
                     value={
                       this.datasheet && this.datasheet.categoriesId
                         ? this.datasheet.categoriesId
                         : null
                     }
-                    lines="inset"
+                    lines='inset'
                     selectFn={(ev) => this.selectCategory(ev)}
                     selectOptions={DatasheetsService.getDatasheetCategories()}
-                    selectValueId="categoriesId"
+                    selectValueId='categoriesId'
                     selectValueText={["categoriesName"]}
                   ></app-select-search>
                   <app-form-item
-                    lines="inset"
-                    label-tag="tech-no"
-                    label-text="Tech. #"
+                    lines='inset'
+                    label-tag='tech-no'
+                    label-text='Tech. #'
                     value={this.datasheet.techNo}
-                    name="techNo"
-                    input-type="text"
+                    name='techNo'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="revision-no"
-                    label-text="Revision #"
+                    lines='inset'
+                    label-tag='revision-no'
+                    label-text='Revision #'
                     value={this.datasheet.revisionNo}
-                    name="revisionNo"
-                    input-type="text"
+                    name='revisionNo'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="old"
-                    label-text="Old"
+                    lines='inset'
+                    label-tag='old'
+                    label-text='Old'
                     value={this.datasheet.oldProduct}
-                    name="oldProduct"
-                    input-type="boolean"
+                    name='oldProduct'
+                    input-type='boolean'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="issued-on-date"
-                    label-text="Issued on Date"
+                    lines='inset'
+                    label-tag='issued-on-date'
+                    label-text='Issued on Date'
                     value={this.datasheet.issuedOnDate}
-                    name="issuedOnDate"
-                    input-type="date"
-                    date-presentation="date"
+                    name='issuedOnDate'
+                    input-type='date'
+                    date-presentation='date'
                     prefer-wheel={false}
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="product-name"
-                    label-text="Product Name"
+                    lines='inset'
+                    label-tag='product-name'
+                    label-text='Product Name'
                     value={this.datasheet.productName}
-                    name="productName"
-                    input-type="text"
+                    name='productName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="classification"
-                    label-text="Classification"
+                    lines='inset'
+                    label-tag='classification'
+                    label-text='Classification'
                     value={this.datasheet.classification}
-                    name="classification"
-                    input-type="text"
+                    name='classification'
+                    input-type='text'
                     multiLanguage={true}
-                    text-rows="4"
+                    text-rows='4'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     onUpdateSlider={() => this.updateSlider()}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="application"
-                    label-text="Application"
+                    lines='inset'
+                    label-tag='application'
+                    label-text='Application'
                     value={this.datasheet.application}
-                    name="application"
-                    input-type="text"
+                    name='application'
+                    input-type='text'
                     multiLanguage={true}
-                    text-rows="4"
+                    text-rows='4'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     onUpdateSlider={() => this.updateSlider()}
                     validator={["required"]}
                   ></app-form-item>
                 </ion-list>
                 {this.datasheetId ? (
-                  <ion-footer class="ion-no-border">
+                  <ion-footer class='ion-no-border'>
                     <ion-toolbar>
                       <ion-button
-                        expand="block"
-                        fill="outline"
-                        color="danger"
+                        expand='block'
+                        fill='outline'
+                        color='danger'
                         onClick={() => this.deleteDatasheet()}
                       >
-                        <ion-icon slot="start" name="trash"></ion-icon>
+                        <ion-icon slot='start' name='trash'></ion-icon>
                         <my-transl
-                          tag="delete"
-                          text="Delete"
+                          tag='delete'
+                          text='Delete'
                           isLabel
                         ></my-transl>
                       </ion-button>
@@ -449,41 +449,41 @@ export class ModalDatasheetUpdate {
                   </ion-footer>
                 ) : undefined}
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
-                <div id="properties-grid">
+              <swiper-slide class='swiper-slide'>
+                <div id='properties-grid'>
                   <ion-grid>
                     <ion-row>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <small>
                           {TranslationService.getTransl("type", "Type")}
                         </small>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <small>
                           {TranslationService.getTransl("name", "Name")}
                         </small>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <small>
                           {TranslationService.getTransl("typical", "Typical")}
                         </small>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <small>
                           {TranslationService.getTransl("prefix", "Prefix")}
                         </small>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <small>
                           {TranslationService.getTransl("from", "From")}
                         </small>
                       </ion-col>
-                      <ion-col class="centered">
+                      <ion-col class='centered'>
                         <small>
                           {TranslationService.getTransl("to", "To")}
                         </small>
                       </ion-col>
-                      <ion-col size="1" class="centered">
+                      <ion-col size='1' class='centered'>
                         <small>
                           {TranslationService.getTransl("show", "Show") +
                             "/" +
@@ -495,94 +495,94 @@ export class ModalDatasheetUpdate {
                       <ion-row>
                         <ion-col>
                           <app-select-search
-                            color="trasteel"
+                            color='trasteel'
                             value={property.type ? property.type : null}
-                            lines="none"
+                            lines='none'
                             selectFn={(ev) =>
                               this.selectPropertyType(index, ev)
                             }
                             selectOptions={DatasheetsService.getDatasheetPropertyTypes()}
-                            selectValueId="typeId"
+                            selectValueId='typeId'
                             selectValueText={["typeName"]}
                           ></app-select-search>
                         </ion-col>
                         <ion-col>
                           <app-select-search
-                            color="trasteel"
+                            color='trasteel'
                             value={property.name ? property.name : null}
-                            lines="none"
+                            lines='none'
                             disabled={!this.propertyNames[index]}
                             selectFn={(ev) =>
                               this.selectPropertyName(index, ev)
                             }
                             selectOptions={this.propertyNames[index]}
-                            selectValueId="nameId"
+                            selectValueId='nameId'
                             selectValueText={["nameName"]}
                           ></app-select-search>
                         </ion-col>
-                        <ion-col class="centered">
+                        <ion-col class='centered'>
                           <app-form-item
                             value={property.typical}
-                            name="typical"
-                            input-type="number"
+                            name='typical'
+                            input-type='number'
                             onFormItemChanged={(ev) =>
                               this.handlePropertyChange(index, ev)
                             }
                           ></app-form-item>
                         </ion-col>
-                        <ion-col class="centered">
+                        <ion-col class='centered'>
                           <app-form-item
                             value={property.prefix}
-                            name="prefix"
-                            input-type="text"
+                            name='prefix'
+                            input-type='text'
                             onFormItemChanged={(ev) =>
                               this.handlePropertyChange(index, ev)
                             }
                           ></app-form-item>
                         </ion-col>
-                        <ion-col class="centered">
+                        <ion-col class='centered'>
                           <app-form-item
                             value={property.lower}
-                            name="lower"
-                            input-type="number"
+                            name='lower'
+                            input-type='number'
                             onFormItemChanged={(ev) =>
                               this.handlePropertyChange(index, ev)
                             }
                           ></app-form-item>
                         </ion-col>
-                        <ion-col class="centered">
+                        <ion-col class='centered'>
                           <app-form-item
                             value={property.higher}
-                            name="higher"
-                            input-type="number"
+                            name='higher'
+                            input-type='number'
                             onFormItemChanged={(ev) =>
                               this.handlePropertyChange(index, ev)
                             }
                           ></app-form-item>
                         </ion-col>
-                        <ion-col size="1" class="centered ">
-                          <ion-grid class="remove-background">
+                        <ion-col size='1' class='centered '>
+                          <ion-grid class='remove-background'>
                             <ion-row>
-                              <ion-col class="centered">
+                              <ion-col class='centered'>
                                 <app-form-item
-                                  class="ion-no-padding"
+                                  class='ion-no-padding'
                                   value={property.show}
-                                  name="show"
-                                  input-type="boolean"
+                                  name='show'
+                                  input-type='boolean'
                                   onFormItemChanged={(ev) =>
                                     this.handlePropertyChange(index, ev)
                                   }
                                 ></app-form-item>
                               </ion-col>
-                              <ion-col class="centered">
+                              <ion-col class='centered'>
                                 <ion-button
-                                  class="ion-no-padding"
+                                  class='ion-no-padding'
                                   icon-only
-                                  color="danger"
-                                  fill="clear"
+                                  color='danger'
+                                  fill='clear'
                                   onClick={() => this.deleteProperty(index)}
                                 >
-                                  <ion-icon name="trash"></ion-icon>
+                                  <ion-icon name='trash'></ion-icon>
                                 </ion-button>
                               </ion-col>
                             </ion-row>
@@ -595,77 +595,77 @@ export class ModalDatasheetUpdate {
 
                 <io-item>
                   <ion-button
-                    expand="full"
-                    shape="round"
-                    color="trasteel"
-                    size="small"
+                    expand='full'
+                    shape='round'
+                    color='trasteel'
+                    size='small'
                     onClick={() => this.addProperty()}
                   >
                     +
                   </ion-button>
                 </io-item>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-list>
                   <app-form-item
-                    lines="inset"
-                    label-tag="producer"
-                    label-text="Producer"
+                    lines='inset'
+                    label-tag='producer'
+                    label-text='Producer'
                     value={this.datasheet.producerName}
-                    name="producerName"
-                    input-type="text"
+                    name='producerName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="producer-ref-quality"
-                    label-text="Producer Reference Quality"
+                    lines='inset'
+                    label-tag='producer-ref-quality'
+                    label-text='Producer Reference Quality'
                     value={this.datasheet.producerReferenceQuality}
-                    name="producerReferenceQuality"
-                    input-type="text"
+                    name='producerReferenceQuality'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="competitor-ref-quality"
-                    label-text="Competitor Reference Quality"
+                    lines='inset'
+                    label-tag='competitor-ref-quality'
+                    label-text='Competitor Reference Quality'
                     value={this.datasheet.competitorReferenceQuality}
-                    name="competitorReferenceQuality"
-                    input-type="text"
+                    name='competitorReferenceQuality'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                 </ion-list>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-list>
                   <app-form-item
-                    lines="inset"
-                    label-tag="comments"
-                    label-text="Comments"
+                    lines='inset'
+                    label-tag='comments'
+                    label-text='Comments'
                     value={this.datasheet.comments}
-                    name="comments"
-                    input-type="text"
-                    text-rows="4"
+                    name='comments'
+                    input-type='text'
+                    text-rows='4'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="performance-comments"
-                    label-text="Performance Comments"
+                    lines='inset'
+                    label-tag='performance-comments'
+                    label-text='Performance Comments'
                     value={this.datasheet.performanceComments}
-                    name="performanceComments"
-                    input-type="text"
-                    text-rows="4"
+                    name='performanceComments'
+                    input-type='text'
+                    text-rows='4'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                 </ion-list>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 FILES - TO BE DONE
               </swiper-slide>
             </swiper-wrapper>

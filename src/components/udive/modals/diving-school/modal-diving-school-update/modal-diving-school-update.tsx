@@ -1,15 +1,15 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {DivingSchool} from "../../../../../interfaces/udive/diving-school/divingSchool";
-import {modalController, popoverController} from "@ionic/core";
-import {isNumber, isString, toLower, toNumber} from "lodash";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { DivingSchool } from "../../../../../interfaces/udive/diving-school/divingSchool";
+import { modalController, popoverController } from "@ionic/core";
+import { isNumber, isString, toLower, toNumber } from "lodash";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
 import {
   DivingSchoolsService,
   DIVESCHOOLSSCOLLECTION,
 } from "../../../../../services/udive/divingSchools";
-import {UserProfile} from "../../../../../interfaces/common/user/user-profile";
-import {mapHeight} from "../../../../../helpers/utils";
+import { UserProfile } from "../../../../../interfaces/common/user/user-profile";
+import { mapHeight } from "../../../../../helpers/utils";
 import Swiper from "swiper";
 
 @Component({
@@ -30,11 +30,11 @@ export class ModalDivingSchoolUpdate {
     divingSchoolCoursesSelect: any[];
   };
   @State() titles = [
-    {tag: "map"},
-    {tag: "position"},
-    {tag: "information"},
-    {tag: "diving-courses", text: "Diving Courses"},
-    {tag: "team"},
+    { tag: "map" },
+    { tag: "position" },
+    { tag: "information" },
+    { tag: "diving-courses", text: "Diving Courses" },
+    { tag: "team" },
   ];
 
   mapElement: HTMLAppMapElement;
@@ -231,181 +231,181 @@ export class ModalDivingSchoolUpdate {
           ></app-upload-cover>
         </ion-header>
         <app-header-segment-toolbar
-          color="divingschool"
+          color='divingschool'
           swiper={this.slider}
           titles={this.titles}
         ></app-header-segment-toolbar>
-        <ion-content class="slides">
-          <swiper-container class="slider-diving-school swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
-                <div id="map-container">
+        <ion-content class='slides'>
+          <swiper-container class='slider-diving-school swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
+                <div id='map-container'>
                   <app-map
-                    id="map"
-                    pageId="dive-sites"
+                    id='map'
+                    pageId='dive-sites'
                     draggableMarkerPosition={this.draggableMarkerPosition}
                     onDragMarkerEnd={(ev) => this.updateLocation(ev)}
                   ></app-map>
                 </div>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-coordinates
                   coordinates={this.draggableMarkerPosition}
                   onCoordinatesEmit={(ev) => this.updateLocation(ev)}
                   onAddressEmit={(ev) => this.updateAddress(ev)}
                 ></app-coordinates>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding">
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding'>
                   <ion-list-header>
                     <my-transl
-                      tag="general-information"
-                      text="General Information"
+                      tag='general-information'
+                      text='General Information'
                       isLabel
                     />
                   </ion-list-header>
                   <app-form-item
-                    label-tag="name"
-                    label-text="Name"
+                    label-tag='name'
+                    label-text='Name'
                     value={this.divingSchool.displayName}
-                    name="displayName"
-                    input-type="text"
+                    name='displayName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   {this.showDCId ? (
                     <app-form-item
-                      label-tag="unique-id"
-                      label-text="Unique ID"
+                      label-tag='unique-id'
+                      label-text='Unique ID'
                       value={this.tmpDivingSchoolId}
-                      name="id"
-                      input-type="text"
+                      name='id'
+                      input-type='text'
                       onFormItemChanged={(ev) => this.handleChange(ev)}
                       onIsValid={(ev) => this.uniqueIdValid(ev)}
                       validator={[
                         "required",
                         {
                           name: "uniqueid",
-                          options: {type: DIVESCHOOLSSCOLLECTION},
+                          options: { type: DIVESCHOOLSSCOLLECTION },
                         },
                       ]}
                     ></app-form-item>
                   ) : undefined}
                   <app-form-item
-                    label-tag="description"
-                    label-text="Description"
+                    label-tag='description'
+                    label-text='Description'
                     value={this.divingSchool.description}
-                    name="description"
+                    name='description'
                     textRows={10}
-                    input-type="text"
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="phone"
-                    label-text="Phone"
+                    label-tag='phone'
+                    label-text='Phone'
                     value={this.divingSchool.phoneNumber}
-                    name="phoneNumber"
-                    input-type="tel"
+                    name='phoneNumber'
+                    input-type='tel'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="email"
-                    label-text="Email"
+                    label-tag='email'
+                    label-text='Email'
                     value={this.divingSchool.email}
-                    name="email"
-                    input-type="email"
+                    name='email'
+                    input-type='email'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["email"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="website"
-                    label-text="Website"
+                    label-tag='website'
+                    label-text='Website'
                     value={this.divingSchool.website}
-                    name="website"
-                    input-type="url"
+                    name='website'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.divingSchool.website ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={"http://" + this.divingSchool.website}
-                      target="_blank"
+                      target='_blank'
                     >
                       {"http://" + this.divingSchool.website}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="facebook-id"
-                    label-text="Facebook ID"
+                    label-tag='facebook-id'
+                    label-text='Facebook ID'
                     value={this.divingSchool.facebook}
-                    name="facebook"
-                    input-type="url"
+                    name='facebook'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.divingSchool.facebook ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.facebook.com/" + this.divingSchool.facebook
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.facebook.com/" + this.divingSchool.facebook}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="instagram-id"
-                    label-text="Instagram ID"
+                    label-tag='instagram-id'
+                    label-text='Instagram ID'
                     value={this.divingSchool.instagram}
-                    name="instagram"
-                    input-type="url"
+                    name='instagram'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.divingSchool.instagram ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.instagram.com/" +
                         this.divingSchool.instagram
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.instagram.com/" +
                         this.divingSchool.instagram}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="twitter id"
-                    label-text="Twitter ID"
+                    label-tag='twitter id'
+                    label-text='Twitter ID'
                     value={this.divingSchool.twitter}
-                    name="twitter"
-                    input-type="url"
+                    name='twitter'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.divingSchool.twitter ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.twitter.com/" + this.divingSchool.twitter
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.twitter.com/" + this.divingSchool.twitter}
                     </a>
                   ) : undefined}
                 </ion-list>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-grid>
-                  <ion-row class="ion-text-start">
+                  <ion-row class='ion-text-start'>
                     {this.schoolCourses.map((course) => (
-                      <ion-col size-sm="12" size-md="6" size-lg="4">
+                      <ion-col size-sm='12' size-md='6' size-lg='4'>
                         <app-dive-course-card
                           divingCourse={course}
                           edit={true}
@@ -415,12 +415,12 @@ export class ModalDivingSchoolUpdate {
                         />
                       </ion-col>
                     ))}
-                    <ion-col size-sm="12" size-md="6" size-lg="4">
+                    <ion-col size-sm='12' size-md='6' size-lg='4'>
                       <ion-card onClick={() => this.openAddDiveCourse()}>
-                        <ion-card-content class="ion-text-center">
+                        <ion-card-content class='ion-text-center'>
                           <ion-icon
-                            name="add-circle-outline"
-                            style={{fontSize: "130px"}}
+                            name='add-circle-outline'
+                            style={{ fontSize: "130px" }}
                           ></ion-icon>
                         </ion-card-content>
                       </ion-card>
@@ -428,7 +428,7 @@ export class ModalDivingSchoolUpdate {
                   </ion-row>
                 </ion-grid>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-users-list
                   item={this.divingSchool}
                   editable

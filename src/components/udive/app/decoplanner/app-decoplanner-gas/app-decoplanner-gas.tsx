@@ -1,16 +1,16 @@
-import {Component, h, Prop, State, Element, Watch} from "@stencil/core";
-import {DecoplannerDive} from "../../../../../interfaces/udive/planner/decoplanner-dive";
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
-import {DecoplannerParameters} from "../../../../../interfaces/udive/planner/decoplanner-parameters";
+import { Component, h, Prop, State, Element, Watch } from "@stencil/core";
+import { DecoplannerDive } from "../../../../../interfaces/udive/planner/decoplanner-dive";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
+import { DecoplannerParameters } from "../../../../../interfaces/udive/planner/decoplanner-parameters";
 //import { GasBlenderService } from "../../../../services/planner/gas-blender";
 //import { DiveConfiguration } from "../../../../interfaces/udive/planner/dive-configuration";
 
-import {cloneDeep, find, forEach, round, sortBy, toNumber} from "lodash";
-import {Gas} from "../../../../../interfaces/udive/planner/gas";
-import {DiveToolsService} from "../../../../../services/udive/planner/dive-tools";
-import {Environment} from "../../../../../global/env";
-import {FusionchartsService} from "../../../../../services/common/fusioncharts";
-import {TranslationService} from "../../../../../services/common/translations";
+import { cloneDeep, find, forEach, round, sortBy, toNumber } from "lodash";
+import { Gas } from "../../../../../interfaces/udive/planner/gas";
+import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
+import { Environment } from "../../../../../global/env";
+import { FusionchartsService } from "../../../../../services/common/fusioncharts";
+import { TranslationService } from "../../../../../services/common/translations";
 
 @Component({
   tag: "app-decoplanner-gas",
@@ -432,23 +432,23 @@ export class AppDecoplannerGas {
 
   render() {
     return (
-      <div class="slider-container">
-        <div class="slider-scrollable-header">
+      <div class='slider-container'>
+        <div class='slider-scrollable-header'>
           <ion-segment
-            mode="ios"
+            mode='ios'
             color={Environment.getAppColor()}
             onIonChange={(ev) => this.segmentChanged(ev)}
             value={this.selectedModelGasView}
           >
-            <ion-segment-button value="BUHL">
+            <ion-segment-button value='BUHL'>
               <ion-label>BUHL</ion-label>
             </ion-segment-button>
-            <ion-segment-button value="VPM">
+            <ion-segment-button value='VPM'>
               <ion-label>VPM</ion-label>
             </ion-segment-button>
           </ion-segment>
         </div>
-        <div class="slider-scrollable-container">
+        <div class='slider-scrollable-container'>
           <ion-list>
             {this.editPlan ? (
               <ion-item>
@@ -470,8 +470,8 @@ export class AppDecoplannerGas {
             ) : undefined}
 
             <ion-item>
-              <ion-label position="stacked">
-                <my-transl tag="minimum-gas" text="Minimum Gas" />
+              <ion-label position='stacked'>
+                <my-transl tag='minimum-gas' text='Minimum Gas' />
               </ion-label>
               <div item-content>
                 <span>
@@ -497,8 +497,8 @@ export class AppDecoplannerGas {
               </div>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">
-                <my-transl tag="usable-gas" text="Usable Gas" />
+              <ion-label position='stacked'>
+                <my-transl tag='usable-gas' text='Usable Gas' />
               </ion-label>
               <div item-content>
                 <span>
@@ -525,8 +525,8 @@ export class AppDecoplannerGas {
             </ion-item>
             {this.diveTurnGas.time < this.diveUsableGas.time ? (
               <ion-item>
-                <ion-label position="stacked">
-                  <my-transl tag="turn-gas" text="Turn Gas" />
+                <ion-label position='stacked'>
+                  <my-transl tag='turn-gas' text='Turn Gas' />
                 </ion-label>
                 <div item-content>
                   <span>
@@ -558,21 +558,21 @@ export class AppDecoplannerGas {
                 {this.models[this.selectedModelGasView].configuration[stage]
                   .length > 0 ? (
                   <ion-list-header>
-                    <ion-grid class="ion-no-padding">
+                    <ion-grid class='ion-no-padding'>
                       <ion-row>
                         {stage == "bottom" ? (
                           <ion-col>
                             <my-transl
-                              tag="bottom"
-                              text="Bottom"
+                              tag='bottom'
+                              text='Bottom'
                               isLabel
                             ></my-transl>
                           </ion-col>
                         ) : (
                           <ion-col>
                             <my-transl
-                              tag="deco"
-                              text="Deco"
+                              tag='deco'
+                              text='Deco'
                               isLabel
                             ></my-transl>
                           </ion-col>
@@ -584,9 +584,9 @@ export class AppDecoplannerGas {
                 {this.models[this.selectedModelGasView].configuration[stage]
                   .length > 0 ? (
                   <ion-grid>
-                    <ion-row class="ion-justify-content-center">
+                    <ion-row class='ion-justify-content-center'>
                       {this.charts[stage].map((item, i) => (
-                        <ion-col size="12" size-sm>
+                        <ion-col size='12' size-sm>
                           {item.render ? (
                             <ion-card
                               style={{
@@ -594,19 +594,19 @@ export class AppDecoplannerGas {
                                 background: item.error ? "#f55d5d" : "#ffffff",
                               }}
                             >
-                              <ion-card-content class="ion-text-center">
-                                <ion-grid class="ion-no-padding">
-                                  <ion-row class="ion-justify-content-center">
-                                    <ion-col size="4">
+                              <ion-card-content class='ion-text-center'>
+                                <ion-grid class='ion-no-padding'>
+                                  <ion-row class='ion-justify-content-center'>
+                                    <ion-col size='4'>
                                       <div
-                                        id="chart-container-ace"
-                                        style={{height: "200px"}}
+                                        id='chart-container-ace'
+                                        style={{ height: "200px" }}
                                       ></div>
                                     </ion-col>
-                                    <ion-col size="8">
+                                    <ion-col size='8'>
                                       <ion-row>
                                         <strong>
-                                          <my-transl tag="ace" text="ACE" />
+                                          <my-transl tag='ace' text='ACE' />
                                         </strong>
                                       </ion-row>
                                       <ion-row>
@@ -615,8 +615,8 @@ export class AppDecoplannerGas {
                                       <ion-row>
                                         <i>
                                           <my-transl
-                                            tag="available"
-                                            text="Available"
+                                            tag='available'
+                                            text='Available'
                                           />
                                         </i>
                                         :
@@ -628,10 +628,10 @@ export class AppDecoplannerGas {
                                       </ion-row>
                                       <ion-row>{item.runtime} min</ion-row>
                                       {item.error ? (
-                                        <ion-row class="ion-justify-content-center">
+                                        <ion-row class='ion-justify-content-center'>
                                           <ion-icon
-                                            name="warning"
-                                            class="color-red"
+                                            name='warning'
+                                            class='color-red'
                                           ></ion-icon>
                                         </ion-row>
                                       ) : undefined}
@@ -652,21 +652,21 @@ export class AppDecoplannerGas {
                               }}
                             >
                               <ion-card-content
-                                class="ion-text-center"
-                                id="card-content"
+                                class='ion-text-center'
+                                id='card-content'
                               >
-                                <ion-grid class="ion-no-padding">
+                                <ion-grid class='ion-no-padding'>
                                   <ion-row>
-                                    <ion-col size="4">
+                                    <ion-col size='4'>
                                       <div
                                         id={
                                           "chart-container-" + stage + "-" + i
                                         }
-                                        style={{height: "200px"}}
+                                        style={{ height: "200px" }}
                                       ></div>
                                     </ion-col>
-                                    <ion-col size="8">
-                                      <ion-row class="ion-justify-content-center">
+                                    <ion-col size='8'>
+                                      <ion-row class='ion-justify-content-center'>
                                         <ion-col>
                                           <strong>
                                             {item.tank.name} (
@@ -679,23 +679,23 @@ export class AppDecoplannerGas {
                                           <span></span>
                                         </ion-col>
                                       </ion-row>
-                                      <ion-row class="ion-justify-content-center">
+                                      <ion-row class='ion-justify-content-center'>
                                         <ion-col>
                                           <i>
                                             <my-transl
-                                              tag="available"
-                                              text="Available"
+                                              tag='available'
+                                              text='Available'
                                             />
                                           </i>
                                           :{" "}
                                           {item.tank.chartPercent > 100 ? (
-                                            <strong class="color-yellow">
+                                            <strong class='color-yellow'>
                                               100%
                                             </strong>
                                           ) : undefined}
                                         </ion-col>
                                       </ion-row>
-                                      <ion-row class="ion-justify-content-center">
+                                      <ion-row class='ion-justify-content-center'>
                                         <ion-col>
                                           {item.tank.pressure}
                                           {this.parameters.pressureUnit} /{" "}
@@ -703,12 +703,12 @@ export class AppDecoplannerGas {
                                           {this.parameters.volumeUnit}
                                         </ion-col>
                                       </ion-row>
-                                      <ion-row class="ion-justify-content-center">
+                                      <ion-row class='ion-justify-content-center'>
                                         <ion-col>
                                           <i>
                                             <my-transl
-                                              tag="required"
-                                              text="Required"
+                                              tag='required'
+                                              text='Required'
                                             />
                                           </i>
                                           :{" "}
@@ -725,7 +725,7 @@ export class AppDecoplannerGas {
                                           </strong>
                                         </ion-col>
                                       </ion-row>
-                                      <ion-row class="ion-justify-content-center">
+                                      <ion-row class='ion-justify-content-center'>
                                         <ion-col>
                                           {round(
                                             (item.tank.pressure *
@@ -738,13 +738,13 @@ export class AppDecoplannerGas {
                                           {this.parameters.volumeUnit}
                                         </ion-col>
                                       </ion-row>
-                                      <ion-row class="ion-justify-content-center">
+                                      <ion-row class='ion-justify-content-center'>
                                         <ion-col>
                                           <i>
-                                            <my-transl tag="used" text="Used" />
+                                            <my-transl tag='used' text='Used' />
                                           </i>
                                           :{" "}
-                                          <strong class="color-green">
+                                          <strong class='color-green'>
                                             {round(
                                               (item.tank.used /
                                                 item.tank.available) *
@@ -755,7 +755,7 @@ export class AppDecoplannerGas {
                                           </strong>
                                         </ion-col>
                                       </ion-row>
-                                      <ion-row class="ion-justify-content-center">
+                                      <ion-row class='ion-justify-content-center'>
                                         <ion-col>
                                           {round(
                                             (item.tank.pressure *
@@ -769,10 +769,10 @@ export class AppDecoplannerGas {
                                         </ion-col>
                                       </ion-row>
                                       {item.tank.chartPercent > 100 ? (
-                                        <ion-row class="ion-justify-content-center">
+                                        <ion-row class='ion-justify-content-center'>
                                           <ion-icon
-                                            name="warning"
-                                            class="color-red"
+                                            name='warning'
+                                            class='color-red'
                                           ></ion-icon>
                                         </ion-row>
                                       ) : undefined}

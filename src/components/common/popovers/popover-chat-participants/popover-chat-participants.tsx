@@ -1,14 +1,14 @@
-import {Component, h, Host, State, Element, Prop} from "@stencil/core";
-import {UserService} from "../../../../services/common/user";
-import {DivingCentersService} from "../../../../services/udive/divingCenters";
-import {DivingSchoolsService} from "../../../../services/udive/divingSchools";
-import {ServiceCentersService} from "../../../../services/udive/serviceCenters";
-import {popoverController} from "@ionic/core";
-import {TranslationService} from "../../../../services/common/translations";
-import {Chat} from "../../../../interfaces/common/chat/chat";
-import {Environment} from "../../../../global/env";
-import {getEmailValidator} from "../../../../validators/email-validator";
-import {orderBy} from "lodash";
+import { Component, h, Host, State, Element, Prop } from "@stencil/core";
+import { UserService } from "../../../../services/common/user";
+import { DivingCentersService } from "../../../../services/udive/divingCenters";
+import { DivingSchoolsService } from "../../../../services/udive/divingSchools";
+import { ServiceCentersService } from "../../../../services/udive/serviceCenters";
+import { popoverController } from "@ionic/core";
+import { TranslationService } from "../../../../services/common/translations";
+import { Chat } from "../../../../interfaces/common/chat/chat";
+import { Environment } from "../../../../global/env";
+import { getEmailValidator } from "../../../../validators/email-validator";
+import { orderBy } from "lodash";
 
 @Component({
   tag: "popover-chat-participants",
@@ -151,9 +151,9 @@ export class PopoverChatParticipants {
         <ion-content>
           <ion-list>
             {this.editable && Object.keys(this.chat.participants).length > 2 ? (
-              <ion-item color="chat">
+              <ion-item color='chat'>
                 <ion-input
-                  mode="ios"
+                  mode='ios'
                   placeholder={TranslationService.getTransl(
                     "chat-name",
                     "Insert Chat Name"
@@ -169,8 +169,8 @@ export class PopoverChatParticipants {
                     <ion-toolbar>
                       <ion-title>
                         <my-transl
-                          tag="edit-chat-participants"
-                          text="Edit Chat Participants"
+                          tag='edit-chat-participants'
+                          text='Edit Chat Participants'
                         />
                       </ion-title>
                     </ion-toolbar>
@@ -180,7 +180,7 @@ export class PopoverChatParticipants {
             {this.participantsList.map((user) => (
               <ion-item>
                 {user.photoURL ? (
-                  <ion-avatar slot="start">
+                  <ion-avatar slot='start'>
                     <ion-img src={user.photoURL} />
                   </ion-avatar>
                 ) : undefined}
@@ -189,13 +189,13 @@ export class PopoverChatParticipants {
                 !this.ownersIds.includes(user.uid) &&
                 !this.ownersIds.includes(user.id) ? (
                   <ion-button
-                    slot="end"
+                    slot='end'
                     icon-only
-                    fill="clear"
-                    color="danger"
+                    fill='clear'
+                    color='danger'
                     onClick={() => this.removeUser(user)}
                   >
-                    <ion-icon name="person-remove-outline"></ion-icon>
+                    <ion-icon name='person-remove-outline'></ion-icon>
                   </ion-button>
                 ) : undefined}
               </ion-item>
@@ -207,8 +207,8 @@ export class PopoverChatParticipants {
                   <ion-toolbar>
                     <ion-title>
                       <my-transl
-                        tag="add-chat-participants"
-                        text="Add Chat Participants"
+                        tag='add-chat-participants'
+                        text='Add Chat Participants'
                       />
                     </ion-title>
                   </ion-toolbar>
@@ -217,12 +217,12 @@ export class PopoverChatParticipants {
                   <ion-toolbar>
                     <ion-searchbar
                       value={this.searchFilter}
-                      placeholder="Email"
-                      inputmode="email"
-                      type="email"
-                      enterkeyhint="search"
-                      clearIcon="close-circle"
-                      autocomplete="email"
+                      placeholder='Email'
+                      inputmode='email'
+                      type='email'
+                      enterkeyhint='search'
+                      clearIcon='close-circle'
+                      autocomplete='email'
                       onIonInput={() => this.resetShowList()}
                       onIonClear={() => this.resetShowList()}
                       onIonCancel={() => this.resetShowList()}
@@ -236,26 +236,26 @@ export class PopoverChatParticipants {
             {this.showList.map((user) => (
               <ion-item>
                 {user.photoURL ? (
-                  <ion-avatar slot="start">
+                  <ion-avatar slot='start'>
                     <ion-img src={user.photoURL} />
                   </ion-avatar>
                 ) : undefined}
                 <ion-label>{user.displayName}</ion-label>
                 <ion-button
-                  slot="end"
+                  slot='end'
                   icon-only
-                  fill="clear"
-                  color="success"
+                  fill='clear'
+                  color='success'
                   onClick={() => this.addUser(user)}
                 >
-                  <ion-icon name="person-add-outline"></ion-icon>
+                  <ion-icon name='person-add-outline'></ion-icon>
                 </ion-button>
               </ion-item>
             ))}
             {this.userNotFound ? (
               <ion-item>
                 <ion-label>
-                  <my-transl tag="user-not-found" text="User Not Found" />
+                  <my-transl tag='user-not-found' text='User Not Found' />
                 </ion-label>
               </ion-item>
             ) : undefined}

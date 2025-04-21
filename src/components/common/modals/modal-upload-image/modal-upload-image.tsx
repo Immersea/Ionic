@@ -1,5 +1,5 @@
 import { Component, h, Prop, Element, State } from "@stencil/core";
-import Cropper from "cropperjs";
+import Cropper from "cropperjs/dist/cropper.esm.js";
 import { modalController } from "@ionic/core";
 import { Environment } from "../../../../global/env";
 

@@ -1,6 +1,6 @@
-import {Gas} from "./gas";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
-import {toNumber} from "lodash";
+import { Gas } from "./gas";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
+import { toNumber } from "lodash";
 
 export class GasModel {
   //database fields

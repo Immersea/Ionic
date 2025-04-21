@@ -1,11 +1,11 @@
-import {Component, h, Host, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {cloneDeep, isString} from "lodash";
-import {TranslationService} from "../../../../services/common/translations";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {QuantityUnit} from "../../../../interfaces/trasteel/refractories/projects";
-import {ProjectsService} from "../../../../services/trasteel/refractories/projects";
+import { Component, h, Host, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { cloneDeep, isString } from "lodash";
+import { TranslationService } from "../../../../services/common/translations";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { QuantityUnit } from "../../../../interfaces/trasteel/refractories/projects";
+import { ProjectsService } from "../../../../services/trasteel/refractories/projects";
 
 @Component({
   tag: "modal-project-quantityunit",
@@ -102,17 +102,17 @@ export class ModalQuantityUnit {
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-item lines="none">
+                <ion-item lines='none'>
                   <ion-select
-                    color="trasteel"
-                    id="selectType"
-                    interface="action-sheet"
+                    color='trasteel'
+                    id='selectType'
+                    interface='action-sheet'
                     label={TranslationService.getTransl(
                       "project_quantityunit",
                       "Project Quantity Unit"
                     )}
                     disabled={!this.validQuantityUnit}
-                    label-placement="floating"
+                    label-placement='floating'
                     onIonChange={(ev) => this.selectType(ev)}
                     value={this.index ? this.index : 0}
                   >
@@ -126,43 +126,43 @@ export class ModalQuantityUnit {
                   </ion-select>
                 </ion-item>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validQuantityUnit}
                   onClick={() => this.addQuantityUnit()}
                 >
-                  <ion-icon name="add" slot="start" />
+                  <ion-icon name='add' slot='start' />
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validQuantityUnit}
                   onClick={() => this.duplicateQuantityUnit()}
                 >
-                  <ion-icon slot="start" name="duplicate"></ion-icon>
+                  <ion-icon slot='start' name='duplicate'></ion-icon>
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   disabled={this.quantityUnits.length == 0}
                   onClick={() => this.deleteQuantityUnit()}
                 >
-                  <ion-icon slot="start" name="trash"></ion-icon>
+                  <ion-icon slot='start' name='trash'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
           <app-form-item
-            label-text="ID"
+            label-text='ID'
             value={this.quantityUnit.quantityUnitId}
-            name="quantityUnitId"
-            input-type="string"
+            name='quantityUnitId'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
@@ -176,14 +176,14 @@ export class ModalQuantityUnit {
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="Name"
+            label-text='Name'
             value={this.quantityUnit.quantityUnitName}
-            name="quantityUnitName"
-            input-type="text"
+            name='quantityUnitName'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
         </ion-content>

@@ -1,14 +1,14 @@
-import {Component, State, h} from "@stencil/core";
-import {MapDataProject} from "../../../../../interfaces/trasteel/refractories/projects";
+import { Component, State, h } from "@stencil/core";
+import { MapDataProject } from "../../../../../interfaces/trasteel/refractories/projects";
 import {
   PROJECTSCOLLECTION,
   ProjectsService,
 } from "../../../../../services/trasteel/refractories/projects";
-import {TrasteelFilterService} from "../../../../../services/trasteel/common/trs-db-filter";
-import {cloneDeep} from "lodash";
-import {CustomersService} from "../../../../../services/trasteel/crm/customers";
-import {TrasteelService} from "../../../../../services/trasteel/common/services";
-import {Element} from "@stencil/core";
+import { TrasteelFilterService } from "../../../../../services/trasteel/common/trs-db-filter";
+import { cloneDeep } from "lodash";
+import { CustomersService } from "../../../../../services/trasteel/crm/customers";
+import { TrasteelService } from "../../../../../services/trasteel/common/services";
+import { Element } from "@stencil/core";
 
 @Component({
   tag: "page-projects",
@@ -92,30 +92,30 @@ export class PageProjects {
     return [
       <ion-header>
         <app-navbar
-          tag="projects"
-          text="Projects"
-          color="trasteel"
+          tag='projects'
+          text='Projects'
+          color='trasteel'
         ></app-navbar>
         <app-search-toolbar
-          id="searchToolbar"
-          searchTitle="projects"
+          id='searchToolbar'
+          searchTitle='projects'
           list={this.projectsList}
           orderFields={["customerId", "projectLocalId"]}
-          color="trasteel"
-          placeholder="Search by customer or project"
+          color='trasteel'
+          placeholder='Search by customer or project'
           filterBy={["customerId", "projectLocalId", "projectDescription"]}
           onFilteredList={(ev) => (this.filteredProjectsList = ev.detail)}
         ></app-search-toolbar>
       </ion-header>,
       <ion-content>
         {TrasteelService.isRefraDBAdmin() ? (
-          <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+          <ion-fab vertical='top' horizontal='end' slot='fixed' edge>
             <ion-fab-button
-              size="small"
+              size='small'
               onClick={() => this.addProject()}
-              color="trasteel"
+              color='trasteel'
             >
-              <ion-icon name="add"></ion-icon>
+              <ion-icon name='add'></ion-icon>
             </ion-fab-button>
           </ion-fab>
         ) : undefined}
@@ -126,7 +126,7 @@ export class PageProjects {
           showNotes={["projectDescription"]}
           groupBy={["customerId"]}
           options={this.getOptions()}
-          returnField="id"
+          returnField='id'
           icon={TrasteelFilterService.getMapDocs(PROJECTSCOLLECTION).icon.name}
           onItemClicked={(ev) =>
             ProjectsService.presentProjectDetails(ev.detail)

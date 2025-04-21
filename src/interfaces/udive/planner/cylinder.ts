@@ -1,6 +1,6 @@
-import {Gas} from "./gas";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
-import {toNumber} from "lodash";
+import { Gas } from "./gas";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
+import { toNumber } from "lodash";
 
 const VanDerWaals_A_OXYGEN = 1.382;
 const VanDerWaals_A_HELIUM = 0.0346;

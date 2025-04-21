@@ -7,9 +7,22 @@
       "name": "Launch Chrome against localhost",
       "url": "http://localhost:3333",
       "sourceMaps": true,
+      "outFiles": [
+        "${workspaceFolder}/www/**/*.js",
+        "${workspaceFolder}/www/**/*.js.map"
+      ],
+      "skipFiles": ["node_modules/**/*.js", "<node_internals>/**"],
+      "smartStep": true,
       "sourceMapPathOverrides": {
-        "*": "${webRoot}/*"
-      }
+        "webpack:///*": "${workspaceFolder}/*",
+        "webpack:///./*": "${workspaceFolder}/*",
+        "webpack:///src/*": "${workspaceFolder}/src/*"
+      },
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/www/**/*.js",
+        "${workspaceFolder}/www/**/*.js.map",
+        "!**/node_modules/**"
+      ]
     }
   ]
 }

@@ -29,7 +29,11 @@ import { StorageService } from "./storage";
 import { USERPROFILECOLLECTION, UserService } from "./user";
 import { SystemService } from "./system";
 import { Environment } from "../../global/env";
-import { Geopoint, distanceBetween, geohashQueryBounds } from "geofire-common";
+import { Geopoint } from "geofire-common/dist/geofire-common/index.esm.js";
+import {
+  distanceBetween,
+  geohashQueryBounds,
+} from "geofire-common/dist/geofire-common/index.esm.js";
 import { ProjectsService } from "../trasteel/refractories/projects";
 import { DatasheetsService } from "../trasteel/refractories/datasheets";
 import { ShapesService } from "../trasteel/refractories/shapes";
@@ -124,6 +128,7 @@ class DatabaseController {
         } else if (Environment.isTrasteel()) {
           //null
         }
+
         if (Environment.isUdive()) {
           DivingCentersService.init();
           DiveCommunitiesService.init();

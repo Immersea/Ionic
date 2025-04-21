@@ -1,18 +1,18 @@
-import {StorageService} from "../common/storage";
-import {alertController} from "@ionic/core";
-import {DatabaseService} from "../common/database";
-import {TranslationService} from "../common/translations";
-import {DivePlanModel} from "../../interfaces/udive/planner/dive-plan";
-import {UserRoles} from "../../interfaces/common/user/user-roles";
-import {DiveConfiguration} from "../../interfaces/udive/planner/dive-configuration";
-import {cloneDeep, forEach} from "lodash";
-import {UserService} from "../common/user";
-import {RouterService} from "../common/router";
-import {UserProfile} from "../../interfaces/common/user/user-profile";
-import {UserSettings} from "../../interfaces/udive/user/user-settings";
-import {BehaviorSubject} from "rxjs";
-import {DivePlan} from "./planner/dive-plan";
-import {SystemService} from "../common/system";
+import { StorageService } from "../common/storage";
+import { alertController } from "@ionic/core";
+import { DatabaseService } from "../common/database";
+import { TranslationService } from "../common/translations";
+import { DivePlanModel } from "../../interfaces/udive/planner/dive-plan";
+import { UserRoles } from "../../interfaces/common/user/user-roles";
+import { DiveConfiguration } from "../../interfaces/udive/planner/dive-configuration";
+import { cloneDeep, forEach } from "lodash";
+import { UserService } from "../common/user";
+import { RouterService } from "../common/router";
+import { UserProfile } from "../../interfaces/common/user/user-profile";
+import { UserSettings } from "../../interfaces/udive/user/user-settings";
+import { BehaviorSubject } from "rxjs";
+import { DivePlan } from "./planner/dive-plan";
+import { SystemService } from "../common/system";
 
 const DIVEPLANSCOLLECTION = "divePlans";
 

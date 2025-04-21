@@ -1,6 +1,6 @@
-import {DatabaseService} from "./database";
-import {RouterService} from "./router";
-import {UserService, USERPROFILECOLLECTION} from "./user";
+import { DatabaseService } from "./database";
+import { RouterService } from "./router";
+import { UserService, USERPROFILECOLLECTION } from "./user";
 import {
   Review,
   ReviewSummary,
@@ -15,7 +15,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import {firestore} from "../../helpers/firebase";
+import { firestore } from "../../helpers/firebase";
 
 export const REVIEWCOLLECTION = "reviews";
 

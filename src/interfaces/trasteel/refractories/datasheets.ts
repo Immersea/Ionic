@@ -7,12 +7,15 @@ import {
   toNumber,
   union,
 } from "lodash";
-import {Media} from "../../../interfaces/common/media/media";
-import {TextMultilanguage} from "../../interfaces";
-import {convertTextMultiLanguage, roundDecimals} from "../../../helpers/utils";
-import {DatasheetsService} from "../../../services/trasteel/refractories/datasheets";
-import {FirebaseFilterCondition} from "../../common/system/system";
-import {SystemService} from "../../../services/common/system";
+import { Media } from "../../../interfaces/common/media/media";
+import { TextMultilanguage } from "../../interfaces";
+import {
+  convertTextMultiLanguage,
+  roundDecimals,
+} from "../../../helpers/utils";
+import { DatasheetsService } from "../../../services/trasteel/refractories/datasheets";
+import { FirebaseFilterCondition } from "../../common/system/system";
+import { SystemService } from "../../../services/common/system";
 
 export class DatasheetSettings {
   datasheetMajorFamilies: DatasheetMajorFamily[];
@@ -84,15 +87,15 @@ export class DatasheetPropertyType {
     this.typeLeft =
       data && data.typeLeft
         ? convertTextMultiLanguage(data.typeLeft)
-        : {en: null};
+        : { en: null };
     this.typeRight =
       data && data.typeRight
         ? convertTextMultiLanguage(data.typeRight)
-        : {en: null};
+        : { en: null };
     this.typeLimit =
       data && data.typeLimit
         ? convertTextMultiLanguage(data.typeLimit)
-        : {en: null};
+        : { en: null };
   }
 }
 
@@ -113,20 +116,20 @@ export class DatasheetPropertyName {
     this.nameDescLeft =
       data && data.nameDescLeft
         ? convertTextMultiLanguage(data.nameDescLeft)
-        : {en: null};
+        : { en: null };
 
     this.nameDescRight =
       data && data.nameDescRight
         ? convertTextMultiLanguage(data.nameDescRight)
-        : {en: null};
+        : { en: null };
     this.comments =
       data && data.comments
         ? convertTextMultiLanguage(data.comments)
-        : {en: null};
+        : { en: null };
     this.dimension =
       data && data.dimension
         ? convertTextMultiLanguage(data.dimension)
-        : {en: null};
+        : { en: null };
     this.decimals = data && data.decimals ? toNumber(data.decimals) : 2;
     this.position = data && data.position ? toNumber(data.position) : 1;
   }
@@ -220,7 +223,7 @@ export class Datasheet {
     this.classification =
       data && data.classification
         ? convertTextMultiLanguage(data.classification)
-        : {en: null};
+        : { en: null };
     //fix old db import error
     data && data.Value_Type_Left
       ? (this.classification = convertTextMultiLanguage(data.Value_Type_Left))
@@ -228,7 +231,7 @@ export class Datasheet {
     this.application =
       data && data.application
         ? convertTextMultiLanguage(data.application)
-        : {en: null};
+        : { en: null };
     //fix old db import error
     data && data.Value_Type_Right
       ? (this.application = convertTextMultiLanguage(data.Value_Type_Right))

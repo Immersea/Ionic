@@ -1,14 +1,14 @@
-import {Component, h, Host, Prop, Element, State} from "@stencil/core";
+import { Component, h, Host, Prop, Element, State } from "@stencil/core";
 
-import {Gas} from "../../../../interfaces/udive/planner/gas";
-import {Cylinder} from "../../../../interfaces/udive/planner/cylinder";
-import {GasSupply} from "../../../../interfaces/udive/planner/gas-supply";
-import {GasModel} from "../../../../interfaces/udive/planner/gas-model";
-import {GasBlenderService} from "../../../../services/udive/planner/gas-blender";
-import {UserService} from "../../../../services/common/user";
-import {DiveToolsService} from "../../../../services/udive/planner/dive-tools";
-import {popoverController} from "@ionic/core";
-import {round, toNumber} from "lodash";
+import { Gas } from "../../../../interfaces/udive/planner/gas";
+import { Cylinder } from "../../../../interfaces/udive/planner/cylinder";
+import { GasSupply } from "../../../../interfaces/udive/planner/gas-supply";
+import { GasModel } from "../../../../interfaces/udive/planner/gas-model";
+import { GasBlenderService } from "../../../../services/udive/planner/gas-blender";
+import { UserService } from "../../../../services/common/user";
+import { DiveToolsService } from "../../../../services/udive/planner/dive-tools";
+import { popoverController } from "@ionic/core";
+import { round, toNumber } from "lodash";
 
 @Component({
   tag: "popover-gas-blender",
@@ -156,46 +156,46 @@ export class PopoverGasBlender {
     return (
       <Host>
         <ion-list>
-          <ion-grid class="ion-no-padding">
+          <ion-grid class='ion-no-padding'>
             <ion-row>
-              <ion-col size="6">
+              <ion-col size='6'>
                 <app-form-item
-                  label-tag="o2"
-                  label-text="O2"
+                  label-tag='o2'
+                  label-text='O2'
                   value={this.form.o2}
-                  name="o2"
-                  input-type="number"
+                  name='o2'
+                  input-type='number'
                   onFormItemChanged={(ev) => this.inputHandler(ev)}
                   onFormItemBlur={(ev) => this.blurHandler(ev)}
                   validator={[
                     "required",
                     {
                       name: "minmaxvalue",
-                      options: {min: 0, max: 100 - this.form.he},
+                      options: { min: 0, max: 100 - this.form.he },
                     },
                   ]}
                 ></app-form-item>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size='6'>
                 {this.hasTrimixlicence ? (
                   <app-form-item
-                    label-text="He"
+                    label-text='He'
                     value={this.form.he}
-                    name="he"
-                    input-type="number"
+                    name='he'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.inputHandler(ev)}
                     onFormItemBlur={(ev) => this.blurHandler(ev)}
                     validator={[
                       "required",
                       {
                         name: "minmaxvalue",
-                        options: {min: 0, max: 100 - this.form.o2},
+                        options: { min: 0, max: 100 - this.form.o2 },
                       },
                     ]}
                   ></app-form-item>
                 ) : (
                   <app-form-item
-                    label-text="He"
+                    label-text='He'
                     value={this.form.he}
                     onClick={() => UserService.checkLicence("trimix", true)}
                   ></app-form-item>
@@ -203,53 +203,53 @@ export class PopoverGasBlender {
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col size="6">
+              <ion-col size='6'>
                 <app-form-item
-                  label-tag="pressure"
-                  label-text="Pressure"
+                  label-tag='pressure'
+                  label-text='Pressure'
                   appendText={" (" + DiveToolsService.pressUnit + ")"}
                   value={this.form.bar}
-                  name="bar"
-                  input-type="number"
+                  name='bar'
+                  input-type='number'
                   onFormItemChanged={(ev) => this.inputHandler(ev)}
                   onFormItemBlur={(ev) => this.blurHandler(ev)}
                   validator={[
                     "required",
                     {
                       name: "minmaxvalue",
-                      options: {min: 1, max: this.maxPressure},
+                      options: { min: 1, max: this.maxPressure },
                     },
                   ]}
                 ></app-form-item>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size='6'>
                 <app-form-item
-                  label-tag="temperature"
-                  label-text="Temperature"
+                  label-tag='temperature'
+                  label-text='Temperature'
                   appendText={
                     " (" + (DiveToolsService.isMetric() ? "°C" : "°F") + ")"
                   }
                   value={this.form.temp}
-                  name="temp"
-                  input-type="number"
+                  name='temp'
+                  input-type='number'
                   onFormItemChanged={(ev) => this.inputHandler(ev)}
                   onFormItemBlur={(ev) => this.blurHandler(ev)}
                   validator={[
                     "required",
                     {
                       name: "minmaxvalue",
-                      options: {min: 0, max: this.maxTemperature},
+                      options: { min: 0, max: this.maxTemperature },
                     },
                   ]}
                 ></app-form-item>
               </ion-col>
             </ion-row>
 
-            <ion-row class="scrollx" id="scrollGas">
+            <ion-row class='scrollx' id='scrollGas'>
               {this.stdGases.map((gas) => (
-                <ion-col class="item">
+                <ion-col class='item'>
                   <ion-button
-                    shape="round"
+                    shape='round'
                     color={gas.selected ? "secondary" : "primary"}
                     onClick={() => this.selectStdGas(gas.gas)}
                   >
@@ -259,15 +259,15 @@ export class PopoverGasBlender {
               ))}
             </ion-row>
             <ion-row>
-              <ion-col class="item">
+              <ion-col class='item'>
                 <ion-button
-                  expand="block"
-                  fill="outline"
-                  size="small"
-                  color="success"
+                  expand='block'
+                  fill='outline'
+                  size='small'
+                  color='success'
                   onClick={() => this.save()}
                 >
-                  <my-transl tag="save" text="Save" />
+                  <my-transl tag='save' text='Save' />
                 </ion-button>
               </ion-col>
             </ion-row>

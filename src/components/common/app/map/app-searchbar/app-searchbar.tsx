@@ -7,8 +7,8 @@ import {
   EventEmitter,
   Element,
 } from "@stencil/core";
-import {TranslationService} from "../../../../../services/common/translations";
-import {debounce} from "lodash";
+import { TranslationService } from "../../../../../services/common/translations";
+import { debounce } from "lodash";
 
 @Component({
   tag: "app-searchbar",
@@ -63,17 +63,17 @@ export class AppSearchbar {
     return (
       <Host>
         {this.floating ? (
-          <div class="container">
+          <div class='container'>
             <input
-              id="input-search"
-              type="text"
+              id='input-search'
+              type='text'
               value={this.value}
               placeholder={this.placeholder + "..."}
               onInput={(ev) => this.handleChange(ev)}
               onChange={(ev) => this.handleBlur(ev)}
               onKeyUp={(ev) => this.handleKey(ev)}
             />
-            <div class="search"></div>
+            <div class='search'></div>
           </div>
         ) : (
           <div></div>

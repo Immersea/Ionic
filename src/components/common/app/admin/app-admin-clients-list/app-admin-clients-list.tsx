@@ -1,4 +1,4 @@
-import {Component, h, Prop, State} from "@stencil/core";
+import { Component, h, Prop, State } from "@stencil/core";
 import {
   DIVESCHOOLSSCOLLECTION,
   DivingSchoolsService,
@@ -7,18 +7,18 @@ import {
   DIVECENTERSSCOLLECTION,
   DivingCentersService,
 } from "../../../../../services/udive/divingCenters";
-import {Subscription} from "rxjs";
-import {MapDataUserPubicProfile} from "../../../../../interfaces/common/user/user-public-profile";
-import {UserService} from "../../../../../services/common/user";
-import {TranslationService} from "../../../../../services/common/translations";
-import {ADMINROUTE} from "../../../../../services/common/router";
+import { Subscription } from "rxjs";
+import { MapDataUserPubicProfile } from "../../../../../interfaces/common/user/user-public-profile";
+import { UserService } from "../../../../../services/common/user";
+import { TranslationService } from "../../../../../services/common/translations";
+import { ADMINROUTE } from "../../../../../services/common/router";
 import {
   SERVICECENTERSCOLLECTION,
   ServiceCentersService,
 } from "../../../../../services/udive/serviceCenters";
-import {Organiser} from "../../../../../interfaces/udive/dive-trip/diveTrip";
-import {Clients} from "../../../../../interfaces/udive/clients/clients";
-import {orderBy} from "lodash";
+import { Organiser } from "../../../../../interfaces/udive/dive-trip/diveTrip";
+import { Clients } from "../../../../../interfaces/udive/clients/clients";
+import { orderBy } from "lodash";
 
 @Component({
   tag: "app-admin-clients-list",
@@ -86,7 +86,7 @@ export class AppAdminClientsList {
   render() {
     return [
       <ion-header>
-        <ion-toolbar color="clients">
+        <ion-toolbar color='clients'>
           <ion-searchbar
             animated
             placeholder={TranslationService.getTransl("search", "Search")}
@@ -114,11 +114,11 @@ export class AppAdminClientsList {
               }
             >
               {client.photoURL ? (
-                <ion-avatar slot="start">
+                <ion-avatar slot='start'>
                   <img src={client.photoURL} />
                 </ion-avatar>
               ) : (
-                <ion-icon slot="start" name="person"></ion-icon>
+                <ion-icon slot='start' name='person'></ion-icon>
               )}
               <ion-label>{client.displayName}</ion-label>
             </ion-item>

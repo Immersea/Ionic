@@ -1,11 +1,11 @@
-import {Component, h, Host, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {cloneDeep, isString} from "lodash";
-import {TranslationService} from "../../../../services/common/translations";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {ApplicationUnit} from "../../../../interfaces/trasteel/refractories/projects";
-import {ProjectsService} from "../../../../services/trasteel/refractories/projects";
+import { Component, h, Host, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { cloneDeep, isString } from "lodash";
+import { TranslationService } from "../../../../services/common/translations";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { ApplicationUnit } from "../../../../interfaces/trasteel/refractories/projects";
+import { ProjectsService } from "../../../../services/trasteel/refractories/projects";
 
 @Component({
   tag: "modal-project-applicationunit",
@@ -521,17 +521,17 @@ export class ModalApplicationUnit {
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-item lines="none">
+                <ion-item lines='none'>
                   <ion-select
-                    color="trasteel"
-                    id="selectType"
-                    interface="action-sheet"
+                    color='trasteel'
+                    id='selectType'
+                    interface='action-sheet'
                     label={TranslationService.getTransl(
                       "project_applicationunit",
                       "Project Application Unit"
                     )}
                     disabled={!this.validApplicationUnit}
-                    label-placement="floating"
+                    label-placement='floating'
                     onIonChange={(ev) => this.selectType(ev)}
                     value={this.index ? this.index : 0}
                   >
@@ -543,43 +543,43 @@ export class ModalApplicationUnit {
                   </ion-select>
                 </ion-item>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validApplicationUnit}
                   onClick={() => this.addApplicationUnit()}
                 >
-                  <ion-icon name="add" slot="start" />
+                  <ion-icon name='add' slot='start' />
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validApplicationUnit}
                   onClick={() => this.duplicateApplicationUnit()}
                 >
-                  <ion-icon slot="start" name="duplicate"></ion-icon>
+                  <ion-icon slot='start' name='duplicate'></ion-icon>
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   disabled={this.applicationUnits.length == 0}
                   onClick={() => this.deleteApplicationUnit()}
                 >
-                  <ion-icon slot="start" name="trash"></ion-icon>
+                  <ion-icon slot='start' name='trash'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
           <app-form-item
-            label-text="ID"
+            label-text='ID'
             value={this.applicationUnit.applicationId}
-            name="applicationId"
-            input-type="string"
+            name='applicationId'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
@@ -593,32 +593,32 @@ export class ModalApplicationUnit {
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="Name"
+            label-text='Name'
             value={this.applicationUnit.applicationName}
-            name="applicationName"
-            input-type="text"
+            name='applicationName'
+            input-type='text'
             multiLanguage={true}
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
           <app-form-item
-            label-text="Associated Goods Description"
+            label-text='Associated Goods Description'
             value={this.applicationUnit.applicationAssociatedGoodsDesc}
-            name="applicationAssociatedGoodsDesc"
-            input-type="text"
+            name='applicationAssociatedGoodsDesc'
+            input-type='text'
             multiLanguage={true}
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
           ></app-form-item>
           <app-form-item
-            label-text="Packing Description"
+            label-text='Packing Description'
             value={this.applicationUnit.applicationPackingDesc}
-            name="applicationPackingDesc"
-            input-type="text"
+            name='applicationPackingDesc'
+            input-type='text'
             multiLanguage={true}
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
           ></app-form-item>
         </ion-content>
         <app-modal-footer

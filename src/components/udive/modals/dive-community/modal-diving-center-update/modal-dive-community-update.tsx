@@ -1,17 +1,17 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {DiveCommunity} from "../../../../../interfaces/udive/dive-community/diveCommunity";
-import {modalController} from "@ionic/core";
-import {cloneDeep, isNumber, isString, toLower, toNumber} from "lodash";
-import {DiveConfiguration} from "../../../../../interfaces/udive/planner/dive-configuration";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { DiveCommunity } from "../../../../../interfaces/udive/dive-community/diveCommunity";
+import { modalController } from "@ionic/core";
+import { cloneDeep, isNumber, isString, toLower, toNumber } from "lodash";
+import { DiveConfiguration } from "../../../../../interfaces/udive/planner/dive-configuration";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
 import {
   DiveCommunitiesService,
   DIVECOMMUNITIESCOLLECTION,
 } from "../../../../../services/udive/diveCommunities";
-import {UserProfile} from "../../../../../interfaces/common/user/user-profile";
-import {UserSettings} from "../../../../../interfaces/udive/user/user-settings";
-import {mapHeight} from "../../../../../helpers/utils";
+import { UserProfile } from "../../../../../interfaces/common/user/user-profile";
+import { UserSettings } from "../../../../../interfaces/udive/user/user-settings";
+import { mapHeight } from "../../../../../helpers/utils";
 import Swiper from "swiper";
 
 @Component({
@@ -25,10 +25,10 @@ export class ModalDiveCommunityUpdate {
   @State() updateView = true;
   @State() validDiveCommunity = false;
   titles = [
-    {tag: "map"},
-    {tag: "position"},
-    {tag: "information"},
-    {tag: "team"},
+    { tag: "map" },
+    { tag: "position" },
+    { tag: "information" },
+    { tag: "team" },
   ];
   @State() tmpDiveCommunityId: string;
   mapElement: HTMLAppMapElement;
@@ -204,45 +204,45 @@ export class ModalDiveCommunityUpdate {
           ></app-upload-cover>
         </ion-header>
         <app-header-segment-toolbar
-          color="divecommunities"
+          color='divecommunities'
           swiper={this.slider}
           titles={this.titles}
         ></app-header-segment-toolbar>
-        <ion-content class="slides">
-          <swiper-container class="slider-dive-community-modal swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
-                <div id="map-container">
+        <ion-content class='slides'>
+          <swiper-container class='slider-dive-community-modal swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
+                <div id='map-container'>
                   <app-map
-                    id="map"
-                    pageId="dive-community"
+                    id='map'
+                    pageId='dive-community'
                     draggableMarkerPosition={this.draggableMarkerPosition}
                     onDragMarkerEnd={(ev) => this.updateLocation(ev)}
                   ></app-map>
                 </div>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-coordinates
                   coordinates={this.draggableMarkerPosition}
                   onCoordinatesEmit={(ev) => this.updateLocation(ev)}
                   onAddressEmit={(ev) => this.updateAddress(ev)}
                 ></app-coordinates>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding">
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding'>
                   <ion-list-header>
                     <my-transl
-                      tag="general-information"
-                      text="General Information"
+                      tag='general-information'
+                      text='General Information'
                       isLabel
                     />
                   </ion-list-header>
                   <app-form-item
-                    label-tag="name"
-                    label-text="Name"
+                    label-tag='name'
+                    label-text='Name'
                     value={this.diveCommunity.displayName}
-                    name="displayName"
-                    input-type="text"
+                    name='displayName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     onFormItemBlur={() =>
                       this.setTmpId(this.diveCommunity.displayName)
@@ -251,135 +251,135 @@ export class ModalDiveCommunityUpdate {
                   ></app-form-item>
                   {this.showDCId ? (
                     <app-form-item
-                      label-tag="unique-id"
-                      label-text="Unique ID"
+                      label-tag='unique-id'
+                      label-text='Unique ID'
                       value={this.tmpDiveCommunityId}
-                      name="id"
-                      input-type="text"
+                      name='id'
+                      input-type='text'
                       onFormItemChanged={(ev) => this.handleChange(ev)}
                       onIsValid={(ev) => this.uniqueIdValid(ev)}
                       validator={[
                         "required",
                         {
                           name: "uniqueid",
-                          options: {type: DIVECOMMUNITIESCOLLECTION},
+                          options: { type: DIVECOMMUNITIESCOLLECTION },
                         },
                       ]}
                     ></app-form-item>
                   ) : undefined}
                   <app-form-item
-                    label-tag="description"
-                    label-text="Description"
+                    label-tag='description'
+                    label-text='Description'
                     value={this.diveCommunity.description}
-                    name="description"
+                    name='description'
                     textRows={10}
-                    input-type="text"
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="phone"
-                    label-text="Phone"
+                    label-tag='phone'
+                    label-text='Phone'
                     value={this.diveCommunity.phoneNumber}
-                    name="phoneNumber"
-                    input-type="tel"
+                    name='phoneNumber'
+                    input-type='tel'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="email"
-                    label-text="Email"
+                    label-tag='email'
+                    label-text='Email'
                     value={this.diveCommunity.email}
-                    name="email"
-                    input-type="email"
+                    name='email'
+                    input-type='email'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["email"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="website"
-                    label-text="Website"
+                    label-tag='website'
+                    label-text='Website'
                     value={this.diveCommunity.website}
-                    name="website"
-                    input-type="url"
+                    name='website'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.diveCommunity.website ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={"http://" + this.diveCommunity.website}
-                      target="_blank"
+                      target='_blank'
                     >
                       {"http://" + this.diveCommunity.website}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="facebook-id"
-                    label-text="Facebook ID"
+                    label-tag='facebook-id'
+                    label-text='Facebook ID'
                     value={this.diveCommunity.facebook}
-                    name="facebook"
-                    input-type="url"
+                    name='facebook'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.diveCommunity.facebook ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.facebook.com/" +
                         this.diveCommunity.facebook
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.facebook.com/" +
                         this.diveCommunity.facebook}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="instagram-id"
-                    label-text="Instagram ID"
+                    label-tag='instagram-id'
+                    label-text='Instagram ID'
                     value={this.diveCommunity.instagram}
-                    name="instagram"
-                    input-type="url"
+                    name='instagram'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.diveCommunity.instagram ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.instagram.com/" +
                         this.diveCommunity.instagram
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.instagram.com/" +
                         this.diveCommunity.instagram}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="twitter id"
-                    label-text="Twitter ID"
+                    label-tag='twitter id'
+                    label-text='Twitter ID'
                     value={this.diveCommunity.twitter}
-                    name="twitter"
-                    input-type="url"
+                    name='twitter'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.diveCommunity.twitter ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.twitter.com/" + this.diveCommunity.twitter
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.twitter.com/" + this.diveCommunity.twitter}
                     </a>
                   ) : undefined}
                 </ion-list>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-users-list
                   item={this.diveCommunity}
                   editable

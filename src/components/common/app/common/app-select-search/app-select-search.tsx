@@ -1,6 +1,6 @@
-import {popoverController} from "@ionic/core";
-import {Component, Element, Prop, State, h} from "@stencil/core";
-import {cloneDeep, find, isObject, isString} from "lodash";
+import { popoverController } from "@ionic/core";
+import { Component, Element, Prop, State, h } from "@stencil/core";
+import { cloneDeep, find, isObject, isString } from "lodash";
 
 @Component({
   tag: "app-select-search",
@@ -9,12 +9,12 @@ import {cloneDeep, find, isObject, isString} from "lodash";
 })
 export class AppSelectSearch {
   @Element() el: HTMLElement;
-  @Prop() label: {tag: string; text: string};
+  @Prop() label: { tag: string; text: string };
   @Prop() labelAddText: string;
   @Prop() lines: "inset" | "full" | "none";
   @Prop() selectFn: any;
   @Prop() selectOptions: any[];
-  @Prop({mutable: true}) value: string;
+  @Prop({ mutable: true }) value: string;
   @Prop() placeholder: string;
   @Prop() selectValueId: string;
   @Prop() selectValueText: string[];
@@ -41,7 +41,7 @@ export class AppSelectSearch {
       if (ev && ev.data) {
         this.value = ev.data[this.selectValueId];
         //execute function and return selected value id - return same ev as ion-select
-        this.selectFn({detail: {value: this.value}});
+        this.selectFn({ detail: { value: this.value } });
         this.updateView = !this.updateView;
       }
     });
@@ -108,7 +108,7 @@ export class AppSelectSearch {
                 ]
               : undefined}
         </ion-label>
-        <ion-icon name="caret-down" slot="end" size="small"></ion-icon>
+        <ion-icon name='caret-down' slot='end' size='small'></ion-icon>
       </ion-item>
     );
   }

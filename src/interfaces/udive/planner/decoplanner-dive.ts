@@ -31,12 +31,12 @@
           ],
           "surfaceInterval": 3
 */
-import {Gas} from "./gas";
-import {DiveProfilePoint} from "./dive-profile-point";
-import {max, orderBy, reverse, round} from "lodash";
-import {ARPCModel} from "./arpc";
-import {GasBlenderService} from "../../../services/udive/planner/gas-blender";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
+import { Gas } from "./gas";
+import { DiveProfilePoint } from "./dive-profile-point";
+import { max, orderBy, reverse, round } from "lodash";
+import { ARPCModel } from "./arpc";
+import { GasBlenderService } from "../../../services/udive/planner/gas-blender";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
 
 export class DecoplannerDive {
   decoGases: Array<Gas> = [];

@@ -1,15 +1,15 @@
-import {Component, h, State, Host} from "@stencil/core";
-import {UserDivePlans} from "../../../../../interfaces/udive/user/user-dive-plans";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
-import {orderBy} from "lodash";
-import {DiveSitesService} from "../../../../../services/udive/diveSites";
-import {GasBlenderService} from "../../../../../services/udive/planner/gas-blender";
-import {DivePlansService} from "../../../../../services/udive/divePlans";
-import {TranslationService} from "../../../../../services/common/translations";
-import {Environment} from "../../../../../global/env";
-import {DiveToolsService} from "../../../../../services/udive/planner/dive-tools";
-import {format} from "date-fns";
+import { Component, h, State, Host } from "@stencil/core";
+import { UserDivePlans } from "../../../../../interfaces/udive/user/user-dive-plans";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
+import { orderBy } from "lodash";
+import { DiveSitesService } from "../../../../../services/udive/diveSites";
+import { GasBlenderService } from "../../../../../services/udive/planner/gas-blender";
+import { DivePlansService } from "../../../../../services/udive/divePlans";
+import { TranslationService } from "../../../../../services/common/translations";
+import { Environment } from "../../../../../global/env";
+import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
+import { format } from "date-fns";
 
 @Component({
   tag: "app-user-dive-plans",
@@ -116,11 +116,11 @@ export class AppUserDivePlans {
       <Host>
         {this.loadingDivePlans
           ? [
-              <app-skeletons skeleton="userDivePlan" />,
-              <app-skeletons skeleton="userDivePlan" />,
-              <app-skeletons skeleton="userDivePlan" />,
-              <app-skeletons skeleton="userDivePlan" />,
-              <app-skeletons skeleton="userDivePlan" />,
+              <app-skeletons skeleton='userDivePlan' />,
+              <app-skeletons skeleton='userDivePlan' />,
+              <app-skeletons skeleton='userDivePlan' />,
+              <app-skeletons skeleton='userDivePlan' />,
+              <app-skeletons skeleton='userDivePlan' />,
             ]
           : undefined}
         {/*this.creatingNewDivePlan ? (
@@ -134,24 +134,24 @@ export class AppUserDivePlans {
                 <p>{divePlan.configuration}</p>
               </ion-label>
               <ion-button
-                fill="clear"
+                fill='clear'
                 icon-only
-                slot="end"
-                color="danger"
+                slot='end'
+                color='danger'
                 onClick={(ev) => this.deleteDivePlan(ev, divePlan.id)}
               >
-                <ion-icon name="trash-bin" slot="end"></ion-icon>
+                <ion-icon name='trash-bin' slot='end'></ion-icon>
               </ion-button>
               <ion-button
-                fill="clear"
+                fill='clear'
                 icon-only
                 color={Environment.isDecoplanner() ? "gue-blue" : "planner"}
-                slot="end"
+                slot='end'
                 onClick={(ev) =>
                   this.addDive(ev, divePlan.id, divePlan.dives.length - 1)
                 }
               >
-                <ion-icon name="add-circle" slot="end"></ion-icon>
+                <ion-icon name='add-circle' slot='end'></ion-icon>
               </ion-button>
             </ion-item>
             {divePlan.dives.map((dive, key) => (
@@ -163,7 +163,7 @@ export class AppUserDivePlans {
                 }
               >
                 {dive.diveSite && dive.diveSite.coverURL ? (
-                  <ion-thumbnail slot="start">
+                  <ion-thumbnail slot='start'>
                     <img src={dive.diveSite.coverURL} />
                   </ion-thumbnail>
                 ) : undefined}
@@ -182,24 +182,24 @@ export class AppUserDivePlans {
                 </ion-label>
                 {key > 0 ? (
                   <ion-button
-                    fill="clear"
+                    fill='clear'
                     icon-only
-                    slot="end"
-                    color="danger"
+                    slot='end'
+                    color='danger'
                     onClick={(ev) => this.delete(ev, divePlan.id, key)}
                   >
-                    <ion-icon name="trash" slot="end"></ion-icon>
+                    <ion-icon name='trash' slot='end'></ion-icon>
                   </ion-button>
                 ) : undefined}
 
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   icon-only
-                  slot="end"
+                  slot='end'
                   color={Environment.isDecoplanner() ? "gue-blue" : "planner"}
                   onClick={(ev) => this.update(ev, divePlan.id, key)}
                 >
-                  <ion-icon name="create" slot="end"></ion-icon>
+                  <ion-icon name='create' slot='end'></ion-icon>
                 </ion-button>
               </ion-item>
             ))}

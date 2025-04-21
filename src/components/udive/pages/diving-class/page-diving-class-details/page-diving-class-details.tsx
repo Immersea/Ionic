@@ -1,23 +1,23 @@
-import {Component, h, Prop, State, Element} from "@stencil/core";
-import {Marker} from "../../../../../interfaces/interfaces";
-import {RouterService} from "../../../../../services/common/router";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
+import { Component, h, Prop, State, Element } from "@stencil/core";
+import { Marker } from "../../../../../interfaces/interfaces";
+import { RouterService } from "../../../../../services/common/router";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
 import {
   DivingClass,
   Agency,
 } from "../../../../../interfaces/udive/diving-class/divingClass";
-import {DivingClassesService} from "../../../../../services/udive/divingClasses";
-import {SystemService} from "../../../../../services/common/system";
-import {fabButtonTopMarginString} from "../../../../../helpers/utils";
-import {MapDataDivingSchool} from "../../../../../interfaces/udive/diving-school/divingSchool";
+import { DivingClassesService } from "../../../../../services/udive/divingClasses";
+import { SystemService } from "../../../../../services/common/system";
+import { fabButtonTopMarginString } from "../../../../../helpers/utils";
+import { MapDataDivingSchool } from "../../../../../interfaces/udive/diving-school/divingSchool";
 import {
   DivingSchoolsService,
   DIVESCHOOLSSCOLLECTION,
 } from "../../../../../services/udive/divingSchools";
-import {MapDataUserPubicProfile} from "../../../../../interfaces/common/user/user-public-profile";
+import { MapDataUserPubicProfile } from "../../../../../interfaces/common/user/user-public-profile";
 import Swiper from "swiper";
-import {TranslationService} from "../../../../../services/common/translations";
+import { TranslationService } from "../../../../../services/common/translations";
 
 @Component({
   tag: "page-diving-class-details",
@@ -27,7 +27,11 @@ export class PageDivingClassDetails {
   @Element() el: HTMLElement;
   @Prop() classid: string;
   @State() divingClass: DivingClass;
-  @State() titles = [{tag: "details"}, {tag: "schedule"}, {tag: "bookings"}];
+  @State() titles = [
+    { tag: "details" },
+    { tag: "schedule" },
+    { tag: "bookings" },
+  ];
   @State() slider: Swiper;
   markers: Marker[] = [];
   mapElement: HTMLAppMapElement;
@@ -93,7 +97,7 @@ export class PageDivingClassDetails {
   }
 
   disconnectedCallback() {
-    this.userSub.unsubscribe();
+    this.userSub ? this.userSub.unsubscribe() : undefined;
   }
 
   render() {
@@ -105,17 +109,17 @@ export class PageDivingClassDetails {
       ) : undefined,
       <ion-header>
         <ion-toolbar
-          color="divingclass"
+          color='divingclass'
           class={
             this.selectedCourse && this.selectedCourse.photoURL
               ? "no-safe-padding"
               : undefined
           }
         >
-          <ion-buttons slot="start">
+          <ion-buttons slot='start'>
             {!this.selectedCourse ? (
               <ion-button onClick={() => RouterService.goBack()} icon-only>
-                <ion-icon name="arrow-back"></ion-icon>
+                <ion-icon name='arrow-back'></ion-icon>
               </ion-button>
             ) : undefined}
           </ion-buttons>
@@ -124,33 +128,33 @@ export class PageDivingClassDetails {
       </ion-header>,
 
       <app-header-segment-toolbar
-        color="divingclass"
+        color='divingclass'
         swiper={this.slider}
         titles={this.titles}
       ></app-header-segment-toolbar>,
-      <ion-content class="slides">
+      <ion-content class='slides'>
         {this.selectedCourse && this.selectedCourse.coverURL ? (
           <ion-fab
-            vertical="top"
-            horizontal="start"
-            slot="fixed"
-            style={{marginTop: fabButtonTopMarginString(2)}}
+            vertical='top'
+            horizontal='start'
+            slot='fixed'
+            style={{ marginTop: fabButtonTopMarginString(2) }}
           >
             <ion-fab-button
               onClick={() => RouterService.goBack()}
-              class="fab-icon"
+              class='fab-icon'
             >
-              <ion-icon name="arrow-back-circle-outline"></ion-icon>
+              <ion-icon name='arrow-back-circle-outline'></ion-icon>
             </ion-fab-button>
           </ion-fab>
         ) : undefined}
-        <swiper-container class="slider-diving-class swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
+        <swiper-container class='slider-diving-class swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
               <ion-list>
                 {this.selectedDivingSchool ? (
                   <ion-item>
-                    <ion-avatar slot="start">
+                    <ion-avatar slot='start'>
                       <img src={this.selectedDivingSchool.photoURL}></img>
                     </ion-avatar>
                     <ion-label>
@@ -160,7 +164,7 @@ export class PageDivingClassDetails {
                 ) : undefined}
                 {this.selectedAgency ? (
                   <ion-item>
-                    <ion-avatar slot="start">
+                    <ion-avatar slot='start'>
                       <img src={this.selectedAgency.photoURL}></img>
                     </ion-avatar>
                     <ion-label>{this.selectedAgency.name}</ion-label>
@@ -168,38 +172,38 @@ export class PageDivingClassDetails {
                 ) : undefined}
                 {this.selectedCourse ? (
                   <ion-item>
-                    <ion-avatar slot="start">
+                    <ion-avatar slot='start'>
                       <img src={this.selectedCourse.photoURL}></img>
                     </ion-avatar>
                     <ion-label>{this.selectedCourse.name}</ion-label>
                   </ion-item>
                 ) : undefined}
                 <ion-item>
-                  <ion-icon slot="start" name="navigate-outline"></ion-icon>
+                  <ion-icon slot='start' name='navigate-outline'></ion-icon>
                   <ion-label>
                     {this.divingClass.location.display_name}
                   </ion-label>
                 </ion-item>
                 <ion-item>
-                  <ion-icon slot="start" name="scan-outline"></ion-icon>
+                  <ion-icon slot='start' name='scan-outline'></ion-icon>
                   <ion-label>
-                    <my-transl tag="status" text="Status"></my-transl>
+                    <my-transl tag='status' text='Status'></my-transl>
                   </ion-label>
-                  <ion-note slot="end">
+                  <ion-note slot='end'>
                     {this.statusTitles[this.divingClass.status]}
                   </ion-note>
                 </ion-item>
                 <ion-list-header>
-                  <my-transl tag="instructor" text="Instructor" />
+                  <my-transl tag='instructor' text='Instructor' />
                 </ion-list-header>
                 {this.instructors.map((instructor) => (
                   <ion-item>
                     {instructor.photoURL ? (
-                      <ion-avatar slot="start">
+                      <ion-avatar slot='start'>
                         <img src={instructor.photoURL}></img>
                       </ion-avatar>
                     ) : (
-                      <ion-icon slot="start" name="person"></ion-icon>
+                      <ion-icon slot='start' name='person'></ion-icon>
                     )}
                     <ion-label>{instructor.displayName}</ion-label>
                   </ion-item>
@@ -207,10 +211,10 @@ export class PageDivingClassDetails {
                 {this.divingClass.comments
                   ? [
                       <ion-list-header>
-                        <my-transl tag="comments" text="Comments" />
+                        <my-transl tag='comments' text='Comments' />
                       </ion-list-header>,
                       <ion-item>
-                        <ion-label class="ion-text-wrap">
+                        <ion-label class='ion-text-wrap'>
                           {this.divingClass.comments}
                         </ion-label>
                       </ion-item>,
@@ -218,12 +222,12 @@ export class PageDivingClassDetails {
                   : undefined}
               </ion-list>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <app-diving-class-schedule divingClass={this.divingClass} />
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <ion-grid>
-                <ion-row class="ion-text-start">
+                <ion-row class='ion-text-start'>
                   {!this.userId ? (
                     <div
                       style={{
@@ -236,8 +240,8 @@ export class PageDivingClassDetails {
                         <ion-card-header>
                           <ion-card-title>
                             <my-transl
-                              tag="please-login"
-                              text="Please login to view this page"
+                              tag='please-login'
+                              text='Please login to view this page'
                             />
                           </ion-card-title>
                         </ion-card-header>

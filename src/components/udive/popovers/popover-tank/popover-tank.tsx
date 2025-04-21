@@ -1,12 +1,12 @@
-import {Component, h, Element, Prop, State} from "@stencil/core";
-import {GasModel} from "../../../../interfaces/udive/planner/gas-model";
-import {Tank} from "../../../../interfaces/udive/planner/tank";
-import {TankModel} from "../../../../interfaces/udive/planner/tank-model";
-import {GasBlenderService} from "../../../../services/udive/planner/gas-blender";
-import {UserService} from "../../../../services/common/user";
-import {DiveToolsService} from "../../../../services/udive/planner/dive-tools";
-import {find, toNumber} from "lodash";
-import {TranslationService} from "../../../../services/common/translations";
+import { Component, h, Element, Prop, State } from "@stencil/core";
+import { GasModel } from "../../../../interfaces/udive/planner/gas-model";
+import { Tank } from "../../../../interfaces/udive/planner/tank";
+import { TankModel } from "../../../../interfaces/udive/planner/tank-model";
+import { GasBlenderService } from "../../../../services/udive/planner/gas-blender";
+import { UserService } from "../../../../services/common/user";
+import { DiveToolsService } from "../../../../services/udive/planner/dive-tools";
+import { find, toNumber } from "lodash";
+import { TranslationService } from "../../../../services/common/translations";
 
 @Component({
   tag: "popover-tank",
@@ -35,7 +35,7 @@ export class PopoverTank {
       newTank.setForDeco(this.decoTanks);
       this.tank = newTank.getTank();
     }
-    this.selectedTank = find(this.tanksList, {name: this.tank.name});
+    this.selectedTank = find(this.tanksList, { name: this.tank.name });
     if (!this.selectedTank)
       this.selectedTank = find(this.tanksList, {
         name: this.tank.name.toUpperCase(),
@@ -152,8 +152,8 @@ export class PopoverTank {
 
   render() {
     return [
-      <ion-list style={{marginBottom: "0"}}>
-        <ion-grid class="ion-no-padding">
+      <ion-list style={{ marginBottom: "0" }}>
+        <ion-grid class='ion-no-padding'>
           <ion-row>
             <ion-col>
               <ion-item>
@@ -174,11 +174,11 @@ export class PopoverTank {
           <ion-row>
             <ion-col>
               <app-form-item
-                label-tag="pressure"
-                label-text="Pressure"
+                label-tag='pressure'
+                label-text='Pressure'
                 value={this.form.pressure}
-                name="pressure"
-                input-type="number"
+                name='pressure'
+                input-type='number'
                 onFormItemChanged={(ev) => this.inputHandler(ev)}
                 onFormItemBlur={() => this.blurHandler()}
                 validator={["required"]}
@@ -188,17 +188,17 @@ export class PopoverTank {
           <ion-row>
             <ion-col>
               <app-form-item
-                label-text="O2"
+                label-text='O2'
                 value={this.form.O2}
-                name="O2"
-                input-type="number"
+                name='O2'
+                input-type='number'
                 onFormItemChanged={(ev) => this.inputHandler(ev)}
                 onFormItemBlur={() => this.blurHandler()}
                 validator={[
                   "required",
                   {
                     name: "minmaxvalue",
-                    options: {min: 1, max: 100 - this.form.He},
+                    options: { min: 1, max: 100 - this.form.He },
                   },
                 ]}
               ></app-form-item>
@@ -206,17 +206,17 @@ export class PopoverTank {
             <ion-col>
               {this.hasTrimixlicence ? (
                 <app-form-item
-                  label-text="He"
+                  label-text='He'
                   value={this.form.He}
-                  name="He"
-                  input-type="number"
+                  name='He'
+                  input-type='number'
                   onFormItemChanged={(ev) => this.inputHandler(ev)}
                   onFormItemBlur={() => this.blurHandler()}
                   validator={[
                     "required",
                     {
                       name: "minmaxvalue",
-                      options: {min: 0, max: 100 - this.form.O2},
+                      options: { min: 0, max: 100 - this.form.O2 },
                     },
                   ]}
                 ></app-form-item>
@@ -233,11 +233,11 @@ export class PopoverTank {
           <ion-row>
             <ion-col>
               <app-form-item
-                label-tag="depth"
-                label-text="Depth"
+                label-tag='depth'
+                label-text='Depth'
                 value={this.form.fromDepth}
-                name="fromDepth"
-                input-type="number"
+                name='fromDepth'
+                input-type='number'
                 onFormItemChanged={(ev) => this.inputHandler(ev)}
                 onFormItemBlur={() => this.blurHandler()}
                 validator={["required"]}
@@ -247,24 +247,24 @@ export class PopoverTank {
               <ion-col>
                 {this.hasReblicence ? (
                   <app-form-item
-                    label-tag="pO2-setpoint"
-                    label-text="pO2 setPoint"
+                    label-tag='pO2-setpoint'
+                    label-text='pO2 setPoint'
                     value={this.form.ppO2}
-                    name="ppO2"
-                    input-type="number"
+                    name='ppO2'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.inputHandler(ev)}
                     onFormItemBlur={() => this.blurHandler()}
                     validator={[
                       {
                         name: "minmaxvalue",
-                        options: {min: 0.5, max: 1.6},
+                        options: { min: 0.5, max: 1.6 },
                       },
                     ]}
                   ></app-form-item>
                 ) : (
                   <app-form-item
-                    label-tag="pO2-setpoint"
-                    label-text="pO2 setPoint"
+                    label-tag='pO2-setpoint'
+                    label-text='pO2 setPoint'
                     value={this.form.ppO2}
                     onClick={() => UserService.checkLicence("reb", true)}
                   ></app-form-item>
@@ -272,11 +272,11 @@ export class PopoverTank {
               </ion-col>
             ) : undefined}
           </ion-row>
-          <ion-row class="scrollx" id="scrollTankGas">
+          <ion-row class='scrollx' id='scrollTankGas'>
             {this.stdGases.map((gas) => (
-              <ion-col class="item">
+              <ion-col class='item'>
                 <ion-button
-                  shape="round"
+                  shape='round'
                   color={gas.selected ? "secondary" : "primary"}
                   onClick={() => this.selectStdGas(gas.gas)}
                 >
@@ -287,11 +287,11 @@ export class PopoverTank {
           </ion-row>
           <ion-row>
             <ion-col>
-              <div class="notification" style={{color: "blue"}}>
+              <div class='notification' style={{ color: "blue" }}>
                 MOD: {this.tank.gas.getMod()}
                 {DiveToolsService.depthUnit} @ {this.tank.gas.ppO2} pO2
               </div>
-              <div class="notification" style={{color: "blue"}}>
+              <div class='notification' style={{ color: "blue" }}>
                 pO2: {this.tank.gas.getpO2atDepth(this.tank.gas.fromDepth, 2)}{" "}
                 pO2 @ {this.tank.gas.fromDepth}
                 {DiveToolsService.depthUnit}

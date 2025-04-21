@@ -1,12 +1,12 @@
-import {Component, h, State, Host} from "@stencil/core";
-import {UserService} from "../../../../../services/common/user";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {orderBy} from "lodash";
+import { Component, h, State, Host } from "@stencil/core";
+import { UserService } from "../../../../../services/common/user";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { orderBy } from "lodash";
 import {
   DivingSchoolsService,
   DIVESCHOOLSSCOLLECTION,
 } from "../../../../../services/udive/divingSchools";
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
 
 @Component({
   tag: "app-user-diving-schools",
@@ -74,19 +74,19 @@ export class AppUserDivingSchools {
             detail
           >
             {dc.photoURL ? (
-              <ion-avatar slot="start">
+              <ion-avatar slot='start'>
                 <img src={dc.photoURL} />
               </ion-avatar>
             ) : undefined}
 
             <ion-label>{dc.displayName}</ion-label>
             <ion-button
-              fill="clear"
+              fill='clear'
               icon-only
-              slot="end"
+              slot='end'
               onClick={(ev) => this.update(ev, dc.id)}
             >
-              <ion-icon name="create" slot="end"></ion-icon>
+              <ion-icon name='create' slot='end'></ion-icon>
             </ion-button>
           </ion-item>
         ))}

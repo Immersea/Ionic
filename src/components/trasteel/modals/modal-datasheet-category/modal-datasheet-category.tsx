@@ -1,10 +1,10 @@
-import {Component, h, Host, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {DatasheetCategory} from "../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
-import {cloneDeep, isString} from "lodash";
+import { Component, h, Host, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { DatasheetCategory } from "../../../../interfaces/trasteel/refractories/datasheets";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
+import { cloneDeep, isString } from "lodash";
 
 @Component({
   tag: "modal-datasheet-category",
@@ -106,7 +106,7 @@ export class ModalDatasheetCategory {
             <ion-row>
               <ion-col>
                 <app-select-search
-                  color="trasteel"
+                  color='trasteel'
                   label={{
                     tag: "datasheet_category",
                     text: "Datasheet Category",
@@ -116,52 +116,52 @@ export class ModalDatasheetCategory {
                       ? this.datasheetCategories[this.index].categoriesId
                       : this.datasheetCategories[0].categoriesId
                   }
-                  lines="none"
-                  label-placement="floating"
+                  lines='none'
+                  label-placement='floating'
                   selectFn={(ev) => this.selectType(ev)}
                   selectOptions={this.datasheetCategories}
-                  selectValueId="categoriesId"
+                  selectValueId='categoriesId'
                   selectValueText={["categoriesName"]}
                   disabled={!this.validDatasheetCategory}
                 ></app-select-search>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetCategory}
                   onClick={() => this.addDatasheetCategory()}
                 >
-                  <ion-icon name="add" slot="start" />
+                  <ion-icon name='add' slot='start' />
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetCategory}
                   onClick={() => this.duplicateDatasheetCategory()}
                 >
-                  <ion-icon slot="start" name="duplicate"></ion-icon>
+                  <ion-icon slot='start' name='duplicate'></ion-icon>
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   disabled={this.datasheetCategories.length == 0}
                   onClick={() => this.deleteDatasheetCategory()}
                 >
-                  <ion-icon slot="start" name="trash"></ion-icon>
+                  <ion-icon slot='start' name='trash'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
           <app-form-item
-            label-text="ID"
+            label-text='ID'
             value={this.datasheetCategory.categoriesId}
-            name="categoriesId"
-            input-type="string"
+            name='categoriesId'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
@@ -175,12 +175,12 @@ export class ModalDatasheetCategory {
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="Name"
+            label-text='Name'
             value={this.datasheetCategory.categoriesName}
-            name="categoriesName"
-            input-type="string"
+            name='categoriesName'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
         </ion-content>

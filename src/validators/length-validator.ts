@@ -1,6 +1,6 @@
-import {Validator} from "./validator";
-import {TranslateText} from "../interfaces/common/translations/translations";
-import {isNumber, isString} from "lodash";
+import { Validator } from "./validator";
+import { TranslateText } from "../interfaces/common/translations/translations";
+import { isNumber, isString } from "lodash";
 
 export function getLengthValidator(
   min: number,
@@ -31,6 +31,9 @@ export function getLengthValidator(
         value = value || 0;
         if (min && max) {
           //"length" validator
+          if (typeof value === "string") {
+            value = parseFloat(value);
+          }
           return min <= value && value <= max;
         }
         if (min == -1) {
@@ -39,10 +42,16 @@ export function getLengthValidator(
         }
         if (min) {
           //"length" validator
+          if (typeof value === "string") {
+            value = parseFloat(value);
+          }
           return min <= value;
         }
         if (max) {
           //"length" validator
+          if (typeof value === "string") {
+            value = parseFloat(value);
+          }
           return value <= max;
         }
         return true;

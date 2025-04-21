@@ -1,12 +1,12 @@
-import {Component, h, Prop, Element} from "@stencil/core";
-import {DiveConfiguration} from "../../../../../interfaces/udive/planner/dive-configuration";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {DivePlanModel} from "../../../../../interfaces/udive/planner/dive-plan";
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
-import {GasModel} from "../../../../../interfaces/udive/planner/gas-model";
-import {DiveStandardsService} from "../../../../../services/udive/planner/dive-standards";
-import {filter, orderBy} from "lodash";
-import {Environment} from "../../../../../global/env";
+import { Component, h, Prop, Element } from "@stencil/core";
+import { DiveConfiguration } from "../../../../../interfaces/udive/planner/dive-configuration";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { DivePlanModel } from "../../../../../interfaces/udive/planner/dive-plan";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
+import { GasModel } from "../../../../../interfaces/udive/planner/gas-model";
+import { DiveStandardsService } from "../../../../../services/udive/planner/dive-standards";
+import { filter, orderBy } from "lodash";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "modal-dive-template",
@@ -59,9 +59,9 @@ export class ModalDiveTemplate {
     DiveStandardsService.getStdGases().forEach((list) => {
       gases.push(list);
     });
-    this.stdGases = filter(gases, {deco: false});
+    this.stdGases = filter(gases, { deco: false });
     this.stdGases = orderBy(this.stdGases, "fromDepth", "asc");
-    this.stdDecoGases = filter(gases, {deco: true});
+    this.stdDecoGases = filter(gases, { deco: true });
     this.stdDecoGases = orderBy(this.stdDecoGases, "fromDepth", "desc");
 
     this.diveDataToShare = {
@@ -95,8 +95,8 @@ export class ModalDiveTemplate {
   render() {
     return [
       <app-navbar
-        tag="deco-planner"
-        text="Deco Planner"
+        tag='deco-planner'
+        text='Deco Planner'
         extra-title={this.divePlan.configuration.stdName}
         color={Environment.isDecoplanner() ? "gue-blue" : "planner"}
         modal={true}

@@ -1,7 +1,7 @@
-import {Gas} from "./gas";
-import {Cylinder} from "./cylinder";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
-import {round, toInteger, toNumber} from "lodash";
+import { Gas } from "./gas";
+import { Cylinder } from "./cylinder";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
+import { round, toInteger, toNumber } from "lodash";
 
 export class GasSupply {
   /**

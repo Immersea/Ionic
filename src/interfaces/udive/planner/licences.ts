@@ -295,10 +295,10 @@ Level 2: 90m depth limit. 4 deco gas limit. Max 90min deco
         minO2 = 18;
         maxO2 = 40;
         minDecoO2 = 21;
-        maxDecoO2 = 50;
+        maxDecoO2 = 100;
         maxHe = 45;
         maxDepth = DiveToolsService.isMetric() ? 60 : 200;
-        maxDecoGases = 1;
+        maxDecoGases = 2;
         maxDecoTime = 45;
         break;
       case "tech2":
@@ -308,10 +308,11 @@ Level 2: 90m depth limit. 4 deco gas limit. Max 90min deco
         maxDecoO2 = 100;
         maxHe = 65;
         maxDepth = DiveToolsService.isMetric() ? 90 : 300;
-        maxDecoGases = 3;
+        maxDecoGases = 4;
         maxDecoTime = 90;
         break;
-      case "unlimited" || "pro":
+      case "unlimited":
+      case "pro":
         minO2 = 5;
         maxO2 = 100;
         minDecoO2 = 10;

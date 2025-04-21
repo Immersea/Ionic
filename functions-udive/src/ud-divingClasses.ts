@@ -76,10 +76,20 @@ export const updateDivingClasses = functions
 
 //divingClassSummaryDoc -> used for user, diving ceneters and schools class list
 const divingClassSummaryDoc = (diveClass: any) => {
-  const schedule = diveClass.schedule;
-  const start = schedule["1"] ? schedule["1"] : new Date();
-  let end = schedule[Object.keys(schedule).length.toString()];
-  end = end ? end : new Date();
+  // Extract timestamps
+  const timestamps = diveClass.activities.map((activity: any) =>
+    new Date(activity.date).getTime()
+  );
+
+  // Find minimum and maximum timestamps
+  const minTimestamp = Math.min(...timestamps);
+  const maxTimestamp = Math.max(...timestamps);
+
+  // Convert back to Date objects
+  const minDate = new Date(minTimestamp);
+  const maxDate = new Date(maxTimestamp);
+  const start = minDate.toISOString();
+  let end = maxDate.toISOString();
   return {
     date: start,
     end: end,

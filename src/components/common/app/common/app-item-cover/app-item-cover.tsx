@@ -14,7 +14,7 @@ export class AppItemCover {
         {this.item
           ? [
               <div
-                class='cover'
+                class='item-cover'
                 style={
                   this.item.coverURL
                     ? {

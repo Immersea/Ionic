@@ -1,8 +1,8 @@
-import {BuhlPref} from "./buhl-preferences";
-import {round, toNumber} from "lodash";
-import {UserService} from "../../../services/common/user";
-import {TranslationService} from "../../../services/common/translations";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
+import { BuhlPref } from "./buhl-preferences";
+import { round, toNumber } from "lodash";
+import { UserService } from "../../../services/common/user";
+import { TranslationService } from "../../../services/common/translations";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
 
 /*
  * Gas

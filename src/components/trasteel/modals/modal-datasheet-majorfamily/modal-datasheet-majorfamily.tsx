@@ -1,10 +1,10 @@
-import {Component, h, Host, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {cloneDeep, isString} from "lodash";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {DatasheetMajorFamily} from "../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
+import { Component, h, Host, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { cloneDeep, isString } from "lodash";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { DatasheetMajorFamily } from "../../../../interfaces/trasteel/refractories/datasheets";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
 
 @Component({
   tag: "modal-datasheet-majorfamily",
@@ -106,7 +106,7 @@ export class ModalDatasheetMajorfamily {
             <ion-row>
               <ion-col>
                 <app-select-search
-                  color="trasteel"
+                  color='trasteel'
                   label={{
                     tag: "datasheet_major_family",
                     text: "Datasheet Major Family",
@@ -116,52 +116,52 @@ export class ModalDatasheetMajorfamily {
                       ? this.datasheetMajorFamilies[this.index].majorFamilyId
                       : this.datasheetMajorFamilies[0].majorFamilyId
                   }
-                  lines="none"
-                  label-placement="floating"
+                  lines='none'
+                  label-placement='floating'
                   selectFn={(ev) => this.selectType(ev)}
                   selectOptions={this.datasheetMajorFamilies}
-                  selectValueId="majorFamilyId"
+                  selectValueId='majorFamilyId'
                   selectValueText={["majorFamilyName"]}
                   disabled={!this.validDatasheetMajorFamily}
                 ></app-select-search>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetMajorFamily}
                   onClick={() => this.addDatasheetMajorFamily()}
                 >
-                  <ion-icon name="add" slot="start" />
+                  <ion-icon name='add' slot='start' />
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetMajorFamily}
                   onClick={() => this.duplicateDatasheetMajorFamily()}
                 >
-                  <ion-icon slot="start" name="duplicate"></ion-icon>
+                  <ion-icon slot='start' name='duplicate'></ion-icon>
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   disabled={this.datasheetMajorFamilies.length == 0}
                   onClick={() => this.deleteDatasheetMajorFamily()}
                 >
-                  <ion-icon slot="start" name="trash"></ion-icon>
+                  <ion-icon slot='start' name='trash'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
           <app-form-item
-            label-text="ID"
+            label-text='ID'
             value={this.datasheetMajorFamily.majorFamilyId}
-            name="majorFamilyId"
-            input-type="string"
+            name='majorFamilyId'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
@@ -175,12 +175,12 @@ export class ModalDatasheetMajorfamily {
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="Name"
+            label-text='Name'
             value={this.datasheetMajorFamily.majorFamilyName}
-            name="majorFamilyName"
-            input-type="string"
+            name='majorFamilyName'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
         </ion-content>

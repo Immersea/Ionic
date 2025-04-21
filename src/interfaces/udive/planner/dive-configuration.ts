@@ -1,7 +1,7 @@
-import {round, toNumber} from "lodash";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
-import {DecoplannerParameters} from "./decoplanner-parameters";
-import {Tank} from "./tank";
+import { round, toNumber } from "lodash";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
+import { DecoplannerParameters } from "./decoplanner-parameters";
+import { Tank } from "./tank";
 
 export class DiveConfiguration {
   //model fields;

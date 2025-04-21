@@ -1,21 +1,26 @@
 import * as admin from "firebase-admin";
-import _ from "lodash";
-//import moment from "moment";
-//import functions from "firebase-functions";
+import {Timestamp} from "firebase-admin/firestore";
+import {isEqual, without} from "lodash";
+import {
+  deleteSplitDoc,
+  retrieveAndMergeDoc,
+  splitAndStoreDoc,
+} from "./c-splitAndStoreDocuments";
+//import {logData} from ".";
 
 export const db = admin.firestore();
-//update date in system preferences everytime the translations are updated
-/*export const updateTranslationsData = functions
+// update date in system preferences everytime the translations are updated
+/* export const updateTranslationsData = functions
   .region("europe-west1")
   .runWith({ memory: "128MB", timeoutSeconds: 60 })
   .firestore.document("/translations/{translationId}")
   .onWrite(async (change, context) => {
     return updateSystemData("translations");
-  });*/
+  }); */
 
 export const REGION = "europe-west1";
 export const MEMORY = "128MB";
-export const TIMEOUT = 60;
+export const TIMEOUT = 120;
 
 export const SYSTEMCOLLECTION = "system";
 export const MAPDATACOLLECTION = "mapData";
@@ -40,7 +45,7 @@ export const updateSystemData = async (collectionId: string) => {
   system.collectionsUpdate = system.collectionsUpdate
     ? system.collectionsUpdate
     : {};
-  system.collectionsUpdate[collectionId] = new Date();
+  system.collectionsUpdate[collectionId] = Timestamp.fromDate(new Date());
   if (newDoc) {
     return systemRef.set(system);
   } else {
@@ -54,11 +59,12 @@ export const updateEditorOf = async (
   item: any,
   previousItem: any
 ) => {
-  const promises: any[] = [];
+  let promises: any[] = [];
 
   if (item) {
     // update or create item
-    for (const uid of Object.keys(item.users)) {
+    for (let index = 0; index < Object.keys(item.users).length; index++) {
+      const uid = Object.keys(item.users)[index];
       // get all userids of owners and editors
       const userRolesRef = db.doc(`/${USERROLESCOLLECTION}/${uid}`);
       const userRolesDoc = await userRolesRef.get();
@@ -81,7 +87,12 @@ export const updateEditorOf = async (
 
   // compare users and previous users to find deleted users
   if (previousItem) {
-    for (const uid of Object.keys(previousItem.users)) {
+    for (
+      let index = 0;
+      index < Object.keys(previousItem.users).length;
+      index++
+    ) {
+      const uid = Object.keys(previousItem.users)[index];
       // if item is null -> item has been deleted
       if (!item || !item.users[uid]) {
         // user has been removed
@@ -99,10 +110,10 @@ export const updateEditorOf = async (
     }
   }
 
-  return Promise.all(promises);
+  return promises;
 };
 
-//updates collections with summary of new/deleted items - like Dive Trips into userDiveTrips
+//  updates collections with summary of new/deleted items - like Dive Trips into userDiveTrips
 export const updateItemSummary = async (
   collection: string,
   itemId: string,
@@ -110,10 +121,11 @@ export const updateItemSummary = async (
   previousItem: any,
   itemDetailsFunction: any
 ) => {
-  const promises: any[] = [];
+  let promises: any[] = [];
   if (item) {
     // update or create item
-    for (const uid of Object.keys(item.users)) {
+    for (let index = 0; index < Object.keys(item.users).length; index++) {
+      const uid = Object.keys(item.users)[index];
       // get all userids of owners and editors
       const collectionDocRef = db.doc(`/${collection}/${uid}`);
       const collectionDoc = await collectionDocRef.get();
@@ -129,10 +141,15 @@ export const updateItemSummary = async (
   // compare users and previous users to find deleted users
   // valid also if item is deleted
   if (previousItem) {
-    for (const uid of Object.keys(previousItem.users)) {
+    for (
+      let index = 0;
+      index < Object.keys(previousItem.users).length;
+      index++
+    ) {
+      const uid = Object.keys(previousItem.users)[index];
       // if item is null -> item has been deleted
       if (!item || !item.users[uid]) {
-        // user has been removed
+        // item or user has been removed
         const collectionDocRef = db.doc(`/${collection}/${uid}`);
         const collectionDoc = await collectionDocRef.get();
         let collectionDocData = collectionDoc.data();
@@ -145,7 +162,7 @@ export const updateItemSummary = async (
       }
     }
   }
-  return Promise.all(promises);
+  return promises;
 };
 
 export const updateMapData = async (
@@ -153,189 +170,226 @@ export const updateMapData = async (
   itemId: string,
   item: any
 ) => {
-  const promises = [];
-  // update map data
-  const mapDataRef = db.doc(`/${MAPDATACOLLECTION}/` + collectionId);
-  const mapDataDoc = await mapDataRef.get();
-  let mapData = mapDataDoc.data();
-  const newDoc = mapData ? false : true;
-  mapData = mapData ? mapData : {};
-
-  if (newDoc) {
-    // write new item and update date in system
-    mapData[itemId] = item;
-    promises.push(mapDataRef.set(mapData));
-    promises.push(updateSystemData(collectionId));
-  } else {
-    // compare new item with previous and update only if different
-    if (mapData[itemId] && !_.isEqual(item, mapData[itemId])) {
+  return new Promise(async (resolve) => {
+    await lockDocument(MAPDATACOLLECTION, collectionId, itemId, true);
+    let promises: any[] = [];
+    // update map data
+    //get mapdata from docSplitRetrieve
+    let mapData = await retrieveAndMergeDoc(
+      MAPDATACOLLECTION,
+      collectionId,
+      null,
+      null
+    );
+    const newDoc = mapData ? false : true;
+    mapData = mapData ? mapData : {};
+    if (newDoc) {
+      //new mapData document
       // write new item and update date in system
       mapData[itemId] = item;
-      promises.push(mapDataRef.update(mapData));
+      promises = promises.concat(
+        await splitAndStoreDoc(
+          MAPDATACOLLECTION,
+          collectionId,
+          null,
+          null,
+          mapData,
+          true
+        )
+      );
       promises.push(updateSystemData(collectionId));
-    } else if (!mapData[itemId]) {
-      // write new item and update date in system if new
-      mapData[itemId] = item;
-      promises.push(mapDataRef.update(mapData));
-      promises.push(updateSystemData(collectionId));
+    } else {
+      // compare new item with previous and update only if different
+      if (mapData[itemId] && !isEqual(item, mapData[itemId])) {
+        // write new item and update date in system
+        mapData[itemId] = item;
+        promises = promises.concat(
+          await splitAndStoreDoc(
+            MAPDATACOLLECTION,
+            collectionId,
+            null,
+            null,
+            mapData,
+            true
+          )
+        );
+        promises.push(updateSystemData(collectionId));
+      } else if (!mapData[itemId]) {
+        // write new item and update date in system if new
+        mapData[itemId] = item;
+
+        promises = promises.concat(
+          await splitAndStoreDoc(
+            MAPDATACOLLECTION,
+            collectionId,
+            null,
+            null,
+            mapData,
+            true
+          )
+        );
+        promises.push(updateSystemData(collectionId));
+      }
     }
-  }
-  return Promise.all(promises);
+    promises.push(lockDocument(MAPDATACOLLECTION, collectionId, itemId, false));
+    resolve(promises);
+  });
 };
 
 export const deleteMapData = async (
   collectionId: string,
   mapDataId: string
 ) => {
-  const promises = [];
-  const mapDataRef = db.doc(`/${MAPDATACOLLECTION}/${collectionId}`);
-  const mapDataDoc = await mapDataRef.get();
-  let mapData = mapDataDoc.data();
-  if (!mapData) {
-    mapData = {};
-  }
-  if (mapData[mapDataId]) {
-    delete mapData[mapDataId];
-    //check if last element
-    if (Object.keys(mapData).length > 0) {
-      promises.push(mapDataRef.set(mapData));
-    } else {
-      //delete mapData
-      promises.push(mapDataRef.delete());
+  return new Promise(async (resolve) => {
+    await lockDocument(MAPDATACOLLECTION, collectionId, mapDataId, true);
+    let promises: any[] = [];
+    //get mapdata from docSplitRetrieve
+    let mapData = await retrieveAndMergeDoc(
+      MAPDATACOLLECTION,
+      collectionId,
+      null,
+      null
+    );
+    if (!mapData) {
+      mapData = {};
     }
-    promises.push(updateSystemData(collectionId));
-  }
-  return Promise.all(promises);
+    if (mapData[mapDataId]) {
+      delete mapData[mapDataId];
+      //check if last element
+      if (Object.keys(mapData).length > 0) {
+        promises = promises.concat(
+          await splitAndStoreDoc(
+            MAPDATACOLLECTION,
+            collectionId,
+            null,
+            null,
+            mapData,
+            true
+          )
+        );
+      } else {
+        //delete mapData
+        promises = promises.concat(
+          await deleteSplitDoc(
+            MAPDATACOLLECTION,
+            collectionId,
+            null,
+            null,
+            1,
+            true
+          )
+        );
+      }
+      promises.push(updateSystemData(collectionId));
+    }
+    promises.push(
+      lockDocument(MAPDATACOLLECTION, collectionId, mapDataId, false)
+    );
+    resolve(promises);
+  });
 };
 
-//archive old bookings
-/*
-  archiveData(
-    `/${BEACHESCOLLECTIONNAME}/${beachId}/${BOOKINGSCOLLECTION}/`,
-    BOOKINGSCOLLECTION,
-    "day",
-    "dateFrom",
-    true
-  )
-*/
-/*
-export const archiveData = functions
-  .region(REGION)
-  .runWith({memory: MEMORY, timeoutSeconds: TIMEOUT})
-  .https.onCall(async (data) => {
-    const path = data.path;
-    const docName = data.docName;
-    const groupByDate = data.groupByDate;
-    const groupByField = data.groupByField;
-    const archiveByDate = data.archiveByDate;
-    return archiveFunction(
-      path,
-      docName,
-      groupByDate,
-      groupByField,
-      archiveByDate
-    );
-  });
-
-export const archiveFunction = async (
-  path: string,
-  docName: string,
-  groupByDate: string,
-  groupByField: string,
-  archiveByDate: boolean
+const lockDocument = async (
+  collectionId: string, //MAPDATA
+  docId: string, //CollectionId for mapdata
+  subDocId: string, //for document sequence
+  lock: boolean
 ) => {
-  //
-  //groupByDate = "week" / "month" / "day";
-  //groupByField = fieldname to be grouped
-  //archiveByDate = true-> group by date / false-> create only archive group
-  //current date/week/month is excluded, archive only past dates
-  const promises = [];
-  const docRef = db.doc(path + docName);
-  const doc = await docRef.get();
-  //insert id inside each object
-  const docData = _.map(doc.data(), (x, key) => {
-    x.key = key;
-    return x;
-  });
-  //group ids
-  let archive = {};
-  archive = _.groupBy(docData, (x) => {
-    const date = moment(new Date(x[groupByField]));
-    const currentYear = moment(new Date()).year();
-    if (groupByDate === "week") {
-      const week = date.isoWeek();
-      const year = date.year();
-      const currentWeek = moment(new Date()).isoWeek();
-      if (year >= currentYear && week >= currentWeek) {
-        return docName;
-      } else {
-        if (archiveByDate) {
-          return year + "_" + week;
-        } else {
-          return "archive";
+  return new Promise(async (resolve) => {
+    //check locking document
+    const docName = collectionId + "-" + docId;
+    const docRef = admin.firestore().collection("lockDocuments").doc(docName);
+    try {
+      // Function to check if the document is locked, with a timeout
+      async function waitForUnlock(docRef: any, maxWaitTime: number) {
+        const startTime = Date.now();
+        let locked = true;
+        while (locked) {
+          const docSnapshot = await docRef.get();
+          const data = docSnapshot.data();
+          if (!data || !data.locked) {
+            locked = false;
+          } else {
+            //check sequence
+            if (subDocId && data.sequence && subDocId == data.sequence[0]) {
+              locked = false;
+              return true;
+            }
+            // Check if maximum wait time has been exceeded
+            if (Date.now() - startTime > maxWaitTime) {
+              return false; // Indicate that the document did not unlock in time
+            }
+            // Wait for a short period before checking again (e.g., 1000ms)
+            await new Promise((res) => setTimeout(res, 1000));
+          }
         }
+        return true; // Indicate that the document is unlocked
       }
-    } else if (groupByDate === "month") {
-      const month = date.month();
-      const year = date.year();
-      const currentMonth = moment(new Date()).month();
-      if (year >= currentYear && month >= currentMonth) {
-        return docName;
-      } else {
-        if (archiveByDate) {
-          return year + "_" + (month + 1);
-        } else {
-          return "archive";
-        }
-      }
-    } else {
-      const day = date.dayOfYear();
-      const year = date.year();
-      const currentDay = moment(new Date()).dayOfYear();
-      if (year >= currentYear && day >= currentDay) {
-        return docName;
-      } else {
-        if (archiveByDate) {
-          return year + "_" + day;
-        } else {
-          return "archive";
-        }
-      }
-    }
-  });
-  
-  //check if archive[docName] exists otherwise create new empty to delete old archive data
-  if (!archive[docName]) {
-    archive[docName] = {};
-  }
 
-  //save all archives
-  for (const date of Object.keys(archive)) {
-    //create object from archive array
-    archive[date] = _.keyBy(archive[date], "key");
-    //remove key
-    for (const key of Object.keys(archive[date])) {
-      delete archive[date][key].key;
-    }
-    const archiveDocRef = db.doc(path + date);
-    //check if existing data only for archived data
-    let dataToSave = {};
-    if (date !== docName) {
-      const dateDoc = await archiveDocRef.get();
-      const dateDocData = dateDoc.data();
-      if (dateDocData) {
-        dataToSave = dateDocData;
-      }
-      //update data
-      for (const key of Object.keys(archive[date])) {
-        dataToSave[key] = archive[date][key];
-      }
-    } else {
-      dataToSave = archive[date];
-    }
-    dataToSave = archive[date];
-    promises.push(archiveDocRef.set(dataToSave));
-  }
+      // Maximum wait time in milliseconds (e.g., 119 seconds) - max 120 timeout function
+      const maxWaitTime = 120000;
 
-  return await Promise.all(promises);
-};*/
+      if (lock) {
+        // Lock the document
+        // Check if the document exists
+        const docSnapshot = await docRef.get();
+        let locked = {locked: true, sequence: [subDocId]};
+        if (docSnapshot.exists) {
+          let data = docSnapshot.data();
+          if (data && data.sequence) {
+            data.locked = true;
+            data.sequence.push(subDocId);
+          } else {
+            data = locked;
+          }
+          // Document exists, perform an update
+          await docRef.update(data);
+        } else {
+          // Document does not exist, create it
+          await docRef.set(locked);
+        }
+        // Wait until the document is unlocked or the maximum wait time is exceeded
+        if (await waitForUnlock(docRef, maxWaitTime)) {
+          resolve(null);
+        } else {
+          throw new Error(
+            "Maximum wait time exceeded, aborting operation -> docId:" +
+              subDocId
+          );
+        }
+      } else {
+        //check if sequence is empty and remove current doc
+        const docSnapshot = await docRef.get();
+        let data = docSnapshot.data();
+        if (data && data.sequence) {
+          data.sequence = without(data.sequence, subDocId);
+          data.locked = data.sequence.length > 0;
+        } else {
+          data = {locked: false};
+        }
+        await docRef.update(data);
+        resolve(null);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // Always release the lock, even if there is an error
+      await docRef.update({locked: false});
+      resolve(null);
+    }
+  });
+};
+
+export const executePromisesInSequence = async (promises: any[]) => {
+  for (const promise of promises) {
+    try {
+      if (typeof promise === "function") {
+        await Promise.resolve(promise());
+      } else {
+        await Promise.resolve(promise);
+      }
+    } catch (error) {
+      console.error("executePromisesInSequence", error);
+    }
+  }
+  return {message: "Finished"};
+};

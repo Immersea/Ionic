@@ -1,5 +1,5 @@
-import {differenceInDays} from "date-fns";
-import {toNumber} from "lodash";
+import { differenceInDays } from "date-fns";
+import { toNumber } from "lodash";
 
 export class ARPCModel {
   //Model fields

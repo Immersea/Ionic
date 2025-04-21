@@ -8,9 +8,9 @@ import {
   Event,
   EventEmitter,
 } from "@stencil/core";
-import {reverseGeocode} from "../../../../../helpers/utils";
-import {LocationIQ} from "../../../../../services/common/map";
-import {toNumber, toString} from "lodash";
+import { reverseGeocode } from "../../../../../helpers/utils";
+import { LocationIQ } from "../../../../../services/common/map";
+import { toNumber, toString } from "lodash";
 
 export interface DecimalCoords {
   lat: number;
@@ -36,7 +36,7 @@ export interface DMSCoords {
 export class AppCoordinates {
   @Event() coordinatesEmit: EventEmitter<DecimalCoords>;
   @Event() addressEmit: EventEmitter<LocationIQ>;
-  @Prop({mutable: true}) coordinates: DecimalCoords;
+  @Prop({ mutable: true }) coordinates: DecimalCoords;
   @State() DMSCoordinates: DMSCoords;
   @State() location: LocationIQ;
   timer: number;
@@ -162,17 +162,17 @@ export class AppCoordinates {
             <ion-row>
               <ion-col>
                 <app-form-item
-                  label-tag="latitude"
-                  label-text="Latitude"
+                  label-tag='latitude'
+                  label-text='Latitude'
                   value={toString(this.coordinates.lat)}
-                  name="lat"
-                  input-type="number"
+                  name='lat'
+                  input-type='number'
                   onFormItemChanged={(ev) => this.decimalCoordinatesHandler(ev)}
                   onFormItemBlur={() => this.coordinatesUpdated()}
                   validator={[
                     {
                       name: "minmaxvalue",
-                      options: {min: -90, max: 90},
+                      options: { min: -90, max: 90 },
                     },
                   ]}
                 ></app-form-item>
@@ -181,55 +181,55 @@ export class AppCoordinates {
                 <ion-row>
                   <ion-col>
                     <app-form-item
-                      label-tag="degrees"
-                      label-text="Degrees"
+                      label-tag='degrees'
+                      label-text='Degrees'
                       value={toString(this.DMSCoordinates.lat.degrees)}
-                      name="latitude-degrees"
-                      input-type="number"
+                      name='latitude-degrees'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.DMSCoordinatesHandler(ev)}
                       onFormItemBlur={() => this.coordinatesUpdated()}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: -90, max: 90},
+                          options: { min: -90, max: 90 },
                         },
                       ]}
                     ></app-form-item>
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      label-tag="minutes"
-                      label-text="Minutes"
+                      label-tag='minutes'
+                      label-text='Minutes'
                       value={toString(
                         Math.abs(this.DMSCoordinates.lat.minutes)
                       )}
-                      name="latitude-minutes"
-                      input-type="number"
+                      name='latitude-minutes'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.DMSCoordinatesHandler(ev)}
                       onFormItemBlur={() => this.coordinatesUpdated()}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: 0, max: 60},
+                          options: { min: 0, max: 60 },
                         },
                       ]}
                     ></app-form-item>
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      label-tag="seconds"
-                      label-text="Seconds"
+                      label-tag='seconds'
+                      label-text='Seconds'
                       value={toString(
                         Math.abs(this.DMSCoordinates.lat.seconds)
                       )}
-                      name="latitude-seconds"
-                      input-type="number"
+                      name='latitude-seconds'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.DMSCoordinatesHandler(ev)}
                       onFormItemBlur={() => this.coordinatesUpdated()}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: 0, max: 60},
+                          options: { min: 0, max: 60 },
                         },
                       ]}
                     ></app-form-item>
@@ -240,17 +240,17 @@ export class AppCoordinates {
             <ion-row>
               <ion-col>
                 <app-form-item
-                  label-tag="longitude"
-                  label-text="Longitude"
+                  label-tag='longitude'
+                  label-text='Longitude'
                   value={toString(this.coordinates.lon)}
-                  name="lon"
-                  input-type="number"
+                  name='lon'
+                  input-type='number'
                   onFormItemChanged={(ev) => this.decimalCoordinatesHandler(ev)}
                   onFormItemBlur={() => this.coordinatesUpdated()}
                   validator={[
                     {
                       name: "minmaxvalue",
-                      options: {min: -180, max: 180},
+                      options: { min: -180, max: 180 },
                     },
                   ]}
                 ></app-form-item>
@@ -259,55 +259,55 @@ export class AppCoordinates {
                 <ion-row>
                   <ion-col>
                     <app-form-item
-                      label-tag="degrees"
-                      label-text="Degrees"
+                      label-tag='degrees'
+                      label-text='Degrees'
                       value={toString(this.DMSCoordinates.lon.degrees)}
-                      name="longitude-degrees"
-                      input-type="number"
+                      name='longitude-degrees'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.DMSCoordinatesHandler(ev)}
                       onFormItemBlur={() => this.coordinatesUpdated()}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: -180, max: 180},
+                          options: { min: -180, max: 180 },
                         },
                       ]}
                     ></app-form-item>
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      label-tag="minutes"
-                      label-text="Minutes"
+                      label-tag='minutes'
+                      label-text='Minutes'
                       value={toString(
                         Math.abs(this.DMSCoordinates.lon.minutes)
                       )}
-                      name="longitude-minutes"
-                      input-type="number"
+                      name='longitude-minutes'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.DMSCoordinatesHandler(ev)}
                       onFormItemBlur={() => this.coordinatesUpdated()}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: 0, max: 60},
+                          options: { min: 0, max: 60 },
                         },
                       ]}
                     ></app-form-item>
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      label-tag="seconds"
-                      label-text="Seconds"
+                      label-tag='seconds'
+                      label-text='Seconds'
                       value={toString(
                         Math.abs(this.DMSCoordinates.lon.seconds)
                       )}
-                      name="longitude-seconds"
-                      input-type="number"
+                      name='longitude-seconds'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.DMSCoordinatesHandler(ev)}
                       onFormItemBlur={() => this.coordinatesUpdated()}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: 0, max: 60},
+                          options: { min: 0, max: 60 },
                         },
                       ]}
                     ></app-form-item>
@@ -318,10 +318,10 @@ export class AppCoordinates {
             {this.location ? (
               <ion-row>
                 <ion-col>
-                  <ion-item color="dark" lines="none">
+                  <ion-item color='dark' lines='none'>
                     <ion-icon
-                      name="navigate-circle-outline"
-                      slot="start"
+                      name='navigate-circle-outline'
+                      slot='start'
                     ></ion-icon>
                     <ion-label>{this.location.display_name}</ion-label>
                   </ion-item>

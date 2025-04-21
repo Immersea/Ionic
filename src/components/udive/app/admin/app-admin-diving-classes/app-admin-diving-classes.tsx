@@ -1,26 +1,28 @@
-import {Component, h, State, Host, Prop} from "@stencil/core";
-import {Subscription} from "rxjs";
+import { Component, h, State, Host, Prop } from "@stencil/core";
+import { Subscription } from "rxjs";
 import {
   UserService,
   USERPROFILECOLLECTION,
 } from "../../../../../services/common/user";
-import {orderBy} from "lodash";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {UserPubicProfile} from "../../../../../interfaces/common/user/user-public-profile";
+import { orderBy } from "lodash";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { UserPubicProfile } from "../../../../../interfaces/common/user/user-public-profile";
 import {
   DivingCentersService,
   DIVECENTERSSCOLLECTION,
 } from "../../../../../services/udive/divingCenters";
-import {MapDataDivingCenter} from "../../../../../interfaces/udive/diving-center/divingCenter";
-import {MapDataDivingSchool} from "../../../../../interfaces/udive/diving-school/divingSchool";
+import { MapDataDivingCenter } from "../../../../../interfaces/udive/diving-center/divingCenter";
+import { MapDataDivingSchool } from "../../../../../interfaces/udive/diving-school/divingSchool";
 import {
   DivingSchoolsService,
   DIVESCHOOLSSCOLLECTION,
 } from "../../../../../services/udive/divingSchools";
-import {DivingClassesService} from "../../../../../services/udive/divingClasses";
-import {ClassSummary} from "../../../../../interfaces/udive/diving-class/divingClass";
-import {TranslationService} from "../../../../../services/common/translations";
-import {format} from "date-fns";
+import { DivingClassesService } from "../../../../../services/udive/divingClasses";
+import { ClassSummary } from "../../../../../interfaces/udive/diving-class/divingClass";
+import { TranslationService } from "../../../../../services/common/translations";
+import { format } from "date-fns";
+import { RouterService } from "../../../../../services/common/router";
+//import { DocumentSnapshot } from "firebase/firestore";
 
 @Component({
   tag: "app-admin-diving-classes",
@@ -29,6 +31,8 @@ import {format} from "date-fns";
 export class AppAdminDivingClasses {
   @Prop() filterByOrganisierId: string;
   @Prop() filterByClasses: any;
+  @Prop() future: boolean = false;
+  @Prop() school: boolean = false;
   @State() adminDivingClassesArray: any[] = [];
   @State() updateView = false;
   @State() creatingNewDivingClass = false;
@@ -67,7 +71,19 @@ export class AppAdminDivingClasses {
         DivingSchoolsService.selectedDivingSchoolClasses$.subscribe((sub) =>
           this.loadDivingClasses(sub)
         );
+    } else if (this.school) {
+      //load diving center observable into service
+      await DivingSchoolsService.selectDivingSchoolForAdmin(
+        this.filterByOrganisierId
+      );
+      this.future = true;
+      //school next classes searched by students
+      this.userDivingClasses$ =
+        DivingSchoolsService.selectedDivingSchoolClasses$.subscribe((sub) =>
+          this.loadDivingClasses(sub)
+        );
     } else {
+      //user
       this.userDivingClasses$ = UserService.userDivingClasses$.subscribe(
         (sub) => this.loadDivingClasses(sub)
       );
@@ -120,12 +136,16 @@ export class AppAdminDivingClasses {
       Object.keys(userDivingClasses).forEach((key) => {
         let adminClass = userDivingClasses[key] as any;
         adminClass.id = key;
+        if (this.future && new Date(adminClass.end) < new Date()) {
+          adminClass = null;
+        }
         if (
+          adminClass &&
           this.filterByOrganisierId &&
           adminClass.organiser.id == this.filterByOrganisierId
         ) {
           adminDivingClassesArray.push(adminClass);
-        } else if (!this.filterByOrganisierId) {
+        } else if (adminClass && !this.filterByOrganisierId) {
           adminDivingClassesArray.push(adminClass);
         }
       });
@@ -195,19 +215,19 @@ export class AppAdminDivingClasses {
       <Host>
         {this.loadingDivingClasses
           ? [
-              <app-skeletons skeleton="diveTrip" />,
-              <app-skeletons skeleton="diveTrip" />,
-              <app-skeletons skeleton="diveTrip" />,
-              <app-skeletons skeleton="diveTrip" />,
-              <app-skeletons skeleton="diveTrip" />,
+              <app-skeletons skeleton='diveTrip' />,
+              <app-skeletons skeleton='diveTrip' />,
+              <app-skeletons skeleton='diveTrip' />,
+              <app-skeletons skeleton='diveTrip' />,
+              <app-skeletons skeleton='diveTrip' />,
             ]
           : undefined}
         {this.creatingNewDivingClass ? (
-          <app-skeletons skeleton="diveTrip" />
+          <app-skeletons skeleton='diveTrip' />
         ) : undefined}
         {this.adminDivingClassesArray.map((diveClass) =>
           this.editingDivingClass == diveClass.id ? (
-            <app-skeletons skeleton="diveTrip" />
+            <app-skeletons skeleton='diveTrip' />
           ) : (
             <ion-item
               button
@@ -217,7 +237,7 @@ export class AppAdminDivingClasses {
               {diveClass.organiser &&
               diveClass.organiser.item &&
               diveClass.organiser.item.photoURL ? (
-                <ion-avatar slot="start">
+                <ion-avatar slot='start'>
                   <ion-img src={diveClass.organiser.item.photoURL} />
                 </ion-avatar>
               ) : undefined}
@@ -228,31 +248,31 @@ export class AppAdminDivingClasses {
                 diveClass.organiser.item &&
                 diveClass.organiser.item.displayName ? (
                   <p>
-                    <my-transl tag="organiser" text="Organiser" />
+                    <my-transl tag='organiser' text='Organiser' />
                     {": " + diveClass.organiser.item.displayName}
                   </p>
                 ) : undefined}
               </ion-label>
               {diveClass.owner ? (
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   icon-only
-                  slot="end"
+                  slot='end'
                   onClick={(ev) => this.delete(ev, diveClass.id)}
                 >
-                  <ion-icon name="trash" slot="end"></ion-icon>
+                  <ion-icon name='trash' slot='end'></ion-icon>
                 </ion-button>
               ) : undefined}
               {diveClass.editor ? (
                 <ion-button
-                  fill="clear"
-                  color="divingclass"
+                  fill='clear'
+                  color='divingclass'
                   icon-only
-                  slot="end"
+                  slot='end'
                   onClick={(ev) => this.update(ev, diveClass.id)}
                 >
-                  <ion-icon name="create" slot="end"></ion-icon>
+                  <ion-icon name='create' slot='end'></ion-icon>
                 </ion-button>
               ) : undefined}
             </ion-item>
@@ -260,7 +280,7 @@ export class AppAdminDivingClasses {
         )}
 
         {this.adminDivingClassesArray.length == 0 ? (
-          <ion-item>
+          <ion-item button onClick={() => RouterService.push("map", "root")}>
             <ion-label>
               <h2>
                 {TranslationService.getTransl(

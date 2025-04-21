@@ -1,7 +1,7 @@
-import {Component, h, Host, Element, Prop, State} from "@stencil/core";
-import {popoverController} from "@ionic/core";
-import {cloneDeep, includes, isObject, isString, toLower} from "lodash";
-import {Environment} from "../../../../global/env";
+import { Component, h, Host, Element, Prop, State } from "@stencil/core";
+import { popoverController } from "@ionic/core";
+import { cloneDeep, includes, isObject, isString, toLower } from "lodash";
+import { Environment } from "../../../../global/env";
 @Component({
   tag: "popover-select-search",
   styleUrl: "popover-select-search.scss",
@@ -76,9 +76,9 @@ export class PopoverSelectSearch {
       <Host>
         <ion-header translucent>
           <ion-toolbar>
-            <ion-grid class="ion-no-padding">
+            <ion-grid class='ion-no-padding'>
               <ion-row>
-                <ion-col size="10">
+                <ion-col size='10'>
                   <ion-searchbar
                     animated={true}
                     debounce={250}
@@ -86,14 +86,14 @@ export class PopoverSelectSearch {
                     onIonInput={(ev) => this.handleSearch(ev)}
                   ></ion-searchbar>
                 </ion-col>
-                <ion-col size="1">
+                <ion-col size='1'>
                   <ion-button
                     color={Environment.getAppColor()}
                     icon-only
-                    fill="clear"
+                    fill='clear'
                     onClick={this.close}
                   >
-                    <ion-icon name="close"></ion-icon>
+                    <ion-icon name='close'></ion-icon>
                   </ion-button>
                 </ion-col>
               </ion-row>
@@ -111,7 +111,7 @@ export class PopoverSelectSearch {
                 }
               >
                 {option[this.selectValueId] == this.value ? (
-                  <ion-icon name="checkmark"></ion-icon>
+                  <ion-icon name='checkmark'></ion-icon>
                 ) : undefined}
                 <ion-label>{this.getTextValue(option)}</ion-label>
               </ion-item>

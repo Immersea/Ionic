@@ -8,19 +8,19 @@ import {
   State,
   Element,
 } from "@stencil/core";
-import {DivePlanModel} from "../../../../../interfaces/udive/planner/dive-plan";
-import {TranslationService} from "../../../../../services/common/translations";
-import {TripDive} from "../../../../../interfaces/udive/dive-trip/diveTrip";
-import {MapDataDiveSite} from "../../../../../interfaces/udive/dive-site/diveSite";
-import {DiveSitesService} from "../../../../../services/udive/diveSites";
-import {MapDataDivingCenter} from "../../../../../interfaces/udive/diving-center/divingCenter";
-import {DivingCentersService} from "../../../../../services/udive/divingCenters";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
-import {DivePlansService} from "../../../../../services/udive/divePlans";
-import {format} from "date-fns";
-import {toNumber} from "lodash";
-import {Environment} from "../../../../../global/env";
+import { DivePlanModel } from "../../../../../interfaces/udive/planner/dive-plan";
+import { TranslationService } from "../../../../../services/common/translations";
+import { TripDive } from "../../../../../interfaces/udive/dive-trip/diveTrip";
+import { MapDataDiveSite } from "../../../../../interfaces/udive/dive-site/diveSite";
+import { DiveSitesService } from "../../../../../services/udive/diveSites";
+import { MapDataDivingCenter } from "../../../../../interfaces/udive/diving-center/divingCenter";
+import { DivingCentersService } from "../../../../../services/udive/divingCenters";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
+import { DivePlansService } from "../../../../../services/udive/divePlans";
+import { format } from "date-fns";
+import { toNumber } from "lodash";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "app-dive-trip-card",
@@ -28,14 +28,14 @@ import {Environment} from "../../../../../global/env";
 })
 export class AppDiveTripCard {
   @Element() el: HTMLElement;
-  @Prop({mutable: true}) tripDive: TripDive;
+  @Prop({ mutable: true }) tripDive: TripDive;
   diveSites: MapDataDiveSite[] = [];
   @Prop() editable = false;
   @Event() updateDiveEmit: EventEmitter<DivePlanModel>;
   @Event() addDiveEmit: EventEmitter<any>;
   @Event() removeDiveTripEmit: EventEmitter<any>;
   @Event() removeTripDiveEmit: EventEmitter<number>;
-  @Prop({mutable: true}) updateView = false;
+  @Prop({ mutable: true }) updateView = false;
   @State() segment: number = 0;
   divingCenters: MapDataDivingCenter[] = [];
   userSub: Subscription;
@@ -125,7 +125,7 @@ export class AppDiveTripCard {
       <ion-card>
         <ion-card-header>
           <ion-card-title>
-            <ion-item class="ion-no-padding" lines="none">
+            <ion-item class='ion-no-padding' lines='none'>
               <ion-label>
                 {format(this.tripDive.divePlan.dives[0].date, "PP")}
               </ion-label>
@@ -133,21 +133,21 @@ export class AppDiveTripCard {
                 ? [
                     <ion-button
                       icon-only
-                      slot="end"
-                      color="danger"
-                      fill="clear"
+                      slot='end'
+                      color='danger'
+                      fill='clear'
                       onClick={() => this.removeDiveTrip()}
                     >
-                      <ion-icon name="trash-bin-outline"></ion-icon>
+                      <ion-icon name='trash-bin-outline'></ion-icon>
                     </ion-button>,
                     <ion-button
                       icon-only
-                      slot="end"
-                      color="divetrip"
-                      fill="clear"
+                      slot='end'
+                      color='divetrip'
+                      fill='clear'
                       onClick={() => this.addDivePlan()}
                     >
-                      <ion-icon name="add-circle"></ion-icon>
+                      <ion-icon name='add-circle'></ion-icon>
                     </ion-button>,
                   ]
                 : undefined}
@@ -159,7 +159,7 @@ export class AppDiveTripCard {
               TranslationService.getTransl(
                 "max-participants",
                 "Max xxx participants",
-                {xxx: this.tripDive.numberOfParticipants}
+                { xxx: this.tripDive.numberOfParticipants }
               )}
           </ion-card-subtitle>
         </ion-card-header>
@@ -167,7 +167,7 @@ export class AppDiveTripCard {
           {this.tripDive.divePlan.dives.length > 1 ? (
             <ion-toolbar>
               <ion-segment
-                mode="md"
+                mode='md'
                 color={Environment.getAppColor()}
                 onIonChange={(ev) => this.segmentChanged(ev)}
                 value={this.segment.toString()}
@@ -175,7 +175,7 @@ export class AppDiveTripCard {
                 {Object.keys(this.tripDive.divePlan.dives).map((i) => (
                   <ion-segment-button value={i}>
                     <ion-label>
-                      <my-transl tag="dive" text="Dive" />
+                      <my-transl tag='dive' text='Dive' />
                       {" " +
                         (toNumber(i) + 1) +
                         ": " +
@@ -200,7 +200,7 @@ export class AppDiveTripCard {
                 ) : undefined}
               </ion-card-subtitle>
               <ion-card-title>
-                <ion-item class="ion-no-padding" lines="none">
+                <ion-item class='ion-no-padding' lines='none'>
                   <ion-label>
                     {format(
                       this.tripDive.divePlan.dives[this.segment].date,
@@ -212,26 +212,26 @@ export class AppDiveTripCard {
                         this.segment > 0 ? (
                           <ion-button
                             icon-only
-                            slot="end"
-                            color="danger"
-                            fill="clear"
+                            slot='end'
+                            color='danger'
+                            fill='clear'
                             onClick={(ev) =>
                               this.removeDivePlan(ev, this.segment)
                             }
                           >
-                            <ion-icon name="trash-bin-outline"></ion-icon>
+                            <ion-icon name='trash-bin-outline'></ion-icon>
                           </ion-button>
                         ) : undefined,
                         <ion-button
                           icon-only
-                          slot="end"
-                          color="primary"
-                          fill="clear"
+                          slot='end'
+                          color='primary'
+                          fill='clear'
                           onClick={(ev) =>
                             this.updateDivePlan(ev, this.segment)
                           }
                         >
-                          <ion-icon name="create"></ion-icon>
+                          <ion-icon name='create'></ion-icon>
                         </ion-button>,
                       ]
                     : undefined}
@@ -243,7 +243,7 @@ export class AppDiveTripCard {
                 {this.tripDive.divePlan.dives[this.segment]
                   .getProfilePointsDetails()
                   .map((detail) => (
-                    <p class="ion-text-start">{detail}</p>
+                    <p class='ion-text-start'>{detail}</p>
                   ))}
               </ion-card-content>
             ) : undefined}
@@ -251,14 +251,14 @@ export class AppDiveTripCard {
         </ion-card-content>
         {!this.editable && this.loogBookButton ? (
           <ion-button
-            expand="full"
-            color="secondary"
+            expand='full'
+            color='secondary'
             onClick={() => this.createDivePlan(this.tripDive.divePlan)}
           >
             {this.tripDive.divePlan.dives.length == 1 ? (
-              <my-transl tag="log-dive" text="Log Dive" />
+              <my-transl tag='log-dive' text='Log Dive' />
             ) : (
-              <my-transl tag="log-dives" text="Log Dives" />
+              <my-transl tag='log-dives' text='Log Dives' />
             )}
           </ion-button>
         ) : undefined}

@@ -1,16 +1,16 @@
-import {BuhlPref} from "../../../interfaces/udive/planner/buhl-preferences";
-import {OxTox} from "../../../interfaces/udive/planner/ox-tox";
-import {Gradient} from "../../../interfaces/udive/planner/gradient";
-import {Compartment} from "../../../interfaces/udive/planner/compartment";
-import {SegmentAbstract} from "../../../interfaces/udive/planner/segment-abstract";
-import {SegmentAscDec} from "../../../interfaces/udive/planner/segment-asc-desc";
-import {SegmentDive} from "../../../interfaces/udive/planner/segment-dive";
-import {SegmentDeco} from "../../../interfaces/udive/planner/segment-deco";
-import {Gas} from "../../../interfaces/udive/planner/gas";
-import {ppO2Drop} from "./ppO2-drop";
-import {DiveTools, DiveToolsService} from "./dive-tools";
+import { BuhlPref } from "../../../interfaces/udive/planner/buhl-preferences";
+import { OxTox } from "../../../interfaces/udive/planner/ox-tox";
+import { Gradient } from "../../../interfaces/udive/planner/gradient";
+import { Compartment } from "../../../interfaces/udive/planner/compartment";
+import { SegmentAbstract } from "../../../interfaces/udive/planner/segment-abstract";
+import { SegmentAscDec } from "../../../interfaces/udive/planner/segment-asc-desc";
+import { SegmentDive } from "../../../interfaces/udive/planner/segment-dive";
+import { SegmentDeco } from "../../../interfaces/udive/planner/segment-deco";
+import { Gas } from "../../../interfaces/udive/planner/gas";
+import { ppO2Drop } from "./ppO2-drop";
+import { DiveTools, DiveToolsService } from "./dive-tools";
 //import { ObjectsPipe } from '../../pipes/objects.pipe';
-import {orderBy, toInteger} from "lodash";
+import { orderBy, toInteger } from "lodash";
 
 /*
   MODEL for Buhlmann deco planner

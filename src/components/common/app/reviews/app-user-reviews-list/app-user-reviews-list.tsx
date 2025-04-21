@@ -1,8 +1,8 @@
-import {Component, h, Prop, State} from "@stencil/core";
-import {ReviewSummary} from "../../../../../interfaces/common/reviews/review";
-import {USERPROFILECOLLECTION} from "../../../../../services/common/user";
-import {ReviewService} from "../../../../../services/common/reviews";
-import {format} from "date-fns";
+import { Component, h, Prop, State } from "@stencil/core";
+import { ReviewSummary } from "../../../../../interfaces/common/reviews/review";
+import { USERPROFILECOLLECTION } from "../../../../../services/common/user";
+import { ReviewService } from "../../../../../services/common/reviews";
+import { format } from "date-fns";
 
 @Component({
   tag: "app-user-reviews-list",
@@ -33,12 +33,12 @@ export class AppUserReviewsList {
           <ion-item button onClick={() => this.openItem(item)}>
             {this.collectionId === USERPROFILECOLLECTION ? (
               item.reviewedObj && item.reviewedObj.photoURL ? (
-                <ion-avatar slot="start">
+                <ion-avatar slot='start'>
                   <img src={item.reviewedObj.photoURL} />
                 </ion-avatar>
               ) : undefined
             ) : item.user && item.user.photoURL ? (
-              <ion-avatar slot="start">
+              <ion-avatar slot='start'>
                 <img src={item.user.photoURL} />
               </ion-avatar>
             ) : undefined}

@@ -1,18 +1,18 @@
-import {Component, h, Prop, State, Host, Method} from "@stencil/core";
-import {Subscription} from "rxjs";
-import {ChatService} from "../../../../../services/common/chat";
-import {TranslationService} from "../../../../../services/common/translations";
-import {popoverController, alertController} from "@ionic/core";
-import {Chat} from "../../../../../interfaces/common/chat/chat";
-import {RouterService} from "../../../../../services/common/router";
-import {UserService} from "../../../../../services/common/user";
+import { Component, h, Prop, State, Host, Method } from "@stencil/core";
+import { Subscription } from "rxjs";
+import { ChatService } from "../../../../../services/common/chat";
+import { TranslationService } from "../../../../../services/common/translations";
+import { popoverController, alertController } from "@ionic/core";
+import { Chat } from "../../../../../interfaces/common/chat/chat";
+import { RouterService } from "../../../../../services/common/router";
+import { UserService } from "../../../../../services/common/user";
 import {
   fromUnixTime,
   differenceInMinutes,
   differenceInDays,
   format,
 } from "date-fns";
-import {orderBy, toNumber} from "lodash";
+import { orderBy, toNumber } from "lodash";
 
 @Component({
   tag: "app-chat",
@@ -34,7 +34,7 @@ export class AppChat {
       this.showingPopover = true;
       const popover = await popoverController.create({
         component: "popover-chat-participants",
-        componentProps: {chat: this.chat},
+        componentProps: { chat: this.chat },
         event: ev,
         translucent: true,
       });
@@ -204,7 +204,7 @@ export class AppChat {
   render() {
     return (
       <Host>
-        <ion-content id="chat-container">
+        <ion-content id='chat-container'>
           {this.messageGroups.map((messageGroup) => [
             <div
               class={
@@ -222,7 +222,7 @@ export class AppChat {
                 !messageGroup.isMine &&
                 message.isFirst &&
                 !messageGroup.isSystem ? (
-                  <div class="sendername">{message.senderName}</div>
+                  <div class='sendername'>{message.senderName}</div>
                 ) : undefined,
                 <div
                   class={"message" + (message.isLast ? " last" : "")}
@@ -232,14 +232,14 @@ export class AppChat {
             </div>,
           ])}
         </ion-content>
-        <ion-footer class="chat-footer">
+        <ion-footer class='chat-footer'>
           <ion-toolbar>
-            <ion-item lines="none">
+            <ion-item lines='none'>
               {this.sendingMessage ? (
-                <ion-spinner name="dots"></ion-spinner>
+                <ion-spinner name='dots'></ion-spinner>
               ) : undefined}
               <ion-input
-                mode="ios"
+                mode='ios'
                 placeholder={
                   !this.sendingMessage
                     ? TranslationService.getTransl(
@@ -256,13 +256,13 @@ export class AppChat {
                 onKeyUp={(ev) => this.handleKey(ev)}
               ></ion-input>
               <ion-button
-                slot="end"
+                slot='end'
                 icon-only
-                fill="clear"
+                fill='clear'
                 disabled={this.sendingMessage}
                 onClick={() => this.sendMessage()}
               >
-                <ion-icon name="paper-plane-outline"></ion-icon>
+                <ion-icon name='paper-plane-outline'></ion-icon>
               </ion-button>
             </ion-item>
           </ion-toolbar>

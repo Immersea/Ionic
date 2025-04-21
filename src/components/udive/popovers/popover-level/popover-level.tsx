@@ -1,12 +1,12 @@
-import {Component, h, Element, Prop, State} from "@stencil/core";
-import {DiveProfilePoint} from "../../../../interfaces/udive/planner/dive-profile-point";
-import {GasModel} from "../../../../interfaces/udive/planner/gas-model";
-import {GasBlenderService} from "../../../../services/udive/planner/gas-blender";
-import {UserService} from "../../../../services/common/user";
-import {DiveToolsService} from "../../../../services/udive/planner/dive-tools";
-import {alertController} from "@ionic/core";
-import {TranslationService} from "../../../../services/common/translations";
-import {find, round, toNumber} from "lodash";
+import { Component, h, Element, Prop, State } from "@stencil/core";
+import { DiveProfilePoint } from "../../../../interfaces/udive/planner/dive-profile-point";
+import { GasModel } from "../../../../interfaces/udive/planner/gas-model";
+import { GasBlenderService } from "../../../../services/udive/planner/gas-blender";
+import { UserService } from "../../../../services/common/user";
+import { DiveToolsService } from "../../../../services/udive/planner/dive-tools";
+import { alertController } from "@ionic/core";
+import { TranslationService } from "../../../../services/common/translations";
+import { find, round, toNumber } from "lodash";
 
 @Component({
   tag: "popover-level",
@@ -237,16 +237,16 @@ export class PopoverLevel {
 
   render() {
     return [
-      <ion-list style={{marginBottom: "0px"}}>
-        <ion-grid class="ion-no-padding">
+      <ion-list style={{ marginBottom: "0px" }}>
+        <ion-grid class='ion-no-padding'>
           <ion-row>
             <ion-col>
               <app-form-item
-                label-tag="depth"
-                label-text="Depth"
+                label-tag='depth'
+                label-text='Depth'
                 value={this.form.depth}
-                name="depth"
-                input-type="number"
+                name='depth'
+                input-type='number'
                 onFormItemChanged={(ev) => this.inputHandler(ev)}
                 onFormItemBlur={(ev) => this.blurHandler(ev)}
                 validator={[
@@ -263,11 +263,11 @@ export class PopoverLevel {
             </ion-col>
             <ion-col>
               <app-form-item
-                label-tag="time"
-                label-text="Time"
+                label-tag='time'
+                label-text='Time'
                 value={this.form.time}
-                name="time"
-                input-type="number"
+                name='time'
+                input-type='number'
                 onFormItemChanged={(ev) => this.inputHandler(ev)}
                 onFormItemBlur={(ev) => this.blurHandler(ev)}
                 validator={["required"]}
@@ -276,12 +276,12 @@ export class PopoverLevel {
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-row class="ion-no-padding">
+              <ion-row class='ion-no-padding'>
                 <app-form-item
-                  label-text="O2"
+                  label-text='O2'
                   value={this.form.o2}
-                  name="o2"
-                  input-type="number"
+                  name='o2'
+                  input-type='number'
                   onFormItemChanged={(ev) => this.inputHandler(ev)}
                   onFormItemBlur={(ev) => this.blurHandler(ev)}
                   forceInvalid={this.gasWarning}
@@ -300,10 +300,10 @@ export class PopoverLevel {
                 ></app-form-item>
               </ion-row>
               {this.gasWarning ? (
-                <ion-row class="ion-no-padding">
+                <ion-row class='ion-no-padding'>
                   <ion-col>
-                    <div class="notification">
-                      <ion-icon name="warning" item-start></ion-icon>
+                    <div class='notification'>
+                      <ion-icon name='warning' item-start></ion-icon>
                       High pO2 ({this.level.gas.getpO2atDepth(this.level.depth)}
                       )!
                     </div>
@@ -314,12 +314,12 @@ export class PopoverLevel {
             <ion-col>
               {this.hasTrimixlicence ? (
                 [
-                  <ion-row class="ion-no-padding">
+                  <ion-row class='ion-no-padding'>
                     <app-form-item
-                      label-text="He"
+                      label-text='He'
                       value={this.form.he}
-                      name="he"
-                      input-type="number"
+                      name='he'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                       onFormItemBlur={(ev) => this.blurHandler(ev)}
                       forceInvalid={this.ENDWarning}
@@ -337,10 +337,10 @@ export class PopoverLevel {
                     ></app-form-item>
                   </ion-row>,
                   this.ENDWarning ? (
-                    <ion-row class="ion-no-padding">
+                    <ion-row class='ion-no-padding'>
                       <ion-col>
-                        <div class="notification">
-                          <ion-icon name="warning" item-start></ion-icon>
+                        <div class='notification'>
+                          <ion-icon name='warning' item-start></ion-icon>
                           High END ({this.level.gas.getEND(this.level.depth)}
                           {DiveToolsService.depthUnit})!
                         </div>
@@ -350,7 +350,7 @@ export class PopoverLevel {
                 ]
               ) : (
                 <app-form-item
-                  label-text="He"
+                  label-text='He'
                   value={this.form.he}
                   onClick={() => UserService.checkLicence("trimix", true)}
                 ></app-form-item>
@@ -362,48 +362,48 @@ export class PopoverLevel {
               <ion-col>
                 {this.hasReblicence ? (
                   <app-form-item
-                    label-tag="pO2-setpoint"
-                    label-text="pO2 setPoint"
+                    label-tag='pO2-setpoint'
+                    label-text='pO2 setPoint'
                     value={this.form.setpoint}
-                    name="setpoint"
-                    input-type="number"
+                    name='setpoint'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.inputHandler(ev)}
                     onFormItemBlur={(ev) => this.blurHandler(ev)}
                     validator={[
                       {
                         name: "minmaxvalue",
-                        options: {min: 0.5, max: 1.6},
+                        options: { min: 0.5, max: 1.6 },
                       },
                     ]}
                   ></app-form-item>
                 ) : (
                   <app-form-item
-                    label-tag="pO2-setpoint"
-                    label-text="pO2 setPoint"
+                    label-tag='pO2-setpoint'
+                    label-text='pO2 setPoint'
                     value={this.form.setpoint}
                     onClick={() => UserService.checkLicence("reb", true)}
                   ></app-form-item>
                 )}
               </ion-col>
-              <ion-col size="2" class="ion-no-padding">
+              <ion-col size='2' class='ion-no-padding'>
                 <ion-button
-                  shape="round"
-                  fill="clear"
+                  shape='round'
+                  fill='clear'
                   icon-only
-                  class="ion-no-padding"
+                  class='ion-no-padding'
                   onClick={() => this.showpO2Info()}
                 >
-                  <ion-icon name="help-circle-outline"></ion-icon>
+                  <ion-icon name='help-circle-outline'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           ) : undefined}
 
-          <ion-row class="scrollx" id="scrollGas">
+          <ion-row class='scrollx' id='scrollGas'>
             {this.stdGases.map((gas) => (
-              <ion-col class="item">
+              <ion-col class='item'>
                 <ion-button
-                  shape="round"
+                  shape='round'
                   color={gas.selected ? "secondary" : "primary"}
                   disabled={!gas.active}
                   onClick={() => this.selectStdGas(gas.gas)}
@@ -415,7 +415,7 @@ export class PopoverLevel {
           </ion-row>
           <ion-row>
             <ion-col>
-              <div class="notification" style={{color: "blue"}}>
+              <div class='notification' style={{ color: "blue" }}>
                 MOD:{" "}
                 {this.level.gas.getModF(
                   this.level.gas.fO2,
@@ -423,12 +423,12 @@ export class PopoverLevel {
                 )}
                 {DiveToolsService.depthUnit} @ {this.level.gas.ppO2} pO2
               </div>
-              <div class="notification" style={{color: "blue"}}>
+              <div class='notification' style={{ color: "blue" }}>
                 END: {this.level.gas.getEND(this.level.depth)}
                 {DiveToolsService.depthUnit} @ {this.level.depth}
                 {DiveToolsService.depthUnit}
               </div>
-              <div class="notification" style={{color: "blue"}}>
+              <div class='notification' style={{ color: "blue" }}>
                 pO2: {this.level.gas.getpO2atDepth(this.level.depth)} @{" "}
                 {this.level.depth}
                 {DiveToolsService.depthUnit}

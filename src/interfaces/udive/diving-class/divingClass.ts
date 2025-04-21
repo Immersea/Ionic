@@ -1,7 +1,7 @@
-import {DivePlanModel} from "../planner/dive-plan";
-import {Organiser} from "../dive-trip/diveTrip";
-import {TranslationTag} from "../../common/system/system";
-import {LocationIQ} from "../../../components";
+import { DivePlanModel } from "../planner/dive-plan";
+import { Organiser } from "../dive-trip/diveTrip";
+import { LocationIQ } from "../../../components";
+import { orderBy } from "lodash";
 
 export interface Agency {
   id: string;
@@ -56,20 +56,26 @@ export interface Student {
   evaluations: Evaluation[];
 }
 
-export interface Activity {
-  order: number;
+export class Activity {
   type: string; //theory, dry, in-water, dive
-  title: TranslationTag;
-  day: number; //ref. to schedule id
+  title: string;
+  date: string;
   completed: boolean;
   divePlan: DivePlanModel;
+  constructor(data?) {
+    this.type = data && data.type ? data.type : null;
+    this.title = data && data.title ? data.title : null;
+    this.date = data && data.date ? data.date : new Date().toISOString();
+    this.completed = data && data.completed ? true : false;
+    this.divePlan = data && data.divePlan ? data.divePlan : null;
+  }
 }
 
 export class DivingClass {
   organiser: Organiser;
   name: string;
   course: Course;
-  schedule: {[day: number]: Date};
+  schedule: { [day: number]: Date };
   location: LocationIQ;
   activities: Activity[];
   students: Student[];
@@ -98,16 +104,17 @@ export class DivingClass {
       });
     }
     this.location = data && data.location ? data.location : [];
-    this.activities = [];
+    const activities = [];
     if (data && data.activities && data.activities.length > 0) {
       data.activities.map((item) => {
         if (item.divePlan) {
           const plan = new DivePlanModel(item.divePlan);
           item.divePlan = plan;
         }
-        this.activities.push(item);
+        activities.push(new Activity(item));
       });
     }
+    this.activities = orderBy(activities, "date");
     this.students = [];
     if (data && data.students && data.students.length > 0) {
       data.students.map((item) => {

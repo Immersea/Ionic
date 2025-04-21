@@ -53,7 +53,7 @@ export class ModalUserUpdate {
 
   disconnectedCallback() {
     this.settingsSub.unsubscribe();
-    this.userSub.unsubscribe();
+    this.userSub ? this.userSub.unsubscribe() : undefined;
   }
 
   async update() {

@@ -1,15 +1,15 @@
-import {Component, h, State, Element} from "@stencil/core";
-import {isPlatform, popoverController, alertController} from "@ionic/core";
-import {cloneDeep, find, orderBy, round, toNumber, uniqBy} from "lodash";
-import {Gas} from "../../../../../interfaces/udive/planner/gas";
-import {Cylinder} from "../../../../../interfaces/udive/planner/cylinder";
-import {GasSupply} from "../../../../../interfaces/udive/planner/gas-supply";
-import {DiveStandardsService} from "../../../../../services/udive/planner/dive-standards";
-import {GasBlenderService} from "../../../../../services/udive/planner/gas-blender";
-import {DatabaseService} from "../../../../../services/common/database";
-import {TranslationService} from "../../../../../services/common/translations";
-import {DiveToolsService} from "../../../../../services/udive/planner/dive-tools";
-import {TankModel} from "../../../../../interfaces/udive/planner/tank-model";
+import { Component, h, State, Element } from "@stencil/core";
+import { isPlatform, popoverController, alertController } from "@ionic/core";
+import { cloneDeep, find, orderBy, round, toNumber, uniqBy } from "lodash";
+import { Gas } from "../../../../../interfaces/udive/planner/gas";
+import { Cylinder } from "../../../../../interfaces/udive/planner/cylinder";
+import { GasSupply } from "../../../../../interfaces/udive/planner/gas-supply";
+import { DiveStandardsService } from "../../../../../services/udive/planner/dive-standards";
+import { GasBlenderService } from "../../../../../services/udive/planner/gas-blender";
+import { DatabaseService } from "../../../../../services/common/database";
+import { TranslationService } from "../../../../../services/common/translations";
+import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
+import { TankModel } from "../../../../../interfaces/udive/planner/tank-model";
 import Swiper from "swiper";
 
 @Component({
@@ -39,24 +39,24 @@ export class PageGasBlender {
   tmxCost: number;
 
   ppCost = {
-    o2: {volume: 0, cost: 0},
-    he: {volume: 0, cost: 0},
-    nx: {volume: 0, cost: 0},
-    tmx: {volume: 0, cost: 0},
+    o2: { volume: 0, cost: 0 },
+    he: { volume: 0, cost: 0 },
+    nx: { volume: 0, cost: 0 },
+    tmx: { volume: 0, cost: 0 },
     totCost: 0,
   };
   nbCost = {
-    o2: {volume: 0, cost: 0},
-    he: {volume: 0, cost: 0},
-    nx: {volume: 0, cost: 0},
-    tmx: {volume: 0, cost: 0},
+    o2: { volume: 0, cost: 0 },
+    he: { volume: 0, cost: 0 },
+    nx: { volume: 0, cost: 0 },
+    tmx: { volume: 0, cost: 0 },
     totCost: 0,
   };
   tbCost = {
-    o2: {volume: 0, cost: 0},
-    he: {volume: 0, cost: 0},
-    nx: {volume: 0, cost: 0},
-    tmx: {volume: 0, cost: 0},
+    o2: { volume: 0, cost: 0 },
+    he: { volume: 0, cost: 0 },
+    nx: { volume: 0, cost: 0 },
+    tmx: { volume: 0, cost: 0 },
     totCost: 0,
   };
 
@@ -73,10 +73,10 @@ export class PageGasBlender {
 
   allowUpdate = true;
   @State() titles = [
-    {tag: "tank", icon: "chevron-forward", slotIcon: "end"},
-    {tag: "blend", icon: "chevron-forward", slotIcon: "end"},
-    {tag: "cost", icon: "chevron-forward", slotIcon: "end"},
-    {tag: "top-up"},
+    { tag: "tank", icon: "chevron-forward", slotIcon: "end" },
+    { tag: "blend", icon: "chevron-forward", slotIcon: "end" },
+    { tag: "cost", icon: "chevron-forward", slotIcon: "end" },
+    { tag: "top-up" },
   ];
   @State() slider: Swiper;
 
@@ -302,24 +302,24 @@ export class PageGasBlender {
   calculateCosts() {
     const chargeCost = this.chargeCost > 0 ? toNumber(this.chargeCost) : 0;
     this.ppCost = {
-      o2: {volume: 0, cost: 0},
-      he: {volume: 0, cost: 0},
-      nx: {volume: 0, cost: 0},
-      tmx: {volume: 0, cost: 0},
+      o2: { volume: 0, cost: 0 },
+      he: { volume: 0, cost: 0 },
+      nx: { volume: 0, cost: 0 },
+      tmx: { volume: 0, cost: 0 },
       totCost: 0,
     };
     this.nbCost = {
-      o2: {volume: 0, cost: 0},
-      he: {volume: 0, cost: 0},
-      nx: {volume: 0, cost: 0},
-      tmx: {volume: 0, cost: 0},
+      o2: { volume: 0, cost: 0 },
+      he: { volume: 0, cost: 0 },
+      nx: { volume: 0, cost: 0 },
+      tmx: { volume: 0, cost: 0 },
       totCost: 0,
     };
     this.tbCost = {
-      o2: {volume: 0, cost: 0},
-      he: {volume: 0, cost: 0},
-      nx: {volume: 0, cost: 0},
-      tmx: {volume: 0, cost: 0},
+      o2: { volume: 0, cost: 0 },
+      he: { volume: 0, cost: 0 },
+      nx: { volume: 0, cost: 0 },
+      tmx: { volume: 0, cost: 0 },
       totCost: 0,
     };
     this.ppCost.totCost = chargeCost;
@@ -386,7 +386,7 @@ export class PageGasBlender {
           (volume * this.tmxCost) / (DiveToolsService.isMetric() ? 1000 : 1);
       }
     }
-    return {type: type, volume: volume, cost: cost};
+    return { type: type, volume: volume, cost: cost };
   }
 
   async updateBlend() {
@@ -453,50 +453,50 @@ export class PageGasBlender {
     return [
       <ion-header>
         <app-navbar
-          tag="gas-blender"
-          text="Gas Blender"
-          color="blender"
+          tag='gas-blender'
+          text='Gas Blender'
+          color='blender'
         ></app-navbar>
       </ion-header>,
       <app-header-segment-toolbar
-        color="blender"
+        color='blender'
         swiper={this.slider}
         titles={this.titles}
       ></app-header-segment-toolbar>,
       <ion-content
-        class="slides"
+        class='slides'
         scrollEvents={true}
         onIonScrollStart={(ev) => this.logScrollStart(ev)}
       >
-        <swiper-container class="slider-gas-blender swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
-              <ion-list class="ion-text-wrap">
-                <ion-item color="white">
-                  <ion-grid class="ion-text-center">
+        <swiper-container class='slider-gas-blender swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
+              <ion-list class='ion-text-wrap'>
+                <ion-item color='white'>
+                  <ion-grid class='ion-text-center'>
                     <ion-row>
-                      <ion-col style={{marginTop: "5px"}}>
+                      <ion-col style={{ marginTop: "5px" }}>
                         <b>{DiveToolsService.isMetric() ? "Bar" : "Psi"}</b>
                       </ion-col>
-                      <ion-col style={{marginTop: "5px"}}>
+                      <ion-col style={{ marginTop: "5px" }}>
                         <b>
                           O<sub>2</sub>
                         </b>
                       </ion-col>
-                      <ion-col style={{marginTop: "5px"}}>
+                      <ion-col style={{ marginTop: "5px" }}>
                         <b>He</b>
                       </ion-col>
-                      <ion-col style={{marginTop: "5px"}}>
+                      <ion-col style={{ marginTop: "5px" }}>
                         <b>°{DiveToolsService.isMetric() ? "C" : "F"}</b>
                       </ion-col>
                     </ion-row>
                   </ion-grid>
                 </ion-item>
-                <ion-item-divider color="white" class="ion-text-center">
-                  <my-transl tag="topup-gas" text="Top-Up Gas" />
+                <ion-item-divider color='white' class='ion-text-center'>
+                  <my-transl tag='topup-gas' text='Top-Up Gas' />
                 </ion-item-divider>
                 <ion-item>
-                  <ion-grid class="ion-text-center">
+                  <ion-grid class='ion-text-center'>
                     <ion-row>
                       <ion-col
                         onClick={($event) =>
@@ -527,11 +527,11 @@ export class PageGasBlender {
                     </ion-row>
                   </ion-grid>
                 </ion-item>
-                <ion-item-divider color="white" class="ion-text-center">
-                  <my-transl tag="start-tank" text="Start Tank" />
+                <ion-item-divider color='white' class='ion-text-center'>
+                  <my-transl tag='start-tank' text='Start Tank' />
                 </ion-item-divider>
                 <ion-item>
-                  <ion-grid class="ion-text-center">
+                  <ion-grid class='ion-text-center'>
                     <ion-row>
                       <ion-col
                         onClick={($event) =>
@@ -564,11 +564,11 @@ export class PageGasBlender {
                     </ion-row>
                   </ion-grid>
                 </ion-item>
-                <ion-item-divider color="white" class="ion-text-center">
-                  <my-transl tag="end-tank" text="End Tank" />
+                <ion-item-divider color='white' class='ion-text-center'>
+                  <my-transl tag='end-tank' text='End Tank' />
                 </ion-item-divider>
                 <ion-item>
-                  <ion-grid class="ion-text-center">
+                  <ion-grid class='ion-text-center'>
                     <ion-row>
                       <ion-col
                         onClick={($event) => this.presentPopover($event, "end")}
@@ -595,17 +595,17 @@ export class PageGasBlender {
                 </ion-item>
               </ion-list>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <ion-grid>
                 <ion-row>
-                  <ion-list class="ion-text-wrap">
-                    <ion-grid class="ion-text-center">
+                  <ion-list class='ion-text-wrap'>
+                    <ion-grid class='ion-text-center'>
                       <ion-row>
                         <ion-col>
                           <ion-item>
-                            <my-transl tag="real-gas" text="Real gas" isLabel />
+                            <my-transl tag='real-gas' text='Real gas' isLabel />
                             <ion-toggle
-                              color="blender"
+                              color='blender'
                               checked={this.real_gas}
                               onIonChange={() => this.toggleRealGas()}
                             ></ion-toggle>
@@ -613,9 +613,9 @@ export class PageGasBlender {
                         </ion-col>
                         <ion-col>
                           <ion-item>
-                            <my-transl tag="he-first" text="He first" isLabel />
+                            <my-transl tag='he-first' text='He first' isLabel />
                             <ion-toggle
-                              color="blender"
+                              color='blender'
                               checked={this.he_first}
                               onIonChange={() => this.toggleHeFirst()}
                             ></ion-toggle>
@@ -623,37 +623,37 @@ export class PageGasBlender {
                         </ion-col>
                       </ion-row>
                     </ion-grid>
-                    <ion-item color="white">
-                      <ion-grid class="ion-text-center">
+                    <ion-item color='white'>
+                      <ion-grid class='ion-text-center'>
                         <ion-row>
-                          <ion-col style={{marginTop: "5px"}}>
+                          <ion-col style={{ marginTop: "5px" }}>
                             <b>
-                              <my-transl tag="action" text="Action" />
+                              <my-transl tag='action' text='Action' />
                             </b>
                           </ion-col>
-                          <ion-col style={{marginTop: "5px"}}>
+                          <ion-col style={{ marginTop: "5px" }}>
                             <b>
-                              <my-transl tag="start" text="Start" />
+                              <my-transl tag='start' text='Start' />
                             </b>
                           </ion-col>
-                          <ion-col style={{marginTop: "5px"}}>
+                          <ion-col style={{ marginTop: "5px" }}>
                             <b>+</b>
                           </ion-col>
-                          <ion-col style={{marginTop: "5px"}}>
+                          <ion-col style={{ marginTop: "5px" }}>
                             <b>=</b>
                           </ion-col>
                         </ion-row>
                       </ion-grid>
                     </ion-item>
-                    <ion-item-divider color="white" class="ion-text-center">
+                    <ion-item-divider color='white' class='ion-text-center'>
                       <my-transl
-                        tag="partial-pressure-blending"
-                        text="Partial Pressure Blending"
+                        tag='partial-pressure-blending'
+                        text='Partial Pressure Blending'
                       />
                     </ion-item-divider>
                     {this.ppSteps.map((step) => (
                       <ion-item>
-                        <ion-grid class="ion-text-center">
+                        <ion-grid class='ion-text-center'>
                           <ion-row>
                             <ion-col>
                               {step.blend}{" "}
@@ -666,16 +666,16 @@ export class PageGasBlender {
                         </ion-grid>
                       </ion-item>
                     ))}
-                    <ion-item-divider color="white" class="ion-text-center">
+                    <ion-item-divider color='white' class='ion-text-center'>
                       <my-transl
-                        tag="cont-nx-blending"
-                        text="Continuous Nitrox Blending"
+                        tag='cont-nx-blending'
+                        text='Continuous Nitrox Blending'
                         isLabel
                       />
                     </ion-item-divider>
                     {this.nxSteps.map((step) => (
                       <ion-item>
-                        <ion-grid class="ion-text-center">
+                        <ion-grid class='ion-text-center'>
                           <ion-row>
                             <ion-col>
                               {step.blend}{" "}
@@ -689,16 +689,16 @@ export class PageGasBlender {
                       </ion-item>
                     ))}
 
-                    <ion-item-divider color="white" class="ion-text-center">
+                    <ion-item-divider color='white' class='ion-text-center'>
                       <my-transl
-                        tag="cont-tmx-blending"
-                        text="Continuous Trimix Blending"
+                        tag='cont-tmx-blending'
+                        text='Continuous Trimix Blending'
                         isLabel
                       />
                     </ion-item-divider>
                     {this.tmxSteps.map((step) => (
                       <ion-item>
-                        <ion-grid class="ion-text-center">
+                        <ion-grid class='ion-text-center'>
                           <ion-row>
                             <ion-col>
                               {step.blend}{" "}
@@ -715,16 +715,16 @@ export class PageGasBlender {
                 </ion-row>
               </ion-grid>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <ion-grid>
                 <ion-row>
-                  <ion-item style={{width: "100%"}}>
+                  <ion-item style={{ width: "100%" }}>
                     <ion-label>
-                      <my-transl tag="tank" text="Tank"></my-transl>
+                      <my-transl tag='tank' text='Tank'></my-transl>
                     </ion-label>
 
                     <ion-select
-                      interface="action-sheet"
+                      interface='action-sheet'
                       onIonChange={(ev) => this.changeTank(ev)}
                       value={this.tank.name}
                     >
@@ -737,8 +737,8 @@ export class PageGasBlender {
                   </ion-item>
                 </ion-row>
                 <ion-row>
-                  <ion-item style={{width: "100%"}}>
-                    <ion-row style={{width: "100%"}}>
+                  <ion-item style={{ width: "100%" }}>
+                    <ion-row style={{ width: "100%" }}>
                       <ion-col>
                         {TranslationService.getTransl(
                           "ideal-capacity",
@@ -767,72 +767,72 @@ export class PageGasBlender {
                 <ion-row>
                   <ion-col>
                     <app-form-item
-                      label-tag="he-cost"
-                      label-text="Helium Cost"
+                      label-tag='he-cost'
+                      label-text='Helium Cost'
                       appendText={
                         " (unit/" +
                         (DiveToolsService.isMetric() ? "m3" : "cuft") +
                         ")"
                       }
                       value={this.heCost}
-                      name="heCost"
-                      input-type="number"
+                      name='heCost'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.updateCosts(ev)}
                     ></app-form-item>
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      label-tag="o2-cost"
-                      label-text="Oxygen Cost"
+                      label-tag='o2-cost'
+                      label-text='Oxygen Cost'
                       appendText={
                         " (unit/" +
                         (DiveToolsService.isMetric() ? "m3" : "cuft") +
                         ")"
                       }
                       value={this.o2Cost}
-                      name="o2Cost"
-                      input-type="number"
+                      name='o2Cost'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.updateCosts(ev)}
                     ></app-form-item>
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      label-tag="nx-cost"
-                      label-text="Nitrox Cost"
+                      label-tag='nx-cost'
+                      label-text='Nitrox Cost'
                       appendText={
                         " (unit/" +
                         (DiveToolsService.isMetric() ? "m3" : "cuft") +
                         ")"
                       }
                       value={this.nxCost}
-                      name="nxCost"
-                      input-type="number"
+                      name='nxCost'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.updateCosts(ev)}
                     ></app-form-item>
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      label-tag="tmx-cost"
-                      label-text="Trimix Cost"
+                      label-tag='tmx-cost'
+                      label-text='Trimix Cost'
                       appendText={
                         " (unit/" +
                         (DiveToolsService.isMetric() ? "m3" : "cuft") +
                         ")"
                       }
                       value={this.tmxCost}
-                      name="tmxCost"
-                      input-type="number"
+                      name='tmxCost'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.updateCosts(ev)}
                     ></app-form-item>
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      label-tag="fill-cost"
-                      label-text="Filling Cost"
+                      label-tag='fill-cost'
+                      label-text='Filling Cost'
                       appendText={" (unit)"}
                       value={this.chargeCost}
-                      name="chargeCost"
-                      input-type="number"
+                      name='chargeCost'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.updateCosts(ev)}
                     ></app-form-item>
                   </ion-col>
@@ -845,8 +845,8 @@ export class PageGasBlender {
                           <ion-col>
                             <ion-row>
                               <my-transl
-                                tag="partial-pressure-blending"
-                                text="Partial Pressure Blending"
+                                tag='partial-pressure-blending'
+                                text='Partial Pressure Blending'
                               />
                             </ion-row>
                             {this.ppCost.o2.volume > 0 ? (
@@ -882,7 +882,7 @@ export class PageGasBlender {
                               </ion-row>
                             ) : undefined}
                           </ion-col>
-                          <ion-col size="4">{this.ppCost.totCost}u</ion-col>
+                          <ion-col size='4'>{this.ppCost.totCost}u</ion-col>
                         </ion-row>
                       </ion-grid>
                     </ion-item>
@@ -892,8 +892,8 @@ export class PageGasBlender {
                           <ion-col>
                             <ion-row>
                               <my-transl
-                                tag="cont-nx-blending"
-                                text="Continuous Nitrox Blending"
+                                tag='cont-nx-blending'
+                                text='Continuous Nitrox Blending'
                               />
                             </ion-row>
                             {this.nbCost.he.volume > 0 ? (
@@ -913,7 +913,7 @@ export class PageGasBlender {
                               </ion-row>
                             ) : undefined}
                           </ion-col>
-                          <ion-col size="4">{this.nbCost.totCost}u</ion-col>
+                          <ion-col size='4'>{this.nbCost.totCost}u</ion-col>
                         </ion-row>
                       </ion-grid>
                     </ion-item>
@@ -923,8 +923,8 @@ export class PageGasBlender {
                           <ion-col>
                             <ion-row>
                               <my-transl
-                                tag="cont-tmx-blending"
-                                text="Continuous Trimix Blending"
+                                tag='cont-tmx-blending'
+                                text='Continuous Trimix Blending'
                               />
                             </ion-row>
                             {this.tbCost.tmx.volume > 0 ? (
@@ -936,7 +936,7 @@ export class PageGasBlender {
                               </ion-row>
                             ) : undefined}
                           </ion-col>
-                          <ion-col size="4">{this.tbCost.totCost}u</ion-col>
+                          <ion-col size='4'>{this.tbCost.totCost}u</ion-col>
                         </ion-row>
                       </ion-grid>
                     </ion-item>
@@ -944,33 +944,33 @@ export class PageGasBlender {
                 </ion-row>
               </ion-grid>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
-              <ion-list class="ion-text-wrap">
-                <ion-item color="white">
-                  <ion-grid class="ion-text-center">
+            <swiper-slide class='swiper-slide'>
+              <ion-list class='ion-text-wrap'>
+                <ion-item color='white'>
+                  <ion-grid class='ion-text-center'>
                     <ion-row>
-                      <ion-col style={{marginTop: "5px"}}>
+                      <ion-col style={{ marginTop: "5px" }}>
                         <b>{DiveToolsService.isMetric() ? "Bar" : "Psi"}</b>
                       </ion-col>
-                      <ion-col style={{marginTop: "5px"}}>
+                      <ion-col style={{ marginTop: "5px" }}>
                         <b>
                           O<sub>2</sub>
                         </b>
                       </ion-col>
-                      <ion-col style={{marginTop: "5px"}}>
+                      <ion-col style={{ marginTop: "5px" }}>
                         <b>He</b>
                       </ion-col>
-                      <ion-col style={{marginTop: "5px"}}>
+                      <ion-col style={{ marginTop: "5px" }}>
                         <b>°{DiveToolsService.isMetric() ? "C" : "F"}</b>
                       </ion-col>
                     </ion-row>
                   </ion-grid>
                 </ion-item>
-                <ion-item-divider color="white" class="ion-text-center">
-                  <my-transl tag="topup-gas" text="Top-Up Gas" isLabel />
+                <ion-item-divider color='white' class='ion-text-center'>
+                  <my-transl tag='topup-gas' text='Top-Up Gas' isLabel />
                 </ion-item-divider>
                 <ion-item>
-                  <ion-grid class="ion-text-center">
+                  <ion-grid class='ion-text-center'>
                     <ion-row>
                       <ion-col
                         onClick={($event) =>
@@ -1001,11 +1001,11 @@ export class PageGasBlender {
                     </ion-row>
                   </ion-grid>
                 </ion-item>
-                <ion-item-divider color="white" class="ion-text-center">
-                  <my-transl tag="start-tank" text="Start Tank" />
+                <ion-item-divider color='white' class='ion-text-center'>
+                  <my-transl tag='start-tank' text='Start Tank' />
                 </ion-item-divider>
                 <ion-item>
-                  <ion-grid class="ion-text-center">
+                  <ion-grid class='ion-text-center'>
                     <ion-row>
                       <ion-col
                         onClick={($event) =>
@@ -1038,17 +1038,17 @@ export class PageGasBlender {
                     </ion-row>
                   </ion-grid>
                 </ion-item>
-                <ion-item-divider color="white" class="ion-text-center">
-                  <my-transl tag="end-tank" text="End Tank" />
+                <ion-item-divider color='white' class='ion-text-center'>
+                  <my-transl tag='end-tank' text='End Tank' />
                 </ion-item-divider>
                 <ion-item>
-                  <ion-grid class="ion-text-center">
+                  <ion-grid class='ion-text-center'>
                     <ion-row>
                       <ion-col>
                         <app-form-item
                           value={this.end_topup_pres.toString()}
-                          name="end_topup"
-                          input-type="number"
+                          name='end_topup'
+                          input-type='number'
                           onFormItemChanged={(ev) => this.updateTopup(ev)}
                         ></app-form-item>
                       </ion-col>

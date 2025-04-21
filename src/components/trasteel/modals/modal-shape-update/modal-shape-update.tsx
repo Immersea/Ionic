@@ -1,11 +1,11 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {isNumber, isString} from "lodash";
-import {Subscription} from "rxjs";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { isNumber, isString } from "lodash";
+import { Subscription } from "rxjs";
 import Swiper from "swiper";
-import {UserProfile} from "../../../../interfaces/common/user/user-profile";
-import {UserService} from "../../../../services/common/user";
-import {TranslationService} from "../../../../services/common/translations";
+import { UserProfile } from "../../../../interfaces/common/user/user-profile";
+import { UserService } from "../../../../services/common/user";
+import { TranslationService } from "../../../../services/common/translations";
 import {
   Shape,
   ShapeType,
@@ -14,10 +14,10 @@ import {
   SHAPESCOLLECTION,
   ShapesService,
 } from "../../../../services/trasteel/refractories/shapes";
-import {RouterService} from "../../../../services/common/router";
-import {Media} from "../../../../interfaces/common/media/media";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
+import { RouterService } from "../../../../services/common/router";
+import { Media } from "../../../../interfaces/common/media/media";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
 
 @Component({
   tag: "modal-shape-update",
@@ -25,8 +25,8 @@ import {SystemService} from "../../../../services/common/system";
 })
 export class ModalShapeUpdate {
   @Element() el: HTMLElement;
-  @Prop({mutable: true}) shapeId: string = undefined;
-  @Prop() duplicateShape: {id: string; shape: Shape} = undefined;
+  @Prop({ mutable: true }) shapeId: string = undefined;
+  @Prop() duplicateShape: { id: string; shape: Shape } = undefined;
   @State() shape: Shape;
   @State() updateView = true;
   @State() scrollTop = 0;
@@ -34,8 +34,8 @@ export class ModalShapeUpdate {
 
   validShape = false;
   titles = [
-    {tag: "information", text: "Information", disabled: false},
-    {tag: "drawing", text: "Drawing", disabled: false},
+    { tag: "information", text: "Information", disabled: false },
+    { tag: "drawing", text: "Drawing", disabled: false },
   ];
   @State() slider: Swiper;
   userProfile: UserProfile;
@@ -214,448 +214,448 @@ export class ModalShapeUpdate {
           titles={this.titles}
         ></app-header-segment-toolbar>
         <ion-content
-          class="slides"
+          class='slides'
           onIonScroll={(ev) => (this.scrollTop = ev.detail.scrollTop)}
         >
-          <swiper-container class="slider-edit-shape swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding">
+          <swiper-container class='slider-edit-shape swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding'>
                   {this.shapeTypes ? (
                     <app-select-search
-                      color="trasteel"
-                      label={{tag: "principal", text: "Principal"}}
-                      labelAddText="*"
+                      color='trasteel'
+                      label={{ tag: "principal", text: "Principal" }}
+                      labelAddText='*'
                       value={
                         this.shape && this.shape.shapeTypeId
                           ? this.shape.shapeTypeId
                           : null
                       }
-                      lines="inset"
+                      lines='inset'
                       selectFn={(ev) => this.selectType(ev)}
                       selectOptions={this.shapeTypes}
-                      selectValueId="typeId"
+                      selectValueId='typeId'
                       selectValueText={["typeName", "en"]}
                     ></app-select-search>
                   ) : undefined}
 
                   <app-form-item
-                    lines="inset"
-                    label-tag="name"
-                    label-text="Name"
+                    lines='inset'
+                    label-tag='name'
+                    label-text='Name'
                     value={this.shape.shapeName}
-                    name="shapeName"
-                    input-type="text"
+                    name='shapeName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    lines="inset"
-                    label-tag="shortName"
-                    label-text="Short Name"
+                    lines='inset'
+                    label-tag='shortName'
+                    label-text='Short Name'
                     value={this.shape.shapeShortName}
-                    name="shapeShortName"
-                    input-type="text"
+                    name='shapeShortName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                   <app-form-item
-                    label-text="H"
+                    label-text='H'
                     value={this.shape.H}
                     appendText={" (mm)"}
-                    name="H"
-                    input-type="number"
+                    name='H'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       "required",
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="H1"
+                    label-text='H1'
                     value={this.shape.H1}
                     appendText={" (mm)"}
-                    name="H1"
-                    input-type="number"
+                    name='H1'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="H2"
+                    label-text='H2'
                     value={this.shape.H2}
                     appendText={" (mm)"}
-                    name="H2"
-                    input-type="number"
+                    name='H2'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="L"
+                    label-text='L'
                     value={this.shape.L}
                     appendText={" (mm)"}
-                    name="L"
-                    input-type="number"
+                    name='L'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       "required",
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="L1"
+                    label-text='L1'
                     appendText={" (mm)"}
                     value={this.shape.L1}
-                    name="L1"
-                    input-type="number"
+                    name='L1'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="La"
+                    label-text='La'
                     appendText={" (mm)"}
                     value={this.shape.La}
-                    name="La"
-                    input-type="number"
+                    name='La'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="Lb"
+                    label-text='Lb'
                     appendText={" (mm)"}
                     value={this.shape.Lb}
-                    name="Lb"
-                    input-type="number"
+                    name='Lb'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="A"
+                    label-text='A'
                     appendText={" (mm)"}
                     value={this.shape.A}
-                    name="A"
-                    input-type="number"
+                    name='A'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       "required",
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="A1"
+                    label-text='A1'
                     appendText={" (mm)"}
                     value={this.shape.A1}
-                    name="A1"
-                    input-type="number"
+                    name='A1'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="B"
+                    label-text='B'
                     appendText={" (mm)"}
                     value={this.shape.B}
-                    name="B"
-                    input-type="number"
+                    name='B'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       "required",
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="B1"
+                    label-text='B1'
                     appendText={" (mm)"}
                     value={this.shape.B1}
-                    name="B1"
-                    input-type="number"
+                    name='B1'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="ANG"
+                    label-text='ANG'
                     appendText={" (°)"}
                     value={this.shape.ANG}
-                    name="ANG"
-                    input-type="number"
+                    name='ANG'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="ANG1"
+                    label-text='ANG1'
                     appendText={" (°)"}
                     value={this.shape.ANG1}
-                    name="ANG1"
-                    input-type="number"
+                    name='ANG1'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="D"
+                    label-text='D'
                     appendText={" (mm)"}
                     value={this.shape.D}
-                    name="D"
-                    input-type="number"
+                    name='D'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="D1"
+                    label-text='D1'
                     appendText={" (mm)"}
                     value={this.shape.D1}
-                    name="D1"
-                    input-type="number"
+                    name='D1'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="D2"
+                    label-text='D2'
                     appendText={" (mm)"}
                     value={this.shape.D2}
-                    name="D2"
-                    input-type="number"
+                    name='D2'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="D3"
+                    label-text='D3'
                     appendText={" (mm)"}
                     value={this.shape.D3}
-                    name="D3"
-                    input-type="number"
+                    name='D3'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="D4"
+                    label-text='D4'
                     appendText={" (mm)"}
                     value={this.shape.D4}
-                    name="D4"
-                    input-type="number"
+                    name='D4'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="De"
+                    label-text='De'
                     appendText={" (mm)"}
                     value={this.shape.De}
-                    name="De"
-                    input-type="number"
+                    name='De'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="Di"
+                    label-text='Di'
                     appendText={" (mm)"}
                     value={this.shape.Di}
-                    name="Di"
-                    input-type="number"
+                    name='Di'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="N"
+                    label-text='N'
                     appendText={" (mm)"}
                     value={this.shape.N}
-                    name="N"
-                    input-type="number"
+                    name='N'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="Decimals"
+                    label-text='Decimals'
                     value={this.shape.decimals}
-                    name="decimals"
-                    inputStep="1"
-                    input-type="number"
+                    name='decimals'
+                    inputStep='1'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 0},
+                        options: { min: 0 },
                       },
                     ]}
                   ></app-form-item>
                   <app-form-item
-                    label-text="Radius"
+                    label-text='Radius'
                     appendText={
                       (this.shape.shapeTypeId == "su-brick" ? " MIN" : "") +
                       " (mm)"
                     }
                     value={this.shape.radius}
-                    name="radius"
-                    input-type="number"
+                    name='radius'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                   {this.shape.shapeTypeId == "su-brick" ? (
                     <app-form-item
-                      label-text="Radius"
+                      label-text='Radius'
                       appendText={" MAX (mm)"}
                       value={this.shape.radius_max}
-                      name="radius_max"
-                      input-type="number"
+                      name='radius_max'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.handleChange(ev)}
-                      labelPosition="fixed"
+                      labelPosition='fixed'
                       validator={[
                         {
                           name: "minvalue",
-                          options: {min: this.shape.radius},
+                          options: { min: this.shape.radius },
                         },
                       ]}
                     ></app-form-item>
                   ) : undefined}
                   <app-form-item
-                    label-text="Volume"
+                    label-text='Volume'
                     appendText={" (dm3)"}
                     value={this.shape.volume}
-                    name="volume"
-                    input-type="number"
+                    name='volume'
+                    input-type='number'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
-                    labelPosition="fixed"
+                    labelPosition='fixed'
                     validator={[
                       {
                         name: "minvalue",
-                        options: {min: 1},
+                        options: { min: 1 },
                       },
                     ]}
                   ></app-form-item>
                 </ion-list>
                 {this.shapeId ? (
-                  <ion-footer class="ion-no-border">
+                  <ion-footer class='ion-no-border'>
                     <ion-toolbar>
                       <ion-button
-                        expand="block"
-                        fill="outline"
-                        color="danger"
+                        expand='block'
+                        fill='outline'
+                        color='danger'
                         onClick={() => this.deleteShape()}
                       >
-                        <ion-icon slot="start" name="trash"></ion-icon>
+                        <ion-icon slot='start' name='trash'></ion-icon>
                         <my-transl
-                          tag="delete"
-                          text="Delete"
+                          tag='delete'
+                          text='Delete'
                           isLabel
                         ></my-transl>
                       </ion-button>
@@ -663,23 +663,23 @@ export class ModalShapeUpdate {
                   </ion-footer>
                 ) : undefined}
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-banner
                   scrollTopValue={this.scrollTop}
                   backgroundCoverFill={false}
                   heightPx={500}
                   link={this.shape.dwg ? this.shape.dwg.url : null}
                 ></app-banner>
-                <ion-footer class="ion-no-border">
+                <ion-footer class='ion-no-border'>
                   <ion-toolbar>
                     <ion-button
-                      expand="block"
-                      fill="outline"
-                      color="trasteel"
+                      expand='block'
+                      fill='outline'
+                      color='trasteel'
                       disabled={!this.shapeId}
                       onClick={() => this.editDrawing()}
                     >
-                      <ion-icon slot="start" name="create"></ion-icon>
+                      <ion-icon slot='start' name='create'></ion-icon>
                       <ion-label>
                         {!this.shapeId
                           ? TranslationService.getTransl(

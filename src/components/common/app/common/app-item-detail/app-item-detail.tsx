@@ -78,9 +78,12 @@ export class AppItemDetail {
               TranslationService.getTransl("no", "No")
             )
           ) : this.detailTag && isString(this.detailText) ? (
-            TranslationService.getTransl(this.detailTag, this.detailText)
+            TranslationService.getTransl(
+              this.detailTag,
+              String(this.detailText)
+            )
           ) : this.isDate ? (
-            new Date(this.detailText).toLocaleDateString()
+            new Date(String(this.detailText)).toLocaleDateString()
           ) : (
             this.detailText
           )}

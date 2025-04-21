@@ -1,10 +1,10 @@
-import {TankModel} from "../../../interfaces/udive/planner/tank-model";
-import {GasModel} from "../../../interfaces/udive/planner/gas-model";
-import {DiveConfiguration} from "../../../interfaces/udive/planner/dive-configuration";
-import {DecoplannerParameters} from "../../../interfaces/udive/planner/decoplanner-parameters";
-import {cloneDeep, find} from "lodash";
-import {DivePlan} from "./dive-plan";
-import {DiveToolsService} from "./dive-tools";
+import { TankModel } from "../../../interfaces/udive/planner/tank-model";
+import { GasModel } from "../../../interfaces/udive/planner/gas-model";
+import { DiveConfiguration } from "../../../interfaces/udive/planner/dive-configuration";
+import { DecoplannerParameters } from "../../../interfaces/udive/planner/decoplanner-parameters";
+import { cloneDeep, find } from "lodash";
+import { DivePlan } from "./dive-plan";
+import { DiveToolsService } from "./dive-tools";
 
 export class DiveStandardsController {
   agencies = [
@@ -516,7 +516,7 @@ export class DiveStandardsController {
     stdParams.setUnits(DiveToolsService.units);
     let stdGases = this.getStdGases();
     let stdTanks = this.getStdTanks();
-    let rec1BottomTank = cloneDeep(find(stdTanks, {name: "15lt"}));
+    let rec1BottomTank = cloneDeep(find(stdTanks, { name: "15lt" }));
     rec1BottomTank.setGas(stdGases[5].getGas());
     let rec1 = new DiveConfiguration({
       parameters: stdParams,
@@ -529,7 +529,7 @@ export class DiveStandardsController {
       },
     });
     this.stdConfigurations.push(rec1);
-    let rec2BottomTank = cloneDeep(find(stdTanks, {name: "D12"}));
+    let rec2BottomTank = cloneDeep(find(stdTanks, { name: "D12" }));
     rec2BottomTank.setGas(stdGases[5].getGas());
     let rec2 = new DiveConfiguration({
       parameters: stdParams,
@@ -543,9 +543,9 @@ export class DiveStandardsController {
     });
     this.stdConfigurations.push(rec2);
 
-    let rec3BottomTank = cloneDeep(find(stdTanks, {name: "D12"}));
+    let rec3BottomTank = cloneDeep(find(stdTanks, { name: "D12" }));
     rec3BottomTank.setGas(stdGases[7].getGas());
-    let rec3DecoTank = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let rec3DecoTank = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     rec3DecoTank.setGas(stdGases[4].getGas());
     rec3DecoTank.gas.fromDepth = DiveToolsService.isMetric() ? 21 : 70;
     let rec3 = new DiveConfiguration({
@@ -560,9 +560,9 @@ export class DiveStandardsController {
     });
     this.stdConfigurations.push(rec3);
 
-    let tec1BottomTank = cloneDeep(find(stdTanks, {name: "D12"}));
+    let tec1BottomTank = cloneDeep(find(stdTanks, { name: "D12" }));
     tec1BottomTank.setGas(stdGases[7].getGas());
-    let tec1DecoTank = cloneDeep(find(stdTanks, {name: "7lt"}, 8));
+    let tec1DecoTank = cloneDeep(find(stdTanks, { name: "7lt" }, 8));
     tec1DecoTank.setGas(stdGases[1].getGas());
     let tec1Parameters = stdParams;
     tec1Parameters.time_at_bottom_for_min_gas = 1;
@@ -579,11 +579,11 @@ export class DiveStandardsController {
     });
     this.stdConfigurations.push(tec1);
 
-    let tec1pBottomTank = cloneDeep(find(stdTanks, {name: "D12"}));
+    let tec1pBottomTank = cloneDeep(find(stdTanks, { name: "D12" }));
     tec1pBottomTank.setGas(stdGases[8].getGas());
-    let tec1pDecoTank1 = cloneDeep(find(stdTanks, {name: "s80"}, 8));
+    let tec1pDecoTank1 = cloneDeep(find(stdTanks, { name: "s80" }, 8));
     tec1pDecoTank1.setGas(stdGases[1].getGas());
-    let tec1pDecoTank2 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let tec1pDecoTank2 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     tec1pDecoTank2.setGas(stdGases[0].getGas());
     let tec1p = new DiveConfiguration({
       parameters: tec1Parameters,
@@ -596,15 +596,15 @@ export class DiveStandardsController {
       },
     });
     this.stdConfigurations.push(tec1p);
-    let tec2BottomTank1 = cloneDeep(find(stdTanks, {name: "D15"}));
+    let tec2BottomTank1 = cloneDeep(find(stdTanks, { name: "D15" }));
     tec2BottomTank1.setGas(stdGases[9].getGas());
-    let tec2BottomTank2 = cloneDeep(find(stdTanks, {name: "s80"}));
+    let tec2BottomTank2 = cloneDeep(find(stdTanks, { name: "s80" }));
     tec2BottomTank2.setGas(stdGases[9].getGas());
-    let tec2DecoTank1 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let tec2DecoTank1 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     tec2DecoTank1.setGas(stdGases[2].getGas());
-    let tec2DecoTank2 = cloneDeep(find(stdTanks, {name: "s80"}, 8));
+    let tec2DecoTank2 = cloneDeep(find(stdTanks, { name: "s80" }, 8));
     tec2DecoTank2.setGas(stdGases[1].getGas());
-    let tec2DecoTank3 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let tec2DecoTank3 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     tec2DecoTank3.setGas(stdGases[0].getGas());
     let tec2Parameters = tec1Parameters;
     tec2Parameters.deco_gas_reserve = 0;
@@ -620,17 +620,17 @@ export class DiveStandardsController {
       },
     });
     this.stdConfigurations.push(tec2);
-    let tec2pBottomTank1 = cloneDeep(find(stdTanks, {name: "D18"}));
+    let tec2pBottomTank1 = cloneDeep(find(stdTanks, { name: "D18" }));
     tec2pBottomTank1.setGas(stdGases[10].getGas());
-    let tec2pBottomTank2 = cloneDeep(find(stdTanks, {name: "s80"}));
+    let tec2pBottomTank2 = cloneDeep(find(stdTanks, { name: "s80" }));
     tec2pBottomTank2.setGas(stdGases[10].getGas());
-    let tec2pDecoTank1 = cloneDeep(find(stdTanks, {name: "s80"}, 8));
+    let tec2pDecoTank1 = cloneDeep(find(stdTanks, { name: "s80" }, 8));
     tec2pDecoTank1.setGas(stdGases[3].getGas());
-    let tec2pDecoTank2 = cloneDeep(find(stdTanks, {name: "s80"}, 8));
+    let tec2pDecoTank2 = cloneDeep(find(stdTanks, { name: "s80" }, 8));
     tec2pDecoTank2.setGas(stdGases[2].getGas());
-    let tec2pDecoTank3 = cloneDeep(find(stdTanks, {name: "s80"}, 8));
+    let tec2pDecoTank3 = cloneDeep(find(stdTanks, { name: "s80" }, 8));
     tec2pDecoTank3.setGas(stdGases[1].getGas());
-    let tec2pDecoTank4 = cloneDeep(find(stdTanks, {name: "s80"}, 8));
+    let tec2pDecoTank4 = cloneDeep(find(stdTanks, { name: "s80" }, 8));
     tec2pDecoTank4.setGas(stdGases[0].getGas());
     let tec2p = new DiveConfiguration({
       parameters: tec2Parameters,
@@ -644,17 +644,17 @@ export class DiveStandardsController {
     });
     this.stdConfigurations.push(tec2p);
 
-    let ccrBottomTank1 = cloneDeep(find(stdTanks, {name: "D7"}));
+    let ccrBottomTank1 = cloneDeep(find(stdTanks, { name: "D7" }));
     ccrBottomTank1.setGas(stdGases[11].getGas());
-    let ccrBottomTank2 = cloneDeep(find(stdTanks, {name: "3lt"}));
+    let ccrBottomTank2 = cloneDeep(find(stdTanks, { name: "3lt" }));
     ccrBottomTank2.setGas(stdGases[0].getGas());
-    let ccrDecoTank1 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let ccrDecoTank1 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     ccrDecoTank1.setGas(stdGases[3].getGas());
-    let ccrDecoTank2 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let ccrDecoTank2 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     ccrDecoTank2.setGas(stdGases[2].getGas());
-    let ccrDecoTank3 = cloneDeep(find(stdTanks, {name: "s80"}, 8));
+    let ccrDecoTank3 = cloneDeep(find(stdTanks, { name: "s80" }, 8));
     ccrDecoTank3.setGas(stdGases[1].getGas());
-    let ccrDecoTank4 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let ccrDecoTank4 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     ccrDecoTank4.setGas(stdGases[0].getGas());
     let ccrParameters = tec2Parameters;
     ccrParameters.rmvBottom_multiplier_for_min_gas = 1.5;
@@ -672,17 +672,17 @@ export class DiveStandardsController {
     });
     this.stdConfigurations.push(ccr);
 
-    let pscrBottomTank1 = cloneDeep(find(stdTanks, {name: "D8.5"}));
+    let pscrBottomTank1 = cloneDeep(find(stdTanks, { name: "D8.5" }));
     pscrBottomTank1.setGas(stdGases[11].getGas());
-    let pscrBottomTank2 = cloneDeep(find(stdTanks, {name: "s80"}));
+    let pscrBottomTank2 = cloneDeep(find(stdTanks, { name: "s80" }));
     pscrBottomTank2.setGas(stdGases[10].getGas());
-    let pscrDecoTank1 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let pscrDecoTank1 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     pscrDecoTank1.setGas(stdGases[3].getGas());
-    let pscrDecoTank2 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let pscrDecoTank2 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     pscrDecoTank2.setGas(stdGases[2].getGas());
-    let pscrDecoTank3 = cloneDeep(find(stdTanks, {name: "s80"}, 8));
+    let pscrDecoTank3 = cloneDeep(find(stdTanks, { name: "s80" }, 8));
     pscrDecoTank3.setGas(stdGases[1].getGas());
-    let pscrDecoTank4 = cloneDeep(find(stdTanks, {name: "s40"}, 8));
+    let pscrDecoTank4 = cloneDeep(find(stdTanks, { name: "s40" }, 8));
     pscrDecoTank4.setGas(stdGases[0].getGas());
     let pscrParameters = ccrParameters;
     pscrParameters.ace_time = 400;

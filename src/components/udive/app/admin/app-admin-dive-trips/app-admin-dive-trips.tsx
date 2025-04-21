@@ -1,31 +1,31 @@
-import {Component, h, State, Host, Prop} from "@stencil/core";
-import {Subscription} from "rxjs";
+import { Component, h, State, Host, Prop } from "@stencil/core";
+import { Subscription } from "rxjs";
 import {
   UserService,
   USERPROFILECOLLECTION,
 } from "../../../../../services/common/user";
-import {orderBy} from "lodash";
-import {DiveTripsService} from "../../../../../services/udive/diveTrips";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {UserPubicProfile} from "../../../../../interfaces/common/user/user-public-profile";
+import { orderBy } from "lodash";
+import { DiveTripsService } from "../../../../../services/udive/diveTrips";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { UserPubicProfile } from "../../../../../interfaces/common/user/user-public-profile";
 import {
   DivingCentersService,
   DIVECENTERSSCOLLECTION,
 } from "../../../../../services/udive/divingCenters";
-import {MapDataDivingCenter} from "../../../../../interfaces/udive/diving-center/divingCenter";
-import {MapDataDivingSchool} from "../../../../../interfaces/udive/diving-school/divingSchool";
+import { MapDataDivingCenter } from "../../../../../interfaces/udive/diving-center/divingCenter";
+import { MapDataDivingSchool } from "../../../../../interfaces/udive/diving-school/divingSchool";
 import {
   DivingSchoolsService,
   DIVESCHOOLSSCOLLECTION,
 } from "../../../../../services/udive/divingSchools";
-import {TripSummary} from "../../../../../interfaces/udive/dive-trip/diveTrip";
+import { TripSummary } from "../../../../../interfaces/udive/dive-trip/diveTrip";
 import {
   DIVECOMMUNITIESCOLLECTION,
   DiveCommunitiesService,
 } from "../../../../../services/udive/diveCommunities";
-import {MapDataDiveCommunity} from "../../../../../interfaces/udive/dive-community/diveCommunity";
-import {TranslationService} from "../../../../../services/common/translations";
-import {format} from "date-fns";
+import { MapDataDiveCommunity } from "../../../../../interfaces/udive/dive-community/diveCommunity";
+import { TranslationService } from "../../../../../services/common/translations";
+import { format } from "date-fns";
 
 @Component({
   tag: "app-admin-dive-trips",
@@ -34,6 +34,7 @@ import {format} from "date-fns";
 export class AppAdminDiveTrips {
   @Prop() filterByOrganisierId: string;
   @Prop() filterByTrips: any;
+  @Prop() future: boolean = false;
   @State() adminDiveTripsArray: any[] = [];
   @State() updateView = false;
   @State() creatingNewDiveTrip = false;
@@ -145,15 +146,21 @@ export class AppAdminDiveTrips {
     this.loadingDiveTrips = false;
     if (userDiveTrips) {
       let adminDiveTripsArray = [];
+      console.log("userDiveTrips", userDiveTrips);
+
       Object.keys(userDiveTrips).forEach((key) => {
         let trip = userDiveTrips[key] as any;
         trip.id = key;
+        if (this.future && new Date(trip.end) < new Date()) {
+          trip = null;
+        }
         if (
+          trip &&
           this.filterByOrganisierId &&
           trip.organiser.id == this.filterByOrganisierId
         ) {
           adminDiveTripsArray.push(trip);
-        } else if (!this.filterByOrganisierId) {
+        } else if (trip && !this.filterByOrganisierId) {
           adminDiveTripsArray.push(trip);
         }
       });
@@ -223,19 +230,19 @@ export class AppAdminDiveTrips {
       <Host>
         {this.loadingDiveTrips
           ? [
-              <app-skeletons skeleton="diveTrip" />,
-              <app-skeletons skeleton="diveTrip" />,
-              <app-skeletons skeleton="diveTrip" />,
-              <app-skeletons skeleton="diveTrip" />,
-              <app-skeletons skeleton="diveTrip" />,
+              <app-skeletons skeleton='diveTrip' />,
+              <app-skeletons skeleton='diveTrip' />,
+              <app-skeletons skeleton='diveTrip' />,
+              <app-skeletons skeleton='diveTrip' />,
+              <app-skeletons skeleton='diveTrip' />,
             ]
           : undefined}
         {this.creatingNewDiveTrip ? (
-          <app-skeletons skeleton="diveTrip" />
+          <app-skeletons skeleton='diveTrip' />
         ) : undefined}
         {this.adminDiveTripsArray.map((diveTrip) =>
           this.editingDiveTrip == diveTrip.id ? (
-            <app-skeletons skeleton="diveTrip" />
+            <app-skeletons skeleton='diveTrip' />
           ) : (
             <ion-item
               button
@@ -245,7 +252,7 @@ export class AppAdminDiveTrips {
               {diveTrip.organiser &&
               diveTrip.organiser.item &&
               diveTrip.organiser.item.photoURL ? (
-                <ion-avatar slot="start">
+                <ion-avatar slot='start'>
                   <ion-img src={diveTrip.organiser.item.photoURL} />
                 </ion-avatar>
               ) : undefined}
@@ -256,44 +263,59 @@ export class AppAdminDiveTrips {
                 diveTrip.organiser.item &&
                 diveTrip.organiser.item.displayName ? (
                   <p>
-                    <my-transl tag="organiser" text="Organiser" />
+                    <my-transl tag='organiser' text='Organiser' />
                     {": " + diveTrip.organiser.item.displayName}
                   </p>
                 ) : undefined}
               </ion-label>
               {diveTrip.owner ? (
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   icon-only
-                  slot="end"
+                  slot='end'
                   onClick={(ev) => this.delete(ev, diveTrip.id)}
                 >
-                  <ion-icon name="trash" slot="end"></ion-icon>
+                  <ion-icon name='trash' slot='end'></ion-icon>
                 </ion-button>
               ) : undefined}
               {diveTrip.editor ? (
                 <ion-button
-                  fill="clear"
-                  color="divetrip"
+                  fill='clear'
+                  color='divetrip'
                   icon-only
-                  slot="end"
+                  slot='end'
                   onClick={(ev) => this.update(ev, diveTrip.id)}
                 >
-                  <ion-icon name="create" slot="end"></ion-icon>
+                  <ion-icon name='create' slot='end'></ion-icon>
                 </ion-button>
               ) : undefined}
             </ion-item>
           )
         )}
         {this.adminDiveTripsArray.length == 0 ? (
-          <ion-item>
+          <ion-item
+            button={this.future}
+            onClick={() =>
+              this.future
+                ? DiveTripsService.presentDiveTripUpdate(
+                    USERPROFILECOLLECTION,
+                    UserService.userRoles.uid
+                  )
+                : null
+            }
+          >
             <ion-label>
               <h2>
-                {TranslationService.getTransl(
-                  "no-dive-trips",
-                  "No dive trips yet. Click on the '+' button to create your first one."
-                )}
+                {this.future
+                  ? TranslationService.getTransl(
+                      "no-future-dive-trips",
+                      "Plan a new dive trip"
+                    )
+                  : TranslationService.getTransl(
+                      "no-dive-trips",
+                      "No dive trips yet. Click on the '+' button to create your first one."
+                    )}
               </h2>
             </ion-label>
           </ion-item>

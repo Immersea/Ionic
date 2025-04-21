@@ -1,12 +1,12 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {cloneDeep, forEach, isNumber, isString} from "lodash";
-import {popoverController, alertController} from "@ionic/core";
-import {Activity} from "../../../../interfaces/udive/diving-class/divingClass";
-import {TranslationService} from "../../../../services/common/translations";
-import {DiveConfiguration} from "../../../../interfaces/udive/planner/dive-configuration";
-import {UserService} from "../../../../services/common/user";
-import {RouterService} from "../../../../services/common/router";
-import {DivePlansService} from "../../../../services/udive/divePlans";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { cloneDeep, forEach, isString } from "lodash";
+import { popoverController, alertController } from "@ionic/core";
+import { Activity } from "../../../../interfaces/udive/diving-class/divingClass";
+import { TranslationService } from "../../../../services/common/translations";
+import { DiveConfiguration } from "../../../../interfaces/udive/planner/dive-configuration";
+import { UserService } from "../../../../services/common/user";
+import { RouterService } from "../../../../services/common/router";
+import { DivePlansService } from "../../../../services/udive/divePlans";
 
 @Component({
   tag: "popover-new-class-activity",
@@ -14,7 +14,7 @@ import {DivePlansService} from "../../../../services/udive/divePlans";
 })
 export class PopoverNewClassActivity {
   @Element() el: HTMLElement;
-  @Prop() activity: Activity;
+  @Prop({ mutable: true }) activity: Activity;
   @Prop() showDiveLocation: boolean = true;
 
   @State() updateView = false;
@@ -24,13 +24,13 @@ export class PopoverNewClassActivity {
 
   componentWillLoad() {
     this.typeSelectOptions = [
-      {tag: "theory", text: TranslationService.getTransl("theory", "Theory")},
-      {tag: "dry", text: TranslationService.getTransl("dry", "Dry")},
+      { tag: "theory", text: TranslationService.getTransl("theory", "Theory") },
+      { tag: "dry", text: TranslationService.getTransl("dry", "Dry") },
       {
         tag: "in-water",
         text: TranslationService.getTransl("in-water", "In Water"),
       },
-      {tag: "dive", text: TranslationService.getTransl("dive", "Dive")},
+      { tag: "dive", text: TranslationService.getTransl("dive", "Dive") },
     ];
     this.stdConfigurations = cloneDeep(
       UserService.userSettings.userConfigurations
@@ -40,10 +40,9 @@ export class PopoverNewClassActivity {
 
   validateActivity() {
     this.validActivity =
-      isNumber(this.activity.day) &&
+      isString(this.activity.date) &&
       isString(this.activity.type) &&
-      isString(this.activity.title.tag) &&
-      isString(this.activity.title.text);
+      isString(this.activity.title);
     if (this.activity.type == "dive") {
       this.validActivity =
         this.validActivity && this.activity.divePlan !== null;
@@ -51,10 +50,11 @@ export class PopoverNewClassActivity {
     this.updateView = !this.updateView;
   }
 
-  updateDay(day) {
-    this.activity.day = day;
+  updateDay(date) {
+    this.activity.date = date;
     this.validateActivity();
   }
+
   updateType(type) {
     if (type != "dive" && this.activity.type == "dive") {
       this.activity.divePlan = null;
@@ -64,10 +64,7 @@ export class PopoverNewClassActivity {
   }
   updateTitle(ev) {
     let value = ev.detail.value;
-    if (ev.detail.name == "tag") {
-      value = value.toLowerCase().replace(" ", "-").trim();
-    }
-    this.activity.title[ev.detail.name] = value;
+    this.activity.title = value;
     this.validateActivity();
   }
 
@@ -145,38 +142,25 @@ export class PopoverNewClassActivity {
       <Host>
         <ion-toolbar>
           <ion-title>
-            <my-transl tag="class-activity" text="Class Activity" />
+            <my-transl tag='class-activity' text='Class Activity' />
           </ion-title>
         </ion-toolbar>
+        <app-form-item
+          label-tag='date'
+          label-text='Date'
+          value={this.activity.date}
+          name='activityDate'
+          input-type='date'
+          datePresentation='date'
+          lines='inset'
+          onFormItemChanged={(ev) => this.updateDay(ev.detail.value)}
+        ></app-form-item>
         <ion-item>
-          <ion-label>
-            <my-transl tag="class-day" text="Class Day"></my-transl>
-          </ion-label>
           <ion-select
-            value={this.activity.day}
-            onIonChange={(ev) => this.updateDay(ev.detail.value)}
-            interface="popover"
-          >
-            <ion-select-option value={1}>1</ion-select-option>
-            <ion-select-option value={2}>2</ion-select-option>
-            <ion-select-option value={3}>3</ion-select-option>
-            <ion-select-option value={4}>4</ion-select-option>
-            <ion-select-option value={5}>5</ion-select-option>
-            <ion-select-option value={6}>6</ion-select-option>
-            <ion-select-option value={7}>7</ion-select-option>
-            <ion-select-option value={8}>8</ion-select-option>
-            <ion-select-option value={9}>9</ion-select-option>
-            <ion-select-option value={10}>10</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <my-transl tag="type" text="Type"></my-transl>
-          </ion-label>
-          <ion-select
+            label={TranslationService.getTransl("type", "Type")}
             value={this.activity.type}
             onIonChange={(ev) => this.updateType(ev.detail.value)}
-            interface="popover"
+            interface='popover'
           >
             {this.typeSelectOptions.map((option) => (
               <ion-select-option value={option.tag}>
@@ -186,26 +170,11 @@ export class PopoverNewClassActivity {
           </ion-select>
         </ion-item>
         <app-form-item
-          label-tag="unique-id"
-          label-text="Unique ID"
-          value={this.activity.title.tag}
-          name="tag"
-          input-type="text"
-          onFormItemChanged={(ev) => this.updateTitle(ev)}
-          validator={[
-            "required",
-            {
-              name: "uniqueid",
-              options: {type: null},
-            },
-          ]}
-        ></app-form-item>
-        <app-form-item
-          label-tag="title"
-          label-text="Title"
-          value={this.activity.title.text}
-          name="text"
-          input-type="text"
+          label-tag='title'
+          label-text='Title'
+          value={this.activity.title}
+          name='text'
+          input-type='text'
           onFormItemChanged={(ev) => this.updateTitle(ev)}
           validator={["required"]}
         ></app-form-item>
@@ -221,19 +190,18 @@ export class PopoverNewClassActivity {
               </ion-label>
               <ion-button
                 icon-only
-                fill="clear"
+                fill='clear'
                 onClick={() => this.editDivePlan()}
               >
-                <ion-icon name="create-outline"></ion-icon>
+                <ion-icon name='create-outline'></ion-icon>
               </ion-button>
             </ion-item>
           ) : (
-            <ion-button expand="full" onClick={() => this.addDivePlan()}>
+            <ion-button expand='full' onClick={() => this.addDivePlan()}>
               Add Dive Plan
             </ion-button>
           )
         ) : undefined}
-
         <app-modal-footer
           disableSave={!this.validActivity}
           onCancelEmit={() => this.cancel()}

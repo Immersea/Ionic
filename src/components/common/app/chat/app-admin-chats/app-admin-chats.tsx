@@ -1,19 +1,19 @@
-import {Component, h, State, Prop} from "@stencil/core";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {MapDataUserPubicProfile} from "../../../../../interfaces/common/user/user-public-profile";
-import {DivingCentersService} from "../../../../../services/udive/divingCenters";
-import {MapDataDivingCenter} from "../../../../../interfaces/udive/diving-center/divingCenter";
-import {MapDataDivingSchool} from "../../../../../interfaces/udive/diving-school/divingSchool";
-import {DivingSchoolsService} from "../../../../../services/udive/divingSchools";
-import {ChatService} from "../../../../../services/common/chat";
-import {MapDataServiceCenter} from "../../../../../interfaces/udive/service-center/serviceCenter";
-import {ServiceCentersService} from "../../../../../services/udive/serviceCenters";
-import {ChatsSummary} from "../../../../../interfaces/common/chat/chat";
-import {Environment} from "../../../../../global/env";
-import {format, fromUnixTime} from "date-fns";
-import {orderBy, toNumber} from "lodash";
+import { Component, h, State, Prop } from "@stencil/core";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { MapDataUserPubicProfile } from "../../../../../interfaces/common/user/user-public-profile";
+import { DivingCentersService } from "../../../../../services/udive/divingCenters";
+import { MapDataDivingCenter } from "../../../../../interfaces/udive/diving-center/divingCenter";
+import { MapDataDivingSchool } from "../../../../../interfaces/udive/diving-school/divingSchool";
+import { DivingSchoolsService } from "../../../../../services/udive/divingSchools";
+import { ChatService } from "../../../../../services/common/chat";
+import { MapDataServiceCenter } from "../../../../../interfaces/udive/service-center/serviceCenter";
+import { ServiceCentersService } from "../../../../../services/udive/serviceCenters";
+import { ChatsSummary } from "../../../../../interfaces/common/chat/chat";
+import { Environment } from "../../../../../global/env";
+import { format, fromUnixTime } from "date-fns";
+import { orderBy, toNumber } from "lodash";
 
 @Component({
   tag: "app-admin-chats",
@@ -197,17 +197,17 @@ export class AppAdminChats {
       <ion-list>
         {this.loadingChats
           ? [
-              <app-skeletons skeleton="chat" />,
-              <app-skeletons skeleton="chat" />,
-              <app-skeletons skeleton="chat" />,
-              <app-skeletons skeleton="chat" />,
-              <app-skeletons skeleton="chat" />,
+              <app-skeletons skeleton='chat' />,
+              <app-skeletons skeleton='chat' />,
+              <app-skeletons skeleton='chat' />,
+              <app-skeletons skeleton='chat' />,
+              <app-skeletons skeleton='chat' />,
             ]
           : undefined}
-        {this.creatingNewChat ? <app-skeletons skeleton="chat" /> : undefined}
+        {this.creatingNewChat ? <app-skeletons skeleton='chat' /> : undefined}
         {this.adminChatsArray.map((chat) =>
           this.editingChat == chat.id ? (
-            <app-skeletons skeleton="chat" />
+            <app-skeletons skeleton='chat' />
           ) : (
             <ion-item
               button
@@ -215,14 +215,14 @@ export class AppAdminChats {
               detail
             >
               {chat.photoURL ? (
-                <ion-avatar slot="start">
+                <ion-avatar slot='start'>
                   <ion-img src={chat.photoURL} />
                 </ion-avatar>
               ) : (
-                <ion-icon slot="start" name="chatbubbles-outline"></ion-icon>
+                <ion-icon slot='start' name='chatbubbles-outline'></ion-icon>
               )}
               <ion-label>
-                <h2 style={chat.unread ? {fontWeight: "bold"} : undefined}>
+                <h2 style={chat.unread ? { fontWeight: "bold" } : undefined}>
                   {chat.name
                     ? chat.name
                     : chat.participantNames
@@ -241,21 +241,21 @@ export class AppAdminChats {
               </ion-label>
               {chat.unread ? (
                 <ion-icon
-                  slot="start"
-                  color="danger"
-                  name="radio-button-on"
+                  slot='start'
+                  color='danger'
+                  name='radio-button-on'
                 ></ion-icon>
               ) : undefined}
 
               {chat.owner ? (
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   icon-only
-                  slot="end"
+                  slot='end'
                   onClick={(ev) => this.delete(ev, chat.id)}
                 >
-                  <ion-icon name="trash" slot="end"></ion-icon>
+                  <ion-icon name='trash' slot='end'></ion-icon>
                 </ion-button>
               ) : undefined}
             </ion-item>

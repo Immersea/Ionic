@@ -128,7 +128,6 @@ export class XLSXExportController {
       areaShapes,
       lang
     );
-
     this.cloneWorksheet(
       workbook,
       this.remapQuantityAssembly(
@@ -314,7 +313,7 @@ export class XLSXExportController {
           formula: "N" + (bricksAreaRow + 1) + "*L" + (bricksAreaRow + 1),
         };
         //add map
-        mapping[mapArea + "-" + area.position + "-" + area.quality] =
+        mapping[mapArea + "-" + area.position + "-" + area.datasheetId] =
           row.number;
 
         if (areaIndex < groupArea.length - 1) {
@@ -731,6 +730,20 @@ export class XLSXExportController {
       formula: "SUM(F" + firstSummaryRow + ":F" + (summaryRow - 1) + ")",
     };
     row.getCell(6).numFmt = mtFmt;
+    //fix border errors
+    this.setBorder(worksheet, "medium", false, true, false, true, 6, 13, 7, 13);
+    this.setBorder(
+      worksheet,
+      "medium",
+      false,
+      true,
+      false,
+      false,
+      7,
+      17,
+      7,
+      17
+    );
 
     SystemService.dismissLoading();
     return { worksheet: worksheet, mapping: mapping };
@@ -873,7 +886,6 @@ export class XLSXExportController {
         });
       });
     });
-
     for (
       let areaIndex = 0;
       areaIndex < Object.keys(projectAreaQuality).length;
@@ -936,8 +948,14 @@ export class XLSXExportController {
         }
         worksheet.getCell(12, bricksAreaColumn).value = unitWeight;
         worksheet.getCell(13, bricksAreaColumn).value = "Pc";
-        mapping[mapArea + "-" + shape.position + "-" + area.quality] =
-          bricksAreaColumn;
+        mapping[
+          mapArea +
+            (isRepair ? rep : "") +
+            "-" +
+            shape.position +
+            "-" +
+            area.datasheetId
+        ] = bricksAreaColumn;
         bricksAreaColumn = bricksAreaColumn + 2;
         lastColumn = lastColumn + 2;
       }
@@ -1266,6 +1284,8 @@ export class XLSXExportController {
 
       courseRow++;
     }
+    //hide last row
+    worksheet.getRow(courseRow).height = 0.0001;
     worksheet.getRow(courseRow).hidden = true;
 
     //fill courses columns
@@ -1310,6 +1330,7 @@ export class XLSXExportController {
         bricksAreaColumn = bricksAreaColumn + 2;
       }
     }
+
     //set formats
     worksheet.getRow(courseRow + 4).numFmt = mtFmt;
     worksheet.getRow(courseRow + 10).numFmt = pcsFmt;
@@ -1963,6 +1984,7 @@ export class XLSXExportController {
           62
         );
       }
+
       //fix merge errors
       //this.mergeAllErrors();
       //add worksheet to workbook
@@ -1995,7 +2017,21 @@ export class XLSXExportController {
         });
         clonedWorksheet.addImage(imageId2, "D4:BK15");
       }
+      //fix border errors
+      this.setBorder(
+        clonedWorksheet,
+        "thin",
+        false,
+        false,
+        false,
+        true,
+        18,
+        62,
+        18,
+        62
+      );
     }
+
     this.saveWorkbook(
       workbook,
       "shapes-" + slugify(project.projectLocalId) + ".xlsx"
@@ -2161,7 +2197,24 @@ export class XLSXExportController {
               lang
             ).toUpperCase();
             row.getCell("C").value = title;
-            row.getCell("J").value = raw
+            let limitValues = false;
+            let lowerValues = false;
+            properties[type].map((prop) => {
+              lowerValues = lowerValues || prop.lower > 0 || prop.higher > 0;
+              limitValues =
+                limitValues || (isNumber(prop.typical) && lowerValues);
+            });
+            row.getCell("N").value = limitValues
+              ? TranslationService.getTransl(
+                  "limit_values",
+                  "Limit Values",
+                  null,
+                  lang
+                )
+              : "";
+
+            const column = limitValues ? "J" : "M";
+            row.getCell(column).value = raw
               ? TranslationService.getTransl(
                   "typical_raw",
                   "Typical for the raw material",
@@ -2174,18 +2227,16 @@ export class XLSXExportController {
                   null,
                   lang
                 );
-            let limitValues = false;
-            properties[type].map((prop) => {
-              limitValues = limitValues || isNumber(prop.typical);
-            });
-            row.getCell("N").value = limitValues
-              ? TranslationService.getTransl(
-                  "limit_values",
-                  "Limit Values",
-                  null,
-                  lang
-                )
-              : "";
+            if (!limitValues) {
+              //merge cells for typical
+              this.mergeCells(
+                worksheet,
+                analysisRowNumber,
+                13,
+                analysisRowNumber,
+                15
+              );
+            }
             if (typeIndex > 0) {
               startRowNumber = analysisRowNumber + 3;
             }
@@ -2232,7 +2283,6 @@ export class XLSXExportController {
               vertical: "top",
               horizontal: "left",
             };
-            //row.getCell("N").style
             //merge cells
             this.mergeCells(
               worksheet,
@@ -2261,24 +2311,29 @@ export class XLSXExportController {
               numFmt = "0";
               break;
           }
-          row.getCell("N").value =
+          const cellValue =
             (property.prefix ? property.prefix + " " : "") +
             (property.lower >= 0 && property.higher > 0
               ? roundDecimals(property.lower, propertyDecimals) +
                 " - " +
                 roundDecimals(property.higher, propertyDecimals)
-              : property.lower >= 0
+              : property.lower > 0
                 ? roundDecimals(property.lower, propertyDecimals)
                 : property.higher > 0
                   ? roundDecimals(property.higher, propertyDecimals)
-                  : null);
-          row.getCell("N").numFmt = numFmt;
+                  : "");
+          if (cellValue != "") {
+            row.getCell("N").value = cellValue;
+            row.getCell("N").numFmt = numFmt;
+          }
+
           if (property.typical > 0) {
-            row.getCell("J").value = roundDecimals(
+            const column = cellValue != "" ? "J" : "N";
+            row.getCell(column).value = roundDecimals(
               property.typical,
               propertyDecimals
             );
-            row.getCell("J").numFmt = numFmt;
+            row.getCell(column).numFmt = numFmt;
           }
           //set bottom line
           [

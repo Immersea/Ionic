@@ -1,10 +1,10 @@
-import {Component, h, Prop, State, Event, EventEmitter} from "@stencil/core";
-import {DecoplannerDive} from "../../../../../interfaces/udive/planner/decoplanner-dive";
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
-import {DecoplannerParameters} from "../../../../../interfaces/udive/planner/decoplanner-parameters";
-import {Environment} from "../../../../../global/env";
-import {toNumber} from "lodash";
-import {TranslationService} from "../../../../../services/common/translations";
+import { Component, h, Prop, State, Event, EventEmitter } from "@stencil/core";
+import { DecoplannerDive } from "../../../../../interfaces/udive/planner/decoplanner-dive";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
+import { DecoplannerParameters } from "../../../../../interfaces/udive/planner/decoplanner-parameters";
+import { Environment } from "../../../../../global/env";
+import { toNumber } from "lodash";
+import { TranslationService } from "../../../../../services/common/translations";
 
 @Component({
   tag: "app-decoplanner-settings",
@@ -12,7 +12,7 @@ import {TranslationService} from "../../../../../services/common/translations";
 })
 export class AppDecoplannerSettings {
   @Event() updateParamsEvent: EventEmitter<DecoplannerParameters>;
-  @Prop({mutable: true}) diveDataToShare: any;
+  @Prop({ mutable: true }) diveDataToShare: any;
   @State() dive: DecoplannerDive = new DecoplannerDive();
   @State() updateView = true;
 
@@ -142,11 +142,11 @@ export class AppDecoplannerSettings {
 
   render() {
     return (
-      <div class="slider-container">
-        <ion-list class="slider-scrollable-container">
+      <div class='slider-container'>
+        <ion-list class='slider-scrollable-container'>
           <ion-item-divider>
             <ion-label>
-              <my-transl tag="general-settings" text="General Settings" />
+              <my-transl tag='general-settings' text='General Settings' />
             </ion-label>
           </ion-item-divider>
           {!this.divePlan.configuration || this.showConfigurations ? (
@@ -156,13 +156,13 @@ export class AppDecoplannerSettings {
                   "configuration",
                   "Configuration"
                 )}
-                labelPlacement="floating"
+                labelPlacement='floating'
                 onIonChange={(ev) => this.updateParam("config", ev)}
                 value={this.parameters.configuration}
               >
-                <ion-select-option value="OC">OC</ion-select-option>
-                <ion-select-option value="pSCR">pSCR</ion-select-option>
-                <ion-select-option value="CCR">CCR</ion-select-option>
+                <ion-select-option value='OC'>OC</ion-select-option>
+                <ion-select-option value='pSCR'>pSCR</ion-select-option>
+                <ion-select-option value='CCR'>CCR</ion-select-option>
               </ion-select>
             </ion-item>
           ) : undefined}
@@ -186,7 +186,7 @@ export class AppDecoplannerSettings {
               onIonChange={(ev) => this.updateParam("laststop", ev)}
               checked={this.parameters.lastStop6m20ft}
             >
-              <my-transl tag="last-stop" text="Last stop" />{" "}
+              <my-transl tag='last-stop' text='Last stop' />{" "}
               {this.parameters.metric ? 6 : 20}
               {this.parameters.depthUnit}
             </ion-toggle>
@@ -214,7 +214,7 @@ export class AppDecoplannerSettings {
             <ion-item-divider>
               <ion-label>
                 {this.parameters.configuration}{" "}
-                <my-transl tag="settings" text="settings" />
+                <my-transl tag='settings' text='settings' />
               </ion-label>
             </ion-item-divider>
           ) : undefined}
@@ -225,7 +225,7 @@ export class AppDecoplannerSettings {
                 "conservatism",
                 "Conservatism"
               )}
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) => this.updateParam("conservatism", ev)}
               value={this.parameters.conservatism}
             >
@@ -239,7 +239,7 @@ export class AppDecoplannerSettings {
           {this.parameters.configuration != "OC" ? (
             <ion-item-divider>
               <ion-label>
-                <my-transl tag="bailout-settings" text="Bailout settings" />
+                <my-transl tag='bailout-settings' text='Bailout settings' />
               </ion-label>
             </ion-item-divider>
           ) : undefined}
@@ -250,7 +250,7 @@ export class AppDecoplannerSettings {
                   "conservatism",
                   "Conservatism"
                 )}
-                labelPlacement="floating"
+                labelPlacement='floating'
                 onIonChange={(ev) =>
                   this.updateParam("conservatism_bailout", ev)
                 }
@@ -280,7 +280,7 @@ export class AppDecoplannerSettings {
             <ion-item-divider>
               <ion-label>
                 {this.parameters.configuration}{" "}
-                <my-transl tag="settings" text="settings" />
+                <my-transl tag='settings' text='settings' />
               </ion-label>
             </ion-item-divider>
           ) : undefined}
@@ -291,7 +291,7 @@ export class AppDecoplannerSettings {
                 "gradient-factor-low",
                 "Gradient Factor Low"
               )}
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) => this.updateParam("gfLow", ev)}
               value={this.parameters.gfLow}
             >
@@ -306,7 +306,7 @@ export class AppDecoplannerSettings {
                 "gradient-factor-high",
                 "Gradient Factor High"
               )}
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) => this.updateParam("gfHigh", ev)}
               value={this.parameters.gfHigh}
             >
@@ -319,7 +319,7 @@ export class AppDecoplannerSettings {
             ? [
                 <ion-item-divider>
                   <ion-label>
-                    <my-transl tag="bailout-settings" text="Bailout settings" />
+                    <my-transl tag='bailout-settings' text='Bailout settings' />
                   </ion-label>
                 </ion-item-divider>,
                 <ion-item>
@@ -328,7 +328,7 @@ export class AppDecoplannerSettings {
                       "gradient-factor-low",
                       "Gradient Factor Low"
                     )}
-                    labelPlacement="floating"
+                    labelPlacement='floating'
                     onIonChange={(ev) => this.updateParam("gfLow_bailout", ev)}
                     value={this.parameters.gfLow_bailout}
                   >
@@ -343,7 +343,7 @@ export class AppDecoplannerSettings {
                       "gradient-factor-high",
                       "Gradient Factor High"
                     )}
-                    labelPlacement="floating"
+                    labelPlacement='floating'
                     onIonChange={(ev) => this.updateParam("gfHigh_bailout", ev)}
                     value={this.parameters.gfHigh_bailout}
                   >
@@ -373,16 +373,16 @@ export class AppDecoplannerSettings {
                 <ion-item-divider>
                   <ion-label>
                     <my-transl
-                      tag="ppO2-settings"
-                      text="ppO2 Standard Settings"
+                      tag='ppO2-settings'
+                      text='ppO2 Standard Settings'
                     />
                   </ion-label>
                 </ion-item-divider>,
                 <ion-item-divider>
                   <ion-label>
                     <my-transl
-                      tag="ppO2-settings-note"
-                      text="note: CCR settings from deco gases prevail over these settings"
+                      tag='ppO2-settings-note'
+                      text='note: CCR settings from deco gases prevail over these settings'
                     />
                   </ion-label>
                 </ion-item-divider>,
@@ -392,7 +392,7 @@ export class AppDecoplannerSettings {
                       "descent-ppO2-CCR",
                       "Descent ppO2 (CCR)"
                     )}
-                    labelPlacement="floating"
+                    labelPlacement='floating'
                     onIonChange={(ev) => this.updateParam("descentppO2", ev)}
                     value={this.parameters.descentppO2}
                   >
@@ -407,7 +407,7 @@ export class AppDecoplannerSettings {
                       "bottom-ppO2-CCR",
                       "Bottom ppO2 (CCR)"
                     )}
-                    labelPlacement="floating"
+                    labelPlacement='floating'
                     onIonChange={(ev) => this.updateParam("bottomppO2", ev)}
                     value={this.parameters.bottomppO2}
                   >
@@ -422,7 +422,7 @@ export class AppDecoplannerSettings {
                       "deco-ppO2-CCR",
                       "Deco stops ppO2 (CCR)"
                     )}
-                    labelPlacement="floating"
+                    labelPlacement='floating'
                     onIonChange={(ev) => this.updateParam("decoppO2", ev)}
                     value={this.parameters.decoppO2}
                   >
@@ -437,7 +437,7 @@ export class AppDecoplannerSettings {
                       "oxygen-ppO2-CCR",
                       "Oxygen stops ppO2 (CCR)"
                     )}
-                    labelPlacement="floating"
+                    labelPlacement='floating'
                     onIonChange={(ev) => this.updateParam("oxygenppO2", ev)}
                     value={this.parameters.oxygenppO2}
                   >
@@ -451,7 +451,7 @@ export class AppDecoplannerSettings {
 
           <ion-item-divider>
             <ion-label>
-              <my-transl tag="gas" text="Gas" />
+              <my-transl tag='gas' text='Gas' />
             </ion-label>
           </ion-item-divider>
           {this.parameters.configuration == "pSCR" ? (
@@ -461,7 +461,7 @@ export class AppDecoplannerSettings {
                   "pSCR-gas-divider",
                   "pSCR Gas Divider"
                 )}
-                labelPlacement="floating"
+                labelPlacement='floating'
                 onIonChange={(ev) => this.updateParam("pscrGasDivider", ev)}
                 value={this.parameters.pscrGasDivider}
               >
@@ -480,10 +480,10 @@ export class AppDecoplannerSettings {
                   "ace",
                   "ACE (Absorbent Canister Endurance)"
                 )}
-                labelPlacement="floating"
-                type="number"
+                labelPlacement='floating'
+                type='number'
                 value={this.parameters.ace_time}
-                class="ion-text-end"
+                class='ion-text-end'
                 onIonChange={(ev) => this.updateParam("ace_time", ev)}
               ></ion-input>
             </ion-item>
@@ -500,7 +500,7 @@ export class AppDecoplannerSettings {
                   this.parameters.volumeUnit +
                   "/min)"
                 }
-                labelPlacement="floating"
+                labelPlacement='floating'
                 onIonChange={(ev) => this.updateParam("CCR_o2_consumption", ev)}
                 value={this.parameters.CCR_o2_consumption}
               >
@@ -519,7 +519,7 @@ export class AppDecoplannerSettings {
                   "metabolic-o2-consumption",
                   "Metabolic O2 consumption"
                 )}
-                labelPlacement="floating"
+                labelPlacement='floating'
                 onIonChange={(ev) =>
                   this.updateParam("metabolic_o2_consumption", ev)
                 }
@@ -545,7 +545,7 @@ export class AppDecoplannerSettings {
                   this.parameters.volumeUnit +
                   ")"
                 }
-                labelPlacement="floating"
+                labelPlacement='floating'
                 onIonChange={(ev) =>
                   this.updateParam("CCR_volume_for_consumption", ev)
                 }
@@ -577,7 +577,7 @@ export class AppDecoplannerSettings {
                 this.parameters.volumeUnit +
                 "/min)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) => this.updateParam("rmvBottom", ev)}
               value={this.parameters.rmvBottom}
             >
@@ -594,7 +594,7 @@ export class AppDecoplannerSettings {
                 this.parameters.volumeUnit +
                 "/min)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) => this.updateParam("rmvDeco", ev)}
               value={this.parameters.rmvDeco}
             >
@@ -611,7 +611,7 @@ export class AppDecoplannerSettings {
                   "Deco Gas Reserve"
                 ) + " (%)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) => this.updateParam("deco_gas_reserve", ev)}
               value={this.parameters.deco_gas_reserve}
             >
@@ -630,7 +630,7 @@ export class AppDecoplannerSettings {
                   "Time at bottom for Min. Gas"
                 ) + " (min)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) =>
                 this.updateParam(
                   "decotime_at_bottom_for_min_gas_gas_reserve",
@@ -656,7 +656,7 @@ export class AppDecoplannerSettings {
                   "Time at gas switch for Min. Gas"
                 ) + " (min)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) =>
                 this.updateParam("time_at_gas_switch_for_min_gas", ev)
               }
@@ -679,7 +679,7 @@ export class AppDecoplannerSettings {
                   "Stress factor for Min. Gas"
                 ) + " (x)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) =>
                 this.updateParam("rmvBottom_multiplier_for_min_gas", ev)
               }
@@ -702,7 +702,7 @@ export class AppDecoplannerSettings {
                   "Number of divers for Min. Gas"
                 ) + " (#)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) =>
                 this.updateParam("number_of_divers_for_min_gas", ev)
               }
@@ -725,7 +725,7 @@ export class AppDecoplannerSettings {
                 this.parameters.depthUnit +
                 "/min)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) => this.updateParam("descentRate", ev)}
               value={this.parameters.descentRate}
             >
@@ -744,7 +744,7 @@ export class AppDecoplannerSettings {
                 this.parameters.depthUnit +
                 "/min)"
               }
-              labelPlacement="floating"
+              labelPlacement='floating'
               onIonChange={(ev) => this.updateParam("ascentRate", ev)}
               value={this.parameters.ascentRate}
             >

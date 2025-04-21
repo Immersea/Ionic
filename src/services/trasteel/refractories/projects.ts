@@ -284,7 +284,6 @@ export class ProjectsController {
         );
         qtyPerSetMTTotal += qtyPerSetMT;
         qtyPerSetMTRepairTotal += qtyPerSetMTRepair;
-
         projectSummary.push({
           areaIndex: index,
           areaId: area.bricksAllocationAreaId,
@@ -302,6 +301,7 @@ export class ProjectsController {
                 (a) => a.id == area.datasheetId
               ).productName
             : null,
+          datasheetId: area.datasheetId,
           techNo: area.datasheetId
             ? DatasheetsService.datasheetsList.find(
                 (a) => a.id == area.datasheetId
@@ -344,6 +344,7 @@ export class ProjectsController {
                   (a) => a.id == area.datasheetId
                 ).productName
               : null,
+            datasheetId: area.datasheetId,
             techNo: area.datasheetId
               ? DatasheetsService.datasheetsList.find(
                   (a) => a.id == area.datasheetId

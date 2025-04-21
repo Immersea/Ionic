@@ -1,4 +1,4 @@
-import {Element} from "@stencil/core";
+import { Element } from "@stencil/core";
 import {
   Component,
   h,
@@ -9,7 +9,7 @@ import {
   State,
   Watch,
 } from "@stencil/core";
-import {orderBy} from "lodash";
+import { orderBy } from "lodash";
 
 @Component({
   tag: "app-infinite-scroll",
@@ -19,8 +19,8 @@ export class AppInfiniteScroll {
   @Element() el: HTMLElement;
   private listElement: HTMLIonListElement;
   @Event() listChanged: EventEmitter<any>;
-  @Prop({mutable: true}) list: any[] = [];
-  @Prop({mutable: true}) loading: boolean = false;
+  @Prop({ mutable: true }) list: any[] = [];
+  @Prop({ mutable: true }) loading: boolean = false;
   @Prop() groupBy: string[] = [];
   @Prop() orderBy: string[] = [];
   @Prop() returnField: string;
@@ -81,7 +81,7 @@ export class AppInfiniteScroll {
 
   showItem(item) {
     return (
-      <ion-item-sliding class="no-select">
+      <ion-item-sliding class='no-select'>
         <ion-item
           button
           detail
@@ -90,13 +90,14 @@ export class AppInfiniteScroll {
               this.returnField ? item[this.returnField] : item
             )
           }
+          class='fix-label'
         >
           {item.photoURL ? (
-            <ion-avatar slot="start">
+            <ion-avatar slot='start'>
               <img src={item.photoURL} />
             </ion-avatar>
           ) : this.icon ? (
-            <ion-icon slot="start" name={this.icon}></ion-icon>
+            <ion-icon slot='start' name={this.icon}></ion-icon>
           ) : undefined}
           <ion-label>
             <h2>
@@ -157,20 +158,20 @@ export class AppInfiniteScroll {
           <div>
             {this.loading ? (
               <ion-item>
-                <ion-thumbnail slot="start">
+                <ion-thumbnail slot='start'>
                   <ion-skeleton-text></ion-skeleton-text>
                 </ion-thumbnail>
                 <ion-label>
                   <h2>
                     <ion-skeleton-text
                       animated
-                      style={{width: "80%"}}
+                      style={{ width: "80%" }}
                     ></ion-skeleton-text>
                   </h2>
                   <p>
                     <ion-skeleton-text
                       animated
-                      style={{width: "60%"}}
+                      style={{ width: "60%" }}
                     ></ion-skeleton-text>
                   </p>
                 </ion-label>
@@ -185,7 +186,7 @@ export class AppInfiniteScroll {
           </div>
         ) : (
           [
-            <ion-list id="infinite-scroll-list">
+            <ion-list id='infinite-scroll-list'>
               {this.groupBy.length > 0
                 ? Object.keys(this.groupedItems).map((key) => (
                     <ion-item-group>

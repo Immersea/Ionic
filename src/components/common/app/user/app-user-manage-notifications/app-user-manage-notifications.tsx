@@ -1,13 +1,13 @@
-import {Component, h, State} from "@stencil/core";
-import {NotificationsService} from "../../../../../services/common/notifications";
+import { Component, h, State } from "@stencil/core";
+import { NotificationsService } from "../../../../../services/common/notifications";
 import {
   TopicsList,
   NotificationDoc,
 } from "../../../../../interfaces/common/notifications/notifications";
-import {TranslationService} from "../../../../../services/common/translations";
-import {actionSheetController} from "@ionic/core";
-import {SystemService} from "../../../../../services/common/system";
-import {isBoolean, orderBy} from "lodash";
+import { TranslationService } from "../../../../../services/common/translations";
+import { actionSheetController } from "@ionic/core";
+import { SystemService } from "../../../../../services/common/system";
+import { isBoolean, orderBy } from "lodash";
 
 @Component({
   tag: "app-user-manage-notifications",
@@ -253,9 +253,9 @@ export class AppUserManageNotifications {
               >
                 <ion-label>{topic.name}</ion-label>
                 <ion-button
-                  slot="end"
+                  slot='end'
                   icon-only
-                  fill="clear"
+                  fill='clear'
                   color={topic.activeOnDevice ? "success" : "danger"}
                 >
                   <ion-icon
@@ -263,9 +263,9 @@ export class AppUserManageNotifications {
                   />
                 </ion-button>
                 <ion-button
-                  slot="end"
+                  slot='end'
                   icon-only
-                  fill="clear"
+                  fill='clear'
                   color={topic.activeOnAllDevices ? "success" : "danger"}
                 >
                   <ion-icon

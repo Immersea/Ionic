@@ -1,4 +1,4 @@
-import {Component, Element, State, h} from "@stencil/core";
+import { Component, Element, State, h } from "@stencil/core";
 import {
   SHAPESCOLLECTION,
   ShapesService,
@@ -7,15 +7,15 @@ import {
   MapDataShape,
   ShapeFilter,
 } from "../../../../../interfaces/trasteel/refractories/shapes";
-import {TrasteelFilterService} from "../../../../../services/trasteel/common/trs-db-filter";
-import {TrasteelService} from "../../../../../services/trasteel/common/services";
-import {cloneDeep, find, orderBy} from "lodash";
-import {DatabaseService} from "../../../../../services/common/database";
-import {SystemService} from "../../../../../services/common/system";
+import { TrasteelFilterService } from "../../../../../services/trasteel/common/trs-db-filter";
+import { TrasteelService } from "../../../../../services/trasteel/common/services";
+import { cloneDeep, orderBy } from "lodash";
+import { DatabaseService } from "../../../../../services/common/database";
+import { SystemService } from "../../../../../services/common/system";
 import Swiper from "swiper";
-import {TranslationService} from "../../../../../services/common/translations";
-import {MapDataDatasheet} from "../../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../../services/trasteel/refractories/datasheets";
+import { TranslationService } from "../../../../../services/common/translations";
+import { MapDataDatasheet } from "../../../../../interfaces/trasteel/refractories/datasheets";
+import { DatasheetsService } from "../../../../../services/trasteel/refractories/datasheets";
 
 @Component({
   tag: "page-shapes",
@@ -33,7 +33,7 @@ export class PageShapes {
   @State() updateView = true;
   @State() showDownload = true;
   @State() activateDownload = false;
-  @State() basket: {shape: MapDataShape; datasheet: MapDataDatasheet}[] = [];
+  @State() basket: { shape: MapDataShape; datasheet: MapDataDatasheet }[] = [];
   localDocName = "shapeBasket";
 
   async componentWillLoad() {
@@ -173,8 +173,8 @@ export class PageShapes {
   openShape(shapeId) {
     if (this.showDownload) {
       const shape = ShapesService.getShapeById(shapeId);
-      if (!find(this.basket, {shape}))
-        this.basket.push({shape, datasheet: null});
+      //if (!find(this.basket, {shape}))
+      this.basket.push({ shape, datasheet: null });
       this.basket = orderBy(this.basket, "shape.shapeName");
       this.saveBasket();
     } else {
@@ -223,29 +223,29 @@ export class PageShapes {
   render() {
     return [
       <ion-header>
-        <app-navbar tag="shapes" text="Shapes" color="trasteel"></app-navbar>
-        <ion-grid class="ion-no-padding">
-          <ion-row class="ion-no-padding">
-            <ion-col size="1" class="ion-no-padding">
-              <ion-toolbar color="trasteel">
+        <app-navbar tag='shapes' text='Shapes' color='trasteel'></app-navbar>
+        <ion-grid class='ion-no-padding'>
+          <ion-row class='ion-no-padding'>
+            <ion-col size='1' class='ion-no-padding'>
+              <ion-toolbar color='trasteel'>
                 <ion-button
-                  fill="clear"
-                  expand="full"
+                  fill='clear'
+                  expand='full'
                   icon-only
                   onClick={() => this.openShapeFilter()}
                 >
-                  <ion-icon name="filter" color="light"></ion-icon>
+                  <ion-icon name='filter' color='light'></ion-icon>
                 </ion-button>
               </ion-toolbar>
             </ion-col>
-            <ion-col size="11" class="ion-no-padding">
+            <ion-col size='11' class='ion-no-padding'>
               <app-search-toolbar
-                id="searchToolbar"
-                searchTitle="shapes"
+                id='searchToolbar'
+                searchTitle='shapes'
                 list={this.shapesList}
                 orderFields={["shapeName"]}
-                color="trasteel"
-                placeholder="Search by shape name"
+                color='trasteel'
+                placeholder='Search by shape name'
                 filterBy={["shapeName", "shapeTypeId"]}
                 onFilteredList={(ev) => (this.filteredShapesList = ev.detail)}
               ></app-search-toolbar>
@@ -253,52 +253,52 @@ export class PageShapes {
           </ion-row>
         </ion-grid>
       </ion-header>,
-      <ion-content class="slides">
+      <ion-content class='slides'>
         {TrasteelService.isRefraDBAdmin() ? (
           !this.showDownload ? (
-            <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
-              <ion-fab-button size="small" color="trasteel">
-                <ion-icon name="chevron-down"></ion-icon>
+            <ion-fab vertical='top' horizontal='end' slot='fixed' edge>
+              <ion-fab-button size='small' color='trasteel'>
+                <ion-icon name='chevron-down'></ion-icon>
               </ion-fab-button>
-              <ion-fab-list side="bottom">
+              <ion-fab-list side='bottom'>
                 <ion-fab-button
                   onClick={() => this.addShape()}
-                  color="trasteel"
+                  color='trasteel'
                 >
-                  <ion-icon name="add"></ion-icon>
+                  <ion-icon name='add'></ion-icon>
                 </ion-fab-button>
                 <ion-fab-button
                   onClick={() => this.downloadShapes()}
-                  color="trasteel"
+                  color='trasteel'
                 >
-                  <ion-icon name="download"></ion-icon>
+                  <ion-icon name='download'></ion-icon>
                 </ion-fab-button>
               </ion-fab-list>
             </ion-fab>
           ) : (
-            <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+            <ion-fab vertical='top' horizontal='end' slot='fixed' edge>
               <ion-fab-button
                 onClick={() => this.downloadShapes()}
-                size="small"
-                color="trasteel"
+                size='small'
+                color='trasteel'
               >
-                <ion-icon name="close"></ion-icon>
+                <ion-icon name='close'></ion-icon>
               </ion-fab-button>
             </ion-fab>
           )
         ) : undefined}
-        <swiper-container class="slider-show-shape swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
+        <swiper-container class='slider-show-shape swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
               {this.filter.isActive()
                 ? [
                     <ion-breadcrumbs>
                       <ion-button
                         icon-only
-                        fill="clear"
+                        fill='clear'
                         onClick={() => this.clearShapeFilter()}
                       >
-                        <ion-icon color="danger" name="trash"></ion-icon>
+                        <ion-icon color='danger' name='trash'></ion-icon>
                       </ion-button>
                       <ion-breadcrumb>
                         {this.filteredShapesList.length}
@@ -334,7 +334,7 @@ export class PageShapes {
                 showFields={["shapeName"]}
                 orderBy={["shapeName"]}
                 options={this.getOptions()}
-                returnField="id"
+                returnField='id'
                 icon={
                   TrasteelFilterService.getMapDocs(SHAPESCOLLECTION).icon.name
                 }
@@ -345,7 +345,7 @@ export class PageShapes {
               ></app-infinite-scroll>
             </swiper-slide>
             {this.showDownload ? (
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-list>
                   {this.basket.length == 0 ? (
                     <ion-item>
@@ -357,48 +357,48 @@ export class PageShapes {
                         <ion-col>
                           <ion-button
                             onClick={() => this.downloadShapesList()}
-                            expand="block"
-                            fill="outline"
-                            color="trasteel"
+                            expand='block'
+                            fill='outline'
+                            color='trasteel'
                             disabled={!this.activateDownload}
                           >
-                            <ion-icon name="download" slot="start"></ion-icon>
+                            <ion-icon name='download' slot='start'></ion-icon>
                             <ion-label>
                               {TranslationService.getTransl(
                                 "download",
                                 "Download"
                               )}
                             </ion-label>
-                            <ion-badge slot="end" color="trasteel">
+                            <ion-badge slot='end' color='trasteel'>
                               {this.basket.length}
                             </ion-badge>
                           </ion-button>
                         </ion-col>
-                        <ion-col size="1">
+                        <ion-col size='1'>
                           <ion-button
-                            fill="clear"
+                            fill='clear'
                             icon-only
                             onClick={() => this.emptyBasket()}
                           >
-                            <ion-icon name="trash" color="danger"></ion-icon>
+                            <ion-icon name='trash' color='danger'></ion-icon>
                           </ion-button>
                         </ion-col>
                       </ion-row>
                     </ion-grid>
                   )}
                   {this.basket.map((basket, index) => (
-                    <ion-grid class="ion-no-padding">
-                      <ion-row class="ion-no-padding">
-                        <ion-col class="ion-no-padding">
-                          <ion-item color="light">
+                    <ion-grid class='ion-no-padding'>
+                      <ion-row class='ion-no-padding'>
+                        <ion-col class='ion-no-padding'>
+                          <ion-item color='light'>
                             <ion-label>{basket.shape.shapeName}</ion-label>
-                            <ion-icon slot="end" name="arrow-right"></ion-icon>
+                            <ion-icon slot='end' name='arrow-right'></ion-icon>
                           </ion-item>
                         </ion-col>
-                        <ion-col class="ion-no-padding">
+                        <ion-col class='ion-no-padding'>
                           <ion-item
                             button
-                            color="light"
+                            color='light'
                             onClick={() => this.openDataSheet(index)}
                           >
                             <ion-label>
@@ -408,15 +408,15 @@ export class PageShapes {
                             </ion-label>
                           </ion-item>
                         </ion-col>
-                        <ion-col size="2" class="ion-no-padding">
-                          <ion-item color="light">
+                        <ion-col size='2' class='ion-no-padding'>
+                          <ion-item color='light'>
                             <ion-button
-                              slot="end"
-                              fill="clear"
+                              slot='end'
+                              fill='clear'
                               icon-only
                               onClick={() => this.removeItemFromBasket(index)}
                             >
-                              <ion-icon name="trash" color="danger"></ion-icon>
+                              <ion-icon name='trash' color='danger'></ion-icon>
                             </ion-button>
                           </ion-item>
                         </ion-col>

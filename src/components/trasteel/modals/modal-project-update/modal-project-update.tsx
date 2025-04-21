@@ -1083,6 +1083,7 @@ export class ModalProjectUpdate {
                     button
                     lines='inset'
                     onClick={() => this.openSelectCustomer()}
+                    class='fix-label'
                   >
                     <ion-label>
                       <p class='small'>
@@ -1387,7 +1388,7 @@ export class ModalProjectUpdate {
                                   onClick={() =>
                                     this.openSelectDataSheet(area, index)
                                   }
-                                  class='reduce-padding'
+                                  class='reduce-padding fix-label'
                                 >
                                   <ion-label>
                                     <p class='small'>
@@ -1512,16 +1513,11 @@ export class ModalProjectUpdate {
                                               positionIndex
                                             )
                                           }
-                                          class='reduce-padding-top'
+                                          class='reduce-padding-top fix-label'
                                         >
                                           <ion-label>
                                             {positionIndex == 0 ? (
-                                              <p
-                                                style={{
-                                                  color: "black",
-                                                  "font-size": "0.75rem",
-                                                }}
-                                              >
+                                              <p>
                                                 <my-transl
                                                   tag='shape'
                                                   text='Shape'
@@ -2059,7 +2055,7 @@ export class ModalProjectUpdate {
                                                       .length > 0 &&
                                                     course.quantityShapes[
                                                       shapeIndex
-                                                    ].quantity < 0
+                                                    ].quantity <= 0
                                                       ? {
                                                           "--ion-background-color":
                                                             "red",

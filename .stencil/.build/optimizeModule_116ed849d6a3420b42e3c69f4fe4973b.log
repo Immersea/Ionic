@@ -1,1 +1,0 @@
-import{r}from"./p-6934ed3c.js";const o=r("Browser",{web:()=>import("./p-0d97632a.js").then((r=>new r.BrowserWeb))});export{o as B};

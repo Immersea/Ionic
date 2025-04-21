@@ -1,7 +1,7 @@
-import {Component, h, Prop, State} from "@stencil/core";
-import {Review} from "../../../../../interfaces/common/reviews/review";
-import {ReviewService} from "../../../../../services/common/reviews";
-import {format} from "date-fns";
+import { Component, h, Prop, State } from "@stencil/core";
+import { Review } from "../../../../../interfaces/common/reviews/review";
+import { ReviewService } from "../../../../../services/common/reviews";
+import { format } from "date-fns";
 
 @Component({
   tag: "app-review-details",
@@ -20,7 +20,7 @@ export class AppReviewDetails {
       <ion-card color={this.color}>
         <ion-card-header>
           <ion-card-subtitle>
-            <my-transl tag="your-review" text="Your Review" />
+            <my-transl tag='your-review' text='Your Review' />
           </ion-card-subtitle>
           <ion-card-title>{this.review.title}</ion-card-title>
           <ion-card-subtitle>
@@ -44,7 +44,7 @@ export class AppReviewDetails {
                     paddingTop: "10px",
                   }}
                 >
-                  <my-transl tag="answer" text="Answer" />
+                  <my-transl tag='answer' text='Answer' />
                 </h2>,
                 <p>{this.review.answer}</p>,
               ]

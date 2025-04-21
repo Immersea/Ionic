@@ -1,19 +1,12 @@
 {
   "firestore": {
-    "rules": "firestore-trasteel.rules",
-    "indexes": "firestore-trasteel.indexes.json"
+    "rules": "firestore-udive.rules",
+    "indexes": "firestore-udive.indexes.json"
   },
   "functions": [
     {
-      "source": "functions-trasteel",
+      "source": "functions-udive",
       "codebase": "default",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
-      ],
       "predeploy": [
         "npm --prefix \"$RESOURCE_DIR\" run lint",
         "npm --prefix \"$RESOURCE_DIR\" run build"
@@ -22,7 +15,7 @@
   ],
   "hosting": [
     {
-      "target": "trasteel-consumables",
+      "target": "udive",
       "public": "www",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
@@ -33,19 +26,8 @@
       ]
     },
     {
-      "target": "virtual-tours-imrs",
-      "public": "vt",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
-      "target": "trasteel-signin",
-      "public": "trasteel-signin",
+      "target": "guedecoplanner",
+      "public": "www",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
@@ -56,6 +38,14 @@
     }
   ],
   "storage": {
-    "rules": "storage-trasteel.rules"
+    "rules": "storage-udive.rules"
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    }
   }
 }

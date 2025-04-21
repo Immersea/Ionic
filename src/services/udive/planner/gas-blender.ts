@@ -1,8 +1,8 @@
-import {Gas} from "../../../interfaces/udive/planner/gas";
-import {GasSupply} from "../../../interfaces/udive/planner/gas-supply";
+import { Gas } from "../../../interfaces/udive/planner/gas";
+import { GasSupply } from "../../../interfaces/udive/planner/gas-supply";
 
-import {cloneDeep, toNumber} from "lodash";
-import {TranslationService} from "../../common/translations";
+import { cloneDeep, toNumber } from "lodash";
+import { TranslationService } from "../../common/translations";
 
 /**
  * Computes a volume-based solution to the given gas blending problem.

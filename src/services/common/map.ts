@@ -1,9 +1,8 @@
-import {BehaviorSubject} from "rxjs";
-import {Marker} from "../../interfaces/interfaces";
-import {geohashForLocation} from "geofire-common";
-import {GeoPoint} from "firebase/firestore";
-import {Environment} from "../../global/env";
-import {toNumber} from "lodash";
+import { BehaviorSubject } from "rxjs";
+import { Marker } from "../../interfaces/interfaces";
+import { geohashForLocation } from "geofire-common/dist/geofire-common/index.esm.js";
+import { GeoPoint } from "firebase/firestore";
+import { Environment } from "../../global/env";
 
 export class Position {
   geohash: string;
@@ -35,8 +34,8 @@ export class LocationIQ {
 
   constructor(data?) {
     this.place_id = data && data.place_id ? data.place_id : null;
-    this.lat = data && data.lat ? toNumber(data.lat) : null;
-    this.lon = data && data.lon ? toNumber(data.lon) : null;
+    this.lat = data && data.lat ? Number(data.lat) : null;
+    this.lon = data && data.lon ? Number(data.lon) : null;
     this.display_name = data && data.display_name ? data.display_name : null;
     this.osm_id = data && data.osm_id ? data.osm_id : null;
     this.osm_typ = data && data.osm_typ ? data.osm_typ : null;
@@ -81,9 +80,9 @@ export class MapController {
 
   getStandardPosition() {
     if (Environment.isTrasteel()) {
-      return {lat: 46.00773, lng: 8.95504}; //Trasteel position
+      return { lat: 46.00773, lng: 8.95504 }; //Trasteel position
     } else {
-      return {lat: 46, lng: 13};
+      return { lat: 46, lng: 13 };
     }
   }
 
@@ -102,15 +101,18 @@ export class MapController {
     if (
       position.geohash &&
       position.geopoint &&
-      position.geopoint.latitude &&
-      position.geopoint.longitude
+      (position.geopoint.latitude || position.geopoint._latitude) &&
+      (position.geopoint.longitude || position.geopoint._latitude)
     ) {
+      const lat = position.geopoint.latitude
+        ? position.geopoint.latitude
+        : position.geopoint._latitude;
+      const lon = position.geopoint.longitude
+        ? position.geopoint.longitude
+        : position.geopoint._longitude;
       return {
         geohash: position.geohash,
-        geopoint: new GeoPoint(
-          position.geopoint.latitude,
-          position.geopoint.longitude
-        ),
+        geopoint: new GeoPoint(lat, lon),
       };
     } else {
       return null;

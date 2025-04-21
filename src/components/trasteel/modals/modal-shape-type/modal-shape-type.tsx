@@ -1,15 +1,15 @@
-import {Component, h, Host, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {cloneDeep, isNumber, isString} from "lodash";
-import {TranslationService} from "../../../../services/common/translations";
-import {ShapeType} from "../../../../interfaces/trasteel/refractories/shapes";
+import { Component, h, Host, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { cloneDeep, isNumber, isString } from "lodash";
+import { TranslationService } from "../../../../services/common/translations";
+import { ShapeType } from "../../../../interfaces/trasteel/refractories/shapes";
 import {
   SHAPESCOLLECTION,
   ShapesService,
 } from "../../../../services/trasteel/refractories/shapes";
-import {RouterService} from "../../../../services/common/router";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
+import { RouterService } from "../../../../services/common/router";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
 
 @Component({
   tag: "modal-shape-type",
@@ -146,13 +146,13 @@ export class ModalShapeType {
             link={this.shapeType.dwg ? this.shapeType.dwg.url : null}
           ></app-banner>
           <ion-button
-            expand="block"
-            fill="outline"
-            color="trasteel"
+            expand='block'
+            fill='outline'
+            color='trasteel'
             disabled={!this.shapeType.typeId}
             onClick={() => this.editDrawing()}
           >
-            <ion-icon slot="start" name="create"></ion-icon>
+            <ion-icon slot='start' name='create'></ion-icon>
             <ion-label>
               {!this.shapeType.typeId
                 ? TranslationService.getTransl(
@@ -171,67 +171,67 @@ export class ModalShapeType {
                     text: "Shape Type",
                   }}
                   value={this.shapeType.typeId}
-                  lines="inset"
+                  lines='inset'
                   selectFn={(ev) => this.selectType(ev)}
                   selectOptions={this.shapeTypes}
-                  selectValueId="typeId"
+                  selectValueId='typeId'
                   selectValueText={["typeName", "en"]}
                   disabled={!this.validShapeType}
                 ></app-select-search>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validShapeType}
                   onClick={() => this.addShapeType()}
                 >
-                  <ion-icon name="add" slot="start" />
+                  <ion-icon name='add' slot='start' />
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validShapeType}
                   onClick={() => this.duplicateShapeType()}
                 >
-                  <ion-icon slot="start" name="duplicate"></ion-icon>
+                  <ion-icon slot='start' name='duplicate'></ion-icon>
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   disabled={this.shapeTypes.length == 0}
                   onClick={() => this.deleteShapeType()}
                 >
-                  <ion-icon slot="start" name="trash"></ion-icon>
+                  <ion-icon slot='start' name='trash'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
 
           <app-form-item
-            label-text="Position"
+            label-text='Position'
             value={this.shapeType.position}
-            name="position"
-            input-type="number"
+            name='position'
+            input-type='number'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
                 name: "minvalue",
-                options: {min: 1},
+                options: { min: 1 },
               },
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="ID"
+            label-text='ID'
             value={this.shapeType.typeId}
-            name="typeId"
-            input-type="string"
+            name='typeId'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
@@ -245,24 +245,24 @@ export class ModalShapeType {
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="Name"
+            label-text='Name'
             value={this.shapeType.typeName}
-            name="typeName"
-            input-type="text"
+            name='typeName'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
           <app-form-item
-            label-text="Decimals"
+            label-text='Decimals'
             value={this.shapeType.decimals}
-            name="decimals"
-            inputStep="1"
-            input-type="number"
+            name='decimals'
+            inputStep='1'
+            input-type='number'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
         </ion-content>

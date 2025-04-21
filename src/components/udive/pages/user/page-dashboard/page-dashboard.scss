@@ -1,17 +1,32 @@
 page-dashboard {
-  .full-row {
-    min-height: 400px;
-    margin-bottom: 10px;
-  }
-  .half-row {
-    min-height: 200px;
+  width: 100%;
+  .cards-container {
+    margin: 0;
+    margin-bottom: 1rem; /* Space between the rows */
   }
 
-  .col-border {
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-mask-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border: 1px solid var(--ion-color-medium);
+  .cards-column {
+    margin-bottom: 1rem !important; /* Add space between rows */
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Make card take the full height of the container */
+    box-sizing: border-box;
+    cursor: pointer; /* Change cursor to pointer */
+    transition: transform 0.2s ease-in-out; /* Add smooth transition effect */
+  }
+
+  .card:hover {
+    transform: scale(1.02); /* Slight zoom effect on hover */
+  }
+
+  .card-content {
+    flex-grow: 1; /* Make card content grow to fill the available space */
+  }
+
+  .card-margins {
+    margin-bottom: 1rem; /* Ensure there's space inside the cards */
   }
 }

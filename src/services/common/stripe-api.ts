@@ -1,11 +1,11 @@
-import {httpsCallable} from "firebase/functions";
-import {Environment} from "../../global/env";
-import {functions} from "../../helpers/firebase";
-import {PaymentStatus} from "../../interfaces/common/stripe/stripe";
-import {DatabaseService} from "./database";
-import {RouterService} from "./router";
-import {SystemService} from "./system";
-import {round} from "lodash";
+import { httpsCallable } from "firebase/functions";
+import { Environment } from "../../global/env";
+import { functions } from "../../helpers/firebase";
+import { PaymentStatus } from "../../interfaces/common/stripe/stripe";
+import { DatabaseService } from "./database";
+import { RouterService } from "./router";
+import { SystemService } from "./system";
+import { round } from "lodash";
 declare var Stripe;
 
 /**
@@ -93,7 +93,7 @@ export class StripeAPIController {
       };
     }
     if (res && res.error) {
-      return {error: res.error};
+      return { error: res.error };
     } else {
       return res;
     }
@@ -119,7 +119,7 @@ export class StripeAPIController {
       };
     }
     if (res && res.error) {
-      return {error: res.error};
+      return { error: res.error };
     } else {
       return res;
     }
@@ -242,7 +242,7 @@ export class StripeAPIController {
       },
     };
 
-    var card = elements.create("card", {style: style});
+    var card = elements.create("card", { style: style });
     card.mount("#card-element");
 
     card.on("change", (event) => {

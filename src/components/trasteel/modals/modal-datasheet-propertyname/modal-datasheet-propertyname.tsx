@@ -1,11 +1,11 @@
-import {Component, h, Host, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {cloneDeep, isNumber, isString, split} from "lodash";
-import {TranslationService} from "../../../../services/common/translations";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {DatasheetPropertyName} from "../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
+import { Component, h, Host, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { cloneDeep, isNumber, isString, split } from "lodash";
+import { TranslationService } from "../../../../services/common/translations";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { DatasheetPropertyName } from "../../../../interfaces/trasteel/refractories/datasheets";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
 
 @Component({
   tag: "modal-datasheet-propertyname",
@@ -139,7 +139,7 @@ export class ModalDatasheetPropertyName {
             <ion-row>
               <ion-col>
                 <app-select-search
-                  color="trasteel"
+                  color='trasteel'
                   label={{
                     tag: "datasheet_propertyName",
                     text: "Datasheet Property Name",
@@ -149,54 +149,54 @@ export class ModalDatasheetPropertyName {
                       ? this.datasheetPropertyNames[this.index].nameId
                       : this.datasheetPropertyNames[0].nameId
                   }
-                  lines="none"
+                  lines='none'
                   selectFn={(ev) => this.selectType(ev)}
                   selectOptions={this.datasheetPropertyNames}
-                  selectValueId="nameId"
+                  selectValueId='nameId'
                   selectValueText={["nameName"]}
                   disabled={!this.validDatasheetPropertyName}
                 ></app-select-search>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetPropertyName}
                   onClick={() => this.addDatasheetPropertyName()}
                 >
-                  <ion-icon name="add" slot="start" />
+                  <ion-icon name='add' slot='start' />
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetPropertyName}
                   onClick={() => this.duplicateDatasheetPropertyName()}
                 >
-                  <ion-icon slot="start" name="duplicate"></ion-icon>
+                  <ion-icon slot='start' name='duplicate'></ion-icon>
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   disabled={this.datasheetPropertyNames.length == 0}
                   onClick={() => this.deleteDatasheetPropertyName()}
                 >
-                  <ion-icon slot="start" name="trash"></ion-icon>
+                  <ion-icon slot='start' name='trash'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
-          <ion-item lines="none">
+          <ion-item lines='none'>
             <ion-select
-              color="trasteel"
-              id="selectType"
-              interface="action-sheet"
+              color='trasteel'
+              id='selectType'
+              interface='action-sheet'
               label={TranslationService.getTransl(
                 "datasheet_propertyType",
                 "Datasheet Property Type"
               )}
-              label-placement="floating"
+              label-placement='floating'
               onIonChange={(ev) => this.selectPropertyType(ev)}
             >
               {DatasheetsService.datasheetPropertyTypes.map(
@@ -209,21 +209,21 @@ export class ModalDatasheetPropertyName {
             </ion-select>
           </ion-item>
           <app-form-item
-            label-text="Position"
+            label-text='Position'
             value={this.datasheetPropertyName.position}
-            name="position"
-            input-type="number"
+            name='position'
+            input-type='number'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
           <app-form-item
-            label-text="ID"
+            label-text='ID'
             value={this.datasheetPropertyName.nameId}
-            name="nameId"
-            input-type="string"
+            name='nameId'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
@@ -237,63 +237,63 @@ export class ModalDatasheetPropertyName {
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="Name"
+            label-text='Name'
             value={this.datasheetPropertyName.nameName}
-            name="nameName"
-            input-type="string"
+            name='nameName'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
           <app-form-item
-            label-text="Decimals"
+            label-text='Decimals'
             value={this.datasheetPropertyName.decimals}
-            name="decimals"
-            input-type="number"
-            inputStep="1"
+            name='decimals'
+            input-type='number'
+            inputStep='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
           <app-form-item
-            label-text="Description Left"
+            label-text='Description Left'
             value={this.datasheetPropertyName.nameDescLeft}
-            name="nameDescLeft"
-            input-type="text"
+            name='nameDescLeft'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="floating"
+            labelPosition='floating'
           ></app-form-item>
           <app-form-item
-            label-text="Description Right"
+            label-text='Description Right'
             value={this.datasheetPropertyName.nameDescRight}
-            name="nameDescRight"
-            input-type="text"
+            name='nameDescRight'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="floating"
+            labelPosition='floating'
           ></app-form-item>
           <app-form-item
-            label-text="Comments"
+            label-text='Comments'
             value={this.datasheetPropertyName.comments}
-            name="comments"
-            input-type="text"
+            name='comments'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="floating"
+            labelPosition='floating'
           ></app-form-item>
           <app-form-item
-            label-text="Dimension"
+            label-text='Dimension'
             value={this.datasheetPropertyName.dimension}
-            name="dimension"
-            input-type="text"
+            name='dimension'
+            input-type='text'
             multiLanguage={true}
-            text-rows="1"
+            text-rows='1'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="floating"
+            labelPosition='floating'
           ></app-form-item>
         </ion-content>
         <app-modal-footer

@@ -1,18 +1,18 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {alertController, modalController} from "@ionic/core";
-import {Environment} from "../../../../global/env";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { alertController, modalController } from "@ionic/core";
+import { Environment } from "../../../../global/env";
 import {
   PlanOfAction,
   ProductLines,
   UserPlan,
   UserPlans,
 } from "../../../../interfaces/trasteel/users/user-plans";
-import {UserPlansService} from "../../../../services/trasteel/crm/user-plans";
-import {CustomersService} from "../../../../services/trasteel/crm/customers";
-import {MapDataCustomer} from "../../../../interfaces/trasteel/customer/customer";
-import {TranslationService} from "../../../../services/common/translations";
-import {UserService} from "../../../../services/common/user";
-import {cloneDeep} from "lodash";
+import { UserPlansService } from "../../../../services/trasteel/crm/user-plans";
+import { CustomersService } from "../../../../services/trasteel/crm/customers";
+import { MapDataCustomer } from "../../../../interfaces/trasteel/customer/customer";
+import { TranslationService } from "../../../../services/common/translations";
+import { UserService } from "../../../../services/common/user";
+import { cloneDeep } from "lodash";
 
 @Component({
   tag: "modal-user-plans-update",
@@ -144,11 +144,11 @@ export class ModalUserPlansUpdate {
     return (
       <Host>
         <ion-header>
-          <ion-toolbar color="trasteel">
+          <ion-toolbar color='trasteel'>
             <ion-title>
               <my-transl
-                tag="plan-of-actions"
-                text="Plan of Actions"
+                tag='plan-of-actions'
+                text='Plan of Actions'
               ></my-transl>
             </ion-title>
           </ion-toolbar>
@@ -158,12 +158,12 @@ export class ModalUserPlansUpdate {
             {this.userPlan.otherName == null ? (
               <ion-item
                 button
-                lines="inset"
+                lines='inset'
                 onClick={() => this.openSelectCustomer()}
               >
                 <ion-label>
-                  <p class="small">
-                    <my-transl tag="customer" text="Customer"></my-transl>*
+                  <p class='small'>
+                    <my-transl tag='customer' text='Customer'></my-transl>*
                   </p>
                   <h2>
                     {this.selectedCustomer
@@ -181,19 +181,19 @@ export class ModalUserPlansUpdate {
             ) : undefined}
             {this.userPlan.customerId == null ? (
               <app-form-item
-                lines="inset"
-                label-tag="other"
-                label-text="Other"
+                lines='inset'
+                label-tag='other'
+                label-text='Other'
                 value={this.userPlan.otherName}
-                name="otherName"
-                input-type="string"
+                name='otherName'
+                input-type='string'
                 onFormItemChanged={(ev) => this.handleOtherChange(ev)}
               ></app-form-item>
             ) : undefined}
             <ion-button
-              color="trasteel"
-              fill="outline"
-              expand="full"
+              color='trasteel'
+              fill='outline'
+              expand='full'
               disabled={
                 this.userPlan.customerId == null &&
                 this.userPlan.otherName == null
@@ -202,9 +202,9 @@ export class ModalUserPlansUpdate {
                 this.addAction();
               }}
             >
-              <ion-icon name="add" slot="start"></ion-icon>
+              <ion-icon name='add' slot='start'></ion-icon>
               <ion-label>
-                <my-transl tag="add-action" text="Add Action"></my-transl>
+                <my-transl tag='add-action' text='Add Action'></my-transl>
               </ion-label>
             </ion-button>
             <ion-grid>
@@ -212,11 +212,11 @@ export class ModalUserPlansUpdate {
                 <ion-row>
                   <ion-col>
                     <ion-select
-                      color="trasteel"
-                      id="application"
-                      interface="action-sheet"
+                      color='trasteel'
+                      id='application'
+                      interface='action-sheet'
                       label={TranslationService.getTransl("product", "Product")}
-                      label-placement="floating"
+                      label-placement='floating'
                       onIonChange={(ev) => {
                         action.product = ev.detail.value;
                         this.validatePlan();
@@ -230,38 +230,38 @@ export class ModalUserPlansUpdate {
                       ))}
                     </ion-select>
                   </ion-col>
-                  <ion-col size="3">
+                  <ion-col size='3'>
                     <app-form-item
-                      lines="inset"
-                      label-tag="due-date"
-                      label-text="Due Date"
+                      lines='inset'
+                      label-tag='due-date'
+                      label-text='Due Date'
                       value={action.dueDate}
-                      name="dueDate"
-                      input-type="date"
-                      date-presentation="date"
+                      name='dueDate'
+                      input-type='date'
+                      date-presentation='date'
                       onFormItemChanged={(ev) => this.handleChange(action, ev)}
                       validator={["required"]}
                     ></app-form-item>
                   </ion-col>
-                  <ion-col size="1">
+                  <ion-col size='1'>
                     <ion-button
-                      fill="clear"
+                      fill='clear'
                       icon-only
                       onClick={() => this.removePlan(index)}
                     >
-                      <ion-icon name="trash" color="danger"></ion-icon>
+                      <ion-icon name='trash' color='danger'></ion-icon>
                     </ion-button>
                   </ion-col>
                 </ion-row>,
                 <ion-row>
                   <ion-col>
                     <app-form-item
-                      lines="inset"
-                      label-tag="actual-situation"
-                      label-text="Actual Situation"
+                      lines='inset'
+                      label-tag='actual-situation'
+                      label-text='Actual Situation'
                       value={action.situation}
-                      name="situation"
-                      input-type="text"
+                      name='situation'
+                      input-type='text'
                       textRows={3}
                       onFormItemChanged={(ev) => this.handleChange(action, ev)}
                       validator={["required"]}
@@ -269,12 +269,12 @@ export class ModalUserPlansUpdate {
                   </ion-col>
                   <ion-col>
                     <app-form-item
-                      lines="inset"
-                      label-tag="plan"
-                      label-text="Plan"
+                      lines='inset'
+                      label-tag='plan'
+                      label-text='Plan'
                       value={action.plan}
-                      name="plan"
-                      input-type="text"
+                      name='plan'
+                      input-type='text'
                       textRows={3}
                       onFormItemChanged={(ev) => this.handleChange(action, ev)}
                       validator={["required"]}
@@ -288,16 +288,16 @@ export class ModalUserPlansUpdate {
             </ion-grid>
             {this.userPlan.planOfActions.length > 0 ? (
               <ion-button
-                color="danger"
-                fill="outline"
-                expand="full"
+                color='danger'
+                fill='outline'
+                expand='full'
                 onClick={() => {
                   this.deletePlan();
                 }}
               >
-                <ion-icon name="trash" slot="start"></ion-icon>
+                <ion-icon name='trash' slot='start'></ion-icon>
                 <ion-label>
-                  <my-transl tag="delete" text="Delete"></my-transl>
+                  <my-transl tag='delete' text='Delete'></my-transl>
                 </ion-label>
               </ion-button>
             ) : undefined}

@@ -1,12 +1,12 @@
-import {Component, h, State, Host} from "@stencil/core";
-import {UserService} from "../../../../../services/common/user";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {orderBy} from "lodash";
+import { Component, h, State, Host } from "@stencil/core";
+import { UserService } from "../../../../../services/common/user";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { orderBy } from "lodash";
 import {
   DiveSitesService,
   DIVESITESCOLLECTION,
 } from "../../../../../services/udive/diveSites";
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
 
 @Component({
   tag: "app-user-dive-sites",
@@ -72,19 +72,19 @@ export class AppUserDiveSites {
             detail
           >
             {site.photoURL ? (
-              <ion-avatar slot="start">
+              <ion-avatar slot='start'>
                 <img src={site.photoURL} />
               </ion-avatar>
             ) : undefined}
 
             <ion-label>{site.displayName}</ion-label>
             <ion-button
-              fill="clear"
+              fill='clear'
               icon-only
-              slot="end"
+              slot='end'
               onClick={(ev) => this.update(ev, site.id)}
             >
-              <ion-icon name="create" slot="end"></ion-icon>
+              <ion-icon name='create' slot='end'></ion-icon>
             </ion-button>
           </ion-item>
         ))}

@@ -36,8 +36,12 @@ export class AppDivingCenterCard {
                   <my-transl tag='distance' text='Distance'></my-transl>,
                   ": " +
                     distance(
-                      this.startlocation.latitude,
-                      this.startlocation.longitude,
+                      this.startlocation.latitude
+                        ? this.startlocation.latitude
+                        : this.startlocation.position.geopoint.latitude,
+                      this.startlocation.longitude
+                        ? this.startlocation.longitude
+                        : this.startlocation.position.geopoint.longitude,
                       this.divingCenter.position.geopoint.latitude,
                       this.divingCenter.position.geopoint.longitude
                     ),

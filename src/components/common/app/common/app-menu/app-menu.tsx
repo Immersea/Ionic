@@ -9,7 +9,6 @@ import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
 import { TrasteelMenuService } from "../../../../../services/trasteel/common/menus";
 import { Browser } from "@capacitor/browser";
 import { TranslationService } from "../../../../../services/common/translations";
-import { isArray } from "lodash";
 
 @Component({
   tag: "app-menu",
@@ -42,7 +41,9 @@ export class AppMenu {
     this.showMenu = "lg"; //if true shows always the menu without auto-hide
 
     //update selected menu for highlight
-    this.selectedMenu = isArray(this.url) ? this.url.join("/") : this.url;
+    this.selectedMenu = Array.isArray(this.url)
+      ? this.url.join("/")
+      : String(this.url);
     //create menu for admin
     MenuService.resetMenus();
 

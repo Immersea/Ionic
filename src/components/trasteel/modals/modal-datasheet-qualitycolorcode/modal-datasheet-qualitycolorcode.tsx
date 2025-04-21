@@ -1,11 +1,11 @@
-import {Component, h, Host, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {cloneDeep, isString} from "lodash";
-import {TranslationService} from "../../../../services/common/translations";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {DatasheetQualityColorCode} from "../../../../interfaces/trasteel/refractories/datasheets";
-import {DatasheetsService} from "../../../../services/trasteel/refractories/datasheets";
+import { Component, h, Host, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { cloneDeep, isString } from "lodash";
+import { TranslationService } from "../../../../services/common/translations";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { DatasheetQualityColorCode } from "../../../../interfaces/trasteel/refractories/datasheets";
+import { DatasheetsService } from "../../../../services/trasteel/refractories/datasheets";
 
 @Component({
   tag: "modal-datasheet-qualitycolorcode",
@@ -108,17 +108,17 @@ export class ModalDatasheetQualityColorCode {
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-item lines="none">
+                <ion-item lines='none'>
                   <ion-select
-                    color="trasteel"
-                    id="selectType"
-                    interface="action-sheet"
+                    color='trasteel'
+                    id='selectType'
+                    interface='action-sheet'
                     label={TranslationService.getTransl(
                       "datasheet_qualityColorCode",
                       "Datasheet QualityColorCode"
                     )}
                     disabled={!this.validDatasheetQualityColorCode}
-                    label-placement="floating"
+                    label-placement='floating'
                     onIonChange={(ev) => this.selectType(ev)}
                     value={this.index ? this.index : 0}
                   >
@@ -134,43 +134,43 @@ export class ModalDatasheetQualityColorCode {
                   </ion-select>
                 </ion-item>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetQualityColorCode}
                   onClick={() => this.addDatasheetQualityColorCode()}
                 >
-                  <ion-icon name="add" slot="start" />
+                  <ion-icon name='add' slot='start' />
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
+                  fill='clear'
                   disabled={!this.validDatasheetQualityColorCode}
                   onClick={() => this.duplicateDatasheetQualityColorCode()}
                 >
-                  <ion-icon slot="start" name="duplicate"></ion-icon>
+                  <ion-icon slot='start' name='duplicate'></ion-icon>
                 </ion-button>
               </ion-col>
-              <ion-col size="1" class="ion-text-center">
+              <ion-col size='1' class='ion-text-center'>
                 <ion-button
-                  fill="clear"
-                  color="danger"
+                  fill='clear'
+                  color='danger'
                   disabled={this.datasheetQualityColorCodes.length == 0}
                   onClick={() => this.deleteDatasheetQualityColorCode()}
                 >
-                  <ion-icon slot="start" name="trash"></ion-icon>
+                  <ion-icon slot='start' name='trash'></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
           <app-form-item
-            label-text="ID"
+            label-text='ID'
             value={this.datasheetQualityColorCode.qualityColorCodeId}
-            name="qualityColorCodeId"
-            input-type="string"
+            name='qualityColorCodeId'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={[
               "required",
               {
@@ -184,12 +184,12 @@ export class ModalDatasheetQualityColorCode {
             ]}
           ></app-form-item>
           <app-form-item
-            label-text="Name"
+            label-text='Name'
             value={this.datasheetQualityColorCode.qualityColorCodePicture}
-            name="qualityColorCodePicture"
-            input-type="string"
+            name='qualityColorCodePicture'
+            input-type='string'
             onFormItemChanged={(ev) => this.handleChange(ev)}
-            labelPosition="fixed"
+            labelPosition='fixed'
             validator={["required"]}
           ></app-form-item>
         </ion-content>

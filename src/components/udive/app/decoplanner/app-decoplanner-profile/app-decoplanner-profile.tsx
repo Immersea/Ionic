@@ -7,17 +7,17 @@ import {
   EventEmitter,
   Watch,
 } from "@stencil/core";
-import {DecoplannerDive} from "../../../../../interfaces/udive/planner/decoplanner-dive";
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
+import { DecoplannerDive } from "../../../../../interfaces/udive/planner/decoplanner-dive";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
 //import { Config } from '../../../../providers/config';
 //import { DataBase } from '../../../../providers/database';
-import {DecoplannerParameters} from "../../../../../interfaces/udive/planner/decoplanner-parameters";
-import {GasBlenderService} from "../../../../../services/udive/planner/gas-blender";
-import {TranslationService} from "../../../../../services/common/translations";
-import {UserService} from "../../../../../services/common/user";
-import {SystemService} from "../../../../../services/common/system";
-import {round, toNumber, toString} from "lodash";
-import {Environment} from "../../../../../global/env";
+import { DecoplannerParameters } from "../../../../../interfaces/udive/planner/decoplanner-parameters";
+import { GasBlenderService } from "../../../../../services/udive/planner/gas-blender";
+import { TranslationService } from "../../../../../services/common/translations";
+import { UserService } from "../../../../../services/common/user";
+import { SystemService } from "../../../../../services/common/system";
+import { round, toNumber, toString } from "lodash";
+import { Environment } from "../../../../../global/env";
 //import { GoogleSheetProvider } from '../../../../providers/google-sheet';
 //import { GoogleSheet } from '../../../../models/google/google-sheet'
 //import { GoogleSpreadSheet } from '../../../../models/google/google-spreadsheet'
@@ -362,22 +362,22 @@ export class AppDecoplannerProfile {
 
   render() {
     return [
-      <div class="slider-container">
-        <div class="slider-scrollable-header">
+      <div class='slider-container'>
+        <div class='slider-scrollable-header'>
           <ion-segment
-            mode="ios"
+            mode='ios'
             color={Environment.getAppColor()}
             onIonChange={(ev) => this.segmentChanged(ev)}
             value={this.selectedModelView}
           >
-            <ion-segment-button value="BUHL">
+            <ion-segment-button value='BUHL'>
               <ion-label>BUHL</ion-label>
             </ion-segment-button>
-            <ion-segment-button value="VPM">
+            <ion-segment-button value='VPM'>
               <ion-label>VPM</ion-label>
             </ion-segment-button>
             {this.editPlan ? (
-              <ion-segment-button value="tables">
+              <ion-segment-button value='tables'>
                 <ion-label>
                   {TranslationService.getTransl("tables", "TABLES")}
                 </ion-label>
@@ -386,56 +386,56 @@ export class AppDecoplannerProfile {
           </ion-segment>
         </div>
 
-        <div class="slider-scrollable-container">
+        <div class='slider-scrollable-container'>
           {this.selectedModelView == "tables" ? (
             [
               <ion-row align-items-center>
                 {/* MAIN */}
-                <ion-col size="12" size-sm>
+                <ion-col size='12' size-sm>
                   <ion-card>
                     <ion-card-header>
                       <ion-segment
                         onIonChange={(ev) => this.updateSelectedModel(ev)}
-                        mode="ios"
+                        mode='ios'
                         color={Environment.getAppColor()}
                         value={this.dive.selectedModel}
                       >
-                        <ion-segment-button value="BUHL">
+                        <ion-segment-button value='BUHL'>
                           <ion-label>BUHL</ion-label>
                         </ion-segment-button>
-                        <ion-segment-button value="VPM">
+                        <ion-segment-button value='VPM'>
                           <ion-label>VPM</ion-label>
                         </ion-segment-button>
                       </ion-segment>
                     </ion-card-header>
                     <ion-card-content>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="runtime" text="Runtime" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='runtime' text='Runtime' />:{" "}
                         {this.dive.getRunTime()}
                       </p>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="deco-time" text="Deco time" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='deco-time' text='Deco time' />:{" "}
                         {this.dive.getDecoTime()}
                       </p>
                       {this.dive.getProfilePointsDetails().map((detail) => (
-                        <p class="ion-text-start ion-padding-start">{detail}</p>
+                        <p class='ion-text-start ion-padding-start'>{detail}</p>
                       ))}
                       {this.dive.getDecoProfileGroups().map((detail) => (
-                        <p class="ion-text-start ion-padding-start">{detail}</p>
+                        <p class='ion-text-start ion-padding-start'>{detail}</p>
                       ))}
                     </ion-card-content>
                   </ion-card>
                 </ion-col>
                 {/* setup depth */}
-                <ion-col size="12" size-sm>
+                <ion-col size='12' size-sm>
                   <ion-card>
                     <ion-card-content>
                       <app-form-item
-                        label-tag="time-diff"
-                        label-text="Time diff. (min)"
+                        label-tag='time-diff'
+                        label-text='Time diff. (min)'
                         value={toString(this.divePlan.time_to_add)}
-                        name="depth"
-                        input-type="number"
+                        name='depth'
+                        input-type='number'
                         onFormItemChanged={(ev) =>
                           (this.divePlan.time_to_add = toNumber(
                             ev.detail.value
@@ -444,13 +444,13 @@ export class AppDecoplannerProfile {
                         onFormItemBlur={() => this.updateTables()}
                       ></app-form-item>
                       <app-form-item
-                        label-tag="depth-diff"
+                        label-tag='depth-diff'
                         label-text={
                           "Depth diff. (" + this.parameters.depthUnit + ")"
                         }
                         value={toString(this.divePlan.depth_to_add)}
-                        name="depth"
-                        input-type="number"
+                        name='depth'
+                        input-type='number'
                         onFormItemChanged={(ev) =>
                           (this.divePlan.depth_to_add = toNumber(
                             ev.detail.value
@@ -464,14 +464,14 @@ export class AppDecoplannerProfile {
               </ion-row>,
               <ion-row align-items-center>
                 {/* -5 min */}
-                <ion-col size="12" size-sm>
+                <ion-col size='12' size-sm>
                   <ion-card>
                     <ion-card-header>
                       -{this.divePlan.time_to_add}min
                     </ion-card-header>
                     <ion-card-content>
                       <ion-note>
-                        -1 min <my-transl tag="bottom" text="bottom" /> ={" "}
+                        -1 min <my-transl tag='bottom' text='bottom' /> ={" "}
                         {round(
                           (this.dive_less_time.getDecoTime() -
                             this.dive.getDecoTime()) /
@@ -480,25 +480,25 @@ export class AppDecoplannerProfile {
                         )}{" "}
                         min deco
                       </ion-note>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="runtime" text="Runtime" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='runtime' text='Runtime' />:{" "}
                         {this.dive_less_time.getRunTime()}
                       </p>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="decotime" text="Deco time" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='decotime' text='Deco time' />:{" "}
                         {this.dive_less_time.getDecoTime()}
                       </p>
                       {this.dive_less_time
                         .getProfilePointsDetails()
                         .map((detail) => (
-                          <p class="ion-text-start ion-padding-start">
+                          <p class='ion-text-start ion-padding-start'>
                             {detail}
                           </p>
                         ))}
                       {this.dive_less_time
                         .getDecoProfileGroups()
                         .map((detail) => (
-                          <p class="ion-text-start ion-padding-start">
+                          <p class='ion-text-start ion-padding-start'>
                             {detail}
                           </p>
                         ))}
@@ -506,14 +506,14 @@ export class AppDecoplannerProfile {
                   </ion-card>
                 </ion-col>
                 {/* +5 min */}
-                <ion-col size="12" size-sm>
+                <ion-col size='12' size-sm>
                   <ion-card>
                     <ion-card-header>
                       +{this.divePlan.time_to_add}min
                     </ion-card-header>
                     <ion-card-content>
                       <ion-note>
-                        +1 min <my-transl tag="bottom" text="bottom" /> ={" +"}
+                        +1 min <my-transl tag='bottom' text='bottom' /> ={" +"}
                         {round(
                           (this.dive_more_time.getDecoTime() -
                             this.dive.getDecoTime()) /
@@ -522,25 +522,25 @@ export class AppDecoplannerProfile {
                         )}{" "}
                         min deco
                       </ion-note>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="runtime" text="Runtime" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='runtime' text='Runtime' />:{" "}
                         {this.dive_more_time.getRunTime()}
                       </p>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="decotime" text="Deco time" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='decotime' text='Deco time' />:{" "}
                         {this.dive_more_time.getDecoTime()}
                       </p>
                       {this.dive_more_time
                         .getProfilePointsDetails()
                         .map((detail) => (
-                          <p class="ion-text-start ion-padding-start">
+                          <p class='ion-text-start ion-padding-start'>
                             {detail}
                           </p>
                         ))}
                       {this.dive_more_time
                         .getDecoProfileGroups()
                         .map((detail) => (
-                          <p class="ion-text-start ion-padding-start">
+                          <p class='ion-text-start ion-padding-start'>
                             {detail}
                           </p>
                         ))}
@@ -551,7 +551,7 @@ export class AppDecoplannerProfile {
 
               <ion-row align-items-center>
                 {/* -3 mt */}
-                <ion-col size="12" size-sm>
+                <ion-col size='12' size-sm>
                   <ion-card>
                     <ion-card-header>
                       -{this.divePlan.depth_to_add}
@@ -560,7 +560,7 @@ export class AppDecoplannerProfile {
                     <ion-card-content>
                       <ion-note>
                         -1 {this.parameters.depthUnit}{" "}
-                        <my-transl tag="depth" text="depth" /> ={" "}
+                        <my-transl tag='depth' text='depth' /> ={" "}
                         {round(
                           (this.dive_less_depth.getDecoTime() -
                             this.dive.getDecoTime()) /
@@ -569,25 +569,25 @@ export class AppDecoplannerProfile {
                         )}{" "}
                         min deco
                       </ion-note>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="runtime" text="Runtime" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='runtime' text='Runtime' />:{" "}
                         {this.dive_less_depth.getRunTime()}
                       </p>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="decotime" text="Deco time" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='decotime' text='Deco time' />:{" "}
                         {this.dive_less_depth.getDecoTime()}
                       </p>
                       {this.dive_less_depth
                         .getProfilePointsDetails()
                         .map((detail) => (
-                          <p class="ion-text-start ion-padding-start">
+                          <p class='ion-text-start ion-padding-start'>
                             {detail}
                           </p>
                         ))}
                       {this.dive_less_depth
                         .getDecoProfileGroups()
                         .map((detail) => (
-                          <p class="ion-text-start ion-padding-start">
+                          <p class='ion-text-start ion-padding-start'>
                             {detail}
                           </p>
                         ))}
@@ -595,7 +595,7 @@ export class AppDecoplannerProfile {
                   </ion-card>
                 </ion-col>
                 {/* +3 mt */}
-                <ion-col size="12" size-sm>
+                <ion-col size='12' size-sm>
                   <ion-card>
                     <ion-card-header>
                       +{this.divePlan.depth_to_add}
@@ -604,7 +604,7 @@ export class AppDecoplannerProfile {
                     <ion-card-content>
                       <ion-note>
                         +1 {this.parameters.depthUnit}{" "}
-                        <my-transl tag="depth" text="depth" /> ={" +"}
+                        <my-transl tag='depth' text='depth' /> ={" +"}
                         {round(
                           (this.dive_more_depth.getDecoTime() -
                             this.dive.getDecoTime()) /
@@ -613,25 +613,25 @@ export class AppDecoplannerProfile {
                         )}{" "}
                         min deco
                       </ion-note>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="runtime" text="Runtime" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='runtime' text='Runtime' />:{" "}
                         {this.dive_more_depth.getRunTime()}
                       </p>
-                      <p class="ion-text-start ion-padding-start">
-                        <my-transl tag="decotime" text="Deco time" />:{" "}
+                      <p class='ion-text-start ion-padding-start'>
+                        <my-transl tag='decotime' text='Deco time' />:{" "}
                         {this.dive_more_depth.getDecoTime()}
                       </p>
                       {this.dive_more_depth
                         .getProfilePointsDetails()
                         .map((detail) => (
-                          <p class="ion-text-start ion-padding-start">
+                          <p class='ion-text-start ion-padding-start'>
                             {detail}
                           </p>
                         ))}
                       {this.dive_more_depth
                         .getDecoProfileGroups()
                         .map((detail) => (
-                          <p class="ion-text-start ion-padding-start">
+                          <p class='ion-text-start ion-padding-start'>
                             {detail}
                           </p>
                         ))}
@@ -642,7 +642,7 @@ export class AppDecoplannerProfile {
               <ion-row>
                 <ion-item>
                   {this.dive.introText.map((text) => (
-                    <p style={{fontSize: "smaller"}}>{text}</p>
+                    <p style={{ fontSize: "smaller" }}>{text}</p>
                   ))}
                 </ion-item>
               </ion-row>,
@@ -652,7 +652,7 @@ export class AppDecoplannerProfile {
               {this.parameters.configuration != "OC" ? (
                 <ion-segment
                   onIonChange={(ev) => this.switchCCRView(ev)}
-                  mode="ios"
+                  mode='ios'
                   color={Environment.getAppColor()}
                   value={this.selectedCCRSegmentView}
                 >
@@ -669,7 +669,7 @@ export class AppDecoplannerProfile {
                       </ion-label>
                     ) : undefined}
                   </ion-segment-button>
-                  <ion-segment-button value="OC">
+                  <ion-segment-button value='OC'>
                     {TranslationService.getTransl(
                       "bailout-open-circuit",
                       "Bailout Open Circuit"
@@ -690,20 +690,20 @@ export class AppDecoplannerProfile {
                 </ion-segment>
               ) : undefined}
 
-              <ion-grid class="ion-no-padding">
+              <ion-grid class='ion-no-padding'>
                 <ion-row>
-                  <ion-col size="8" class="ion-text-start ion-padding-start">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='8' class='ion-text-start ion-padding-start'>
+                    <h6 class='ion-no-margin'>
                       <my-transl
-                        tag="runtime"
-                        text="Runtime"
+                        tag='runtime'
+                        text='Runtime'
                         isLabel
                       ></my-transl>
                       :
                     </h6>
                   </ion-col>
-                  <ion-col size="4" class="ion-text-end ion-padding-end">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='4' class='ion-text-end ion-padding-end'>
+                    <h6 class='ion-no-margin'>
                       {round(
                         this.selectedCCRView[this.selectedModelView].runtime,
                         0
@@ -713,18 +713,18 @@ export class AppDecoplannerProfile {
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="8" class="ion-text-start ion-padding-start">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='8' class='ion-text-start ion-padding-start'>
+                    <h6 class='ion-no-margin'>
                       <my-transl
-                        tag="deco-time"
-                        text="Deco Time"
+                        tag='deco-time'
+                        text='Deco Time'
                         isLabel
                       ></my-transl>
                       :
                     </h6>
                   </ion-col>
-                  <ion-col size="4" class="ion-text-end ion-padding-end">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='4' class='ion-text-end ion-padding-end'>
+                    <h6 class='ion-no-margin'>
                       {round(
                         this.selectedCCRView[this.selectedModelView].decotime
                       )}{" "}
@@ -733,18 +733,18 @@ export class AppDecoplannerProfile {
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="8" class="ion-text-start ion-padding-start">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='8' class='ion-text-start ion-padding-start'>
+                    <h6 class='ion-no-margin'>
                       <my-transl
-                        tag="avg-bottom-depth"
-                        text="Avg. bottom depth"
+                        tag='avg-bottom-depth'
+                        text='Avg. bottom depth'
                         isLabel
                       ></my-transl>
                       :
                     </h6>
                   </ion-col>
-                  <ion-col size="4" class="ion-text-end ion-padding-end">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='4' class='ion-text-end ion-padding-end'>
+                    <h6 class='ion-no-margin'>
                       {round(
                         this.selectedCCRView[this.selectedModelView]
                           .average_bottom_depth,
@@ -755,18 +755,18 @@ export class AppDecoplannerProfile {
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="8" class="ion-text-start ion-padding-start">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='8' class='ion-text-start ion-padding-start'>
+                    <h6 class='ion-no-margin'>
                       <my-transl
-                        tag="avg-dive-depth"
-                        text="Avg. dive depth"
+                        tag='avg-dive-depth'
+                        text='Avg. dive depth'
                         isLabel
                       ></my-transl>
                       :
                     </h6>
                   </ion-col>
-                  <ion-col size="4" class="ion-text-end ion-padding-end">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='4' class='ion-text-end ion-padding-end'>
+                    <h6 class='ion-no-margin'>
                       {round(
                         this.selectedCCRView[this.selectedModelView]
                           .average_dive_depth,
@@ -777,31 +777,31 @@ export class AppDecoplannerProfile {
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="8" class="ion-text-start ion-padding-start">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='8' class='ion-text-start ion-padding-start'>
+                    <h6 class='ion-no-margin'>
                       <my-transl
-                        tag="start-offgassing"
-                        text="Start of offgassing"
+                        tag='start-offgassing'
+                        text='Start of offgassing'
                         isLabel
                       ></my-transl>
                       :
                     </h6>
                   </ion-col>
-                  <ion-col size="4" class="ion-text-end ion-padding-end">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='4' class='ion-text-end ion-padding-end'>
+                    <h6 class='ion-no-margin'>
                       {round(this.dive.offGassingDepth, 0)}{" "}
                       {this.parameters.depthUnit}
                     </h6>
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="8" class="ion-text-start ion-padding-start">
-                    <h6 class="ion-no-margin">
-                      <my-transl tag="cns" text="CNS" isLabel></my-transl>:
+                  <ion-col size='8' class='ion-text-start ion-padding-start'>
+                    <h6 class='ion-no-margin'>
+                      <my-transl tag='cns' text='CNS' isLabel></my-transl>:
                     </h6>
                   </ion-col>
-                  <ion-col size="4" class="ion-text-end ion-padding-end">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='4' class='ion-text-end ion-padding-end'>
+                    <h6 class='ion-no-margin'>
                       {round(
                         this.selectedCCRView[this.selectedModelView].cns,
                         0
@@ -811,13 +811,13 @@ export class AppDecoplannerProfile {
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="8" class="ion-text-start ion-padding-start">
-                    <h6 class="ion-no-margin">
-                      <my-transl tag="otu" text="OTU" isLabel></my-transl>:
+                  <ion-col size='8' class='ion-text-start ion-padding-start'>
+                    <h6 class='ion-no-margin'>
+                      <my-transl tag='otu' text='OTU' isLabel></my-transl>:
                     </h6>
                   </ion-col>
-                  <ion-col size="4" class="ion-text-end ion-padding-end">
-                    <h6 class="ion-no-margin">
+                  <ion-col size='4' class='ion-text-end ion-padding-end'>
+                    <h6 class='ion-no-margin'>
                       {round(
                         this.selectedCCRView[this.selectedModelView].otu,
                         0
@@ -827,18 +827,18 @@ export class AppDecoplannerProfile {
                 </ion-row>
                 {this.parameters.configuration == "pSCR" ? (
                   <ion-row>
-                    <ion-col size="8" class="ion-text-start ion-padding-start">
-                      <h6 class="ion-no-margin">
+                    <ion-col size='8' class='ion-text-start ion-padding-start'>
+                      <h6 class='ion-no-margin'>
                         <my-transl
-                          tag="backgas-hypoxic-depth"
-                          text="BackGas Hypoxic Depth"
+                          tag='backgas-hypoxic-depth'
+                          text='BackGas Hypoxic Depth'
                           isLabel
                         />
                         :
                       </h6>
                     </ion-col>
-                    <ion-col size="4" class="ion-text-end ion-padding-end">
-                      <h6 class="ion-no-margin">
+                    <ion-col size='4' class='ion-text-end ion-padding-end'>
+                      <h6 class='ion-no-margin'>
                         &lt; {this.dive.backgasHypoxicDepth}{" "}
                         {this.parameters.depthUnit}
                       </h6>
@@ -846,30 +846,30 @@ export class AppDecoplannerProfile {
                   </ion-row>
                 ) : undefined}
               </ion-grid>
-              <ion-grid class="ion-no-padding">
-                <ion-row style={{paddingRight: "16px"}}>
-                  <ion-col size="1"></ion-col>
-                  <ion-col class="ion-text-center">
-                    <ion-text color="dark">
+              <ion-grid class='ion-no-padding'>
+                <ion-row style={{ paddingRight: "16px" }}>
+                  <ion-col size='1'></ion-col>
+                  <ion-col class='ion-text-center'>
+                    <ion-text color='dark'>
                       <h6>
-                        <my-transl tag="depth" text="Depth" isLabel />
+                        <my-transl tag='depth' text='Depth' isLabel />
                       </h6>
                     </ion-text>
                   </ion-col>
-                  <ion-col class="ion-text-center" size="1"></ion-col>
-                  <ion-col class="ion-text-center">
-                    <ion-text color="dark">
+                  <ion-col class='ion-text-center' size='1'></ion-col>
+                  <ion-col class='ion-text-center'>
+                    <ion-text color='dark'>
                       <h6>
-                        <my-transl tag="time" text="Time" isLabel />
+                        <my-transl tag='time' text='Time' isLabel />
                       </h6>
                     </ion-text>
                   </ion-col>
-                  <ion-col size="2"></ion-col>
+                  <ion-col size='2'></ion-col>
                 </ion-row>
               </ion-grid>
               {this.selectedCCRView[this.selectedModelView].profile.map(
                 (profile) => (
-                  <div class="accordion">
+                  <div class='accordion'>
                     {
                       /* RANGES line */
                       this.selectedCCRView[this.selectedModelView].rangeSums[
@@ -891,7 +891,7 @@ export class AppDecoplannerProfile {
                               : undefined
                           }
                         >
-                          <ion-grid class="ion-no-padding">
+                          <ion-grid class='ion-no-padding'>
                             <ion-row
                               class={
                                 this.showCCRRange[this.selectedModelView][
@@ -901,7 +901,7 @@ export class AppDecoplannerProfile {
                                   : undefined
                               }
                             >
-                              <ion-col size="1">
+                              <ion-col size='1'>
                                 <ion-icon
                                   name={
                                     this.showCCRRange[this.selectedModelView][
@@ -910,10 +910,10 @@ export class AppDecoplannerProfile {
                                       ? "remove"
                                       : "add"
                                   }
-                                  color="danger"
+                                  color='danger'
                                 ></ion-icon>
                               </ion-col>
-                              <ion-col size="3" class="ion-text-center">
+                              <ion-col size='3' class='ion-text-center'>
                                 {
                                   this.selectedCCRView[this.selectedModelView]
                                     .rangeDescr[profile.depth]
@@ -922,11 +922,11 @@ export class AppDecoplannerProfile {
                                 {this.parameters.depthUnit}
                               </ion-col>
                               <ion-col
-                                class="ion-text-center"
-                                size="1"
+                                class='ion-text-center'
+                                size='1'
                               ></ion-col>
-                              <ion-col size="3" class="ion-text-center">
-                                <ion-icon name="time"></ion-icon>
+                              <ion-col size='3' class='ion-text-center'>
+                                <ion-icon name='time'></ion-icon>
                                 <span>
                                   {round(
                                     this.selectedCCRView[this.selectedModelView]
@@ -958,25 +958,25 @@ export class AppDecoplannerProfile {
                         profile.depth
                       ] ? (
                         <ion-list-header>
-                          <ion-grid class="ion-no-padding">
+                          <ion-grid class='ion-no-padding'>
                             <ion-row>
                               <ion-segment
                                 onIonChange={(ev) =>
                                   this.rangeSegmentChanged(ev, profile.depth)
                                 }
-                                mode="ios"
+                                mode='ios'
                                 color={Environment.getAppColor()}
                                 value={
                                   this.selectedCCRView[this.selectedModelView]
                                     .rangeShape[profile.depth]
                                 }
                               >
-                                <ion-segment-button value="model">
+                                <ion-segment-button value='model'>
                                   <ion-label>
                                     {this.selectedModelView}
                                   </ion-label>
                                 </ion-segment-button>
-                                <ion-segment-button value="equal">
+                                <ion-segment-button value='equal'>
                                   <ion-label>
                                     {TranslationService.getTransl(
                                       "linear",
@@ -984,10 +984,10 @@ export class AppDecoplannerProfile {
                                     )}
                                   </ion-label>
                                 </ion-segment-button>
-                                <ion-segment-button value="s">
+                                <ion-segment-button value='s'>
                                   <ion-label>S</ion-label>
                                 </ion-segment-button>
-                                <ion-segment-button value="linear">
+                                <ion-segment-button value='linear'>
                                   <ion-label>Exp</ion-label>
                                 </ion-segment-button>
                               </ion-segment>
@@ -1004,9 +1004,9 @@ export class AppDecoplannerProfile {
                         profile.stage
                       ) ? (
                         <ion-item>
-                          <ion-grid class="ion-no-padding">
+                          <ion-grid class='ion-no-padding'>
                             <ion-row align-items-center>
-                              <ion-col size="1" class="ion-text-center">
+                              <ion-col size='1' class='ion-text-center'>
                                 <ion-icon
                                   name={
                                     profile.stage == "descent"
@@ -1026,18 +1026,18 @@ export class AppDecoplannerProfile {
                                   }
                                 ></ion-icon>
                               </ion-col>
-                              <ion-col class="ion-text-center">
+                              <ion-col class='ion-text-center'>
                                 {profile.depth} {this.parameters.depthUnit}
                               </ion-col>
-                              <ion-col size="1" class="ion-text-center">
+                              <ion-col size='1' class='ion-text-center'>
                                 {profile[profile.rangeShape].stoptime ? (
                                   <ion-icon
-                                    name="pause-outline"
-                                    color="gue-grey"
+                                    name='pause-outline'
+                                    color='gue-grey'
                                   ></ion-icon>
                                 ) : undefined}
                               </ion-col>
-                              <ion-col class="ion-text-center">
+                              <ion-col class='ion-text-center'>
                                 {profile[profile.rangeShape].stoptime ? (
                                   <span>
                                     {round(
@@ -1048,7 +1048,7 @@ export class AppDecoplannerProfile {
                                   </span>
                                 ) : undefined}
                               </ion-col>
-                              <ion-col style={{paddingTop: "0px"}} size="2">
+                              <ion-col style={{ paddingTop: "0px" }} size='2'>
                                 {profile[profile.rangeShape].runtime ? (
                                   <ion-row
                                     style={{
@@ -1094,8 +1094,8 @@ export class AppDecoplannerProfile {
                                     }}
                                   >
                                     <my-transl
-                                      tag="start-offgassing"
-                                      text="Start of offgassing"
+                                      tag='start-offgassing'
+                                      text='Start of offgassing'
                                     />
                                   </ion-row>
                                 ) : undefined}
@@ -1110,7 +1110,7 @@ export class AppDecoplannerProfile {
               )}
               <ion-item>
                 {this.dive.introText.map((text) => (
-                  <p style={{fontSize: "smaller"}}>{text}</p>
+                  <p style={{ fontSize: "smaller" }}>{text}</p>
                 ))}
               </ion-item>
             </div>

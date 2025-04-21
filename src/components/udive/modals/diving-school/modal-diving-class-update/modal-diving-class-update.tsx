@@ -1,17 +1,17 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {DivingClass} from "../../../../../interfaces/udive/diving-class/divingClass";
-import {TranslationService} from "../../../../../services/common/translations";
-import {modalController, alertController} from "@ionic/core";
-import {cloneDeep, each, isString, toNumber} from "lodash";
-import {UserService} from "../../../../../services/common/user";
-import {DivingClassesService} from "../../../../../services/udive/divingClasses";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { DivingClass } from "../../../../../interfaces/udive/diving-class/divingClass";
+import { TranslationService } from "../../../../../services/common/translations";
+import { modalController, alertController } from "@ionic/core";
+import { cloneDeep, each, isString, toNumber } from "lodash";
+import { UserService } from "../../../../../services/common/user";
+import { DivingClassesService } from "../../../../../services/udive/divingClasses";
 import {
   DivingSchoolsService,
   DIVESCHOOLSSCOLLECTION,
 } from "../../../../../services/udive/divingSchools";
-import {DivingSchool} from "../../../../../interfaces/udive/diving-school/divingSchool";
-import {Agency} from "../../../../../interfaces/udive/diving-class/divingClass";
-import {SystemService} from "../../../../../services/common/system";
+import { DivingSchool } from "../../../../../interfaces/udive/diving-school/divingSchool";
+import { Agency } from "../../../../../interfaces/udive/diving-class/divingClass";
+import { SystemService } from "../../../../../services/common/system";
 import Swiper from "swiper";
 
 @Component({
@@ -29,14 +29,14 @@ export class ModalDivingClassUpdate {
   divingSchool: DivingSchool;
   divingCourses: any[];
   @State() selectedCourse: any;
-  divingAgencies: {[agencyId: string]: Agency};
+  divingAgencies: { [agencyId: string]: Agency };
   placeholder: string;
   @State() addressText: string;
   @State() titles = [
-    {tag: "details"},
-    {tag: "schedule"},
-    {tag: "team"},
-    {tag: "students"},
+    { tag: "details" },
+    { tag: "schedule" },
+    { tag: "team" },
+    { tag: "students" },
   ];
   @State() slider: Swiper;
   appBookings: HTMLAppDiveClassBookingsElement;
@@ -130,6 +130,14 @@ export class ModalDivingClassUpdate {
     this.validateClass();
   }
 
+  updateSlider() {
+    this.updateView = !this.updateView;
+    //wait for view to update and then reset slider height
+    setTimeout(() => {
+      this.slider ? this.slider.update() : undefined;
+    }, 100);
+  }
+
   createCourseSelectOptions() {
     //create select options
     this.selectCourseElement = this.el.querySelector("#dive-course-select");
@@ -179,7 +187,7 @@ export class ModalDivingClassUpdate {
             handler: () => {
               this.selectGotFocus = false;
               this.createCourseSelectOptions();
-              this.selectedCourse = {...this.selectedCourse};
+              this.selectedCourse = { ...this.selectedCourse };
             },
             role: "cancel",
             cssClass: "secondary",
@@ -205,7 +213,6 @@ export class ModalDivingClassUpdate {
       agencyId: course.agencyId,
     };
     this.appBookings.updateStudentsList();
-    this.appSchedule.updateClassSchedule();
     this.validateClass();
   }
 
@@ -239,7 +246,7 @@ export class ModalDivingClassUpdate {
       isString(this.divingClass.location.display_name) &&
       isString(this.divingClass.status) &&
       Object.keys(this.divingClass.schedule).length > 0;
-    this.updateView = !this.updateView;
+    this.updateSlider();
   }
 
   async save() {
@@ -265,29 +272,30 @@ export class ModalDivingClassUpdate {
 
         {this.selectedCourse ? (
           <ion-header>
-            <ion-toolbar color="divingclass">
+            <ion-toolbar color='divingclass'>
               <ion-title>{this.divingClass.name}</ion-title>
             </ion-toolbar>
           </ion-header>
         ) : undefined}
 
         <app-header-segment-toolbar
-          color="divingclass"
+          color='divingclass'
           swiper={this.slider}
           titles={this.titles}
         ></app-header-segment-toolbar>
-        <ion-content class="slides">
-          <swiper-container class="slider-dive-class swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
+        <ion-content class='slides'>
+          <swiper-container class='slider-dive-class swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
                 <ion-list>
                   <ion-item>
-                    <ion-label>
-                      <my-transl tag="diving-course" text="Diving Course" />
-                    </ion-label>
                     <ion-select
-                      id="dive-course-select"
-                      interface="action-sheet"
+                      label={TranslationService.getTransl(
+                        "diving-course",
+                        "Diving Course"
+                      )}
+                      id='dive-course-select'
+                      interface='action-sheet'
                       onIonChange={(ev) => this.changeCourse(ev.detail.value)}
                       onIonFocus={() => (this.selectGotFocus = true)}
                       placeholder={TranslationService.getTransl(
@@ -298,25 +306,23 @@ export class ModalDivingClassUpdate {
                     ></ion-select>
                   </ion-item>
                   <app-form-item
-                    label-tag="name"
-                    label-text="Name"
+                    label-tag='name'
+                    label-text='Name'
                     value={this.divingClass.name}
-                    name="name"
-                    input-type="text"
+                    name='name'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <ion-item>
-                    <ion-label>
-                      <my-transl
-                        tag="number-of-students"
-                        text="Number of Students"
-                      ></my-transl>
-                    </ion-label>
                     <ion-select
+                      label={TranslationService.getTransl(
+                        "number-of-students",
+                        "Number of Students"
+                      )}
                       value={this.divingClass.numberOfStudents}
                       onIonChange={(ev) => this.updateStudents(ev.detail.value)}
-                      interface="popover"
+                      interface='popover'
                     >
                       <ion-select-option value={1}>1</ion-select-option>
                       <ion-select-option value={2}>2</ion-select-option>
@@ -336,11 +342,11 @@ export class ModalDivingClassUpdate {
                     </ion-select>
                   </ion-item>
                   <app-form-item
-                    label-tag="location"
-                    label-text="Location"
+                    label-tag='location'
+                    label-text='Location'
                     value={this.addressText}
-                    name="location"
-                    input-type="text"
+                    name='location'
+                    input-type='text'
                     onFormItemChanged={(ev) =>
                       (this.addressText = ev.detail.value)
                     }
@@ -350,52 +356,50 @@ export class ModalDivingClassUpdate {
                     validator={["address"]}
                   ></app-form-item>
                   <ion-item>
-                    <ion-label>
-                      <my-transl tag="status" text="Status"></my-transl>
-                    </ion-label>
                     <ion-select
+                      label={TranslationService.getTransl("status", "Status")}
                       value={this.divingClass.status}
                       onIonChange={(ev) => this.updateStatus(ev.detail.value)}
-                      interface="popover"
+                      interface='popover'
                     >
-                      <ion-select-option value="active">
+                      <ion-select-option value='active'>
                         {this.statusTitles.active}
                       </ion-select-option>
-                      <ion-select-option value="closed">
+                      <ion-select-option value='closed'>
                         {this.statusTitles.closed}
                       </ion-select-option>
-                      <ion-select-option value="cancelled">
+                      <ion-select-option value='cancelled'>
                         {this.statusTitles.cancelled}
                       </ion-select-option>
                     </ion-select>
                   </ion-item>
                   <app-form-item
-                    label-tag="comments"
-                    label-text="Comments"
+                    label-tag='comments'
+                    label-text='Comments'
                     value={this.divingClass.comments}
-                    name="comments"
-                    input-type="text"
+                    name='comments'
+                    input-type='text'
                     textRows={4}
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                 </ion-list>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-diving-class-schedule
                   divingClass={this.divingClass}
                   editable={true}
-                  onScheduleEmit={() => this.validateClass()}
+                  onUpdateEmit={() => this.validateClass()}
                 />
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-users-list
                   item={this.divingClass}
                   editable
                   show={["owner", "divemaster", "instructor"]}
                 />
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-dive-class-bookings
                   divingClass={this.divingClass}
                   divingClassId={this.divingClassId}

@@ -1,20 +1,21 @@
-import {Component, h, Prop, State, Element} from "@stencil/core";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {UserService} from "../../../../../services/common/user";
+import { Component, h, Prop, State, Element } from "@stencil/core";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { UserService } from "../../../../../services/common/user";
 import {
   DiveCommunitiesService,
   DIVECOMMUNITIESCOLLECTION,
 } from "../../../../../services/udive/diveCommunities";
-import {DiveCommunity} from "../../../../../interfaces/udive/dive-community/diveCommunity";
-import {Marker} from "../../../../../interfaces/interfaces";
-import {UDiveFilterService} from "../../../../../services/udive/ud-db-filter";
+import { DiveCommunity } from "../../../../../interfaces/udive/dive-community/diveCommunity";
+import { Marker } from "../../../../../interfaces/interfaces";
+import { UDiveFilterService } from "../../../../../services/udive/ud-db-filter";
 import {
   mapHeight,
   fabButtonTopMarginString,
 } from "../../../../../helpers/utils";
-import {DiveTripsService} from "../../../../../services/udive/diveTrips";
-import {Subscription} from "rxjs";
+import { DiveTripsService } from "../../../../../services/udive/diveTrips";
+import { Subscription } from "rxjs";
 import Swiper from "swiper";
+import { RouterService } from "../../../../../services/common/router";
 
 @Component({
   tag: "page-dive-community-details",
@@ -27,10 +28,10 @@ export class PageDiveCommunityDetails {
   @State() diveCommunity: DiveCommunity;
   @State() diveTrips: any;
   @State() titles = [
-    {tag: "information"},
-    {tag: "map"},
-    {tag: "next-trips", text: "Next Dive Trips"},
-    {tag: "team"},
+    { tag: "information" },
+    { tag: "map" },
+    { tag: "next-trips", text: "Next Dive Trips" },
+    { tag: "team" },
   ];
   @State() slider: Swiper;
   userRoles: UserRoles;
@@ -101,57 +102,64 @@ export class PageDiveCommunityDetails {
         <app-item-cover item={this.diveCommunity}></app-item-cover>
       </ion-header>,
       <ion-header>
-        <ion-toolbar color="divecommunity" class="no-safe-padding">
+        <ion-toolbar color='divecommunity' class='no-safe-padding'>
+          {this.diveCommunity && !this.diveCommunity.coverURL ? (
+            <ion-buttons slot='start'>
+              <ion-button onClick={() => RouterService.goBack()} icon-only>
+                <ion-icon name='arrow-back'></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          ) : undefined}
           <ion-title>{this.diveCommunity.displayName}</ion-title>
         </ion-toolbar>
         <app-header-segment-toolbar
-          color="divecommunity"
+          color='divecommunity'
           swiper={this.slider}
           titles={this.titles}
           noHeader
         ></app-header-segment-toolbar>
       </ion-header>,
-      <ion-content class="slides">
+      <ion-content class='slides'>
         {this.admin ? (
           <ion-fab
-            vertical="top"
-            horizontal="end"
-            slot="fixed"
-            style={{marginTop: fabButtonTopMarginString(2)}}
+            vertical='top'
+            horizontal='end'
+            slot='fixed'
+            style={{ marginTop: fabButtonTopMarginString(2) }}
           >
             <ion-fab-button
               onClick={() =>
                 DiveCommunitiesService.presentDiveCommunityUpdate(this.dcid)
               }
-              class="fab-icon"
+              class='fab-icon'
             >
-              <ion-icon name="create"></ion-icon>
+              <ion-icon name='create'></ion-icon>
             </ion-fab-button>
           </ion-fab>
         ) : undefined}
 
-        <swiper-container class="slider-dive-community swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
-              <ion-list class="ion-no-padding">
+        <swiper-container class='slider-dive-community swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
+              <ion-list class='ion-no-padding'>
                 <ion-list-header>
-                  <ion-label color="divingcenter">
+                  <ion-label color='divingcenter'>
                     <my-transl
-                      tag="general-information"
-                      text="General Information"
+                      tag='general-information'
+                      text='General Information'
                     />
                   </ion-label>
                 </ion-list-header>
                 <ion-item>
-                  <ion-label class="ion-text-wrap">
-                    <ion-text color="dark">
+                  <ion-label class='ion-text-wrap'>
+                    <ion-text color='dark'>
                       <p>{this.diveCommunity.description}</p>
                     </ion-text>
                   </ion-label>
                 </ion-item>
                 {this.diveCommunity.email ? (
                   <ion-item button href={"mailto:" + this.diveCommunity.email}>
-                    <ion-icon slot="start" name="at-outline"></ion-icon>
+                    <ion-icon slot='start' name='at-outline'></ion-icon>
                     <ion-label>{this.diveCommunity.email}</ion-label>
                   </ion-item>
                 ) : undefined}
@@ -160,7 +168,7 @@ export class PageDiveCommunityDetails {
                     button
                     href={"tel:" + this.diveCommunity.phoneNumber}
                   >
-                    <ion-icon slot="start" name="call-outline"></ion-icon>
+                    <ion-icon slot='start' name='call-outline'></ion-icon>
                     <ion-label>{this.diveCommunity.phoneNumber}</ion-label>
                   </ion-item>
                 ) : undefined}
@@ -168,9 +176,9 @@ export class PageDiveCommunityDetails {
                   <ion-item
                     button
                     href={"http://" + this.diveCommunity.website}
-                    target="_blank"
+                    target='_blank'
                   >
-                    <ion-icon slot="start" name="link-outline"></ion-icon>
+                    <ion-icon slot='start' name='link-outline'></ion-icon>
                     <ion-label>{this.diveCommunity.website}</ion-label>
                   </ion-item>
                 ) : undefined}
@@ -180,9 +188,9 @@ export class PageDiveCommunityDetails {
                     href={
                       "https://www.facebook.com/" + this.diveCommunity.facebook
                     }
-                    target="_blank"
+                    target='_blank'
                   >
-                    <ion-icon slot="start" name="logo-facebook"></ion-icon>
+                    <ion-icon slot='start' name='logo-facebook'></ion-icon>
                     <ion-label>{this.diveCommunity.facebook}</ion-label>
                   </ion-item>
                 ) : undefined}
@@ -193,9 +201,9 @@ export class PageDiveCommunityDetails {
                       "https://www.instagram.com/" +
                       this.diveCommunity.instagram
                     }
-                    target="_blank"
+                    target='_blank'
                   >
-                    <ion-icon slot="start" name="logo-instagram"></ion-icon>
+                    <ion-icon slot='start' name='logo-instagram'></ion-icon>
                     <ion-label>{this.diveCommunity.instagram}</ion-label>
                   </ion-item>
                 ) : undefined}
@@ -205,33 +213,33 @@ export class PageDiveCommunityDetails {
                     href={
                       "https://www.twitter.com/" + this.diveCommunity.twitter
                     }
-                    target="_blank"
+                    target='_blank'
                   >
-                    <ion-icon slot="start" name="logo-twitter"></ion-icon>
+                    <ion-icon slot='start' name='logo-twitter'></ion-icon>
                     <ion-label>@{this.diveCommunity.twitter}</ion-label>
                   </ion-item>
                 ) : undefined}
               </ion-list>
             </swiper-slide>
 
-            <swiper-slide class="swiper-slide">
-              <div id="map-container">
+            <swiper-slide class='swiper-slide'>
+              <div id='map-container'>
                 <app-map
-                  id="map"
-                  pageId="dive-community-details"
+                  id='map'
+                  pageId='dive-community-details'
                   center={this.diveCommunity}
                   markers={this.markers}
                 ></app-map>
               </div>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <app-calendar
-                calendarId="community-calendar"
-                addEvents={{trips: this.diveTrips}}
+                calendarId='community-calendar'
+                addEvents={{ trips: this.diveTrips }}
               ></app-calendar>
             </swiper-slide>
             {this.admin ? (
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-users-list
                   item={this.diveCommunity}
                   show={["owner", "editor"]}
@@ -242,18 +250,18 @@ export class PageDiveCommunityDetails {
         </swiper-container>
       </ion-content>,
       this.admin ? (
-        <ion-footer class="ion-no-border">
+        <ion-footer class='ion-no-border'>
           <ion-toolbar>
             <ion-button
-              expand="block"
-              fill="solid"
-              color="danger"
+              expand='block'
+              fill='solid'
+              color='danger'
               onClick={() =>
                 DiveCommunitiesService.deleteDiveCommunity(this.dcid)
               }
             >
-              <ion-icon slot="start" name="trash"></ion-icon>
-              <my-transl tag="delete" text="Delete" isLabel></my-transl>
+              <ion-icon slot='start' name='trash'></ion-icon>
+              <my-transl tag='delete' text='Delete' isLabel></my-transl>
             </ion-button>
           </ion-toolbar>
         </ion-footer>

@@ -1,24 +1,24 @@
-import {StorageService} from "../common/storage";
-import {doc, onSnapshot} from "firebase/firestore";
-import {alertController} from "@ionic/core";
-import {DatabaseService, SETTINGSCOLLECTIONNAME} from "../common/database";
+import { StorageService } from "../common/storage";
+import { doc, onSnapshot } from "firebase/firestore";
+import { alertController } from "@ionic/core";
+import { DatabaseService, SETTINGSCOLLECTIONNAME } from "../common/database";
 import {
   DivingCenter,
   MapDataDivingCenter,
 } from "../../interfaces/udive/diving-center/divingCenter";
-import {TranslationService} from "../common/translations";
-import {CLIENTSCOLLECTIONNAME, UDiveFilterService} from "./ud-db-filter";
-import {orderBy} from "lodash";
-import {RouterService} from "../common/router";
-import {DiveSitesService} from "./diveSites";
-import {BehaviorSubject, Subscription} from "rxjs";
-import {DIVETRIPSCOLLECTION} from "./diveTrips";
-import {ChatsSummary} from "../../interfaces/common/chat/chat";
-import {USERCHATSCOLLECTION} from "../common/user";
-import {ChatService} from "../common/chat";
-import {TripSummary} from "../../interfaces/udive/dive-trip/diveTrip";
-import {Clients} from "../../interfaces/udive/clients/clients";
-import {firestore} from "../../helpers/firebase";
+import { TranslationService } from "../common/translations";
+import { CLIENTSCOLLECTIONNAME, UDiveFilterService } from "./ud-db-filter";
+import { orderBy } from "lodash";
+import { RouterService } from "../common/router";
+import { DiveSitesService } from "./diveSites";
+import { BehaviorSubject, Subscription } from "rxjs";
+import { DIVETRIPSCOLLECTION } from "./diveTrips";
+import { ChatsSummary } from "../../interfaces/common/chat/chat";
+import { USERCHATSCOLLECTION } from "../common/user";
+import { ChatService } from "../common/chat";
+import { TripSummary } from "../../interfaces/udive/dive-trip/diveTrip";
+import { Clients } from "../../interfaces/udive/clients/clients";
+import { firestore } from "../../helpers/firebase";
 
 export const DIVECENTERSSCOLLECTION = "divingCenters";
 
@@ -234,6 +234,7 @@ export class DivingCentersController {
 
   loadDivingCenterSites(divingCenter) {
     const diveSites = DiveSitesService.diveSitesList;
+
     let divingCenterSites = [];
     let divingCenterSelect = [];
     diveSites.forEach((site) => {

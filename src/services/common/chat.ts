@@ -1,16 +1,20 @@
-import {DatabaseService} from "./database";
-import {getUserTime} from "../../helpers/utils";
-import {BehaviorSubject, Subscription} from "rxjs";
-import {USERCHATSCOLLECTION, USERPROFILECOLLECTION, UserService} from "./user";
-import {alertController} from "@ionic/core";
-import {TranslationService} from "./translations";
+import { DatabaseService } from "./database";
+import { getUserTime } from "../../helpers/utils";
+import { BehaviorSubject, Subscription } from "rxjs";
+import {
+  USERCHATSCOLLECTION,
+  USERPROFILECOLLECTION,
+  UserService,
+} from "./user";
+import { alertController } from "@ionic/core";
+import { TranslationService } from "./translations";
 import {
   Chat,
   ChatParticipant,
   ChatsSummary,
   Message,
 } from "../../interfaces/common/chat/chat";
-import {RouterService} from "./router";
+import { RouterService } from "./router";
 import {
   DIVESCHOOLSSCOLLECTION,
   DivingSchoolsService,
@@ -23,8 +27,8 @@ import {
   SERVICECENTERSCOLLECTION,
   ServiceCentersService,
 } from "../udive/serviceCenters";
-import {orderBy} from "lodash";
-import {Environment} from "../../global/env";
+import { orderBy } from "lodash";
+import { Environment } from "../../global/env";
 import {
   DiveCommunitiesService,
   DIVECOMMUNITIESCOLLECTION,

@@ -1,4 +1,4 @@
-import {orderBy} from "lodash";
+import { orderBy } from "lodash";
 
 export const ProductLines = {
   refractories: "Refractories",

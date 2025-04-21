@@ -10,23 +10,26 @@ import {
   Host,
   Watch,
 } from "@stencil/core";
-import {TranslationService} from "../../../../../services/common/translations";
-import {toastController} from "@ionic/core";
-import {MAPBOX, Environment} from "../../../../../global/env";
+import { TranslationService } from "../../../../../services/common/translations";
+import { toastController } from "@ionic/core";
+import { MAPBOX, Environment } from "../../../../../global/env";
 import mapboxgl from "mapbox-gl";
 //import {UDiveFilterService} from "../../../../../services/udive/ud-db-filter";
-import {CollectionGroup, SearchTag} from "../../../../../interfaces/interfaces";
-import {DatabaseService} from "../../../../../services/common/database";
-import {Subscription} from "rxjs";
-import {Marker} from "../../../../../interfaces/interfaces";
+import {
+  CollectionGroup,
+  SearchTag,
+} from "../../../../../interfaces/interfaces";
+import { DatabaseService } from "../../../../../services/common/database";
+import { Subscription } from "rxjs";
+import { Marker } from "../../../../../interfaces/interfaces";
 
-import {Geolocation} from "@capacitor/geolocation";
-import {Network} from "@capacitor/network";
+import { Geolocation } from "@capacitor/geolocation";
+import { Network } from "@capacitor/network";
 //import {TrasteelFilterService} from "../../../../../services/trasteel/ud-db-filter";
-import {MapService, Position} from "../../../../../services/common/map";
-import {UDiveFilterService} from "../../../../../services/udive/ud-db-filter";
-import {TrasteelFilterService} from "../../../../../services/trasteel/common/trs-db-filter";
-import {each, toNumber} from "lodash";
+import { MapService, Position } from "../../../../../services/common/map";
+import { UDiveFilterService } from "../../../../../services/udive/ud-db-filter";
+import { TrasteelFilterService } from "../../../../../services/trasteel/common/trs-db-filter";
+import { each, toNumber } from "lodash";
 
 /*const shapes = {
   BLOB:
@@ -53,13 +56,13 @@ export class AppMap {
   @Event() dragMarkerEnd: EventEmitter;
   @Event() emitMapBounds: EventEmitter;
   @Prop() pageId: string;
-  @Prop({mutable: true}) markers: Marker[] = []; //used to insert markers from outside component - in case of any marker then the map is not populated
+  @Prop({ mutable: true }) markers: Marker[] = []; //used to insert markers from outside component - in case of any marker then the map is not populated
   @Prop() markersAsFeature = false;
-  @Prop({mutable: true}) searchTags: SearchTag[] = []; //used to search markers inside the database
+  @Prop({ mutable: true }) searchTags: SearchTag[] = []; //used to search markers inside the database
 
   @Prop() center: any;
-  @Prop({mutable: true}) currentPosition: boolean = false;
-  @Prop({mutable: true}) draggableMarkerPosition: any; //set to {} to get the marker in the current user position - otherwise set to lat/lon
+  @Prop({ mutable: true }) currentPosition: boolean = false;
+  @Prop({ mutable: true }) draggableMarkerPosition: any; //set to {} to get the marker in the current user position - otherwise set to lat/lon
 
   @State() mapsLoaded: boolean = false;
   @State() loadErrorMessage: string = "";
@@ -223,7 +226,7 @@ export class AppMap {
             }
           });
           this.map.fitBounds(bounds, {
-            padding: {top: 100, bottom: 100, left: 100, right: 100},
+            padding: { top: 100, bottom: 100, left: 100, right: 100 },
             duration: 500,
           });
         } else {
@@ -255,7 +258,7 @@ export class AppMap {
           });
         });
         this.map.fitBounds(bounds, {
-          padding: {top: 100, bottom: 100, left: 100, right: 100},
+          padding: { top: 100, bottom: 100, left: 100, right: 100 },
           duration: 500,
         });
         return true;
@@ -866,7 +869,7 @@ export class AppMap {
 
           // create the popup
           const properties = JSON.stringify(e.features[0].properties);
-          const popup = new mapboxgl.Popup({offset: 15})
+          const popup = new mapboxgl.Popup({ offset: 15 })
             .setLngLat(coordinates)
             .setHTML("<app-map-popup properties='" + properties + "' />")
             .addTo(this.map);
@@ -980,20 +983,20 @@ export class AppMap {
       <Host>
         <div id={"map-container-" + this.pageId}></div>
         {!this.mapsLoaded ? (
-          <div id="load-message">
+          <div id='load-message'>
             {this.loadErrorMessage != "" ? (
               <div>
-                <ion-icon name="warning" color="dark"></ion-icon>
-                <ion-text color="dark">
+                <ion-icon name='warning' color='dark'></ion-icon>
+                <ion-text color='dark'>
                   <h3>{this.loadErrorMessage}</h3>
                 </ion-text>
               </div>
             ) : (
               <div>
-                <ion-spinner name="bubbles" color="dark"></ion-spinner>
-                <ion-text color="dark">
+                <ion-spinner name='bubbles' color='dark'></ion-spinner>
+                <ion-text color='dark'>
                   <h3>
-                    <my-transl tag="loading_map" text="Loading map"></my-transl>
+                    <my-transl tag='loading_map' text='Loading map'></my-transl>
                     ...
                   </h3>
                 </ion-text>

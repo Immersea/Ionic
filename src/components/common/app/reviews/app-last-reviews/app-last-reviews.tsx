@@ -1,7 +1,7 @@
-import {Component, h, Prop, State} from "@stencil/core";
-import {Review} from "../../../../../interfaces/common/reviews/review";
-import {ReviewService} from "../../../../../services/common/reviews";
-import {format} from "date-fns";
+import { Component, h, Prop, State } from "@stencil/core";
+import { Review } from "../../../../../interfaces/common/reviews/review";
+import { ReviewService } from "../../../../../services/common/reviews";
+import { format } from "date-fns";
 
 @Component({
   tag: "app-last-reviews",
@@ -26,7 +26,7 @@ export class AppLastReviews {
           <ion-card>
             <ion-item>
               {item.user && item.user.photoURL ? (
-                <ion-avatar slot="start">
+                <ion-avatar slot='start'>
                   <img src={item.user.photoURL} />
                 </ion-avatar>
               ) : undefined}
@@ -34,7 +34,7 @@ export class AppLastReviews {
                 <p>{item.user.displayName}</p>
                 <p>{format(item.date, "PPp")}</p>
               </ion-label>
-              <ion-note slot="end">
+              <ion-note slot='end'>
                 <app-star-rating
                   stars={5}
                   size={20}
@@ -53,7 +53,7 @@ export class AppLastReviews {
                         paddingTop: "10px",
                       }}
                     >
-                      <my-transl tag="answer" text="Answer" />
+                      <my-transl tag='answer' text='Answer' />
                     </h2>,
                     <p>{item.answer}</p>,
                   ]

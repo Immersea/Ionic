@@ -5,4 +5,17 @@ app-infinite-scroll {
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
   }
+
+  .fix-label ion-label {
+    h2 {
+      font-size: var(--ion-font-size-md);
+      font-weight: var(--ion-font-weight-medium);
+      line-height: 1.2;
+      margin: 0;
+    }
+    p {
+      color: "black";
+      font-size: 0.75rem;
+    }
+  }
 }

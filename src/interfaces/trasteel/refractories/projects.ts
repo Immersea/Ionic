@@ -1,6 +1,6 @@
-import {TextMultilanguage} from "../../interfaces";
-import {convertTextMultiLanguage, isValidDate} from "../../../helpers/utils";
-import {toNumber} from "lodash";
+import { TextMultilanguage } from "../../interfaces";
+import { convertTextMultiLanguage, isValidDate } from "../../../helpers/utils";
+import { toNumber } from "lodash";
 
 //each shape information
 export class Project {
@@ -84,6 +84,7 @@ export class ProjectAreaQuality {
   datasheetId: string = "";
   density: number = 0;
   palletMarking: string;
+  quality: string;
   comments: string;
   shapes: ProjectAreaQualityShape[] = [];
   courses: ProjectCourse[] = [];
@@ -166,7 +167,7 @@ export class BricksAllocationArea {
     this.bricksAllocationAreaName =
       data && data.bricksAllocationAreaName
         ? convertTextMultiLanguage(data.bricksAllocationAreaName)
-        : {en: null};
+        : { en: null };
   }
 }
 
@@ -180,15 +181,15 @@ export class ApplicationUnit {
     this.applicationName =
       data && data.applicationName
         ? convertTextMultiLanguage(data.applicationName)
-        : {en: null};
+        : { en: null };
     this.applicationAssociatedGoodsDesc =
       data && data.applicationAssociatedGoodsDesc
         ? convertTextMultiLanguage(data.applicationAssociatedGoodsDesc)
-        : {en: null};
+        : { en: null };
     this.applicationPackingDesc =
       data && data.applicationPackingDesc
         ? convertTextMultiLanguage(data.applicationPackingDesc)
-        : {en: null};
+        : { en: null };
   }
 }
 
@@ -199,7 +200,7 @@ export class QuantityUnit {
     this.quantityUnitName =
       data && data.quantityUnitName
         ? convertTextMultiLanguage(data.quantityUnitName)
-        : {en: null};
+        : { en: null };
     this.quantityUnitId =
       data && data.quantityUnitId ? data.quantityUnitId : null;
   }

@@ -4,6 +4,7 @@ import { sass } from "@stencil/sass";
 // https://stenciljs.com/docs/config
 
 export const config: Config = {
+  sourceMap: false,
   outputTargets: [
     {
       type: "www",

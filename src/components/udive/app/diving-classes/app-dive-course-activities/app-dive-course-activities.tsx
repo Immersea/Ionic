@@ -1,60 +1,29 @@
-import {Component, h, Prop, EventEmitter, Event, State} from "@stencil/core";
-import {cloneDeep, orderBy} from "lodash";
-import {Activity} from "../../../../../interfaces/udive/diving-class/divingClass";
-import {popoverController} from "@ionic/core";
-import {DivingCentersService} from "../../../../../services/udive/divingCenters";
-import {DiveSitesService} from "../../../../../services/udive/diveSites";
-import {format, isValid} from "date-fns";
+import { Component, h, Prop, EventEmitter, Event, State } from "@stencil/core";
+import { cloneDeep, orderBy } from "lodash";
+import { Activity } from "../../../../../interfaces/udive/diving-class/divingClass";
+import { popoverController } from "@ionic/core";
+import { DivingCentersService } from "../../../../../services/udive/divingCenters";
+import { DiveSitesService } from "../../../../../services/udive/diveSites";
+import { format, formatDate, isValid } from "date-fns";
 
 @Component({
   tag: "app-dive-course-activities",
   styleUrl: "app-dive-course-activities.scss",
 })
 export class AppDiveCourseActivities {
-  @Prop() schedule: Activity[];
+  @Prop({ mutable: true }) activities: Activity[];
   @Prop() showDiveLocation: boolean = true;
   @Prop() editable: boolean = false;
+  @Event() updateEmit: EventEmitter<Activity[]>;
 
-  @Event() scheduleEmit: EventEmitter<Activity[]>;
   @State() updateView = false;
-
-  async reorderActivities(reorder) {
-    const schedule = cloneDeep(this.schedule);
-    const itemMove = schedule.splice(reorder.detail.from, 1)[0];
-    schedule.splice(reorder.detail.to, 0, itemMove);
-    schedule.forEach((cert, order) => {
-      cert.order = order;
-    });
-    reorder.detail.complete(schedule);
-    this.schedule = orderBy(schedule, ["days", "order"]);
-  }
 
   async editActivity(key?) {
     let activity = null;
-    let maxDay = 1;
-    let order = 0;
-    if (this.schedule) {
-      this.schedule.map((activity) => {
-        if (activity.day > maxDay) {
-          maxDay = activity.day;
-        }
-      });
-      order = this.schedule.length;
-    }
     if (key === undefined) {
-      activity = {
-        order: order,
-        type: null, //theory, dry, dive
-        title: {
-          tag: null,
-          text: null,
-        },
-        day: maxDay,
-        completed: false,
-        divePlan: null,
-      };
+      activity = new Activity();
     } else {
-      activity = cloneDeep(this.schedule[key]);
+      activity = new Activity(cloneDeep(this.activities[key]));
     }
     const popover = await popoverController.create({
       component: "popover-new-class-activity",
@@ -65,61 +34,60 @@ export class AppDiveCourseActivities {
       translucent: true,
     });
     popover.onDidDismiss().then((ev) => {
-      const activity = ev.data;
+      const activity = new Activity(ev.data);
       //reset dive date to null
-      if (activity.divePlan) {
-        activity.divePlan.dives[0].date = null;
+      //if (activity.divePlan) {
+      //  activity.divePlan.dives[0].date = null;
+      //}
+      if (key === undefined) {
+        this.activities.push(activity);
+      } else {
+        this.activities[key] = activity;
       }
-      if (activity) {
-        if (key === undefined) {
-          !this.schedule ? (this.schedule = []) : undefined;
-          this.schedule.push(activity);
-        } else {
-          this.schedule[key] = activity;
-        }
-      }
-      this.scheduleEmit.emit(this.schedule);
-      this.updateView = !this.updateView;
+      this.activities = orderBy(this.activities, "date");
+      console.log("this.activities", this.activities);
+      this.update();
     });
     popover.present();
+  }
+
+  async deleteActivity(key) {
+    this.activities.splice(key, 1);
+    this.update();
+  }
+
+  update() {
+    this.updateEmit.emit(this.activities);
+    this.updateView = !this.updateView;
   }
 
   render() {
     return (
       <ion-list>
-        <ion-list-header>
-          <ion-label>
-            <my-transl tag="activities" text="Activities" />
-          </ion-label>
-          {this.editable ? (
+        {this.editable ? (
+          <ion-list-header>
+            <ion-label>
+              <my-transl tag='activities' text='Activities' />
+            </ion-label>
             <ion-button icon-only onClick={() => this.editActivity()}>
-              <ion-icon name="add-circle-outline"></ion-icon>
+              <ion-icon name='add-circle-outline'></ion-icon>
             </ion-button>
-          ) : undefined}
-        </ion-list-header>
-        {this.schedule ? (
-          <ion-reorder-group
-            disabled={!this.editable}
-            onIonItemReorder={(ev) => this.reorderActivities(ev)}
-          >
-            {this.schedule.map((activity, i) => (
+          </ion-list-header>
+        ) : undefined}
+
+        {this.activities
+          ? this.activities.map((activity, i) => (
               <ion-item>
-                <ion-reorder slot="end"></ion-reorder>
                 <ion-label>
-                  <h5>Day {activity.day}</h5>
-                  <h2>
-                    <my-transl
-                      tag={activity.title.tag}
-                      text={activity.title.text}
-                    ></my-transl>
-                  </h2>
+                  <h5>{formatDate(activity.date, "PP")}</h5>
+                  <h2>{activity.title}</h2>
 
                   {activity.divePlan
                     ? [
                         <p>
                           {isValid(activity.divePlan.dives[0].date)
                             ? [
-                                <my-transl tag="hour" text="Hour"></my-transl>,
+                                <my-transl tag='hour' text='Hour'></my-transl>,
                                 ": " +
                                   format(activity.divePlan.dives[0].date, "p"),
                               ]
@@ -129,8 +97,8 @@ export class AppDiveCourseActivities {
                           {activity.divePlan.dives[0].divingCenterId
                             ? [
                                 <my-transl
-                                  tag="diving-center"
-                                  text="Diving Center"
+                                  tag='diving-center'
+                                  text='Diving Center'
                                 ></my-transl>,
                                 ": " +
                                   DivingCentersService.getDivingCenterDetails(
@@ -143,8 +111,8 @@ export class AppDiveCourseActivities {
                           {activity.divePlan.dives[0].diveSiteId
                             ? [
                                 <my-transl
-                                  tag="dive-site"
-                                  text="Dive Site"
+                                  tag='dive-site'
+                                  text='Dive Site'
                                 ></my-transl>,
                                 ": " +
                                   DiveSitesService.getDiveSitesDetails(
@@ -156,19 +124,27 @@ export class AppDiveCourseActivities {
                       ]
                     : undefined}
                 </ion-label>
-                {this.editable ? (
-                  <ion-button
-                    icon-only
-                    fill="clear"
-                    onClick={() => this.editActivity(i)}
-                  >
-                    <ion-icon name="create-outline"></ion-icon>
-                  </ion-button>
-                ) : undefined}
+                {this.editable
+                  ? [
+                      <ion-button
+                        icon-only
+                        fill='clear'
+                        onClick={() => this.editActivity(i)}
+                      >
+                        <ion-icon name='create-outline'></ion-icon>
+                      </ion-button>,
+                      <ion-button
+                        icon-only
+                        fill='clear'
+                        onClick={() => this.deleteActivity(i)}
+                      >
+                        <ion-icon name='trash' color='danger'></ion-icon>
+                      </ion-button>,
+                    ]
+                  : undefined}
               </ion-item>
-            ))}
-          </ion-reorder-group>
-        ) : undefined}
+            ))
+          : undefined}
       </ion-list>
     );
   }

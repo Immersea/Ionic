@@ -1,18 +1,18 @@
-import {Component, h, State, Element} from "@stencil/core";
-import {UserService} from "../../../../../services/common/user";
-import {SystemService} from "../../../../../services/common/system";
+import { Component, h, State, Element } from "@stencil/core";
+import { UserService } from "../../../../../services/common/user";
+import { SystemService } from "../../../../../services/common/system";
 import {
   TRANSLATIONSCOLLECTION,
   TranslationService,
 } from "../../../../../services/common/translations";
-import {Translation} from "../../../../../interfaces/common/translations/translations";
-import {DatabaseService} from "../../../../../services/common/database";
-import {slideHeight} from "../../../../../helpers/utils";
-import {collection, onSnapshot, orderBy, query} from "firebase/firestore";
-import {firestore} from "../../../../../helpers/firebase";
+import { Translation } from "../../../../../interfaces/common/translations/translations";
+import { DatabaseService } from "../../../../../services/common/database";
+import { slideHeight } from "../../../../../helpers/utils";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { firestore } from "../../../../../helpers/firebase";
 import Swiper from "swiper";
-import {cloneDeep} from "lodash";
-import {CallableFunctionsService} from "../../../../../services/common/callableFunctions";
+import { cloneDeep } from "lodash";
+import { CallableFunctionsService } from "../../../../../services/common/callableFunctions";
 
 @Component({
   tag: "page-admin-translations",
@@ -165,24 +165,24 @@ export class PageAdminTranslations {
     return [
       <ion-header>
         <app-navbar
-          color="udive"
-          tag="translations"
-          text="Translations"
+          color='udive'
+          tag='translations'
+          text='Translations'
         ></app-navbar>
       </ion-header>,
       UserService.userRoles && UserService.userRoles.isSuperAdmin()
         ? [
             <ion-header>
-              <ion-toolbar color="udive" class="no-safe-padding">
+              <ion-toolbar color='udive' class='no-safe-padding'>
                 <ion-segment
-                  mode="md"
+                  mode='md'
                   onIonChange={(ev) => this.segmentChanged(ev)}
                   value={this.segment}
                 >
-                  <ion-segment-button value="translations" layout="icon-start">
+                  <ion-segment-button value='translations' layout='icon-start'>
                     <ion-label>TRANSLATIONS</ion-label>
                   </ion-segment-button>
-                  <ion-segment-button value="admin" layout="icon-start">
+                  <ion-segment-button value='admin' layout='icon-start'>
                     <ion-label>ADMIN</ion-label>
                   </ion-segment-button>
                 </ion-segment>
@@ -190,7 +190,7 @@ export class PageAdminTranslations {
             </ion-header>,
             this.segment == "translations" ? (
               <ion-header>
-                <ion-toolbar color="udive">
+                <ion-toolbar color='udive'>
                   <ion-searchbar
                     animated
                     placeholder={TranslationService.getTransl(
@@ -202,15 +202,15 @@ export class PageAdminTranslations {
                     onIonInput={(ev) => this.filterTranslations(ev)}
                   ></ion-searchbar>
                 </ion-toolbar>
-                <ion-toolbar color="udive">
+                <ion-toolbar color='udive'>
                   <ion-item>
                     <ion-select
                       label={TranslationService.getTransl(
                         "language",
                         "Language"
                       )}
-                      labelPlacement="floating"
-                      interface="action-sheet"
+                      labelPlacement='floating'
+                      interface='action-sheet'
                       value={this.selectedLanguage}
                       onIonChange={(ev) => this.selectLanguage(ev)}
                     >
@@ -221,7 +221,7 @@ export class PageAdminTranslations {
                       ))}
                     </ion-select>
                     <ion-icon
-                      slot="end"
+                      slot='end'
                       class={
                         "flag-icon flag-icon-" +
                         (this.selectedLanguage.countryCode == "en"
@@ -236,10 +236,10 @@ export class PageAdminTranslations {
           ]
         : undefined,
       <ion-content>
-        <swiper-container class="slider-translations swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
-              <ion-content class="slide-container">
+        <swiper-container class='slider-translations swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
+              <ion-content class='slide-container'>
                 <ion-grid>
                   <ion-row>
                     <ion-col>
@@ -256,10 +256,10 @@ export class PageAdminTranslations {
               </ion-content>
             </swiper-slide>
             {UserService.userRoles && UserService.userRoles.isSuperAdmin() ? (
-              <swiper-slide class="swiper-slide">
-                <ion-content class="slide-container">
+              <swiper-slide class='swiper-slide'>
+                <ion-content class='slide-container'>
                   <ion-button
-                    size="large"
+                    size='large'
                     onClick={() => this.runTranslationsScript()}
                   >
                     Run Translations Script

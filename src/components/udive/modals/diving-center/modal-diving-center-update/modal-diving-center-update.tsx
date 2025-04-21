@@ -1,17 +1,17 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {DivingCenter} from "../../../../../interfaces/udive/diving-center/divingCenter";
-import {modalController, popoverController} from "@ionic/core";
-import {cloneDeep, isNumber, isString, toLower, toNumber} from "lodash";
-import {DiveConfiguration} from "../../../../../interfaces/udive/planner/dive-configuration";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { DivingCenter } from "../../../../../interfaces/udive/diving-center/divingCenter";
+import { modalController, popoverController } from "@ionic/core";
+import { cloneDeep, isNumber, isString, toLower, toNumber } from "lodash";
+import { DiveConfiguration } from "../../../../../interfaces/udive/planner/dive-configuration";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
 import {
   DivingCentersService,
   DIVECENTERSSCOLLECTION,
 } from "../../../../../services/udive/divingCenters";
-import {UserProfile} from "../../../../../interfaces/common/user/user-profile";
-import {UserSettings} from "../../../../../interfaces/udive/user/user-settings";
-import {mapHeight} from "../../../../../helpers/utils";
+import { UserProfile } from "../../../../../interfaces/common/user/user-profile";
+import { UserSettings } from "../../../../../interfaces/udive/user/user-settings";
+import { mapHeight } from "../../../../../helpers/utils";
 import Swiper from "swiper";
 
 @Component({
@@ -30,11 +30,11 @@ export class ModalDivingCenterUpdate {
     divingCenterSelect: any[];
   };
   @State() titles = [
-    {tag: "map"},
-    {tag: "position"},
-    {tag: "information"},
-    {tag: "dive-sites", text: "Dive Sites"},
-    {tag: "team"},
+    { tag: "map" },
+    { tag: "position" },
+    { tag: "information" },
+    { tag: "dive-sites", text: "Dive Sites" },
+    { tag: "team" },
   ];
 
   @State() tmpDivingCenterId: string;
@@ -237,45 +237,45 @@ export class ModalDivingCenterUpdate {
         </ion-header>
 
         <app-header-segment-toolbar
-          color="divingcenter"
+          color='divingcenter'
           swiper={this.slider}
           titles={this.titles}
         ></app-header-segment-toolbar>
-        <ion-content class="slides">
-          <swiper-container class="slider-diving-center swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
-                <div id="map-container">
+        <ion-content class='slides'>
+          <swiper-container class='slider-diving-center swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
+                <div id='map-container'>
                   <app-map
-                    id="map"
-                    pageId="diving-center"
+                    id='map'
+                    pageId='diving-center'
                     draggableMarkerPosition={this.draggableMarkerPosition}
                     onDragMarkerEnd={(ev) => this.updateLocation(ev)}
                   ></app-map>
                 </div>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-coordinates
                   coordinates={this.draggableMarkerPosition}
                   onCoordinatesEmit={(ev) => this.updateLocation(ev)}
                   onAddressEmit={(ev) => this.updateAddress(ev)}
                 ></app-coordinates>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding">
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding'>
                   <ion-list-header>
                     <my-transl
-                      tag="general-information"
-                      text="General Information"
+                      tag='general-information'
+                      text='General Information'
                       isLabel
                     />
                   </ion-list-header>
                   <app-form-item
-                    label-tag="name"
-                    label-text="Name"
+                    label-tag='name'
+                    label-text='Name'
                     value={this.divingCenter.displayName}
-                    name="displayName"
-                    input-type="text"
+                    name='displayName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     onFormItemBlur={() =>
                       this.setTmpId(this.divingCenter.displayName)
@@ -284,137 +284,137 @@ export class ModalDivingCenterUpdate {
                   ></app-form-item>
                   {this.showDCId ? (
                     <app-form-item
-                      label-tag="unique-id"
-                      label-text="Unique ID"
+                      label-tag='unique-id'
+                      label-text='Unique ID'
                       value={this.tmpDivingCenterId}
-                      name="id"
-                      input-type="text"
+                      name='id'
+                      input-type='text'
                       onFormItemChanged={(ev) => this.handleChange(ev)}
                       onIsValid={(ev) => this.uniqueIdValid(ev)}
                       validator={[
                         "required",
                         {
                           name: "uniqueid",
-                          options: {type: DIVECENTERSSCOLLECTION},
+                          options: { type: DIVECENTERSSCOLLECTION },
                         },
                       ]}
                     ></app-form-item>
                   ) : undefined}
                   <app-form-item
-                    label-tag="description"
-                    label-text="Description"
+                    label-tag='description'
+                    label-text='Description'
                     value={this.divingCenter.description}
-                    name="description"
+                    name='description'
                     textRows={10}
-                    input-type="text"
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="phone"
-                    label-text="Phone"
+                    label-tag='phone'
+                    label-text='Phone'
                     value={this.divingCenter.phoneNumber}
-                    name="phoneNumber"
-                    input-type="tel"
+                    name='phoneNumber'
+                    input-type='tel'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="email"
-                    label-text="Email"
+                    label-tag='email'
+                    label-text='Email'
                     value={this.divingCenter.email}
-                    name="email"
-                    input-type="email"
+                    name='email'
+                    input-type='email'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["email"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="website"
-                    label-text="Website"
+                    label-tag='website'
+                    label-text='Website'
                     value={this.divingCenter.website}
-                    name="website"
-                    input-type="url"
+                    name='website'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.divingCenter.website ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={"http://" + this.divingCenter.website}
-                      target="_blank"
+                      target='_blank'
                     >
                       {"http://" + this.divingCenter.website}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="facebook-id"
-                    label-text="Facebook ID"
+                    label-tag='facebook-id'
+                    label-text='Facebook ID'
                     value={this.divingCenter.facebook}
-                    name="facebook"
-                    input-type="url"
+                    name='facebook'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.divingCenter.facebook ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.facebook.com/" + this.divingCenter.facebook
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.facebook.com/" + this.divingCenter.facebook}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="instagram-id"
-                    label-text="Instagram ID"
+                    label-tag='instagram-id'
+                    label-text='Instagram ID'
                     value={this.divingCenter.instagram}
-                    name="instagram"
-                    input-type="url"
+                    name='instagram'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.divingCenter.instagram ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.instagram.com/" +
                         this.divingCenter.instagram
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.instagram.com/" +
                         this.divingCenter.instagram}
                     </a>
                   ) : undefined}
                   <app-form-item
-                    label-tag="twitter id"
-                    label-text="Twitter ID"
+                    label-tag='twitter id'
+                    label-text='Twitter ID'
                     value={this.divingCenter.twitter}
-                    name="twitter"
-                    input-type="url"
+                    name='twitter'
+                    input-type='url'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={[]}
                   ></app-form-item>
                   {this.divingCenter.twitter ? (
                     <a
-                      class="ion-padding-start"
+                      class='ion-padding-start'
                       href={
                         "https://www.twitter.com/" + this.divingCenter.twitter
                       }
-                      target="_blank"
+                      target='_blank'
                     >
                       {"https://www.twitter.com/" + this.divingCenter.twitter}
                     </a>
                   ) : undefined}
                 </ion-list>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-grid>
-                  <ion-row class="ion-text-start">
+                  <ion-row class='ion-text-start'>
                     {this.diveSites.divingCenterSites.map((site) => (
-                      <ion-col size-sm="12" size-md="6" size-lg="4">
+                      <ion-col size-sm='12' size-md='6' size-lg='4'>
                         <app-dive-site-card
                           diveSite={site}
                           startlocation={this.divingCenter}
@@ -425,12 +425,12 @@ export class ModalDivingCenterUpdate {
                         />
                       </ion-col>
                     ))}
-                    <ion-col size-sm="12" size-md="6" size-lg="4">
+                    <ion-col size-sm='12' size-md='6' size-lg='4'>
                       <ion-card onClick={() => this.openAddDiveSite()}>
-                        <ion-card-content class="ion-text-center">
+                        <ion-card-content class='ion-text-center'>
                           <ion-icon
-                            name="add-circle-outline"
-                            style={{fontSize: "130px"}}
+                            name='add-circle-outline'
+                            style={{ fontSize: "130px" }}
                           ></ion-icon>
                         </ion-card-content>
                       </ion-card>
@@ -438,7 +438,7 @@ export class ModalDivingCenterUpdate {
                   </ion-row>
                 </ion-grid>
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <app-users-list
                   item={this.divingCenter}
                   editable

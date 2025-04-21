@@ -1,7 +1,7 @@
-import {Gas} from "./gas";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
-import {DiveStandardsService} from "../../../services/udive/planner/dive-standards";
-import {find, round, toNumber} from "lodash";
+import { Gas } from "./gas";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
+import { DiveStandardsService } from "../../../services/udive/planner/dive-standards";
+import { find, round, toNumber } from "lodash";
 
 export class Tank {
   name: string;
@@ -21,7 +21,7 @@ export class Tank {
   ) {
     const stdTanks = DiveStandardsService.getStdTanks();
     //search stdTank
-    const tank = find(stdTanks, {name: name});
+    const tank = find(stdTanks, { name: name });
     this.name = name;
     this.units = units ? units : "Metric";
     //get volume from standard tanks

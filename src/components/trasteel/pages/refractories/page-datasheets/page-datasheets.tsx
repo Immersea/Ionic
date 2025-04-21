@@ -1,4 +1,4 @@
-import {Component, Element, State, h} from "@stencil/core";
+import { Component, Element, State, h } from "@stencil/core";
 import {
   DatasheetFilter,
   MapDataDatasheet,
@@ -7,13 +7,13 @@ import {
   DATASHEETSCOLLECTION,
   DatasheetsService,
 } from "../../../../../services/trasteel/refractories/datasheets";
-import {TrasteelFilterService} from "../../../../../services/trasteel/common/trs-db-filter";
-import {TrasteelService} from "../../../../../services/trasteel/common/services";
-import {cloneDeep, includes, isArray} from "lodash";
-import {DatabaseService} from "../../../../../services/common/database";
-import {SystemService} from "../../../../../services/common/system";
+import { TrasteelFilterService } from "../../../../../services/trasteel/common/trs-db-filter";
+import { TrasteelService } from "../../../../../services/trasteel/common/services";
+import { cloneDeep, includes, isArray } from "lodash";
+import { DatabaseService } from "../../../../../services/common/database";
+import { SystemService } from "../../../../../services/common/system";
 import Swiper from "swiper";
-import {TranslationService} from "../../../../../services/common/translations";
+import { TranslationService } from "../../../../../services/common/translations";
 
 @Component({
   tag: "page-datasheets",
@@ -224,8 +224,9 @@ export class PageDatasheets {
 
   openDatasheet(datasheetId) {
     if (this.showDownload) {
-      const ds = DatasheetsService.getDatasheetsById(datasheetId);
+      const ds = cloneDeep(DatasheetsService.getDatasheetsById(datasheetId));
       if (!includes(this.basket, ds)) this.basket.push(ds);
+      this.basket.push(ds);
       this.saveBasket();
       this.updateSlider();
     } else {
@@ -262,32 +263,32 @@ export class PageDatasheets {
     return [
       <ion-header>
         <app-navbar
-          tag="datasheets"
-          text="Data Sheets"
-          color="trasteel"
+          tag='datasheets'
+          text='Data Sheets'
+          color='trasteel'
         ></app-navbar>
-        <ion-grid class="ion-no-padding">
-          <ion-row class="ion-no-padding">
-            <ion-col size="1" class="ion-no-padding">
-              <ion-toolbar color="trasteel">
+        <ion-grid class='ion-no-padding'>
+          <ion-row class='ion-no-padding'>
+            <ion-col size='1' class='ion-no-padding'>
+              <ion-toolbar color='trasteel'>
                 <ion-button
-                  fill="clear"
-                  expand="full"
+                  fill='clear'
+                  expand='full'
                   icon-only
                   onClick={() => this.openDatasheetFilter()}
                 >
-                  <ion-icon name="filter" color="light"></ion-icon>
+                  <ion-icon name='filter' color='light'></ion-icon>
                 </ion-button>
               </ion-toolbar>
             </ion-col>
-            <ion-col size="11" class="ion-no-padding">
+            <ion-col size='11' class='ion-no-padding'>
               <app-search-toolbar
-                id="searchToolbar"
-                searchTitle="datasheets"
+                id='searchToolbar'
+                searchTitle='datasheets'
                 list={this.datasheetsList}
                 orderFields={["productName"]}
-                color="trasteel"
-                placeholder="Search by product, family or tech#"
+                color='trasteel'
+                placeholder='Search by product, family or tech#'
                 filterBy={["productName", "familyId", "techNo"]}
                 onFilteredList={(ev) => this.filterDatasheets(ev.detail)}
               ></app-search-toolbar>
@@ -295,52 +296,52 @@ export class PageDatasheets {
           </ion-row>
         </ion-grid>
       </ion-header>,
-      <ion-content class="slides">
+      <ion-content class='slides'>
         {TrasteelService.isRefraDBAdmin() ? (
           !this.showDownload ? (
-            <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
-              <ion-fab-button size="small" color="trasteel">
-                <ion-icon name="chevron-down"></ion-icon>
+            <ion-fab vertical='top' horizontal='end' slot='fixed' edge>
+              <ion-fab-button size='small' color='trasteel'>
+                <ion-icon name='chevron-down'></ion-icon>
               </ion-fab-button>
-              <ion-fab-list side="bottom">
+              <ion-fab-list side='bottom'>
                 <ion-fab-button
                   onClick={() => this.addDatasheet()}
-                  color="trasteel"
+                  color='trasteel'
                 >
-                  <ion-icon name="add"></ion-icon>
+                  <ion-icon name='add'></ion-icon>
                 </ion-fab-button>
                 <ion-fab-button
                   onClick={() => this.downloadDatasheets()}
-                  color="trasteel"
+                  color='trasteel'
                 >
-                  <ion-icon name="download"></ion-icon>
+                  <ion-icon name='download'></ion-icon>
                 </ion-fab-button>
               </ion-fab-list>
             </ion-fab>
           ) : (
-            <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+            <ion-fab vertical='top' horizontal='end' slot='fixed' edge>
               <ion-fab-button
                 onClick={() => this.downloadDatasheets()}
-                size="small"
-                color="trasteel"
+                size='small'
+                color='trasteel'
               >
-                <ion-icon name="close"></ion-icon>
+                <ion-icon name='close'></ion-icon>
               </ion-fab-button>
             </ion-fab>
           )
         ) : undefined}
-        <swiper-container class="slider-show-datasheet swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
+        <swiper-container class='slider-show-datasheet swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
               {this.filter.isActive()
                 ? [
                     <ion-breadcrumbs>
                       <ion-button
                         icon-only
-                        fill="clear"
+                        fill='clear'
                         onClick={() => this.clearDatasheetFilter()}
                       >
-                        <ion-icon color="danger" name="trash"></ion-icon>
+                        <ion-icon color='danger' name='trash'></ion-icon>
                       </ion-button>
                       <ion-breadcrumb>
                         #{this.filteredDatasheetsList.length}
@@ -365,7 +366,7 @@ export class PageDatasheets {
                 loading={this.loading}
                 showFields={["productName"]}
                 options={this.getOptions()}
-                returnField="id"
+                returnField='id'
                 icon={
                   TrasteelFilterService.getMapDocs(DATASHEETSCOLLECTION).icon
                     .name
@@ -377,7 +378,7 @@ export class PageDatasheets {
               ></app-infinite-scroll>
             </swiper-slide>
             {this.showDownload ? (
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-list>
                   {this.basket.length == 0 ? (
                     <ion-item>
@@ -389,44 +390,44 @@ export class PageDatasheets {
                         <ion-col>
                           <ion-button
                             onClick={() => this.downloadDatasheetsList()}
-                            expand="block"
-                            fill="outline"
-                            color="trasteel"
+                            expand='block'
+                            fill='outline'
+                            color='trasteel'
                           >
-                            <ion-icon name="download" slot="start"></ion-icon>
+                            <ion-icon name='download' slot='start'></ion-icon>
                             <ion-label>
                               {TranslationService.getTransl(
                                 "download",
                                 "Download"
                               )}
                             </ion-label>
-                            <ion-badge slot="end" color="trasteel">
+                            <ion-badge slot='end' color='trasteel'>
                               {this.basket.length}
                             </ion-badge>
                           </ion-button>
                         </ion-col>
-                        <ion-col size="1">
+                        <ion-col size='1'>
                           <ion-button
-                            fill="clear"
+                            fill='clear'
                             icon-only
                             onClick={() => this.emptyBasket()}
                           >
-                            <ion-icon name="trash" color="danger"></ion-icon>
+                            <ion-icon name='trash' color='danger'></ion-icon>
                           </ion-button>
                         </ion-col>
                       </ion-row>
                     </ion-grid>
                   )}
                   {this.basket.map((ds, index) => (
-                    <ion-item color="light">
+                    <ion-item color='light'>
                       <ion-label>{ds.productName}</ion-label>
                       <ion-button
-                        slot="end"
-                        fill="clear"
+                        slot='end'
+                        fill='clear'
                         icon-only
                         onClick={() => this.removeItemFromBasket(index)}
                       >
-                        <ion-icon name="trash" color="danger"></ion-icon>
+                        <ion-icon name='trash' color='danger'></ion-icon>
                       </ion-button>
                     </ion-item>
                   ))}

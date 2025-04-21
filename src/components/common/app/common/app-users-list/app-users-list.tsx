@@ -1,8 +1,8 @@
-import {Component, h, Prop, State} from "@stencil/core";
-import {UserService} from "../../../../../services/common/user";
-import {UserProfile} from "../../../../../interfaces/common/user/user-profile";
-import {popoverController} from "@ionic/core";
-import {isArray, orderBy} from "lodash";
+import { Component, h, Prop, State } from "@stencil/core";
+import { UserService } from "../../../../../services/common/user";
+import { UserProfile } from "../../../../../interfaces/common/user/user-profile";
+import { popoverController } from "@ionic/core";
+import { isArray, orderBy } from "lodash";
 
 @Component({
   tag: "app-users-list",
@@ -19,10 +19,10 @@ export class AppUsersList {
   @State() divemaster: any[] = [];
   isOwner = false;
   groups: {
-    owner: {show: boolean; tag: string; text: string};
-    editor: {show: boolean; tag: string; text: string};
-    instructor: {show: boolean; tag: string; text: string};
-    divemaster: {show: boolean; tag: string; text: string};
+    owner: { show: boolean; tag: string; text: string };
+    editor: { show: boolean; tag: string; text: string };
+    instructor: { show: boolean; tag: string; text: string };
+    divemaster: { show: boolean; tag: string; text: string };
   };
 
   async componentWillLoad() {
@@ -112,7 +112,7 @@ export class AppUsersList {
         {Object.keys(this.groups).map((group) => [
           this.groups[group].show && (this[group].length > 0 || this.editable)
             ? [
-                <ion-item lines="full">
+                <ion-item lines='full'>
                   <my-transl
                     tag={this.groups[group].tag}
                     text={this.groups[group].text}
@@ -121,12 +121,12 @@ export class AppUsersList {
                   {this.editable &&
                   (this.isOwner || UserService.userRoles.isSuperAdmin()) ? (
                     <ion-button
-                      color="primary"
-                      fill="clear"
-                      slot="end"
+                      color='primary'
+                      fill='clear'
+                      slot='end'
                       onClick={() => this.addUser(group)}
                     >
-                      <ion-icon name="add-circle"></ion-icon>
+                      <ion-icon name='add-circle'></ion-icon>
                     </ion-button>
                   ) : undefined}
                 </ion-item>,
@@ -140,17 +140,17 @@ export class AppUsersList {
                     (this.isOwner || UserService.userRoles.isSuperAdmin()) ? (
                       <ion-button
                         icon-only
-                        slot="end"
-                        color="danger"
-                        fill="clear"
+                        slot='end'
+                        color='danger'
+                        fill='clear'
                         disabled={UserService.userRoles.uid == user.uid}
                         onClick={() => this.removeUser(user, group)}
                       >
-                        <ion-icon name="trash-bin-outline"></ion-icon>
+                        <ion-icon name='trash-bin-outline'></ion-icon>
                       </ion-button>
                     ) : undefined}
                     {user.photoURL ? (
-                      <ion-avatar slot="start">
+                      <ion-avatar slot='start'>
                         <ion-img src={user.photoURL} />
                       </ion-avatar>
                     ) : undefined}

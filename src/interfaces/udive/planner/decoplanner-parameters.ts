@@ -4,7 +4,7 @@
  *
  */
 
-import {isNumber, toNumber} from "lodash";
+import { isNumber, toNumber } from "lodash";
 
 export class DecoplannerParameters {
   CCR_o2_consumption: number = 2;

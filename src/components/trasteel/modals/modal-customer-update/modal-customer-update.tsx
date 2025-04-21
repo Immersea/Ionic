@@ -1,14 +1,14 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {modalController, popoverController} from "@ionic/core";
-import {Subscription} from "rxjs";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { modalController, popoverController } from "@ionic/core";
+import { Subscription } from "rxjs";
 import Swiper from "swiper";
 import {
   Customer,
   CustomerGroup,
 } from "../../../../interfaces/trasteel/customer/customer";
-import {UserProfile} from "../../../../interfaces/common/user/user-profile";
-import {UserService} from "../../../../services/common/user";
-import {TranslationService} from "../../../../services/common/translations";
+import { UserProfile } from "../../../../interfaces/common/user/user-profile";
+import { UserService } from "../../../../services/common/user";
+import { TranslationService } from "../../../../services/common/translations";
 import {
   CUSTOMERSCOLLECTION,
   CustomersService,
@@ -19,10 +19,10 @@ import {
   CustomerConditionLF,
   CustomerLocation,
 } from "../../../../interfaces/trasteel/customer/customerLocation";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {RouterService} from "../../../../services/common/router";
-import {cloneDeep, isNumber, isString} from "lodash";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { RouterService } from "../../../../services/common/router";
+import { cloneDeep, isNumber, isString } from "lodash";
 
 @Component({
   tag: "modal-customer-update",
@@ -37,8 +37,8 @@ export class ModalCustomerUpdate {
   @State() locationTypeSegment: any = "add";
   saveNewOwner = false;
   titles = [
-    {tag: "information", text: "Information", disabled: false},
-    {tag: "locations", text: "Locations", disabled: false},
+    { tag: "information", text: "Information", disabled: false },
+    { tag: "locations", text: "Locations", disabled: false },
     {
       tag: "operating-conditions",
       text: "Operating Conditions",
@@ -327,21 +327,21 @@ export class ModalCustomerUpdate {
           swiper={this.slider}
           titles={this.titles}
         ></app-header-segment-toolbar>
-        <ion-content class="slides">
-          <swiper-container class="slider-edit-customer swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding">
-                  <ion-item lines="none">
+        <ion-content class='slides'>
+          <swiper-container class='slider-edit-customer swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding'>
+                  <ion-item lines='none'>
                     <ion-select
-                      color="trasteel"
-                      id="selectType"
-                      interface="action-sheet"
+                      color='trasteel'
+                      id='selectType'
+                      interface='action-sheet'
                       label={TranslationService.getTransl(
                         "customer_type",
                         "Customer Type"
                       )}
-                      label-placement="floating"
+                      label-placement='floating'
                       onIonChange={(ev) => this.selectType(ev)}
                       value={
                         this.customer && this.customer.typeId
@@ -351,52 +351,52 @@ export class ModalCustomerUpdate {
                     ></ion-select>
                   </ion-item>
                   <app-form-item
-                    label-tag="name"
-                    label-text="Name"
+                    label-tag='name'
+                    label-text='Name'
                     value={this.customer.fullName}
-                    name="fullName"
-                    input-type="text"
+                    name='fullName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="local_name"
-                    label-text="Local Name"
+                    label-tag='local_name'
+                    label-text='Local Name'
                     value={this.customer.fullNameOther}
-                    name="fullNameOther"
-                    input-type="text"
+                    name='fullNameOther'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    labelTag="other_name"
-                    labelText="Other Name"
+                    labelTag='other_name'
+                    labelText='Other Name'
                     value={this.customer.otherPlantName}
-                    name="otherPlantName"
-                    input-type="text"
+                    name='otherPlantName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    labelTag="other_name"
-                    labelText="Other Local Name"
+                    labelTag='other_name'
+                    labelText='Other Local Name'
                     value={this.customer.otherPlantNameOther}
-                    name="otherPlantNameOther"
-                    input-type="text"
+                    name='otherPlantNameOther'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    labelTag="short_name"
-                    labelText="Short Name"
+                    labelTag='short_name'
+                    labelText='Short Name'
                     value={this.customer.shortName}
-                    name="shortName"
-                    input-type="text"
+                    name='shortName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   {this.customer.group.length == 0 ? (
-                    <ion-item lines="none">
+                    <ion-item lines='none'>
                       <ion-label>
                         <h2>
                           <my-transl
@@ -407,14 +407,14 @@ export class ModalCustomerUpdate {
                       </ion-label>
                       <ion-button
                         onClick={() => this.editOwner(true)}
-                        slot="end"
+                        slot='end'
                       >
                         +
                       </ion-button>
                     </ion-item>
                   ) : undefined}
                   {this.customer.group.map((group, index) => (
-                    <ion-item lines="none">
+                    <ion-item lines='none'>
                       <ion-label>
                         {index == 0 ? (
                           <ion-note>
@@ -434,35 +434,35 @@ export class ModalCustomerUpdate {
                       {index == this.customer.group.length - 1 ? (
                         <ion-button
                           onClick={() => this.editOwner(true)}
-                          slot="end"
+                          slot='end'
                         >
                           +
                         </ion-button>
                       ) : undefined}
                       <ion-button
-                        slot="end"
+                        slot='end'
                         icon-only
-                        color="danger"
-                        fill="clear"
+                        color='danger'
+                        fill='clear'
                         onClick={() => {
                           this.editOwner(true, index, true);
                         }}
                       >
-                        <ion-icon name="trash"></ion-icon>
+                        <ion-icon name='trash'></ion-icon>
                       </ion-button>
                       <ion-button
-                        slot="end"
+                        slot='end'
                         icon-only
-                        fill="clear"
+                        fill='clear'
                         onClick={() => {
                           this.editOwner(true, index);
                         }}
                       >
-                        <ion-icon name="create"></ion-icon>
+                        <ion-icon name='create'></ion-icon>
                       </ion-button>
                     </ion-item>
                   ))}
-                  <ion-item lines="none">
+                  <ion-item lines='none'>
                     <ion-label>
                       <ion-note>
                         <my-transl
@@ -473,14 +473,14 @@ export class ModalCustomerUpdate {
                       <h2>{this.customer.owner.groupName}</h2>
                     </ion-label>
                     <ion-button
-                      slot="end"
+                      slot='end'
                       icon-only
-                      fill="clear"
+                      fill='clear'
                       onClick={() => {
                         this.editOwner(false);
                       }}
                     >
-                      <ion-icon name="create"></ion-icon>
+                      <ion-icon name='create'></ion-icon>
                     </ion-button>
                   </ion-item>
                   <app-customer-plant-production
@@ -489,18 +489,18 @@ export class ModalCustomerUpdate {
                   ></app-customer-plant-production>
                 </ion-list>
                 {this.customerId ? (
-                  <ion-footer class="ion-no-border">
+                  <ion-footer class='ion-no-border'>
                     <ion-toolbar>
                       <ion-button
-                        expand="block"
-                        fill="outline"
-                        color="danger"
+                        expand='block'
+                        fill='outline'
+                        color='danger'
                         onClick={() => this.deleteCustomer()}
                       >
-                        <ion-icon slot="start" name="trash"></ion-icon>
+                        <ion-icon slot='start' name='trash'></ion-icon>
                         <my-transl
-                          tag="delete"
-                          text="Delete"
+                          tag='delete'
+                          text='Delete'
                           isLabel
                         ></my-transl>
                       </ion-button>
@@ -508,17 +508,17 @@ export class ModalCustomerUpdate {
                   </ion-footer>
                 ) : undefined}
               </swiper-slide>
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <div>
                   <ion-toolbar>
                     <ion-segment
-                      mode="ios"
+                      mode='ios'
                       scrollable
                       onIonChange={(ev) => this.locationTypeSegmentChanged(ev)}
                       value={this.locationTypeSegment}
                     >
                       {this.customer.locations.map((location, index) => (
-                        <ion-segment-button value={index} layout="icon-start">
+                        <ion-segment-button value={index} layout='icon-start'>
                           <ion-label>
                             {
                               CustomersService.getLocationsTypes(
@@ -529,9 +529,9 @@ export class ModalCustomerUpdate {
                         </ion-segment-button>
                       ))}
                       <ion-segment-button
-                        value="add"
+                        value='add'
                         onClick={() => this.addLocation()}
-                        layout="icon-start"
+                        layout='icon-start'
                       >
                         <ion-label>+</ion-label>
                       </ion-segment-button>
@@ -555,16 +555,16 @@ export class ModalCustomerUpdate {
                 </div>
               </swiper-slide>
               {/** operating conditions */}
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-grid>
                   <ion-row>
                     <ion-col>
                       <ion-button
                         color={Environment.getAppColor()}
                         onClick={() => this.editOperatingCondition("EAF")}
-                        expand="block"
+                        expand='block'
                       >
-                        <ion-icon name="add"></ion-icon>
+                        <ion-icon name='add'></ion-icon>
                         <ion-label>EAF</ion-label>
                       </ion-button>
                     </ion-col>
@@ -572,9 +572,9 @@ export class ModalCustomerUpdate {
                       <ion-button
                         color={Environment.getAppColor()}
                         onClick={() => this.editOperatingCondition("LF")}
-                        expand="block"
+                        expand='block'
                       >
-                        <ion-icon name="add"></ion-icon>
+                        <ion-icon name='add'></ion-icon>
                         <ion-label>LF</ion-label>
                       </ion-button>
                     </ion-col>
@@ -582,9 +582,9 @@ export class ModalCustomerUpdate {
                       <ion-button
                         color={Environment.getAppColor()}
                         onClick={() => this.editOperatingCondition("CCM")}
-                        expand="block"
+                        expand='block'
                       >
-                        <ion-icon name="add"></ion-icon>
+                        <ion-icon name='add'></ion-icon>
                         <ion-label>CCM</ion-label>
                       </ion-button>
                     </ion-col>

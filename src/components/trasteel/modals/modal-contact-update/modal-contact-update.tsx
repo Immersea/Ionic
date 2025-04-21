@@ -1,21 +1,21 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {modalController} from "@ionic/core";
-import {Subscription} from "rxjs";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { modalController } from "@ionic/core";
+import { Subscription } from "rxjs";
 import Swiper from "swiper";
-import {Contact} from "../../../../interfaces/trasteel/contact/contact";
-import {UserProfile} from "../../../../interfaces/common/user/user-profile";
-import {UserService} from "../../../../services/common/user";
-import {TranslationService} from "../../../../services/common/translations";
+import { Contact } from "../../../../interfaces/trasteel/contact/contact";
+import { UserProfile } from "../../../../interfaces/common/user/user-profile";
+import { UserService } from "../../../../services/common/user";
+import { TranslationService } from "../../../../services/common/translations";
 import {
   CONTACTSCOLLECTION,
   ContactsService,
 } from "../../../../services/trasteel/crm/contacts";
-import {Environment} from "../../../../global/env";
-import {SystemService} from "../../../../services/common/system";
-import {CustomersService} from "../../../../services/trasteel/crm/customers";
-import {Customer} from "../../../../interfaces/trasteel/customer/customer";
-import {CustomerLocation} from "../../../../components";
-import {isString} from "lodash";
+import { Environment } from "../../../../global/env";
+import { SystemService } from "../../../../services/common/system";
+import { CustomersService } from "../../../../services/trasteel/crm/customers";
+import { Customer } from "../../../../interfaces/trasteel/customer/customer";
+import { CustomerLocation } from "../../../../components";
+import { isString } from "lodash";
 
 @Component({
   tag: "modal-contact-update",
@@ -227,40 +227,40 @@ export class ModalContactUpdate {
         <ion-header>
           <ion-toolbar>
             <ion-segment
-              mode="md"
+              mode='md'
               color={Environment.getAppColor()}
               scrollable
               onIonChange={(ev) => this.segmentChanged(ev)}
               value={this.segment}
             >
-              <ion-segment-button value="information" layout="icon-start">
+              <ion-segment-button value='information' layout='icon-start'>
                 <ion-label>{this.segmentTitles.information}</ion-label>
               </ion-segment-button>
             </ion-segment>
           </ion-toolbar>
         </ion-header>
-        <ion-content class="slides">
-          <swiper-container class="slider-edit-contact swiper">
-            <swiper-wrapper class="swiper-wrapper">
-              <swiper-slide class="swiper-slide">
-                <ion-list class="ion-no-padding">
+        <ion-content class='slides'>
+          <swiper-container class='slider-edit-contact swiper'>
+            <swiper-wrapper class='swiper-wrapper'>
+              <swiper-slide class='swiper-slide'>
+                <ion-list class='ion-no-padding'>
                   <ion-list-header>
                     <my-transl
-                      tag="general-information"
-                      text="General Information"
+                      tag='general-information'
+                      text='General Information'
                       isLabel
                     />
                   </ion-list-header>
-                  <ion-item lines="none">
+                  <ion-item lines='none'>
                     <ion-select
-                      color="trasteel"
-                      id="selectCustomer"
-                      interface="action-sheet"
+                      color='trasteel'
+                      id='selectCustomer'
+                      interface='action-sheet'
                       label={TranslationService.getTransl(
                         "customer",
                         "Customer"
                       )}
-                      label-placement="floating"
+                      label-placement='floating'
                       onIonChange={(ev) => this.selectCustomer(ev)}
                       value={
                         this.contact && this.contact.customerId
@@ -275,16 +275,16 @@ export class ModalContactUpdate {
                       ))}
                     </ion-select>
                   </ion-item>
-                  <ion-item lines="none">
+                  <ion-item lines='none'>
                     <ion-select
-                      color="trasteel"
-                      id="selectLocation"
-                      interface="action-sheet"
+                      color='trasteel'
+                      id='selectLocation'
+                      interface='action-sheet'
                       label={TranslationService.getTransl(
                         "location",
                         "Location"
                       )}
-                      label-placement="floating"
+                      label-placement='floating'
                       onIonChange={(ev) => this.selectCustomerLocation(ev)}
                       value={
                         this.contact && this.contact.customerLocationId
@@ -294,71 +294,71 @@ export class ModalContactUpdate {
                     ></ion-select>
                   </ion-item>
                   <app-form-item
-                    label-tag="name"
-                    label-text="Name"
+                    label-tag='name'
+                    label-text='Name'
                     value={this.contact.firstName}
-                    name="firstName"
-                    input-type="text"
+                    name='firstName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="surname"
-                    label-text="Surname"
+                    label-tag='surname'
+                    label-text='Surname'
                     value={this.contact.lastName}
-                    name="lastName"
-                    input-type="text"
+                    name='lastName'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="work-position"
-                    label-text="Work Position"
+                    label-tag='work-position'
+                    label-text='Work Position'
                     value={this.contact.workPosition}
-                    name="workPosition"
-                    input-type="text"
+                    name='workPosition'
+                    input-type='text'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                     validator={["required"]}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="office-phone"
-                    label-text="Office Phone"
+                    label-tag='office-phone'
+                    label-text='Office Phone'
                     value={this.contact.officePhone}
-                    name="officePhone"
-                    input-type="tel"
+                    name='officePhone'
+                    input-type='tel'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="mobile-phone"
-                    label-text="Mobile Phone"
+                    label-tag='mobile-phone'
+                    label-text='Mobile Phone'
                     value={this.contact.mobilePhone}
-                    name="mobilePhone"
-                    input-type="tel"
+                    name='mobilePhone'
+                    input-type='tel'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                   <app-form-item
-                    label-tag="email"
-                    label-text="Email"
+                    label-tag='email'
+                    label-text='Email'
                     value={this.contact.email}
-                    name="email"
-                    input-type="email"
-                    input-form-mode="email"
+                    name='email'
+                    input-type='email'
+                    input-form-mode='email'
                     onFormItemChanged={(ev) => this.handleChange(ev)}
                   ></app-form-item>
                 </ion-list>
                 {this.contactId ? (
-                  <ion-footer class="ion-no-border">
+                  <ion-footer class='ion-no-border'>
                     <ion-toolbar>
                       <ion-button
-                        expand="block"
-                        fill="outline"
-                        color="danger"
+                        expand='block'
+                        fill='outline'
+                        color='danger'
                         onClick={() => this.deleteContact()}
                       >
-                        <ion-icon slot="start" name="trash"></ion-icon>
+                        <ion-icon slot='start' name='trash'></ion-icon>
                         <my-transl
-                          tag="delete"
-                          text="Delete"
+                          tag='delete'
+                          text='Delete'
                           isLabel
                         ></my-transl>
                       </ion-button>

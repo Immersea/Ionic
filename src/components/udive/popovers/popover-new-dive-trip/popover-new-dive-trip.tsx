@@ -1,12 +1,12 @@
-import {Component, h, Host, Prop, State, Element} from "@stencil/core";
-import {TranslationService} from "../../../../services/common/translations";
-import {isDate, isNumber, isString, toNumber} from "lodash";
-import {MapDataDiveSite} from "../../../../interfaces/udive/dive-site/diveSite";
-import {popoverController} from "@ionic/core";
-import {DiveSitesService} from "../../../../services/udive/diveSites";
-import {TripDive} from "../../../../interfaces/udive/dive-trip/diveTrip";
-import {MapDataDivingCenter} from "../../../../interfaces/udive/diving-center/divingCenter";
-import {DivingCentersService} from "../../../../services/udive/divingCenters";
+import { Component, h, Host, Prop, State, Element } from "@stencil/core";
+import { TranslationService } from "../../../../services/common/translations";
+import { isDate, isNumber, isString, toNumber } from "lodash";
+import { MapDataDiveSite } from "../../../../interfaces/udive/dive-site/diveSite";
+import { popoverController } from "@ionic/core";
+import { DiveSitesService } from "../../../../services/udive/diveSites";
+import { TripDive } from "../../../../interfaces/udive/dive-trip/diveTrip";
+import { MapDataDivingCenter } from "../../../../interfaces/udive/diving-center/divingCenter";
+import { DivingCentersService } from "../../../../services/udive/divingCenters";
 
 @Component({
   tag: "popover-new-dive-trip",
@@ -39,12 +39,6 @@ export class PopoverNewDiveTrip {
     if (this.tripDive && this.diveIndex >= 0) {
       this.participants = this.tripDive.numberOfParticipants;
       this.tripDate = this.tripDive.divePlan.dives[0].date;
-      console.log(
-        "this.tripDate",
-        this.tripDive,
-        this.tripDate,
-        this.tripDate.toISOString()
-      );
       this.diveSite = this.sitesList.find(
         (site) =>
           site.id === this.tripDive.divePlan.dives[this.diveIndex].diveSiteId
@@ -222,37 +216,41 @@ export class PopoverNewDiveTrip {
       <Host>
         <ion-toolbar>
           <ion-title>
-            <my-transl tag="dive-trip" text="Dive Trip" />
+            <my-transl tag='dive-trip' text='Dive Trip' />
           </ion-title>
         </ion-toolbar>
         {(!this.diveIndex && !this.tripDive) || this.diveIndex === 0 ? (
           [
             <app-form-item
-              label-tag="date-time"
-              label-text="Date/Time"
-              value={this.tripDate ? this.tripDate.toISOString() : null}
-              name="tripDate"
-              input-type="date"
-              datePresentation="date-time"
-              lines="inset"
+              label-tag='date-time'
+              label-text='Date/Time'
+              value={
+                this.tripDate
+                  ? this.tripDate.toISOString()
+                  : new Date().toISOString()
+              }
+              name='tripDate'
+              input-type='date'
+              datePresentation='date-time'
+              lines='inset'
               onFormItemChanged={(ev) => this.updateDate(ev)}
             ></app-form-item>,
             <app-form-item
-              label-tag="title"
-              label-text="Title"
+              label-tag='title'
+              label-text='Title'
               value={this.divePlanTitle}
-              name="divePlanTitle"
-              input-type="text"
-              lines="inset"
+              name='divePlanTitle'
+              input-type='text'
+              lines='inset'
               onFormItemChanged={(ev) => this.updateTitle(ev)}
             ></app-form-item>,
             <app-form-item
-              label-tag="number-participants"
-              label-text="Max Number of Participants"
+              label-tag='number-participants'
+              label-text='Max Number of Participants'
               value={this.participants}
-              name="participants"
-              input-type="number"
-              lines="inset"
+              name='participants'
+              input-type='number'
+              lines='inset'
               onFormItemChanged={(ev) => this.updateParticipants(ev)}
             ></app-form-item>,
           ]
@@ -297,19 +295,19 @@ export class PopoverNewDiveTrip {
         <ion-item button onClick={() => this.openSearchSite()}>
           <ion-input
             label={TranslationService.getTransl("dive-site", "Dive Site")}
-            label-placement="floating"
+            label-placement='floating'
             placeholder={TranslationService.getTransl(
               "select-dive-site",
               "Select Dive Site"
             )}
             value={this.diveSite ? this.diveSite.displayName : undefined}
           ></ion-input>
-          <ion-icon slot="end" name="search-outline"></ion-icon>
+          <ion-icon slot='end' name='search-outline'></ion-icon>
         </ion-item>
         <ion-item>
           <ion-select
             label={TranslationService.getTransl("dive-profile", "Dive Profile")}
-            id="selectDivePlans"
+            id='selectDivePlans'
             onIonChange={(ev) => this.updateDivePlanName(ev)}
             disabled={true}
             value={this.divePlanName}
@@ -321,7 +319,7 @@ export class PopoverNewDiveTrip {
               "diving-center",
               "Diving Center"
             )}
-            id="selectDivingCenter"
+            id='selectDivingCenter'
             onIonChange={(ev) => this.updateDivingCenter(ev)}
             disabled={true}
             value={this.divingCenterId}

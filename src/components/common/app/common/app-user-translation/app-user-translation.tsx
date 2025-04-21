@@ -7,14 +7,14 @@ import {
   Host,
   State,
 } from "@stencil/core";
-import {actionSheetController} from "@ionic/core";
-import {TranslationService} from "../../../../../services/common/translations";
-import {SystemService} from "../../../../../services/common/system";
+import { actionSheetController } from "@ionic/core";
+import { TranslationService } from "../../../../../services/common/translations";
+import { SystemService } from "../../../../../services/common/system";
 import {
   UserTranslationDoc,
   UserTranslation,
 } from "../../../../../interfaces/common/translations/translations";
-import {orderBy} from "lodash";
+import { orderBy } from "lodash";
 
 @Component({
   tag: "app-user-translation",
@@ -68,7 +68,7 @@ export class AppUserTranslation {
         {this.translations.map((translation, i) => (
           <ion-item>
             <app-language-picker
-              slot="start"
+              slot='start'
               selectedLangCode={translation.lang}
             ></app-language-picker>
             {this.edit ? (
@@ -76,12 +76,12 @@ export class AppUserTranslation {
                 <ion-textarea
                   value={translation.text}
                   rows={2}
-                  inputmode="text"
+                  inputmode='text'
                 ></ion-textarea>,
                 <ion-button
-                  slot="end"
+                  slot='end'
                   icon-only
-                  fill="clear"
+                  fill='clear'
                   onClick={() => this.remove(i)}
                 />,
               ]
@@ -92,9 +92,9 @@ export class AppUserTranslation {
         ))}
         {this.edit ? (
           <ion-item button onClick={() => this.add()}>
-            <ion-icon name="add" slot="start" />
+            <ion-icon name='add' slot='start' />
             <ion-label>
-              <my-transl tag="add" text="Add"></my-transl>
+              <my-transl tag='add' text='Add'></my-transl>
             </ion-label>
           </ion-item>
         ) : undefined}

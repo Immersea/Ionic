@@ -1,7 +1,7 @@
-import {Gas} from "./gas";
-import {Tank} from "./tank";
-import {DiveToolsService} from "../../../services/udive/planner/dive-tools";
-import {toNumber} from "lodash";
+import { Gas } from "./gas";
+import { Tank } from "./tank";
+import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
+import { toNumber } from "lodash";
 
 export class TankModel {
   //model fields;

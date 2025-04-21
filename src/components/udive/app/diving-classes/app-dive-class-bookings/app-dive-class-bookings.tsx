@@ -1,15 +1,15 @@
-import {Component, h, Prop, State, Element, Method} from "@stencil/core";
-import {TranslationService} from "../../../../../services/common/translations";
+import { Component, h, Prop, State, Element, Method } from "@stencil/core";
+import { TranslationService } from "../../../../../services/common/translations";
 import {
   DivingClass,
   Student,
 } from "../../../../../interfaces/udive/diving-class/divingClass";
-import {UserService} from "../../../../../services/common/user";
-import {DivingClassesService} from "../../../../../services/udive/divingClasses";
-import {Subscription} from "rxjs";
-import {alertController} from "@ionic/core";
-import {toNumber} from "lodash";
-import {Environment} from "../../../../../global/env";
+import { UserService } from "../../../../../services/common/user";
+import { DivingClassesService } from "../../../../../services/udive/divingClasses";
+import { Subscription } from "rxjs";
+import { alertController } from "@ionic/core";
+import { toNumber } from "lodash";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "app-dive-class-bookings",
@@ -17,7 +17,7 @@ import {Environment} from "../../../../../global/env";
 })
 export class AppDiveClassBookings {
   @Element() el: HTMLElement;
-  @Prop({mutable: true}) divingClass: DivingClass;
+  @Prop({ mutable: true }) divingClass: DivingClass;
   @Prop() divingClassId: string;
   @Prop() editable = false;
   @State() isEditing = false;
@@ -106,7 +106,7 @@ export class AppDiveClassBookings {
   }
 
   disconnectedCallback() {
-    this.userSub.unsubscribe();
+    this.userSub ? this.userSub.unsubscribe() : undefined;
   }
 
   segmentChanged(ev) {
@@ -183,25 +183,25 @@ export class AppDiveClassBookings {
   render() {
     return (
       <ion-list>
-        <ion-item lines="none">
+        <ion-item lines='none'>
           <ion-label>
             {TranslationService.getTransl(
               "max-participants",
               "Max xxx participants",
-              {xxx: this.divingClass.numberOfStudents}
+              { xxx: this.divingClass.numberOfStudents }
             )}
           </ion-label>
           {this.editable &&
           this.divingClass.students &&
           this.divingClass.students.length > 0 ? (
             !this.isEditing ? (
-              <ion-button slot="end" onClick={() => this.editStudents()}>
-                <my-transl tag="edit" text="Edit" />
+              <ion-button slot='end' onClick={() => this.editStudents()}>
+                <my-transl tag='edit' text='Edit' />
               </ion-button>
             ) : (
               [
-                <ion-button slot="end" onClick={() => this.saveStudents()}>
-                  <my-transl tag="save" text="Save" />
+                <ion-button slot='end' onClick={() => this.saveStudents()}>
+                  <my-transl tag='save' text='Save' />
                 </ion-button>,
               ]
             )
@@ -212,14 +212,14 @@ export class AppDiveClassBookings {
         this.divingClass.status == "active" &&
         (!this.userBooking ||
           (this.userBooking && this.userBooking.status == null)) ? (
-          <ion-button expand="block" onClick={() => this.applyToClass()}>
-            <my-transl tag="apply-to-class" text="Apply to this class" />
+          <ion-button expand='block' onClick={() => this.applyToClass()}>
+            <my-transl tag='apply-to-class' text='Apply to this class' />
           </ion-button>
         ) : undefined}
         {this.userBooking &&
         (this.userBooking.status == "cancelled" ||
           this.userBooking.status == "denied") ? (
-          <ion-button expand="block" color="warning">
+          <ion-button expand='block' color='warning'>
             <my-transl
               tag={this.userBooking.status}
               text={this.userBooking.status}
@@ -227,21 +227,21 @@ export class AppDiveClassBookings {
           </ion-button>
         ) : undefined}
         {this.waitingRequest ? (
-          <app-skeletons skeleton="diveTripBooking" />
+          <app-skeletons skeleton='diveTripBooking' />
         ) : undefined}
         {this.studentsList.map((student, k) =>
           student.uid == this.userId && this.waitingRequest ? (
-            <app-skeletons skeleton="diveTripBooking" />
+            <app-skeletons skeleton='diveTripBooking' />
           ) : (
             <ion-item>
               {!this.isEditing && student.user.photoURL ? (
-                <ion-avatar slot="start">
+                <ion-avatar slot='start'>
                   <ion-img src={student.user.photoURL} />
                 </ion-avatar>
               ) : undefined}
               <ion-label>{student.user.displayName}</ion-label>
               {!this.isEditing ? (
-                <ion-note slot="end">
+                <ion-note slot='end'>
                   {TranslationService.getTransl(student.status, student.status)}
                 </ion-note>
               ) : (
@@ -250,23 +250,23 @@ export class AppDiveClassBookings {
                     maxWidth: "40%",
                     marginLeft: "15%",
                   }}
-                  slot="end"
-                  mode="ios"
+                  slot='end'
+                  mode='ios'
                   color={Environment.getAppColor()}
                   onIonChange={(ev) => this.updateBooking(k, ev)}
                   value={student.status}
                 >
-                  <ion-segment-button value="cancelled">
-                    <my-transl tag="cancelled" text="Cancelled" />
+                  <ion-segment-button value='cancelled'>
+                    <my-transl tag='cancelled' text='Cancelled' />
                   </ion-segment-button>
-                  <ion-segment-button value="applied">
-                    <my-transl tag="applied" text="Applied" />
+                  <ion-segment-button value='applied'>
+                    <my-transl tag='applied' text='Applied' />
                   </ion-segment-button>
-                  <ion-segment-button value="registered">
-                    <my-transl tag="registered" text="Registered" />
+                  <ion-segment-button value='registered'>
+                    <my-transl tag='registered' text='Registered' />
                   </ion-segment-button>
-                  <ion-segment-button value="denied">
-                    <my-transl tag="denied" text="Denied" />
+                  <ion-segment-button value='denied'>
+                    <my-transl tag='denied' text='Denied' />
                   </ion-segment-button>
                 </ion-segment>
               )}
@@ -275,9 +275,9 @@ export class AppDiveClassBookings {
         )}
         {this.availableSpots.map(() => (
           <ion-item>
-            <ion-icon slot="start" name="person-add-outline"></ion-icon>
+            <ion-icon slot='start' name='person-add-outline'></ion-icon>
             <ion-label>
-              <my-transl tag="available" text="Available" />
+              <my-transl tag='available' text='Available' />
             </ion-label>
           </ion-item>
         ))}

@@ -1,10 +1,10 @@
-import {alertController} from "@ionic/core";
-import {Component, Event, EventEmitter, h, Prop, State} from "@stencil/core";
-import {Environment} from "../../../../../global/env";
-import {ARPCModel} from "../../../../../interfaces/udive/planner/arpc";
-import {DatabaseService} from "../../../../../services/common/database";
-import {TranslationService} from "../../../../../services/common/translations";
-import {round} from "lodash";
+import { alertController } from "@ionic/core";
+import { Component, Event, EventEmitter, h, Prop, State } from "@stencil/core";
+import { Environment } from "../../../../../global/env";
+import { ARPCModel } from "../../../../../interfaces/udive/planner/arpc";
+import { DatabaseService } from "../../../../../services/common/database";
+import { TranslationService } from "../../../../../services/common/translations";
+import { round } from "lodash";
 
 const CELLDATE = "CCR-cell-date";
 @Component({
@@ -105,13 +105,13 @@ export class AppDecoplannerArpc {
 
   render() {
     return (
-      <div class="ion-no-padding">
+      <div class='ion-no-padding'>
         <ion-item-divider>
           <ion-label>
             <h2>
               <my-transl
-                tag="arpc"
-                text="ADVANCED REBREATHER PREPARATION CHECKS"
+                tag='arpc'
+                text='ADVANCED REBREATHER PREPARATION CHECKS'
               />
             </h2>
           </ion-label>
@@ -121,8 +121,8 @@ export class AppDecoplannerArpc {
             <ion-item-divider>
               <ion-label>
                 <my-transl
-                  tag="lid-preparation"
-                  text="LID AND CONTROLLER PREPARATION"
+                  tag='lid-preparation'
+                  text='LID AND CONTROLLER PREPARATION'
                 />
               </ion-label>
             </ion-item-divider>
@@ -130,39 +130,39 @@ export class AppDecoplannerArpc {
               <ion-grid no-padding>
                 <ion-row>
                   <ion-col>
-                    <my-transl tag="o2-cell-1year" text="O2 Cells <1 year" />
+                    <my-transl tag='o2-cell-1year' text='O2 Cells <1 year' />
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <my-transl
-                      tag="cell"
-                      text="Cell"
-                      append-text=" #1"
+                      tag='cell'
+                      text='Cell'
+                      append-text=' #1'
                     ></my-transl>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <my-transl
-                      tag="cell"
-                      text="Cell"
-                      append-text=" #2"
+                      tag='cell'
+                      text='Cell'
+                      append-text=' #2'
                     ></my-transl>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <my-transl
-                      tag="cell"
-                      text="Cell"
-                      append-text=" #3"
+                      tag='cell'
+                      text='Cell'
+                      append-text=' #3'
                     ></my-transl>
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
                       value={this.arpc.cellDate[0]}
-                      name="cellDate.0"
-                      input-type="date"
-                      date-presentation="month-year"
+                      name='cellDate.0'
+                      input-type='date'
+                      date-presentation='month-year'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                       maxDate={
                         new Date().getFullYear() +
@@ -171,12 +171,12 @@ export class AppDecoplannerArpc {
                       }
                     ></app-form-item>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
                       value={this.arpc.cellDate[1]}
-                      name="cellDate.1"
-                      input-type="date"
-                      date-presentation="month-year"
+                      name='cellDate.1'
+                      input-type='date'
+                      date-presentation='month-year'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                       maxDate={
                         new Date().getFullYear() +
@@ -185,12 +185,12 @@ export class AppDecoplannerArpc {
                       }
                     ></app-form-item>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
                       value={this.arpc.cellDate[2]}
-                      name="cellDate.2"
-                      input-type="date"
-                      date-presentation="month-year"
+                      name='cellDate.2'
+                      input-type='date'
+                      date-presentation='month-year'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                       maxDate={
                         new Date().getFullYear() +
@@ -207,60 +207,60 @@ export class AppDecoplannerArpc {
                 <ion-row>
                   <ion-col>
                     <my-transl
-                      tag="air-mv-range"
-                      text="Air mV Range"
+                      tag='air-mv-range'
+                      text='Air mV Range'
                     ></my-transl>
                     {" (9-13mV)"}
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
-                      label-tag="cell"
-                      label-text="Cell"
-                      appendText=" #1"
+                      label-tag='cell'
+                      label-text='Cell'
+                      appendText=' #1'
                       value={this.arpc.airmVRange[0]}
-                      name="airmVRange.0"
-                      input-type="number"
+                      name='airmVRange.0'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: 9, max: 13},
+                          options: { min: 9, max: 13 },
                         },
                       ]}
                     ></app-form-item>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
-                      label-tag="cell"
-                      label-text="Cell"
-                      appendText=" #2"
+                      label-tag='cell'
+                      label-text='Cell'
+                      appendText=' #2'
                       value={this.arpc.airmVRange[1]}
-                      name="airmVRange.1"
-                      input-type="number"
+                      name='airmVRange.1'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: 9, max: 13},
+                          options: { min: 9, max: 13 },
                         },
                       ]}
                     ></app-form-item>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
-                      label-tag="cell"
-                      label-text="Cell"
-                      appendText=" #3"
+                      label-tag='cell'
+                      label-text='Cell'
+                      appendText=' #3'
                       value={this.arpc.airmVRange[2]}
-                      name="airmVRange.2"
-                      input-type="number"
+                      name='airmVRange.2'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                       validator={[
                         {
                           name: "minmaxvalue",
-                          options: {min: 9, max: 13},
+                          options: { min: 9, max: 13 },
                         },
                       ]}
                     ></app-form-item>
@@ -270,7 +270,7 @@ export class AppDecoplannerArpc {
             </ion-item>
             <ion-item>
               <ion-label>
-                <my-transl tag="hud-batt-ok" text="HUD Batt (red 30sec=Low)" />
+                <my-transl tag='hud-batt-ok' text='HUD Batt (red 30sec=Low)' />
               </ion-label>
               <ion-toggle
                 color={Environment.getAppColor()}
@@ -279,28 +279,28 @@ export class AppDecoplannerArpc {
               ></ion-toggle>
             </ion-item>
             <app-form-item
-              label-tag="int-batt-ok"
-              label-text="INT. Batt (>3.28/1.3V)"
-              labelPosition="fixed"
+              label-tag='int-batt-ok'
+              label-text='INT. Batt (>3.28/1.3V)'
+              labelPosition='fixed'
               value={this.arpc.battINT}
-              name="battINT"
-              input-type="number"
+              name='battINT'
+              input-type='number'
               onFormItemChanged={(ev) => this.inputHandler(ev)}
             ></app-form-item>
             <app-form-item
-              label-tag="ext-batt-ok"
-              label-text="EXT. Batt (>6.6/8.4V)"
-              labelPosition="fixed"
+              label-tag='ext-batt-ok'
+              label-text='EXT. Batt (>6.6/8.4V)'
+              labelPosition='fixed'
               value={this.arpc.battEXT}
-              name="battEXT"
-              input-type="number"
+              name='battEXT'
+              input-type='number'
               onFormItemChanged={(ev) => this.inputHandler(ev)}
             ></app-form-item>
             <ion-item>
               <ion-label>
                 <my-transl
-                  tag="ctrl-setpoints-ok"
-                  text="Ctrl Setpoints, Settings, Gases"
+                  tag='ctrl-setpoints-ok'
+                  text='Ctrl Setpoints, Settings, Gases'
                 />
               </ion-label>
               <ion-toggle
@@ -311,28 +311,28 @@ export class AppDecoplannerArpc {
             </ion-item>
             <ion-item-divider>
               <my-transl
-                tag="scrubber-preparation"
-                text="SCRUBBER PREPARATION"
+                tag='scrubber-preparation'
+                text='SCRUBBER PREPARATION'
               />
             </ion-item-divider>
             <app-form-item
-              label-tag="ace-180min"
-              label-text="Absorbent Canister Endurance (ACE) (180min nominal)"
-              labelPosition="fixed"
+              label-tag='ace-180min'
+              label-text='Absorbent Canister Endurance (ACE) (180min nominal)'
+              labelPosition='fixed'
               value={this.arpc.scrubberTime}
-              name="scrubberTime"
-              input-type="number"
+              name='scrubberTime'
+              input-type='number'
               onFormItemChanged={(ev) => this.inputHandler(ev)}
               validator={[
                 {
                   name: "minmaxvalue",
-                  options: {min: 60, max: 300},
+                  options: { min: 60, max: 300 },
                 },
               ]}
             ></app-form-item>
             <ion-item>
               <ion-label>
-                <my-transl tag="lid-checks" text="Lid and Lid O-Ring Checks" />
+                <my-transl tag='lid-checks' text='Lid and Lid O-Ring Checks' />
               </ion-label>
               <ion-toggle
                 color={Environment.getAppColor()}
@@ -342,7 +342,7 @@ export class AppDecoplannerArpc {
             </ion-item>
             <ion-item>
               <ion-label>
-                <my-transl tag="loop-checks" text="Loop Valves Checks" />
+                <my-transl tag='loop-checks' text='Loop Valves Checks' />
               </ion-label>
               <ion-toggle
                 color={Environment.getAppColor()}
@@ -353,8 +353,8 @@ export class AppDecoplannerArpc {
             <ion-item>
               <ion-label>
                 <my-transl
-                  tag="negative-pressure-test"
-                  text="Negative Pressure Test"
+                  tag='negative-pressure-test'
+                  text='Negative Pressure Test'
                 />
               </ion-label>
               <ion-toggle
@@ -365,7 +365,7 @@ export class AppDecoplannerArpc {
             </ion-item>
             <ion-item>
               <ion-label>
-                <my-transl tag="o2-pressure-test" text="O2 SPG Pressure Test" />
+                <my-transl tag='o2-pressure-test' text='O2 SPG Pressure Test' />
               </ion-label>
               <ion-toggle
                 color={Environment.getAppColor()}
@@ -376,8 +376,8 @@ export class AppDecoplannerArpc {
             <ion-item>
               <ion-label>
                 <my-transl
-                  tag="positive-pressure-test"
-                  text="Positive Pressure Test"
+                  tag='positive-pressure-test'
+                  text='Positive Pressure Test'
                 />
               </ion-label>
               <ion-toggle
@@ -389,8 +389,8 @@ export class AppDecoplannerArpc {
             <ion-item>
               <ion-label>
                 <my-transl
-                  tag="diluent-pressure-test"
-                  text="Diluent SPG Pressure Test"
+                  tag='diluent-pressure-test'
+                  text='Diluent SPG Pressure Test'
                 />
               </ion-label>
               <ion-toggle
@@ -399,12 +399,12 @@ export class AppDecoplannerArpc {
                 checked={this.arpc.diluentLeakTest}
               ></ion-toggle>
             </ion-item>
-            <ion-item-divider class="lightgrey">
-              <my-transl tag="calibration" text="CALIBRATION" />
+            <ion-item-divider class='lightgrey'>
+              <my-transl tag='calibration' text='CALIBRATION' />
             </ion-item-divider>
             <ion-item>
               <ion-label>
-                <my-transl tag="open-o2-valve" text="Open O2 Valve" />
+                <my-transl tag='open-o2-valve' text='Open O2 Valve' />
               </ion-label>
               <ion-toggle
                 color={Environment.getAppColor()}
@@ -414,7 +414,7 @@ export class AppDecoplannerArpc {
             </ion-item>
             <ion-item>
               <ion-label>
-                <my-transl tag="loop-in-cc" text="Loop in CC mode" />
+                <my-transl tag='loop-in-cc' text='Loop in CC mode' />
               </ion-label>
               <ion-toggle
                 color={Environment.getAppColor()}
@@ -424,7 +424,7 @@ export class AppDecoplannerArpc {
             </ion-item>
             <ion-item>
               <ion-label>
-                <my-transl tag="hud-on" text="Turn HUD on" />
+                <my-transl tag='hud-on' text='Turn HUD on' />
               </ion-label>
               <ion-toggle
                 color={Environment.getAppColor()}
@@ -435,8 +435,8 @@ export class AppDecoplannerArpc {
             <ion-item>
               <ion-label>
                 <my-transl
-                  tag="calibrate-controller"
-                  text="Calibrate Controller"
+                  tag='calibrate-controller'
+                  text='Calibrate Controller'
                 />
               </ion-label>
               <ion-toggle
@@ -447,7 +447,7 @@ export class AppDecoplannerArpc {
             </ion-item>
             <ion-item>
               <ion-label>
-                <my-transl tag="calibrate-hud" text="Calibrate HUD" />
+                <my-transl tag='calibrate-hud' text='Calibrate HUD' />
               </ion-label>
               <ion-toggle
                 color={Environment.getAppColor()}
@@ -459,46 +459,46 @@ export class AppDecoplannerArpc {
               <ion-grid no-padding>
                 <ion-row>
                   <ion-col>
-                    <my-transl tag="o2-cal-mv" text="O2 Calibration mV" />
+                    <my-transl tag='o2-cal-mv' text='O2 Calibration mV' />
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
-                      label-tag="cell"
-                      label-text="Cell"
-                      appendText=" #1"
+                      label-tag='cell'
+                      label-text='Cell'
+                      appendText=' #1'
                       value={this.arpc.o2mVRange[0]}
-                      name="o2mVRange.0"
-                      input-type="number"
+                      name='o2mVRange.0'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                     ></app-form-item>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
-                      label-tag="cell"
-                      label-text="Cell"
-                      appendText=" #2"
+                      label-tag='cell'
+                      label-text='Cell'
+                      appendText=' #2'
                       value={this.arpc.o2mVRange[1]}
-                      name="o2mVRange.1"
-                      input-type="number"
+                      name='o2mVRange.1'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                     ></app-form-item>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <app-form-item
-                      label-tag="cell"
-                      label-text="Cell"
-                      appendText=" #3"
+                      label-tag='cell'
+                      label-text='Cell'
+                      appendText=' #3'
                       value={this.arpc.o2mVRange[2]}
-                      name="o2mVRange.2"
-                      input-type="number"
+                      name='o2mVRange.2'
+                      input-type='number'
                       onFormItemChanged={(ev) => this.inputHandler(ev)}
                     ></app-form-item>
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <ion-note
                       no-lines
                       no-padding
@@ -527,7 +527,7 @@ export class AppDecoplannerArpc {
                       %)
                     </ion-note>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <ion-note
                       no-lines
                       no-padding
@@ -556,7 +556,7 @@ export class AppDecoplannerArpc {
                       %)
                     </ion-note>
                   </ion-col>
-                  <ion-col size="4">
+                  <ion-col size='4'>
                     <ion-note
                       no-lines
                       no-padding
@@ -588,48 +588,48 @@ export class AppDecoplannerArpc {
                 </ion-row>
               </ion-grid>
             </ion-item>
-            <ion-item-divider color="white" class="lightgrey">
-              <my-transl tag="gas-pressure-status" text="GAS PRESSURE STATUS" />
+            <ion-item-divider color='white' class='lightgrey'>
+              <my-transl tag='gas-pressure-status' text='GAS PRESSURE STATUS' />
             </ion-item-divider>
             <app-form-item
-              label-tag="o2-ip"
-              label-text="O2 IP"
-              appendText=" (7-7.5bar)"
-              labelPosition="fixed"
+              label-tag='o2-ip'
+              label-text='O2 IP'
+              appendText=' (7-7.5bar)'
+              labelPosition='fixed'
               value={this.arpc.o2IP}
-              name="o2IP"
-              input-type="number"
+              name='o2IP'
+              input-type='number'
               onFormItemChanged={(ev) => this.inputHandler(ev)}
               validator={[
                 {
                   name: "minmaxvalue",
-                  options: {min: 6.5, max: 8},
+                  options: { min: 6.5, max: 8 },
                 },
               ]}
             ></app-form-item>
             <app-form-item
-              label-tag="diluent-ip"
-              label-text="Diluent IP"
-              appendText=" (9-10bar)"
-              labelPosition="fixed"
+              label-tag='diluent-ip'
+              label-text='Diluent IP'
+              appendText=' (9-10bar)'
+              labelPosition='fixed'
               value={this.arpc.dilIP}
-              name="dilIP"
-              input-type="number"
+              name='dilIP'
+              input-type='number'
               onFormItemChanged={(ev) => this.inputHandler(ev)}
               validator={[
                 {
                   name: "minmaxvalue",
-                  options: {min: 8.5, max: 10.5},
+                  options: { min: 8.5, max: 10.5 },
                 },
               ]}
             ></app-form-item>
             <app-form-item
-              label-tag="bailout-reserve"
-              label-text="Bailout-Reserve"
-              labelPosition="fixed"
+              label-tag='bailout-reserve'
+              label-text='Bailout-Reserve'
+              labelPosition='fixed'
               value={this.arpc.bailout}
-              name="bailout"
-              input-type="number"
+              name='bailout'
+              input-type='number'
               onFormItemChanged={(ev) => this.inputHandler(ev)}
             ></app-form-item>
           </ion-col>

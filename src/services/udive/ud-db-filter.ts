@@ -1,13 +1,13 @@
-import {DatabaseService, MAPDATACOLLECTION} from "../common/database";
-import {SearchTag, CollectionGroup} from "../../interfaces/interfaces";
-import {TranslationService} from "../common/translations";
-import {each, orderBy} from "lodash";
-import {BehaviorSubject} from "rxjs";
-import {USERPUBLICPROFILECOLLECTION, UserService} from "../common/user";
-import {DivingClassesService} from "./divingClasses";
-import {DiveSitesService, DIVESITESCOLLECTION} from "./diveSites";
-import {DIVECENTERSSCOLLECTION, DivingCentersService} from "./divingCenters";
-import {DIVESCHOOLSSCOLLECTION, DivingSchoolsService} from "./divingSchools";
+import { DatabaseService, MAPDATACOLLECTION } from "../common/database";
+import { SearchTag, CollectionGroup } from "../../interfaces/interfaces";
+import { TranslationService } from "../common/translations";
+import { each, orderBy } from "lodash";
+import { BehaviorSubject } from "rxjs";
+import { USERPUBLICPROFILECOLLECTION, UserService } from "../common/user";
+import { DivingClassesService } from "./divingClasses";
+import { DiveSitesService, DIVESITESCOLLECTION } from "./diveSites";
+import { DIVECENTERSSCOLLECTION, DivingCentersService } from "./divingCenters";
+import { DIVESCHOOLSSCOLLECTION, DivingSchoolsService } from "./divingSchools";
 import {
   SERVICECENTERSCOLLECTION,
   ServiceCentersService,
@@ -16,7 +16,7 @@ import {
   DIVECOMMUNITIESCOLLECTION,
   DiveCommunitiesService,
 } from "./diveCommunities";
-import {Environment} from "../../global/env";
+import { Environment } from "../../global/env";
 
 export const CLIENTSCOLLECTIONNAME = "clients";
 

@@ -1,7 +1,7 @@
-import {DivePlanModel} from "../planner/dive-plan";
-import {LocationIQ} from "../../../components";
-import {MapService, Position} from "../../../services/common/map";
-import {toNumber} from "lodash";
+import { DivePlanModel } from "../planner/dive-plan";
+import { LocationIQ } from "../../../components";
+import { MapService, Position } from "../../../services/common/map";
+import { toNumber } from "lodash";
 
 export class MapDataDiveSite {
   id: string;

@@ -2,13 +2,13 @@ import {
   Advertising,
   AdvertisingDoc,
 } from "../../interfaces/common/advertising/advertising";
-import {DatabaseService} from "./database";
-import {SYSTEMCOLLECTION} from "./system";
-import {orderBy} from "lodash";
-import {alertController} from "@ionic/core";
-import {TranslationService} from "./translations";
-import {BehaviorSubject, Subscription} from "rxjs";
-import {StorageService} from "./storage";
+import { DatabaseService } from "./database";
+import { SYSTEMCOLLECTION } from "./system";
+import { orderBy } from "lodash";
+import { alertController } from "@ionic/core";
+import { TranslationService } from "./translations";
+import { BehaviorSubject, Subscription } from "rxjs";
+import { StorageService } from "./storage";
 
 export const ADVERTISINGDOC = "advertising";
 

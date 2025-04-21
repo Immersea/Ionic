@@ -1,12 +1,12 @@
-import {Component, h, State, Host} from "@stencil/core";
-import {UserService} from "../../../../../services/common/user";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
-import {orderBy} from "lodash";
+import { Component, h, State, Host } from "@stencil/core";
+import { UserService } from "../../../../../services/common/user";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
+import { orderBy } from "lodash";
 import {
   ServiceCentersService,
   SERVICECENTERSCOLLECTION,
 } from "../../../../../services/udive/serviceCenters";
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
 
 @Component({
   tag: "app-user-service-centers",
@@ -76,19 +76,19 @@ export class AppUserServiceCenters {
             detail
           >
             {sc.photoURL ? (
-              <ion-avatar slot="start">
+              <ion-avatar slot='start'>
                 <img src={sc.photoURL} />
               </ion-avatar>
             ) : undefined}
 
             <ion-label>{sc.displayName}</ion-label>
             <ion-button
-              fill="clear"
+              fill='clear'
               icon-only
-              slot="end"
+              slot='end'
               onClick={(ev) => this.update(ev, sc.id)}
             >
-              <ion-icon name="create" slot="end"></ion-icon>
+              <ion-icon name='create' slot='end'></ion-icon>
             </ion-button>
           </ion-item>
         ))}

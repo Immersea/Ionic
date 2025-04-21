@@ -231,7 +231,12 @@ class SystemController {
       message: showMessage,
       showBackdrop: showBackdrop,
       translucent: true,
-      duration: message == "saved" || message == "error" ? 1500 : null,
+      duration:
+        message == "saved" || message == "error"
+          ? 1500
+          : message == "loading"
+            ? 5000
+            : null,
       spinner: message == "saved" || message == "error" ? null : "crescent",
     });
     await this.loading.present();

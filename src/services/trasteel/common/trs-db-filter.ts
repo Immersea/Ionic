@@ -1,17 +1,17 @@
-import {DatabaseService, MAPDATACOLLECTION} from "../../common/database";
-import {SearchTag, CollectionGroup} from "../../../interfaces/interfaces";
-import {TranslationService} from "../../common/translations";
-import {each, orderBy} from "lodash";
-import {BehaviorSubject} from "rxjs";
-import {CUSTOMERSCOLLECTION, CustomersService} from "../crm/customers";
-import {SHAPESCOLLECTION, ShapesService} from "../refractories/shapes";
+import { DatabaseService, MAPDATACOLLECTION } from "../../common/database";
+import { SearchTag, CollectionGroup } from "../../../interfaces/interfaces";
+import { TranslationService } from "../../common/translations";
+import { each, orderBy } from "lodash";
+import { BehaviorSubject } from "rxjs";
+import { CUSTOMERSCOLLECTION, CustomersService } from "../crm/customers";
+import { SHAPESCOLLECTION, ShapesService } from "../refractories/shapes";
 import {
   DATASHEETSCOLLECTION,
   DatasheetsService,
 } from "../refractories/datasheets";
-import {PROJECTSCOLLECTION, ProjectsService} from "../refractories/projects";
-import {CONTACTSCOLLECTION, ContactsService} from "../crm/contacts";
-import {USERPUBLICPROFILECOLLECTION, UserService} from "../../common/user";
+import { PROJECTSCOLLECTION, ProjectsService } from "../refractories/projects";
+import { CONTACTSCOLLECTION, ContactsService } from "../crm/contacts";
+import { USERPUBLICPROFILECOLLECTION, UserService } from "../../common/user";
 
 class TrasteelFilterController {
   database: any;

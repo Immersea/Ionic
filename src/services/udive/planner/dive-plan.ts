@@ -1,18 +1,18 @@
-import {DiveToolsService} from "./dive-tools";
-import {DiveBuhlmann} from "./dive-buhlmann";
-import {DiveVPM} from "./dive-vpm";
-import {ppO2Drop} from "./ppO2-drop";
-import {cloneDeep, filter, last, orderBy, round, toNumber} from "lodash";
+import { DiveToolsService } from "./dive-tools";
+import { DiveBuhlmann } from "./dive-buhlmann";
+import { DiveVPM } from "./dive-vpm";
+import { ppO2Drop } from "./ppO2-drop";
+import { cloneDeep, filter, last, orderBy, round, toNumber } from "lodash";
 
-import {DecoplannerParameters} from "../../../interfaces/udive/planner/decoplanner-parameters";
-import {DivePlanModel} from "../../../interfaces/udive/planner/dive-plan";
-import {Gas} from "../../../interfaces/udive/planner/gas";
-import {Compartment} from "../../../interfaces/udive/planner/compartment";
+import { DecoplannerParameters } from "../../../interfaces/udive/planner/decoplanner-parameters";
+import { DivePlanModel } from "../../../interfaces/udive/planner/dive-plan";
+import { Gas } from "../../../interfaces/udive/planner/gas";
+import { Compartment } from "../../../interfaces/udive/planner/compartment";
 //import { Permissions } from '../../models/permissions'
-import {DiveConfiguration} from "../../../interfaces/udive/planner/dive-configuration";
-import {TranslationService} from "../../common/translations";
-import {DecoplannerDive} from "../../../interfaces/udive/planner/decoplanner-dive";
-import {addHours} from "date-fns";
+import { DiveConfiguration } from "../../../interfaces/udive/planner/dive-configuration";
+import { TranslationService } from "../../common/translations";
+import { DecoplannerDive } from "../../../interfaces/udive/planner/decoplanner-dive";
+import { addHours } from "date-fns";
 
 /*
  * DivePlan
@@ -1930,7 +1930,7 @@ export class DivePlan {
       let data = oc
         ? compartment.compartmentChart
         : compartment.compartmentChartCCR;
-      data = filter(cloneDeep(data), {dive: diveId});
+      data = filter(cloneDeep(data), { dive: diveId });
       for (let chartItemIndex in data) {
         let item = data[chartItemIndex];
         let index = parseInt(chartItemIndex);
@@ -1996,7 +1996,7 @@ export class DivePlan {
         previousdepth = 0,
         i = 0;
       //first point for deco planner
-      runtimeArray.push({x: 0, y: -0});
+      runtimeArray.push({ x: 0, y: -0 });
       lineChartRuntimeArray.push(0);
       for (let k in profiles) {
         let profile = profiles[k];
@@ -2010,7 +2010,7 @@ export class DivePlan {
           stoptime = Math.round(profile[profile.rangeShape].stoptime);
           depth = profile.depth;
           let descent_ascent_time = runtime - stoptime;
-          runtimeArray.push({x: descent_ascent_time, y: -depth});
+          runtimeArray.push({ x: descent_ascent_time, y: -depth });
           //create line chart
           for (let i = 1; i <= descent_ascent_time - previousruntime; i++) {
             let descent_depth =
@@ -2020,7 +2020,7 @@ export class DivePlan {
             lineChartRuntimeArray.push(descent_depth);
           }
           if (stoptime > 0) {
-            runtimeArray.push({x: runtime, y: -depth});
+            runtimeArray.push({ x: runtime, y: -depth });
             if (maxRuntime < runtime) maxRuntime = runtime;
             i = i + 2;
 
@@ -2051,7 +2051,7 @@ export class DivePlan {
         //return zoomline chart
         let data = [];
         lineChartRuntimeArray.forEach((item) => {
-          data.push({value: item});
+          data.push({ value: item });
         });
         return {
           seriesname: title,
@@ -2086,7 +2086,7 @@ export class DivePlan {
     } else if (line && !zoom) {
       let data = [];
       categories.forEach((cat) => {
-        data.push({label: cat});
+        data.push({ label: cat });
       });
       response = {
         dataset: decochart,
@@ -2321,7 +2321,7 @@ export class DivePlan {
         let data = oc
           ? compartment.compartmentChart
           : compartment.compartmentChartCCR;
-        data = filter(cloneDeep(data), {dive: diveId});
+        data = filter(cloneDeep(data), { dive: diveId });
         for (let index = 0; index < data.length; index += resolution) {
           let item = data[index];
           let x_axis =

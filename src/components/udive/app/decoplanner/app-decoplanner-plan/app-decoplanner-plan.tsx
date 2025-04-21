@@ -7,28 +7,28 @@ import {
   Event,
   EventEmitter,
 } from "@stencil/core";
-import {isPlatform, popoverController} from "@ionic/core";
+import { isPlatform, popoverController } from "@ionic/core";
 
 //import { Config } from '../../../../providers/config';
-import {cloneDeep, filter, find, last, min, orderBy} from "lodash";
+import { cloneDeep, filter, find, last, min, orderBy } from "lodash";
 //import { LicenceCheckProvider } from '../../../../providers/licence-check';
 //import { ARPCModel } from '../../../../models/dive/arpc';
-import {DecoplannerDive} from "../../../../../interfaces/udive/planner/decoplanner-dive";
-import {DivePlan} from "../../../../../services/udive/planner/dive-plan";
-import {Gas} from "../../../../../interfaces/udive/planner/gas";
-import {GasModel} from "../../../../../interfaces/udive/planner/gas-model";
-import {DecoplannerParameters} from "../../../../../interfaces/udive/planner/decoplanner-parameters";
-import {DiveConfiguration} from "../../../../../interfaces/udive/planner/dive-configuration";
-import {TranslationService} from "../../../../../services/common/translations";
-import {UserService} from "../../../../../services/common/user";
-import {DiveSitesService} from "../../../../../services/udive/diveSites";
-import {MapDataDivingCenter} from "../../../../../interfaces/udive/diving-center/divingCenter";
-import {DivingCentersService} from "../../../../../services/udive/divingCenters";
-import {SystemService} from "../../../../../services/common/system";
-import {RouterService} from "../../../../../services/common/router";
-import {MapDataDiveSite} from "../../../../../interfaces/udive/dive-site/diveSite";
-import {Environment} from "../../../../../global/env";
-import {format} from "date-fns";
+import { DecoplannerDive } from "../../../../../interfaces/udive/planner/decoplanner-dive";
+import { DivePlan } from "../../../../../services/udive/planner/dive-plan";
+import { Gas } from "../../../../../interfaces/udive/planner/gas";
+import { GasModel } from "../../../../../interfaces/udive/planner/gas-model";
+import { DecoplannerParameters } from "../../../../../interfaces/udive/planner/decoplanner-parameters";
+import { DiveConfiguration } from "../../../../../interfaces/udive/planner/dive-configuration";
+import { TranslationService } from "../../../../../services/common/translations";
+import { UserService } from "../../../../../services/common/user";
+import { DiveSitesService } from "../../../../../services/udive/diveSites";
+import { MapDataDivingCenter } from "../../../../../interfaces/udive/diving-center/divingCenter";
+import { DivingCentersService } from "../../../../../services/udive/divingCenters";
+import { SystemService } from "../../../../../services/common/system";
+import { RouterService } from "../../../../../services/common/router";
+import { MapDataDiveSite } from "../../../../../interfaces/udive/dive-site/diveSite";
+import { Environment } from "../../../../../global/env";
+import { format } from "date-fns";
 
 @Component({
   tag: "app-decoplanner-plan",
@@ -180,7 +180,7 @@ export class AppDecoplannerPlan {
       let updatedConf = cloneDeep(this.divePlan.configuration);
       updatedConf.stdName = updatedConf.stdName;
       //check if already added in a previous call
-      findConf = find(this.stdConfigurations, {stdName: updatedConf.stdName});
+      findConf = find(this.stdConfigurations, { stdName: updatedConf.stdName });
       if (!findConf) {
         this.stdConfigurations.push(updatedConf);
         findConf = updatedConf;
@@ -291,8 +291,9 @@ export class AppDecoplannerPlan {
     } else if (type == "gas") {
       //check deco gases limitation
       if (
+        !update &&
         this.dive.decoGases.length >=
-        UserService.userRoles.licences.getUserLimitations().maxDecoGases
+          UserService.userRoles.licences.getUserLimitations().maxDecoGases
       ) {
         UserService.userRoles.licences.presentLicenceLimitation("decogases");
         return;
@@ -475,19 +476,19 @@ export class AppDecoplannerPlan {
 
   render() {
     return [
-      <ion-content class="slide-container">
-        <div class="ion-no-padding">
+      <ion-content class='slide-container'>
+        <div class='ion-no-padding'>
           <ion-row>
             <ion-col>
               <ion-segment
-                mode="ios"
+                mode='ios'
                 color={Environment.getAppColor()}
                 onIonChange={(ev) => this.segmentChanged(ev)}
                 value={this.segment}
               >
                 {(this.dive.diveSiteId && this.diveDataToShare.showDiveSite) ||
                 this.diveDataToShare.showPositionTab ? (
-                  <ion-segment-button value="location">
+                  <ion-segment-button value='location'>
                     <ion-label>
                       {this.index == 0
                         ? Environment.isDecoplanner()
@@ -498,10 +499,10 @@ export class AppDecoplannerPlan {
                   </ion-segment-button>
                 ) : undefined}
 
-                <ion-segment-button value="levels">
+                <ion-segment-button value='levels'>
                   <ion-label>{this.segmentTitles.levels}</ion-label>
                 </ion-segment-button>
-                <ion-segment-button value="gases" layout="icon-start">
+                <ion-segment-button value='gases' layout='icon-start'>
                   <ion-label>{this.segmentTitles.deco}</ion-label>
                   {this.dive.decoGases.length > 0 ? (
                     <ion-badge
@@ -514,7 +515,7 @@ export class AppDecoplannerPlan {
                   ) : undefined}
                 </ion-segment-button>
                 {this.showArpc ? (
-                  <ion-segment-button value="arpc" layout="icon-start">
+                  <ion-segment-button value='arpc' layout='icon-start'>
                     <ion-label>ARPC</ion-label>
                     <ion-badge
                       color={
@@ -524,7 +525,7 @@ export class AppDecoplannerPlan {
                       }
                     >
                       <ion-icon
-                        style={{fontSize: "10px"}}
+                        style={{ fontSize: "10px" }}
                         name={
                           this.dive.arpc && this.dive.arpc.approved
                             ? "checkmark"
@@ -543,27 +544,27 @@ export class AppDecoplannerPlan {
                   <ion-col>
                     {this.index == 0 ? (
                       <app-form-item
-                        label-tag="dive-date"
-                        label-text="Dive Date"
+                        label-tag='dive-date'
+                        label-text='Dive Date'
                         value={
                           this.dive.date ? this.dive.date.toISOString() : null
                         }
-                        name="tripDate"
-                        input-type="date"
-                        datePresentation="date-time"
-                        lines="inset"
+                        name='tripDate'
+                        input-type='date'
+                        datePresentation='date-time'
+                        lines='inset'
                         onFormItemChanged={(ev) => this.updateDate(ev)}
                       ></app-form-item>
                     ) : (
                       [
                         <ion-item>
-                          <my-transl tag="dive-date" text="Dive Date" />
-                          <ion-note slot="end">
+                          <my-transl tag='dive-date' text='Dive Date' />
+                          <ion-note slot='end'>
                             {format(this.dive.date, "dd MMM, yyyy HH:mm")}
                           </ion-note>
                         </ion-item>,
                         <ion-item>
-                          <ion-icon name="time" slot="start"></ion-icon>
+                          <ion-icon name='time' slot='start'></ion-icon>
                           <ion-select
                             label={TranslationService.getTransl(
                               "surface-interval",
@@ -666,7 +667,7 @@ export class AppDecoplannerPlan {
                                 "dive-site",
                                 "Dive Site"
                               )}
-                              labelPlacement="floating"
+                              labelPlacement='floating'
                               placeholder={TranslationService.getTransl(
                                 "select-dive-site",
                                 "Select Dive Site"
@@ -678,8 +679,8 @@ export class AppDecoplannerPlan {
                               }
                             ></ion-input>
                             <ion-icon
-                              slot="end"
-                              name="search-outline"
+                              slot='end'
+                              name='search-outline'
                             ></ion-icon>
                           </ion-item>
                         </ion-col>
@@ -692,8 +693,8 @@ export class AppDecoplannerPlan {
                                 "diving-center",
                                 "Diving Center"
                               )}
-                              labelPlacement="floating"
-                              id="selectDivingCenter"
+                              labelPlacement='floating'
+                              id='selectDivingCenter'
                               onIonChange={(ev) => this.updateDivingCenter(ev)}
                               disabled={true}
                               value={this.dive.divingCenterId}
@@ -707,44 +708,44 @@ export class AppDecoplannerPlan {
           {this.segment == "levels" ? (
             <ion-row>
               <ion-col>
-                <ion-list class="ion-text-wrap">
+                <ion-list class='ion-text-wrap'>
                   <ion-item>
-                    <div slot="end" style={{width: "1.9em"}}>
+                    <div slot='end' style={{ width: "1.9em" }}>
                       <ion-button
                         icon-only
                         color={
                           Environment.isDecoplanner() ? "gue-blue" : "planner"
                         }
-                        fill="clear"
-                        style={{"--padding-start": "0.4em"}}
+                        fill='clear'
+                        style={{ "--padding-start": "0.4em" }}
                         onClick={() => this.editDiveConfig()}
                       >
-                        <ion-icon name="create-outline"></ion-icon>
+                        <ion-icon name='create-outline'></ion-icon>
                       </ion-button>
                     </div>
-                    <ion-grid class="ion-text-center ion-no-padding">
+                    <ion-grid class='ion-text-center ion-no-padding'>
                       <ion-row
-                        class="ion-justify-content-center  ion-no-padding"
+                        class='ion-justify-content-center  ion-no-padding'
                         onClick={() => this.editDiveConfig()}
                       >
-                        <ion-col size="6">
-                          <ion-item lines="none">
+                        <ion-col size='6'>
+                          <ion-item lines='none'>
                             <my-transl
-                              tag="configuration"
-                              text="Configuration"
+                              tag='configuration'
+                              text='Configuration'
                             />
                           </ion-item>
                         </ion-col>
 
                         <ion-col>
-                          <ion-item lines="none">
+                          <ion-item lines='none'>
                             {this.allowSelectConfiguration ? (
                               <ion-select
                                 interfaceOptions={this.confSelectOptions}
                                 onIonChange={(ev) =>
                                   this.updateDiveConfiguration(ev.detail.value)
                                 }
-                                class="select-class"
+                                class='select-class'
                                 value={this.diveConfiguration.stdName}
                               >
                                 {this.stdConfigurations.map((conf) => (
@@ -754,7 +755,7 @@ export class AppDecoplannerPlan {
                                 ))}
                               </ion-select>
                             ) : (
-                              <ion-label class="ion-text-end">
+                              <ion-label class='ion-text-end'>
                                 {this.diveConfiguration.stdName}
                               </ion-label>
                             )}
@@ -765,10 +766,10 @@ export class AppDecoplannerPlan {
                   </ion-item>
 
                   <ion-item>
-                    <div slot="end" style={{width: "1.9em"}}>
+                    <div slot='end' style={{ width: "1.9em" }}>
                       <ion-button
                         icon-only
-                        fill="clear"
+                        fill='clear'
                         color={
                           Environment.isDecoplanner() ? "gue-blue" : "planner"
                         }
@@ -778,45 +779,45 @@ export class AppDecoplannerPlan {
                         }}
                         onClick={(ev) => this.presentPopover(ev, "level")}
                       >
-                        <ion-icon name="add-circle"></ion-icon>
+                        <ion-icon name='add-circle'></ion-icon>
                       </ion-button>
                     </div>
-                    <ion-grid class="ion-text-center">
+                    <ion-grid class='ion-text-center'>
                       <ion-row
                         small-capitals
-                        class="ion-align-items-center ion-no-padding"
+                        class='ion-align-items-center ion-no-padding'
                       >
                         <ion-col>
-                          <ion-text color="dark">
+                          <ion-text color='dark'>
                             <h6>
-                              <my-transl tag="depth" text="Depth" />
+                              <my-transl tag='depth' text='Depth' />
                             </h6>
                           </ion-text>
                         </ion-col>
                         <ion-col>
-                          <ion-text color="dark">
+                          <ion-text color='dark'>
                             <h6>
-                              <my-transl tag="time" text="Time" />
+                              <my-transl tag='time' text='Time' />
                             </h6>
                           </ion-text>
                         </ion-col>
                         <ion-col>
-                          <ion-text color="dark">
+                          <ion-text color='dark'>
                             <h6>
                               O<sub>2</sub>
                             </h6>
                           </ion-text>
                         </ion-col>
                         <ion-col>
-                          <ion-text color="dark">
+                          <ion-text color='dark'>
                             <h6>He</h6>
                           </ion-text>
                         </ion-col>
                         {this.parameters.configuration == "CCR" ? (
                           <ion-col>
-                            <ion-text color="dark">
+                            <ion-text color='dark'>
                               <h6>
-                                <my-transl tag="po2" text="pO2" />
+                                <my-transl tag='po2' text='pO2' />
                               </h6>
                             </ion-text>
                           </ion-col>
@@ -832,9 +833,9 @@ export class AppDecoplannerPlan {
                   >
                     {this.dive.profilePoints.map((level) => (
                       <ion-item>
-                        <ion-reorder slot="end"></ion-reorder>
-                        <ion-grid class="ion-text-center">
-                          <ion-row class="ion-align-items-center ion-no-padding">
+                        <ion-reorder slot='end'></ion-reorder>
+                        <ion-grid class='ion-text-center'>
+                          <ion-row class='ion-align-items-center ion-no-padding'>
                             <ion-col
                               onClick={(ev) =>
                                 this.presentPopover(ev, "level", level.index)
@@ -876,9 +877,9 @@ export class AppDecoplannerPlan {
                             <ion-col>
                               <ion-button
                                 icon-only
-                                fill="clear"
-                                size="small"
-                                color="danger"
+                                fill='clear'
+                                size='small'
+                                color='danger'
                                 disabled={
                                   level.index == 0 &&
                                   this.dive.profilePoints.length <= 1
@@ -890,7 +891,7 @@ export class AppDecoplannerPlan {
                                   )
                                 }
                               >
-                                <ion-icon name="trash"></ion-icon>
+                                <ion-icon name='trash'></ion-icon>
                               </ion-button>
                             </ion-col>
                           </ion-row>
@@ -905,43 +906,43 @@ export class AppDecoplannerPlan {
           {this.segment == "gases" ? (
             <ion-row>
               <ion-col>
-                <ion-list class="ion-text-wrap">
+                <ion-list class='ion-text-wrap'>
                   <ion-item>
-                    <ion-grid class="ion-text-center ion-no-padding">
-                      <ion-row small-capitals class="ion-no-padding">
+                    <ion-grid class='ion-text-center ion-no-padding'>
+                      <ion-row small-capitals class='ion-no-padding'>
                         <ion-col>
-                          <ion-text color="dark">
+                          <ion-text color='dark'>
                             <h6>
-                              <my-transl tag="from-depth" text="from Depth" />
+                              <my-transl tag='from-depth' text='from Depth' />
                             </h6>
                           </ion-text>
                         </ion-col>
                         <ion-col>
-                          <ion-text color="dark">
+                          <ion-text color='dark'>
                             <h6>
                               O<sub>2</sub>
                             </h6>
                           </ion-text>
                         </ion-col>
                         <ion-col>
-                          <ion-text color="dark">
+                          <ion-text color='dark'>
                             <h6>He</h6>
                           </ion-text>
                         </ion-col>
                         {this.parameters.configuration == "CCR" ? (
                           <ion-col>
-                            <ion-text color="dark">
+                            <ion-text color='dark'>
                               <h6>
-                                <my-transl tag="po2" text="pO2" />
+                                <my-transl tag='po2' text='pO2' />
                               </h6>
                             </ion-text>
                           </ion-col>
                         ) : undefined}
 
-                        <ion-col class="ion-no-padding">
-                          <ion-row class="ion-no-padding">
+                        <ion-col class='ion-no-padding'>
+                          <ion-row class='ion-no-padding'>
                             <ion-col
-                              class="ion-no-padding"
+                              class='ion-no-padding'
                               size={
                                 UserService.userRoles &&
                                 UserService.userRoles.licences.unlimited
@@ -951,25 +952,25 @@ export class AppDecoplannerPlan {
                             >
                               <ion-button
                                 icon-only
-                                fill="clear"
-                                color="primary"
+                                fill='clear'
+                                color='primary'
                                 onClick={(ev) => this.presentPopover(ev, "gas")}
-                                style={{marginTop: "10px"}}
+                                style={{ marginTop: "10px" }}
                               >
-                                <ion-icon name="add-circle"></ion-icon>
+                                <ion-icon name='add-circle'></ion-icon>
                               </ion-button>
                             </ion-col>
                             {UserService.userRoles &&
                             UserService.userRoles.licences.unlimited ? (
-                              <ion-col size="6" class="ion-no-padding">
+                              <ion-col size='6' class='ion-no-padding'>
                                 <ion-button
                                   icon-only
-                                  fill="clear"
-                                  color="secondary"
+                                  fill='clear'
+                                  color='secondary'
                                   onClick={() => this.addStdDecoGases()}
-                                  style={{marginTop: "10px"}}
+                                  style={{ marginTop: "10px" }}
                                 >
-                                  <ion-icon name="color-wand"></ion-icon>
+                                  <ion-icon name='color-wand'></ion-icon>
                                 </ion-button>
                               </ion-col>
                             ) : undefined}
@@ -979,30 +980,30 @@ export class AppDecoplannerPlan {
                     </ion-grid>
                   </ion-item>
                   {this.dive.decoGases.map((gas, i) => (
-                    <ion-item class="ion-text-center">
-                      <ion-grid class="ion-text-center">
-                        <ion-row class="ion-no-padding">
+                    <ion-item class='ion-text-center'>
+                      <ion-grid class='ion-text-center'>
+                        <ion-row class='ion-no-padding'>
                           <ion-col
-                            style={{marginTop: "5px"}}
+                            style={{ marginTop: "5px" }}
                             onClick={(ev) => this.presentPopover(ev, "gas", i)}
                           >
                             {gas.fromDepth}
                           </ion-col>
                           <ion-col
-                            style={{marginTop: "5px"}}
+                            style={{ marginTop: "5px" }}
                             onClick={(ev) => this.presentPopover(ev, "gas", i)}
                           >
                             {gas.O2}
                           </ion-col>
                           <ion-col
-                            style={{marginTop: "5px"}}
+                            style={{ marginTop: "5px" }}
                             onClick={(ev) => this.presentPopover(ev, "gas", i)}
                           >
                             {gas.He}
                           </ion-col>
                           {this.parameters.configuration == "CCR" ? (
                             <ion-col
-                              style={{marginTop: "5px"}}
+                              style={{ marginTop: "5px" }}
                               onClick={(ev) =>
                                 this.presentPopover(ev, "gas", i)
                               }
@@ -1017,12 +1018,12 @@ export class AppDecoplannerPlan {
                           <ion-col>
                             <ion-button
                               icon-only
-                              fill="clear"
-                              size="small"
-                              color="danger"
+                              fill='clear'
+                              size='small'
+                              color='danger'
                               onClick={() => this.removeDecoGas(this.dive, i)}
                             >
-                              <ion-icon name="trash"></ion-icon>
+                              <ion-icon name='trash'></ion-icon>
                             </ion-button>
                           </ion-col>
                         </ion-row>

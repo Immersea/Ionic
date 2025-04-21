@@ -1,16 +1,16 @@
-import {popoverController} from "@ionic/core";
-import {Component, h, Prop, State} from "@stencil/core";
-import {Media} from "../../../../interfaces/common/media/media";
-import {Environment} from "../../../../global/env";
-import {toNumber} from "lodash";
+import { popoverController } from "@ionic/core";
+import { Component, h, Prop, State } from "@stencil/core";
+import { Media } from "../../../../interfaces/common/media/media";
+import { Environment } from "../../../../global/env";
+import { toNumber } from "lodash";
 
 @Component({
   tag: "popover-media-loading",
   styleUrl: "popover-media-loading.scss",
 })
 export class PopoverMediaLoading {
-  @Prop({mutable: true}) media: Media;
-  @Prop({mutable: true}) file: File;
+  @Prop({ mutable: true }) media: Media;
+  @Prop({ mutable: true }) file: File;
   @State() validMedia = false;
   @State() updateView = false;
 
@@ -19,7 +19,7 @@ export class PopoverMediaLoading {
       this.media = new Media();
     }
     if (this.file) {
-      this.updateMedia({detail: this.file});
+      this.updateMedia({ detail: this.file });
     } else {
       this.validateMedia();
     }
@@ -30,7 +30,7 @@ export class PopoverMediaLoading {
   }
 
   async save() {
-    popoverController.dismiss({media: this.media, file: this.file});
+    popoverController.dismiss({ media: this.media, file: this.file });
   }
 
   validateMedia() {
@@ -81,11 +81,11 @@ export class PopoverMediaLoading {
         <ion-list>
           <ion-note>Id: {this.media.id}</ion-note>
           <app-form-item
-            label-tag="title"
-            label-text="Title"
+            label-tag='title'
+            label-text='Title'
             value={this.media.title}
-            name="title"
-            input-type="text"
+            name='title'
+            input-type='text'
             onFormItemChanged={(ev) => this.handleChange(ev)}
             validator={[
               "required",
@@ -99,11 +99,11 @@ export class PopoverMediaLoading {
             ]}
           ></app-form-item>
           <app-form-item
-            label-tag="subtitle"
-            label-text="Subtitle"
+            label-tag='subtitle'
+            label-text='Subtitle'
             value={this.media.subtitle}
-            name="subtitle"
-            input-type="text"
+            name='subtitle'
+            input-type='text'
             onFormItemChanged={(ev) => this.handleChange(ev)}
             validator={[
               {
@@ -116,11 +116,11 @@ export class PopoverMediaLoading {
             ]}
           ></app-form-item>
           <app-form-item
-            label-tag="description"
-            label-text="Description"
+            label-tag='description'
+            label-text='Description'
             value={this.media.description}
-            name="description"
-            input-type="text"
+            name='description'
+            input-type='text'
             onFormItemChanged={(ev) => this.handleChange(ev)}
             validator={[
               "required",
@@ -135,16 +135,16 @@ export class PopoverMediaLoading {
           ></app-form-item>
           <ion-item>
             <ion-label>
-              <my-transl tag="public" text="Public" />
+              <my-transl tag='public' text='Public' />
             </ion-label>
             <ion-toggle
-              slot="end"
+              slot='end'
               onIonChange={(ev) => this.updatePublic(ev)}
               checked={this.media.public}
             ></ion-toggle>
           </ion-item>
         </ion-list>
-        <div class="drop-area">
+        <div class='drop-area'>
           <app-dragdrop-file
             fileTypes={this.media.getTypes()}
             file={this.file}

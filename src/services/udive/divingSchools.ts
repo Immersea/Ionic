@@ -1,26 +1,26 @@
-import {StorageService} from "../common/storage";
-import {doc, onSnapshot} from "firebase/firestore";
-import {alertController} from "@ionic/core";
-import {DatabaseService, SETTINGSCOLLECTIONNAME} from "../common/database";
-import {TranslationService} from "../common/translations";
-import {CLIENTSCOLLECTIONNAME, UDiveFilterService} from "./ud-db-filter";
-import {orderBy} from "lodash";
-import {RouterService} from "../common/router";
-import {BehaviorSubject, Subscription} from "rxjs";
-import {SystemService} from "../common/system";
-import {DIVINGCLASSESSCOLLECTION} from "./divingClasses";
-import {DIVETRIPSCOLLECTION} from "./diveTrips";
-import {ClassSummary} from "../../interfaces/udive/diving-class/divingClass";
-import {TripSummary} from "../../interfaces/udive/dive-trip/diveTrip";
-import {USERCHATSCOLLECTION} from "../common/user";
-import {ChatService} from "../common/chat";
+import { StorageService } from "../common/storage";
+import { doc, onSnapshot } from "firebase/firestore";
+import { alertController } from "@ionic/core";
+import { DatabaseService, SETTINGSCOLLECTIONNAME } from "../common/database";
+import { TranslationService } from "../common/translations";
+import { CLIENTSCOLLECTIONNAME, UDiveFilterService } from "./ud-db-filter";
+import { orderBy } from "lodash";
+import { RouterService } from "../common/router";
+import { BehaviorSubject, Subscription } from "rxjs";
+import { SystemService } from "../common/system";
+import { DIVINGCLASSESSCOLLECTION } from "./divingClasses";
+import { DIVETRIPSCOLLECTION } from "./diveTrips";
+import { ClassSummary } from "../../interfaces/udive/diving-class/divingClass";
+import { TripSummary } from "../../interfaces/udive/dive-trip/diveTrip";
+import { USERCHATSCOLLECTION } from "../common/user";
+import { ChatService } from "../common/chat";
 import {
   DivingSchool,
   MapDataDivingSchool,
 } from "../../interfaces/udive/diving-school/divingSchool";
-import {Clients} from "../../interfaces/udive/clients/clients";
-import {ChatsSummary} from "../../interfaces/common/chat/chat";
-import {firestore} from "../../helpers/firebase";
+import { Clients } from "../../interfaces/udive/clients/clients";
+import { ChatsSummary } from "../../interfaces/common/chat/chat";
+import { firestore } from "../../helpers/firebase";
 
 export const DIVESCHOOLSSCOLLECTION = "divingSchools";
 

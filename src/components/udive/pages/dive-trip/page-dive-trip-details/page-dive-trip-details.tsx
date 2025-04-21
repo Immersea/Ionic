@@ -1,13 +1,13 @@
-import {Component, h, Prop, State, Element} from "@stencil/core";
-import {DiveTripsService} from "../../../../../services/udive/diveTrips";
-import {DiveTrip} from "../../../../../interfaces/udive/dive-trip/diveTrip";
-import {Marker} from "../../../../../interfaces/interfaces";
-import {RouterService} from "../../../../../services/common/router";
-import {Subscription} from "rxjs";
-import {UserService} from "../../../../../services/common/user";
-import {calculateColumns, mapHeight} from "../../../../../helpers/utils";
+import { Component, h, Prop, State, Element } from "@stencil/core";
+import { DiveTripsService } from "../../../../../services/udive/diveTrips";
+import { DiveTrip } from "../../../../../interfaces/udive/dive-trip/diveTrip";
+import { Marker } from "../../../../../interfaces/interfaces";
+import { RouterService } from "../../../../../services/common/router";
+import { Subscription } from "rxjs";
+import { UserService } from "../../../../../services/common/user";
+import { calculateColumns, mapHeight } from "../../../../../helpers/utils";
 import Swiper from "swiper";
-import {isArray, toNumber} from "lodash";
+import { isArray, toNumber } from "lodash";
 
 @Component({
   tag: "page-dive-trip-details",
@@ -18,9 +18,9 @@ export class PageDiveTripDetails {
   @Prop() tripid: string;
   @State() diveTrip: DiveTrip;
   @State() titles = [
-    {tag: "dives"},
-    {tag: "bookings"},
-    {tag: "chat", disabled: true},
+    { tag: "dives" },
+    { tag: "bookings" },
+    { tag: "chat", disabled: true },
   ];
   @State() slider: Swiper;
   markers: Marker[] = [];
@@ -81,32 +81,32 @@ export class PageDiveTripDetails {
   }
 
   disconnectedCallback() {
-    this.userSub.unsubscribe();
+    this.userSub ? this.userSub.unsubscribe() : undefined;
   }
 
   render() {
     return [
       <ion-header>
-        <ion-toolbar color="divetrip">
-          <ion-buttons slot="start">
+        <ion-toolbar color='divetrip'>
+          <ion-buttons slot='start'>
             <ion-button onClick={() => RouterService.goBack()} icon-only>
-              <ion-icon name="arrow-back"></ion-icon>
+              <ion-icon name='arrow-back'></ion-icon>
             </ion-button>
           </ion-buttons>
           <ion-title>{this.diveTrip.displayName}</ion-title>
         </ion-toolbar>
       </ion-header>,
       <app-header-segment-toolbar
-        color="divetrip"
+        color='divetrip'
         swiper={this.slider}
         titles={this.titles}
       ></app-header-segment-toolbar>,
-      <ion-content class="slides">
-        <swiper-container class="slider-dive-trip swiper">
-          <swiper-wrapper class="swiper-wrapper">
-            <swiper-slide class="swiper-slide">
+      <ion-content class='slides'>
+        <swiper-container class='slider-dive-trip swiper'>
+          <swiper-wrapper class='swiper-wrapper'>
+            <swiper-slide class='swiper-slide'>
               <ion-grid>
-                <ion-row class="ion-text-start">
+                <ion-row class='ion-text-start'>
                   {this.diveTrip.tripDives.map((trip) => (
                     <ion-col
                       size-sm={this.columns.sm}
@@ -119,9 +119,9 @@ export class PageDiveTripDetails {
                 </ion-row>
               </ion-grid>
             </swiper-slide>
-            <swiper-slide class="swiper-slide">
+            <swiper-slide class='swiper-slide'>
               <ion-grid>
-                <ion-row class="ion-text-start">
+                <ion-row class='ion-text-start'>
                   {!this.userId ? (
                     <div
                       style={{
@@ -134,8 +134,8 @@ export class PageDiveTripDetails {
                         <ion-card-header>
                           <ion-card-title>
                             <my-transl
-                              tag="please-login"
-                              text="Please login to view this page"
+                              tag='please-login'
+                              text='Please login to view this page'
                             />
                           </ion-card-title>
                         </ion-card-header>
@@ -160,8 +160,8 @@ export class PageDiveTripDetails {
               </ion-grid>
             </swiper-slide>
             {this.showChat ? (
-              <swiper-slide class="swiper-slide">
-                <app-chat id="chat-slide" chatId={this.diveTrip.chatId} />
+              <swiper-slide class='swiper-slide'>
+                <app-chat id='chat-slide' chatId={this.diveTrip.chatId} />
               </swiper-slide>
             ) : undefined}
           </swiper-wrapper>

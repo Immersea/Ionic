@@ -1,12 +1,12 @@
-import {ADMINROUTE} from "../../common/router";
-import {UserService} from "../../common/user";
-import {MenuService} from "../../common/menus";
-import {orderBy} from "lodash";
-import {TrasteelFilterService} from "./trs-db-filter";
-import {CUSTOMERSCOLLECTION} from "../crm/customers";
-import {PROJECTSCOLLECTION} from "../refractories/projects";
-import {DATASHEETSCOLLECTION} from "../refractories/datasheets";
-import {SHAPESCOLLECTION} from "../refractories/shapes";
+import { ADMINROUTE } from "../../common/router";
+import { UserService } from "../../common/user";
+import { MenuService } from "../../common/menus";
+import { orderBy } from "lodash";
+import { TrasteelFilterService } from "./trs-db-filter";
+import { CUSTOMERSCOLLECTION } from "../crm/customers";
+import { PROJECTSCOLLECTION } from "../refractories/projects";
+import { DATASHEETSCOLLECTION } from "../refractories/datasheets";
+import { SHAPESCOLLECTION } from "../refractories/shapes";
 //import {USERPLANSCOLLECTION} from "../crm/user-plans";
 
 export class MenuController {

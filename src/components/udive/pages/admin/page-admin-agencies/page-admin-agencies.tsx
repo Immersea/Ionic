@@ -1,19 +1,19 @@
-import {Component, h, State} from "@stencil/core";
-import {UserService} from "../../../../../services/common/user";
-import {UserRoles} from "../../../../../interfaces/common/user/user-roles";
+import { Component, h, State } from "@stencil/core";
+import { UserService } from "../../../../../services/common/user";
+import { UserRoles } from "../../../../../interfaces/common/user/user-roles";
 import {
   SystemService,
   SYSTEMCOLLECTION,
 } from "../../../../../services/common/system";
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
 import {
   Agency,
   Certification,
 } from "../../../../../interfaces/udive/diving-class/divingClass";
-import {cloneDeep, orderBy} from "lodash";
-import {RouterService} from "../../../../../services/common/router";
-import {fabButtonTopMarginString} from "../../../../../helpers/utils";
-import {CallableFunctionsUdiveService} from "../../../../../services/udive/callableFunctions";
+import { cloneDeep, orderBy } from "lodash";
+import { RouterService } from "../../../../../services/common/router";
+import { fabButtonTopMarginString } from "../../../../../helpers/utils";
+import { CallableFunctionsUdiveService } from "../../../../../services/udive/callableFunctions";
 
 @Component({
   tag: "page-admin-agencies",
@@ -159,7 +159,7 @@ export class PageAdminAgencies {
 
   render() {
     return [
-      <ion-header class="cover">
+      <ion-header class='cover'>
         <app-upload-cover
           item={{
             collection: SYSTEMCOLLECTION,
@@ -172,12 +172,12 @@ export class PageAdminAgencies {
       </ion-header>,
       <ion-content>
         <ion-fab
-          vertical="top"
-          horizontal="start"
-          slot="fixed"
-          style={{marginTop: fabButtonTopMarginString(0)}}
+          vertical='top'
+          horizontal='start'
+          slot='fixed'
+          style={{ marginTop: fabButtonTopMarginString(0) }}
         >
-          <ion-menu-button class="fab-icon" />
+          <ion-menu-button class='fab-icon' />
         </ion-fab>
         <ion-list>
           {this.agencies.length > 0 ? (
@@ -186,7 +186,7 @@ export class PageAdminAgencies {
               <ion-select
                 value={this.selectedAgency.id}
                 onIonChange={(ev) => this.updateAgency(ev.detail.value)}
-                interface="popover"
+                interface='popover'
               >
                 {this.agencies.map((agency) => (
                   <ion-select-option value={agency.id}>
@@ -197,20 +197,20 @@ export class PageAdminAgencies {
             </ion-item>
           ) : undefined}
           <app-form-item
-            label-tag="name"
-            label-text="Name"
+            label-tag='name'
+            label-text='Name'
             value={this.selectedAgency.name}
-            name="name"
-            input-type="text"
+            name='name'
+            input-type='text'
             onFormItemChanged={(ev) => this.handleChange(ev)}
             validator={["required"]}
           ></app-form-item>
           <app-form-item
-            label-tag="website"
-            label-text="Website"
+            label-tag='website'
+            label-text='Website'
             value={this.selectedAgency.website}
-            name="website"
-            input-type="text"
+            name='website'
+            input-type='text'
             onFormItemChanged={(ev) => this.handleChange(ev)}
             validator={["required"]}
           ></app-form-item>
@@ -218,10 +218,10 @@ export class PageAdminAgencies {
         <ion-list>
           <ion-list-header>
             <ion-label>
-              <my-transl tag="certifications" text="Certifications" />
+              <my-transl tag='certifications' text='Certifications' />
             </ion-label>
             <ion-button icon-only onClick={() => this.editCertification()}>
-              <ion-icon name="add-circle-outline"></ion-icon>
+              <ion-icon name='add-circle-outline'></ion-icon>
             </ion-button>
           </ion-list-header>
           <ion-reorder-group
@@ -231,20 +231,20 @@ export class PageAdminAgencies {
             {this.selectedAgencyCertifications.map((cert, i) => (
               <ion-item>
                 {cert.photoURL ? (
-                  <ion-avatar slot="start">
+                  <ion-avatar slot='start'>
                     <img src={cert.photoURL} />
                   </ion-avatar>
                 ) : undefined}
-                <ion-reorder slot="end"></ion-reorder>
+                <ion-reorder slot='end'></ion-reorder>
                 <ion-label>
                   {cert.order + 1}. {cert.name}
                 </ion-label>
                 <ion-button
                   icon-only
-                  fill="clear"
+                  fill='clear'
                   onClick={() => this.editCertification(i)}
                 >
-                  <ion-icon name="create-outline"></ion-icon>
+                  <ion-icon name='create-outline'></ion-icon>
                 </ion-button>
               </ion-item>
             ))}

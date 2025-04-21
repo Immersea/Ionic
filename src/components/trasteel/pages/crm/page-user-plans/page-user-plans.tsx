@@ -1,19 +1,19 @@
-import {Component, Prop, State, h} from "@stencil/core";
+import { Component, Prop, State, h } from "@stencil/core";
 import Swiper from "swiper";
-import {UserPlansService} from "../../../../../services/trasteel/crm/user-plans";
+import { UserPlansService } from "../../../../../services/trasteel/crm/user-plans";
 import {
   ProductLines,
   UserPlan,
   UserPlans,
 } from "../../../../../interfaces/trasteel/users/user-plans";
-import {Subscription} from "rxjs";
-import {CustomersService} from "../../../../../services/trasteel/crm/customers";
-import {TrasteelService} from "../../../../../services/trasteel/common/services";
-import {UsersTeams} from "../../../../../interfaces/trasteel/users/users-teams";
-import {UserService} from "../../../../../services/common/user";
-import {UserPubicProfile} from "../../../../../components";
-import {orderBy} from "lodash";
-import {Environment} from "../../../../../global/env";
+import { Subscription } from "rxjs";
+import { CustomersService } from "../../../../../services/trasteel/crm/customers";
+import { TrasteelService } from "../../../../../services/trasteel/common/services";
+import { UsersTeams } from "../../../../../interfaces/trasteel/users/users-teams";
+import { UserService } from "../../../../../services/common/user";
+import { UserPubicProfile } from "../../../../../components";
+import { orderBy } from "lodash";
+import { Environment } from "../../../../../global/env";
 
 @Component({
   tag: "page-user-plans",
@@ -24,8 +24,8 @@ export class PageUserPlans {
   @State() userPlans: UserPlans;
   userPlansSub: Subscription;
   titles = [
-    {tag: "personal", text: "Personal", disabled: false},
-    {tag: "team", text: "Team", disabled: false},
+    { tag: "personal", text: "Personal", disabled: false },
+    { tag: "team", text: "Team", disabled: false },
   ];
   @State() slider: Swiper;
   @State() usersTeams: UsersTeams;
@@ -200,30 +200,30 @@ export class PageUserPlans {
           titles={this.titles}
         ></app-header-segment-toolbar>
       ) : undefined,
-      <ion-content class="slides">
-        <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+      <ion-content class='slides'>
+        <ion-fab vertical='top' horizontal='end' slot='fixed' edge>
           <ion-fab-button
-            size="small"
+            size='small'
             onClick={() => this.editPlan()}
             color={Environment.getAppColor()}
           >
-            <ion-icon name="add"></ion-icon>
+            <ion-icon name='add'></ion-icon>
           </ion-fab-button>
         </ion-fab>
         <swiper-container class={"slider-plans" + this.uid + " swiper"}>
-          <swiper-wrapper class="swiper-wrapper">
+          <swiper-wrapper class='swiper-wrapper'>
             {/* PERSONAL */}
-            <swiper-slide class="swiper-slide">
-              <div class="ion-padding-top"></div>
+            <swiper-slide class='swiper-slide'>
+              <div class='ion-padding-top'></div>
               {this.userPlans &&
               this.userPlans.userPlans &&
               this.userPlans.userPlans.length > 0 ? (
                 this.userPlans.userPlans.map((userPlan, index) => [
                   <ion-item button onClick={() => this.editPlan(index)}>
-                    <ion-grid class="ion-no-padding">
-                      <ion-row class="ion-no-padding">
+                    <ion-grid class='ion-no-padding'>
+                      <ion-row class='ion-no-padding'>
                         <ion-col>
-                          <ion-item-divider color="trasteel">
+                          <ion-item-divider color='trasteel'>
                             {userPlan.customerId != null
                               ? CustomersService.getCustomersDetails(
                                   userPlan.customerId
@@ -233,20 +233,20 @@ export class PageUserPlans {
                         </ion-col>
                       </ion-row>
                       {userPlan.planOfActions.map((plan) => [
-                        <ion-row class="ion-no-padding">
+                        <ion-row class='ion-no-padding'>
                           <ion-col>
                             <app-item-detail
-                              lines="none"
-                              label-tag="product"
-                              label-text="Product"
+                              lines='none'
+                              label-tag='product'
+                              label-text='Product'
                               detailText={ProductLines[plan.product]}
                             ></app-item-detail>
                           </ion-col>
                           <ion-col>
                             <app-item-detail
-                              lines="none"
-                              label-tag="updated"
-                              label-text="Updated"
+                              lines='none'
+                              label-tag='updated'
+                              label-text='Updated'
                               detailText={new Date(
                                 plan.updated
                               ).toLocaleDateString()}
@@ -254,34 +254,34 @@ export class PageUserPlans {
                           </ion-col>
                           <ion-col>
                             <app-item-detail
-                              lines="none"
-                              label-tag="due-date"
-                              label-text="Due Date"
+                              lines='none'
+                              label-tag='due-date'
+                              label-text='Due Date'
                               detailText={new Date(
                                 plan.dueDate
                               ).toLocaleDateString()}
                             ></app-item-detail>
                           </ion-col>
                         </ion-row>,
-                        <ion-row class="ion-no-padding">
+                        <ion-row class='ion-no-padding'>
                           <ion-col>
                             <app-item-detail
-                              lines="none"
-                              label-tag="actual-situation"
-                              label-text="Actual Situation"
+                              lines='none'
+                              label-tag='actual-situation'
+                              label-text='Actual Situation'
                               detailText={plan.situation}
                             ></app-item-detail>
                           </ion-col>
                           <ion-col>
                             <app-item-detail
-                              lines="none"
-                              label-tag="plan"
-                              label-text="Plan"
+                              lines='none'
+                              label-tag='plan'
+                              label-text='Plan'
                               detailText={plan.plan}
                             ></app-item-detail>
                           </ion-col>
                         </ion-row>,
-                        <ion-row class="ion-no-padding">
+                        <ion-row class='ion-no-padding'>
                           <ion-item-divider></ion-item-divider>
                         </ion-row>,
                       ])}
@@ -296,7 +296,7 @@ export class PageUserPlans {
             </swiper-slide>
             {/* TEAM */}
             {!this.uid && TrasteelService.isTeamAdmin() ? (
-              <swiper-slide class="swiper-slide">
+              <swiper-slide class='swiper-slide'>
                 <ion-list>{this.renderTeam()}</ion-list>
               </swiper-slide>
             ) : undefined}
