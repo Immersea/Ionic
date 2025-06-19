@@ -1,7 +1,7 @@
 import { Component, h, Prop, State } from "@stencil/core";
 import { Review } from "../../../../../interfaces/common/reviews/review";
 import { ReviewService } from "../../../../../services/common/reviews";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 
 @Component({
   tag: "app-last-reviews",

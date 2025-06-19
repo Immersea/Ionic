@@ -80,12 +80,21 @@ export namespace Components {
     interface AppAdminDiveTrips {
         "filterByOrganisierId": string;
         "filterByTrips": any;
+        /**
+          * @default false
+         */
         "future": boolean;
     }
     interface AppAdminDivingClasses {
         "filterByClasses": any;
         "filterByOrganisierId": string;
+        /**
+          * @default false
+         */
         "future": boolean;
+        /**
+          * @default false
+         */
         "school": boolean;
     }
     interface AppAdminTranslations {
@@ -93,18 +102,39 @@ export namespace Components {
         "translations": Translation[];
     }
     interface AppBanner {
+        /**
+          * @default true
+         */
         "backgroundCover": boolean;
+        /**
+          * @default true
+         */
         "backgroundCoverFill": boolean;
+        /**
+          * @default 100
+         */
         "heightPerc": number;
+        /**
+          * @default null
+         */
         "heightPx": number;
         "link": string;
         "scrollTopValue": number;
+        /**
+          * @default 100
+         */
         "widthPerc": number;
+        /**
+          * @default null
+         */
         "widthPx": number;
     }
     interface AppCalendar {
         "addEvent": () => Promise<void>;
         "addEvents": any;
+        /**
+          * @default "calendar"
+         */
         "calendarId": string;
     }
     interface AppChat {
@@ -116,10 +146,16 @@ export namespace Components {
     }
     interface AppCustomerPlantProduction {
         "customer": Customer;
+        /**
+          * @default false
+         */
         "editable": boolean;
     }
     interface AppDecoplannerArpc {
         "diveDataToShare": any;
+        /**
+          * @default false
+         */
         "planner"?: boolean;
     }
     interface AppDecoplannerCharts {
@@ -132,6 +168,9 @@ export namespace Components {
     }
     interface AppDecoplannerPlan {
         "diveDataToShare": any;
+        /**
+          * @default false
+         */
         "planner"?: boolean;
     }
     interface AppDecoplannerProfile {
@@ -142,41 +181,71 @@ export namespace Components {
     }
     interface AppDecoplannerShowplan {
         "diveDataToShare": any;
+        /**
+          * @default false
+         */
         "planner"?: boolean;
     }
     interface AppDiveClassBookings {
         "divingClass": DivingClass;
         "divingClassId": string;
+        /**
+          * @default false
+         */
         "editable": boolean;
         "updateStudentsList": () => Promise<boolean>;
     }
     interface AppDiveCourseActivities {
         "activities": Activity[];
+        /**
+          * @default false
+         */
         "editable": boolean;
+        /**
+          * @default true
+         */
         "showDiveLocation": boolean;
     }
     interface AppDiveCourseCard {
         "divingCourse": DivingCourse;
+        /**
+          * @default false
+         */
         "edit": boolean;
     }
     interface AppDivePlanCard {
         "divePlan": DivePlanModel;
+        /**
+          * @default false
+         */
         "edit": boolean;
     }
     interface AppDiveSiteCard {
         "diveSite": MapDataDiveSite;
+        /**
+          * @default false
+         */
         "edit": boolean;
         "startlocation": any;
     }
     interface AppDiveTripBookings {
         "diveTrip": DiveTrip;
         "diveTripId": string;
+        /**
+          * @default false
+         */
         "editable": boolean;
         "tripDiveIndex": number;
     }
     interface AppDiveTripCard {
+        /**
+          * @default false
+         */
         "editable": boolean;
         "tripDive": TripDive;
+        /**
+          * @default false
+         */
         "updateView": boolean;
     }
     interface AppDivingCenterCard {
@@ -185,29 +254,53 @@ export namespace Components {
     }
     interface AppDivingClassSchedule {
         "divingClass": DivingClass;
+        /**
+          * @default false
+         */
         "editable": boolean;
     }
     interface AppDragdropFile {
+        /**
+          * @default false
+         */
         "autoOpen": boolean;
         "file": File;
         "fileType": string;
         "fileTypes": string[];
     }
     interface AppEafQuestionnaire {
+        /**
+          * @default new CustomerConditionEAF()
+         */
         "conditions": CustomerConditionEAF;
+        /**
+          * @default false
+         */
         "editable": boolean;
     }
     interface AppFormItem {
         "appendText"?: any;
         "color"?: string;
+        /**
+          * @default "date"
+         */
         "datePresentation"?: | "date"
     | "date-time"
     | "month"
     | "month-year"
     | "time"
     | "year";
+        /**
+          * @default 300
+         */
         "debounce"?: number;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default false
+         */
         "forceInvalid"?: boolean;
         "forceResetValue": (value: any) => Promise<void>;
         "inputFormMode": | "decimal"
@@ -219,36 +312,84 @@ export namespace Components {
     | "text"
     | "url"
     | undefined;
+        /**
+          * @default "0.1"
+         */
         "inputStep": string;
         "inputType": TextFieldTypes | "boolean";
+        /**
+          * @default "floating"
+         */
         "labelPosition"?: "fixed" | "stacked" | "floating";
         "labelReplace"?: any;
         "labelTag"?: string;
         "labelText"?: string;
+        /**
+          * @default "none"
+         */
         "lines"?: "none" | "full" | "inset";
         "maxDate"?: string;
+        /**
+          * @default false
+         */
         "multiLanguage"?: boolean;
         "name": string;
         "placeholder"?: string;
+        /**
+          * @default false
+         */
         "preferWheel"?: boolean;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default false
+         */
         "selectOnFocus"?: boolean;
+        /**
+          * @default false
+         */
         "shortItem"?: boolean;
+        /**
+          * @default true
+         */
         "showDateTitle"?: boolean;
+        /**
+          * @default true
+         */
         "showItem"?: boolean;
         "textRows"?: number;
         "validator"?: Array<string | ValidatorEntry | Validator<string>>;
         "value": string | TextMultilanguage | number | boolean;
     }
     interface AppGeocode {
+        /**
+          * @default ""
+         */
         "address": string;
+        /**
+          * @default false
+         */
         "gotFocus": boolean;
     }
     interface AppHeaderSegmentToolbar {
         "color": string;
+        /**
+          * @default "md"
+         */
         "mode": "ios" | "md";
+        /**
+          * @default false
+         */
         "noHeader": boolean;
+        /**
+          * @default false
+         */
         "noToolbar": boolean;
+        /**
+          * @default 0
+         */
         "segment": number;
         "swiper": any;
         "titles": {
@@ -260,17 +401,35 @@ export namespace Components {
     slotIcon?: string;
     badge?: number;
   }[];
+        /**
+          * @default true
+         */
         "updateBadge": boolean;
     }
     interface AppImageCache {
+        /**
+          * @default true
+         */
         "backgroundCover": boolean;
+        /**
+          * @default true
+         */
         "backgroundCoverFill": boolean;
         "url": string;
     }
     interface AppInfiniteScroll {
+        /**
+          * @default []
+         */
         "groupBy": string[];
         "icon": string;
+        /**
+          * @default []
+         */
         "list": any[];
+        /**
+          * @default false
+         */
         "loading": boolean;
         "options": {
     tag: string;
@@ -279,10 +438,22 @@ export namespace Components {
     color: string;
     func: any;
   }[];
+        /**
+          * @default []
+         */
         "orderBy": string[];
         "returnField": string;
+        /**
+          * @default []
+         */
         "showFields": string[];
+        /**
+          * @default " "
+         */
         "showFieldsDivider": string;
+        /**
+          * @default []
+         */
         "showNotes": string[];
     }
     interface AppItemCover {
@@ -290,6 +461,9 @@ export namespace Components {
         "tmbPosition"?: string;
     }
     interface AppItemDetail {
+        /**
+          * @default false
+         */
         "alignRight"?: boolean;
         "appendText"?: string;
         "detailTag"?: string;
@@ -297,17 +471,38 @@ export namespace Components {
     | number
     | boolean
     | TextMultilanguage;
+        /**
+          * @default false
+         */
         "isDate"?: boolean;
         "labelPosition"?: any;
         "labelTag"?: string;
         "labelText"?: string;
+        /**
+          * @default "none"
+         */
         "lines"?: "none" | "full" | "inset";
+        /**
+          * @default true
+         */
         "showItem"?: boolean;
     }
     interface AppLanguagePicker {
+        /**
+          * @default false
+         */
         "iconOnly": boolean;
+        /**
+          * @default false
+         */
         "picker": boolean;
+        /**
+          * @default false
+         */
         "selectOnly": boolean;
+        /**
+          * @default "en"
+         */
         "selectedLangCode": string;
     }
     interface AppLastReviews {
@@ -315,6 +510,9 @@ export namespace Components {
         "uid": string;
     }
     interface AppLocation {
+        /**
+          * @default true
+         */
         "editable": boolean;
         "location": CustomerLocation;
         "locations": LocationType[];
@@ -324,14 +522,26 @@ export namespace Components {
         "center": any;
         "closePopup": () => Promise<boolean>;
         "createLine": (id: any, pointA: any, pointB: any) => Promise<boolean>;
+        /**
+          * @default false
+         */
         "currentPosition": boolean;
         "draggableMarkerPosition": any;
         "fitToBounds": (points?: any) => Promise<boolean>;
         "mapLoaded": () => Promise<boolean>;
+        /**
+          * @default []
+         */
         "markers": Marker[];
+        /**
+          * @default false
+         */
         "markersAsFeature": boolean;
         "pageId": string;
         "removeLine": (id: any) => Promise<boolean>;
+        /**
+          * @default []
+         */
         "searchTags": SearchTag[];
         "triggerMapResize": () => Promise<void>;
         "updateSearchTags": (searchTags: any) => Promise<boolean>;
@@ -345,20 +555,47 @@ export namespace Components {
     interface AppMenu {
     }
     interface AppModalFooter {
+        /**
+          * @default {     tag: "cancel",     text: "Cancel",     color: "danger",   }
+         */
         "cancelTag": { tag: string; text: string; color: string; };
+        /**
+          * @default null
+         */
         "color": any;
+        /**
+          * @default false
+         */
         "disableSave": boolean;
+        /**
+          * @default {     tag: "save",     text: "Save",     color: "success",   }
+         */
         "saveTag": { tag: string; text: string; color: string; };
+        /**
+          * @default true
+         */
         "showSave": boolean;
     }
     interface AppMultilanguageText {
         "text": TextMultilanguage;
     }
     interface AppNavbar {
+        /**
+          * @default false
+         */
         "backButton"?: boolean;
+        /**
+          * @default "primary"
+         */
         "color"?: string;
         "extraTitle"?: string;
+        /**
+          * @default "primary"
+         */
         "iconColor"?: string;
+        /**
+          * @default false
+         */
         "modal"?: boolean;
         "rightButtonFc"?: any;
         "rightButtonText"?: {
@@ -371,6 +608,9 @@ export namespace Components {
         "text"?: string;
     }
     interface AppPageProjectSummary {
+        /**
+          * @default []
+         */
         "areaShapes": AreaShape[];
         "project": Project;
         "updateSummary": any;
@@ -387,22 +627,43 @@ export namespace Components {
     }
     interface AppSearchFilter {
         "addTag": (tag: SearchTag) => Promise<void>;
+        /**
+          * @default false
+         */
         "hideToolbar": boolean;
         "removeTag": (i: any) => Promise<void>;
     }
     interface AppSearchToolbar {
+        /**
+          * @default Environment.getAppColor()
+         */
         "color": string;
         "filterBy": string[];
         "forceFilter": (list: any) => Promise<void>;
+        /**
+          * @default []
+         */
         "list": any[];
+        /**
+          * @default []
+         */
         "orderFields": string[];
+        /**
+          * @default "Search"
+         */
         "placeholder": string;
         "searchTitle": string;
     }
     interface AppSearchbar {
+        /**
+          * @default false
+         */
         "floating": boolean;
     }
     interface AppSelectSearch {
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "label": { tag: string; text: string };
         "labelAddText": string;
@@ -415,22 +676,49 @@ export namespace Components {
         "value": string;
     }
     interface AppShrinkingHeader {
+        /**
+          * @default ""
+         */
         "logoUrl": string;
+        /**
+          * @default 0
+         */
         "scrollTopValue": number;
+        /**
+          * @default null
+         */
         "slogan": any;
     }
     interface AppSkeletons {
         "skeleton": string;
     }
     interface AppStarRating {
+        /**
+          * @default "gold"
+         */
         "color": string;
+        /**
+          * @default false
+         */
         "editable": boolean;
+        /**
+          * @default 0
+         */
         "rating": number;
+        /**
+          * @default 25
+         */
         "size": number;
+        /**
+          * @default 5
+         */
         "stars": number;
     }
     interface AppStickySearch {
         "placeholderValue": string;
+        /**
+          * @default 0
+         */
         "scrollTopValue": number;
     }
     interface AppStripeConnect {
@@ -449,6 +737,9 @@ export namespace Components {
     photoURL: string;
     coverURL: string;
   };
+        /**
+          * @default true
+         */
         "showPhotoURL": boolean;
     }
     interface AppUploadCovers {
@@ -458,9 +749,15 @@ export namespace Components {
     photoURL: string;
     coverURL: string | { [coverId: string]: string };
   };
+        /**
+          * @default true
+         */
         "showPhotoURL": boolean;
     }
     interface AppUserAvatar {
+        /**
+          * @default 0
+         */
         "size": number;
     }
     interface AppUserCards {
@@ -469,7 +766,13 @@ export namespace Components {
     interface AppUserConfigurations {
     }
     interface AppUserCover {
+        /**
+          * @default true
+         */
         "showCover"?: boolean;
+        /**
+          * @default true
+         */
         "showUserDetails"?: boolean;
         "tmbPosition"?: string;
     }
@@ -496,18 +799,30 @@ export namespace Components {
     interface AppUserTanks {
     }
     interface AppUserTranslation {
+        /**
+          * @default true
+         */
         "edit": boolean;
         "userTranslation": UserTranslationDoc;
     }
     interface AppUsersList {
+        /**
+          * @default false
+         */
         "editable": boolean;
         "item": any;
         "show": string[];
     }
     interface ModalContactUpdate {
+        /**
+          * @default undefined
+         */
         "contactId": string;
     }
     interface ModalCustomerUpdate {
+        /**
+          * @default undefined
+         */
         "customerId": string;
     }
     interface ModalDatasheetCategory {
@@ -523,7 +838,13 @@ export namespace Components {
     interface ModalDatasheetQualitycolorcode {
     }
     interface ModalDatasheetUpdate {
+        /**
+          * @default undefined
+         */
         "datasheetId": string;
+        /**
+          * @default undefined
+         */
         "duplicateDatasheet": { id: string; datasheet: Datasheet };
         "revision": boolean;
     }
@@ -535,12 +856,18 @@ export namespace Components {
         "diveCertification": Certification;
     }
     interface ModalDiveCommunityUpdate {
+        /**
+          * @default undefined
+         */
         "diveCommunityId": string;
     }
     interface ModalDiveConfiguration {
         "diveDataToShare": any;
     }
     interface ModalDivePlanner {
+        /**
+          * @default false
+         */
         "addDive"?: boolean;
         "divePlanModel": DivePlanModel;
         "diveTripData": {
@@ -548,50 +875,100 @@ export namespace Components {
     diveSiteId: string;
     divingCenterId: string;
   };
+        /**
+          * @default 0
+         */
         "index": number;
         "selectedConfiguration": DiveConfiguration;
+        /**
+          * @default false
+         */
         "setDate"?: boolean;
+        /**
+          * @default false
+         */
         "showDiveSite"?: boolean;
+        /**
+          * @default false
+         */
         "showPositionTab"?: boolean;
+        /**
+          * @default []
+         */
         "stdConfigurations": Array<DiveConfiguration>;
         "userRoles": UserRoles;
     }
     interface ModalDiveSiteUpdate {
+        /**
+          * @default undefined
+         */
         "diveSiteId": string;
     }
     interface ModalDiveTemplate {
+        /**
+          * @default false
+         */
         "addDive"?: boolean;
         "divePlanModel": DivePlanModel;
+        /**
+          * @default 0
+         */
         "index": number;
         "selectedConfiguration": DiveConfiguration;
+        /**
+          * @default false
+         */
         "showPositionTab": boolean;
+        /**
+          * @default []
+         */
         "stdConfigurations": Array<DiveConfiguration>;
         "userRoles": UserRoles;
     }
     interface ModalDiveTripUpdate {
         "collectionId": string;
+        /**
+          * @default undefined
+         */
         "diveTripId": string;
         "organiserId": string;
     }
     interface ModalDivingCenterUpdate {
+        /**
+          * @default undefined
+         */
         "divingCenterId": string;
     }
     interface ModalDivingClassUpdate {
         "collectionId": string;
+        /**
+          * @default undefined
+         */
         "divingClassId": string;
         "organiserId": string;
     }
     interface ModalDivingSchoolUpdate {
+        /**
+          * @default undefined
+         */
         "divingSchoolId": string;
     }
     interface ModalEditUserRoles {
+        /**
+          * @default undefined
+         */
         "uid": string;
+    }
+    interface ModalHalcyonImporter {
     }
     interface ModalOperatingConditionsQuestionnaire {
         "condition": "EAF" | "LF" | "CCM";
         "conditionData": | CustomerConditionEAF
     | CustomerConditionLF
     | CustomerConditionCCM;
+        /**
+          * @default false
+         */
         "editable": boolean;
     }
     interface ModalProjectApplicationunit {
@@ -601,7 +978,13 @@ export namespace Components {
     interface ModalProjectQuantityunit {
     }
     interface ModalProjectUpdate {
+        /**
+          * @default undefined
+         */
         "duplicateProject": Project;
+        /**
+          * @default undefined
+         */
         "projectId": string;
     }
     interface ModalSearchList {
@@ -611,26 +994,47 @@ export namespace Components {
         "filterPopup": any;
         "item": any;
         "list": any[];
+        /**
+          * @default []
+         */
         "orderBy": string[];
         "placeholder": string;
         "searchTitle": { tag: string; text: string };
         "showField": string;
     }
     interface ModalServiceCenterUpdate {
+        /**
+          * @default undefined
+         */
         "serviceCenterId": string;
     }
     interface ModalShapeType {
     }
     interface ModalShapeUpdate {
+        /**
+          * @default undefined
+         */
         "duplicateShape": { id: string; shape: Shape };
+        /**
+          * @default undefined
+         */
         "shapeId": string;
     }
     interface ModalTankConfiguration {
         "tank": TankModel;
     }
     interface ModalUploadImage {
+        /**
+          * @default 16 / 9
+         */
         "aspectRatio": number;
+        /**
+          * @default 2000
+         */
         "maxDimensions": number;
+        /**
+          * @default false
+         */
         "round": boolean;
     }
     interface ModalUserDetails {
@@ -639,6 +1043,9 @@ export namespace Components {
     interface ModalUserPlansUpdate {
         "planIndex": number;
         "uid": string;
+        /**
+          * @default new UserPlans()
+         */
         "userPlans": UserPlans;
     }
     interface ModalUserTeamsUpdate {
@@ -648,6 +1055,9 @@ export namespace Components {
     }
     interface MyTransl {
         "appendText": string;
+        /**
+          * @default false
+         */
         "isLabel": boolean;
         "replace": any;
         "tag": string;
@@ -751,6 +1161,9 @@ export namespace Components {
     interface PageLogin {
     }
     interface PageLostpsw {
+        /**
+          * @default ""
+         */
         "email": string;
     }
     interface PageMap {
@@ -798,6 +1211,8 @@ export namespace Components {
     }
     interface PageShapes {
     }
+    interface PageSubsurfaceImport {
+    }
     interface PageSupport {
     }
     interface PageTeamManager {
@@ -820,6 +1235,9 @@ export namespace Components {
         "filter": DatasheetFilter;
     }
     interface PopoverEditCustomerOwner {
+        /**
+          * @default false
+         */
         "group": boolean;
         "owner": CustomerGroup;
     }
@@ -833,6 +1251,9 @@ export namespace Components {
         "oldCustomer": any;
     }
     interface PopoverGas {
+        /**
+          * @default false
+         */
         "ccr": boolean;
         "gasProp": Gas;
         "parameters": any;
@@ -840,15 +1261,27 @@ export namespace Components {
     }
     interface PopoverGasBlender {
         "gasProp": any;
+        /**
+          * @default true
+         */
         "hasTrimixlicence": boolean;
+        /**
+          * @default true
+         */
         "showBar": boolean;
         "stdGasesList": Array<GasModel>;
     }
     interface PopoverLevel {
+        /**
+          * @default false
+         */
         "ccr": boolean;
         "levelProp": DiveProfilePoint;
         "parameters": any;
         "stdGasesList": Array<GasModel>;
+        /**
+          * @default "Metric"
+         */
         "units": string;
     }
     interface PopoverMediaLoading {
@@ -867,6 +1300,9 @@ export namespace Components {
     }
     interface PopoverNewClassActivity {
         "activity": Activity;
+        /**
+          * @default true
+         */
         "showDiveLocation": boolean;
     }
     interface PopoverNewDiveTrip {
@@ -874,7 +1310,13 @@ export namespace Components {
         "tripDive": TripDive;
     }
     interface PopoverProjectAutofill {
+        /**
+          * @default new AutoFillCourses()
+         */
         "autoFillCourses": AutoFillCourses;
+        /**
+          * @default false
+         */
         "bottom": boolean;
         "shapes": ProjectAreaQualityShape[];
     }
@@ -887,6 +1329,9 @@ export namespace Components {
     }
     interface PopoverSelectDate {
         "appendText"?: any;
+        /**
+          * @default "date"
+         */
         "datePresentation"?: | "date"
     | "date-time"
     | "month"
@@ -898,11 +1343,20 @@ export namespace Components {
         "labelTag"?: string;
         "labelText"?: string;
         "maxDate"?: string;
+        /**
+          * @default false
+         */
         "preferWheel"?: boolean;
+        /**
+          * @default true
+         */
         "showDateTitle"?: boolean;
         "value": string;
     }
     interface PopoverSelectSearch {
+        /**
+          * @default "Search"
+         */
         "placeholder": string;
         "selectOptions": any[];
         "selectValueId": string;
@@ -913,6 +1367,9 @@ export namespace Components {
         "filter": ShapeFilter;
     }
     interface PopoverTank {
+        /**
+          * @default false
+         */
         "ccr": boolean;
         "decoTanks": boolean;
         "parameters": any;
@@ -1974,6 +2431,12 @@ declare global {
         prototype: HTMLModalEditUserRolesElement;
         new (): HTMLModalEditUserRolesElement;
     };
+    interface HTMLModalHalcyonImporterElement extends Components.ModalHalcyonImporter, HTMLStencilElement {
+    }
+    var HTMLModalHalcyonImporterElement: {
+        prototype: HTMLModalHalcyonImporterElement;
+        new (): HTMLModalHalcyonImporterElement;
+    };
     interface HTMLModalOperatingConditionsQuestionnaireElement extends Components.ModalOperatingConditionsQuestionnaire, HTMLStencilElement {
     }
     var HTMLModalOperatingConditionsQuestionnaireElement: {
@@ -2454,6 +2917,12 @@ declare global {
         prototype: HTMLPageShapesElement;
         new (): HTMLPageShapesElement;
     };
+    interface HTMLPageSubsurfaceImportElement extends Components.PageSubsurfaceImport, HTMLStencilElement {
+    }
+    var HTMLPageSubsurfaceImportElement: {
+        prototype: HTMLPageSubsurfaceImportElement;
+        new (): HTMLPageSubsurfaceImportElement;
+    };
     interface HTMLPageSupportElement extends Components.PageSupport, HTMLStencilElement {
     }
     var HTMLPageSupportElement: {
@@ -2727,6 +3196,7 @@ declare global {
         "modal-diving-class-update": HTMLModalDivingClassUpdateElement;
         "modal-diving-school-update": HTMLModalDivingSchoolUpdateElement;
         "modal-edit-user-roles": HTMLModalEditUserRolesElement;
+        "modal-halcyon-importer": HTMLModalHalcyonImporterElement;
         "modal-operating-conditions-questionnaire": HTMLModalOperatingConditionsQuestionnaireElement;
         "modal-project-applicationunit": HTMLModalProjectApplicationunitElement;
         "modal-project-bricksallocationarea": HTMLModalProjectBricksallocationareaElement;
@@ -2807,6 +3277,7 @@ declare global {
         "page-service-warehouse": HTMLPageServiceWarehouseElement;
         "page-shape-details": HTMLPageShapeDetailsElement;
         "page-shapes": HTMLPageShapesElement;
+        "page-subsurface-import": HTMLPageSubsurfaceImportElement;
         "page-support": HTMLPageSupportElement;
         "page-team-manager": HTMLPageTeamManagerElement;
         "page-trs-dashboard": HTMLPageTrsDashboardElement;
@@ -2849,12 +3320,21 @@ declare namespace LocalJSX {
     interface AppAdminDiveTrips {
         "filterByOrganisierId"?: string;
         "filterByTrips"?: any;
+        /**
+          * @default false
+         */
         "future"?: boolean;
     }
     interface AppAdminDivingClasses {
         "filterByClasses"?: any;
         "filterByOrganisierId"?: string;
+        /**
+          * @default false
+         */
         "future"?: boolean;
+        /**
+          * @default false
+         */
         "school"?: boolean;
     }
     interface AppAdminTranslations {
@@ -2863,17 +3343,38 @@ declare namespace LocalJSX {
         "translations"?: Translation[];
     }
     interface AppBanner {
+        /**
+          * @default true
+         */
         "backgroundCover"?: boolean;
+        /**
+          * @default true
+         */
         "backgroundCoverFill"?: boolean;
+        /**
+          * @default 100
+         */
         "heightPerc"?: number;
+        /**
+          * @default null
+         */
         "heightPx"?: number;
         "link"?: string;
         "scrollTopValue"?: number;
+        /**
+          * @default 100
+         */
         "widthPerc"?: number;
+        /**
+          * @default null
+         */
         "widthPx"?: number;
     }
     interface AppCalendar {
         "addEvents"?: any;
+        /**
+          * @default "calendar"
+         */
         "calendarId"?: string;
     }
     interface AppChat {
@@ -2886,11 +3387,17 @@ declare namespace LocalJSX {
     }
     interface AppCustomerPlantProduction {
         "customer"?: Customer;
+        /**
+          * @default false
+         */
         "editable"?: boolean;
     }
     interface AppDecoplannerArpc {
         "diveDataToShare"?: any;
         "onSaveArpc"?: (event: AppDecoplannerArpcCustomEvent<ARPCModel>) => void;
+        /**
+          * @default false
+         */
         "planner"?: boolean;
     }
     interface AppDecoplannerCharts {
@@ -2904,6 +3411,9 @@ declare namespace LocalJSX {
     interface AppDecoplannerPlan {
         "diveDataToShare"?: any;
         "onUpdateParamsEvent"?: (event: AppDecoplannerPlanCustomEvent<DecoplannerParameters>) => void;
+        /**
+          * @default false
+         */
         "planner"?: boolean;
     }
     interface AppDecoplannerProfile {
@@ -2916,32 +3426,53 @@ declare namespace LocalJSX {
     }
     interface AppDecoplannerShowplan {
         "diveDataToShare"?: any;
+        /**
+          * @default false
+         */
         "planner"?: boolean;
     }
     interface AppDiveClassBookings {
         "divingClass"?: DivingClass;
         "divingClassId"?: string;
+        /**
+          * @default false
+         */
         "editable"?: boolean;
     }
     interface AppDiveCourseActivities {
         "activities"?: Activity[];
+        /**
+          * @default false
+         */
         "editable"?: boolean;
         "onUpdateEmit"?: (event: AppDiveCourseActivitiesCustomEvent<Activity[]>) => void;
+        /**
+          * @default true
+         */
         "showDiveLocation"?: boolean;
     }
     interface AppDiveCourseCard {
         "divingCourse"?: DivingCourse;
+        /**
+          * @default false
+         */
         "edit"?: boolean;
         "onRemoveEmit"?: (event: AppDiveCourseCardCustomEvent<any>) => void;
     }
     interface AppDivePlanCard {
         "divePlan"?: DivePlanModel;
+        /**
+          * @default false
+         */
         "edit"?: boolean;
         "onRemoveEmit"?: (event: AppDivePlanCardCustomEvent<number>) => void;
         "onViewEmit"?: (event: AppDivePlanCardCustomEvent<DivePlanModel>) => void;
     }
     interface AppDiveSiteCard {
         "diveSite"?: MapDataDiveSite;
+        /**
+          * @default false
+         */
         "edit"?: boolean;
         "onRemoveEmit"?: (event: AppDiveSiteCardCustomEvent<any>) => void;
         "startlocation"?: any;
@@ -2949,16 +3480,25 @@ declare namespace LocalJSX {
     interface AppDiveTripBookings {
         "diveTrip"?: DiveTrip;
         "diveTripId"?: string;
+        /**
+          * @default false
+         */
         "editable"?: boolean;
         "tripDiveIndex"?: number;
     }
     interface AppDiveTripCard {
+        /**
+          * @default false
+         */
         "editable"?: boolean;
         "onAddDiveEmit"?: (event: AppDiveTripCardCustomEvent<any>) => void;
         "onRemoveDiveTripEmit"?: (event: AppDiveTripCardCustomEvent<any>) => void;
         "onRemoveTripDiveEmit"?: (event: AppDiveTripCardCustomEvent<number>) => void;
         "onUpdateDiveEmit"?: (event: AppDiveTripCardCustomEvent<DivePlanModel>) => void;
         "tripDive"?: TripDive;
+        /**
+          * @default false
+         */
         "updateView"?: boolean;
     }
     interface AppDivingCenterCard {
@@ -2967,11 +3507,17 @@ declare namespace LocalJSX {
     }
     interface AppDivingClassSchedule {
         "divingClass"?: DivingClass;
+        /**
+          * @default false
+         */
         "editable"?: boolean;
         "onScheduleEmit"?: (event: AppDivingClassScheduleCustomEvent<any>) => void;
         "onUpdateEmit"?: (event: AppDivingClassScheduleCustomEvent<boolean>) => void;
     }
     interface AppDragdropFile {
+        /**
+          * @default false
+         */
         "autoOpen"?: boolean;
         "file"?: File;
         "fileType"?: string;
@@ -2979,21 +3525,39 @@ declare namespace LocalJSX {
         "onFileSelected"?: (event: AppDragdropFileCustomEvent<File>) => void;
     }
     interface AppEafQuestionnaire {
+        /**
+          * @default new CustomerConditionEAF()
+         */
         "conditions"?: CustomerConditionEAF;
+        /**
+          * @default false
+         */
         "editable"?: boolean;
         "onUpdateEmit"?: (event: AppEafQuestionnaireCustomEvent<CustomerConditionEAF>) => void;
     }
     interface AppFormItem {
         "appendText"?: any;
         "color"?: string;
+        /**
+          * @default "date"
+         */
         "datePresentation"?: | "date"
     | "date-time"
     | "month"
     | "month-year"
     | "time"
     | "year";
+        /**
+          * @default 300
+         */
         "debounce"?: number;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default false
+         */
         "forceInvalid"?: boolean;
         "inputFormMode"?: | "decimal"
     | "email"
@@ -3004,14 +3568,26 @@ declare namespace LocalJSX {
     | "text"
     | "url"
     | undefined;
+        /**
+          * @default "0.1"
+         */
         "inputStep"?: string;
         "inputType"?: TextFieldTypes | "boolean";
+        /**
+          * @default "floating"
+         */
         "labelPosition"?: "fixed" | "stacked" | "floating";
         "labelReplace"?: any;
         "labelTag"?: string;
         "labelText"?: string;
+        /**
+          * @default "none"
+         */
         "lines"?: "none" | "full" | "inset";
         "maxDate"?: string;
+        /**
+          * @default false
+         */
         "multiLanguage"?: boolean;
         "name"?: string;
         "onFormItemBlur"?: (event: AppFormItemCustomEvent<InputValidator>) => void;
@@ -3021,27 +3597,63 @@ declare namespace LocalJSX {
         "onIsValid"?: (event: AppFormItemCustomEvent<boolean>) => void;
         "onUpdateSlider"?: (event: AppFormItemCustomEvent<boolean>) => void;
         "placeholder"?: string;
+        /**
+          * @default false
+         */
         "preferWheel"?: boolean;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default false
+         */
         "selectOnFocus"?: boolean;
+        /**
+          * @default false
+         */
         "shortItem"?: boolean;
+        /**
+          * @default true
+         */
         "showDateTitle"?: boolean;
+        /**
+          * @default true
+         */
         "showItem"?: boolean;
         "textRows"?: number;
         "validator"?: Array<string | ValidatorEntry | Validator<string>>;
         "value"?: string | TextMultilanguage | number | boolean;
     }
     interface AppGeocode {
+        /**
+          * @default ""
+         */
         "address"?: string;
+        /**
+          * @default false
+         */
         "gotFocus"?: boolean;
         "onLocationSelected"?: (event: AppGeocodeCustomEvent<any>) => void;
         "onLocationsFound"?: (event: AppGeocodeCustomEvent<any>) => void;
     }
     interface AppHeaderSegmentToolbar {
         "color"?: string;
+        /**
+          * @default "md"
+         */
         "mode"?: "ios" | "md";
+        /**
+          * @default false
+         */
         "noHeader"?: boolean;
+        /**
+          * @default false
+         */
         "noToolbar"?: boolean;
+        /**
+          * @default 0
+         */
         "segment"?: number;
         "swiper"?: any;
         "titles"?: {
@@ -3053,17 +3665,35 @@ declare namespace LocalJSX {
     slotIcon?: string;
     badge?: number;
   }[];
+        /**
+          * @default true
+         */
         "updateBadge"?: boolean;
     }
     interface AppImageCache {
+        /**
+          * @default true
+         */
         "backgroundCover"?: boolean;
+        /**
+          * @default true
+         */
         "backgroundCoverFill"?: boolean;
         "url"?: string;
     }
     interface AppInfiniteScroll {
+        /**
+          * @default []
+         */
         "groupBy"?: string[];
         "icon"?: string;
+        /**
+          * @default []
+         */
         "list"?: any[];
+        /**
+          * @default false
+         */
         "loading"?: boolean;
         "onItemClicked"?: (event: AppInfiniteScrollCustomEvent<any>) => void;
         "onListChanged"?: (event: AppInfiniteScrollCustomEvent<any>) => void;
@@ -3074,10 +3704,22 @@ declare namespace LocalJSX {
     color: string;
     func: any;
   }[];
+        /**
+          * @default []
+         */
         "orderBy"?: string[];
         "returnField"?: string;
+        /**
+          * @default []
+         */
         "showFields"?: string[];
+        /**
+          * @default " "
+         */
         "showFieldsDivider"?: string;
+        /**
+          * @default []
+         */
         "showNotes"?: string[];
     }
     interface AppItemCover {
@@ -3085,6 +3727,9 @@ declare namespace LocalJSX {
         "tmbPosition"?: string;
     }
     interface AppItemDetail {
+        /**
+          * @default false
+         */
         "alignRight"?: boolean;
         "appendText"?: string;
         "detailTag"?: string;
@@ -3092,19 +3737,40 @@ declare namespace LocalJSX {
     | number
     | boolean
     | TextMultilanguage;
+        /**
+          * @default false
+         */
         "isDate"?: boolean;
         "labelPosition"?: any;
         "labelTag"?: string;
         "labelText"?: string;
+        /**
+          * @default "none"
+         */
         "lines"?: "none" | "full" | "inset";
+        /**
+          * @default true
+         */
         "showItem"?: boolean;
     }
     interface AppLanguagePicker {
+        /**
+          * @default false
+         */
         "iconOnly"?: boolean;
         "onClickedItem"?: (event: AppLanguagePickerCustomEvent<any>) => void;
         "onLanguageChanged"?: (event: AppLanguagePickerCustomEvent<any>) => void;
+        /**
+          * @default false
+         */
         "picker"?: boolean;
+        /**
+          * @default false
+         */
         "selectOnly"?: boolean;
+        /**
+          * @default "en"
+         */
         "selectedLangCode"?: string;
     }
     interface AppLastReviews {
@@ -3112,6 +3778,9 @@ declare namespace LocalJSX {
         "uid"?: string;
     }
     interface AppLocation {
+        /**
+          * @default true
+         */
         "editable"?: boolean;
         "location"?: CustomerLocation;
         "locations"?: LocationType[];
@@ -3121,14 +3790,26 @@ declare namespace LocalJSX {
     }
     interface AppMap {
         "center"?: any;
+        /**
+          * @default false
+         */
         "currentPosition"?: boolean;
         "draggableMarkerPosition"?: any;
+        /**
+          * @default []
+         */
         "markers"?: Marker[];
+        /**
+          * @default false
+         */
         "markersAsFeature"?: boolean;
         "onDragMarkerEnd"?: (event: AppMapCustomEvent<any>) => void;
         "onEmitMapBounds"?: (event: AppMapCustomEvent<any>) => void;
         "onMapLoadingCompleted"?: (event: AppMapCustomEvent<any>) => void;
         "pageId"?: string;
+        /**
+          * @default []
+         */
         "searchTags"?: SearchTag[];
     }
     interface AppMapIcon {
@@ -3140,22 +3821,49 @@ declare namespace LocalJSX {
     interface AppMenu {
     }
     interface AppModalFooter {
+        /**
+          * @default {     tag: "cancel",     text: "Cancel",     color: "danger",   }
+         */
         "cancelTag"?: { tag: string; text: string; color: string; };
+        /**
+          * @default null
+         */
         "color"?: any;
+        /**
+          * @default false
+         */
         "disableSave"?: boolean;
         "onCancelEmit"?: (event: AppModalFooterCustomEvent<any>) => void;
         "onSaveEmit"?: (event: AppModalFooterCustomEvent<any>) => void;
+        /**
+          * @default {     tag: "save",     text: "Save",     color: "success",   }
+         */
         "saveTag"?: { tag: string; text: string; color: string; };
+        /**
+          * @default true
+         */
         "showSave"?: boolean;
     }
     interface AppMultilanguageText {
         "text"?: TextMultilanguage;
     }
     interface AppNavbar {
+        /**
+          * @default false
+         */
         "backButton"?: boolean;
+        /**
+          * @default "primary"
+         */
         "color"?: string;
         "extraTitle"?: string;
+        /**
+          * @default "primary"
+         */
         "iconColor"?: string;
+        /**
+          * @default false
+         */
         "modal"?: boolean;
         "rightButtonFc"?: any;
         "rightButtonText"?: {
@@ -3168,6 +3876,9 @@ declare namespace LocalJSX {
         "text"?: string;
     }
     interface AppPageProjectSummary {
+        /**
+          * @default []
+         */
         "areaShapes"?: AreaShape[];
         "project"?: Project;
         "updateSummary"?: any;
@@ -3183,24 +3894,45 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface AppSearchFilter {
+        /**
+          * @default false
+         */
         "hideToolbar"?: boolean;
         "onSearchFilterEmit"?: (event: AppSearchFilterCustomEvent<SearchTag[]>) => void;
     }
     interface AppSearchToolbar {
+        /**
+          * @default Environment.getAppColor()
+         */
         "color"?: string;
         "filterBy"?: string[];
+        /**
+          * @default []
+         */
         "list"?: any[];
         "onFilteredList"?: (event: AppSearchToolbarCustomEvent<any>) => void;
+        /**
+          * @default []
+         */
         "orderFields"?: string[];
+        /**
+          * @default "Search"
+         */
         "placeholder"?: string;
         "searchTitle"?: string;
     }
     interface AppSearchbar {
+        /**
+          * @default false
+         */
         "floating"?: boolean;
         "onInputBlur"?: (event: AppSearchbarCustomEvent<string>) => void;
         "onInputChanged"?: (event: AppSearchbarCustomEvent<string>) => void;
     }
     interface AppSelectSearch {
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "label"?: { tag: string; text: string };
         "labelAddText"?: string;
@@ -3213,23 +3945,50 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface AppShrinkingHeader {
+        /**
+          * @default ""
+         */
         "logoUrl"?: string;
+        /**
+          * @default 0
+         */
         "scrollTopValue"?: number;
+        /**
+          * @default null
+         */
         "slogan"?: any;
     }
     interface AppSkeletons {
         "skeleton"?: string;
     }
     interface AppStarRating {
+        /**
+          * @default "gold"
+         */
         "color"?: string;
+        /**
+          * @default false
+         */
         "editable"?: boolean;
         "onRated"?: (event: AppStarRatingCustomEvent<number>) => void;
+        /**
+          * @default 0
+         */
         "rating"?: number;
+        /**
+          * @default 25
+         */
         "size"?: number;
+        /**
+          * @default 5
+         */
         "stars"?: number;
     }
     interface AppStickySearch {
         "placeholderValue"?: string;
+        /**
+          * @default 0
+         */
         "scrollTopValue"?: number;
     }
     interface AppStripeConnect {
@@ -3250,6 +4009,9 @@ declare namespace LocalJSX {
     coverURL: string;
   };
         "onCoverUploaded"?: (event: AppUploadCoverCustomEvent<any>) => void;
+        /**
+          * @default true
+         */
         "showPhotoURL"?: boolean;
     }
     interface AppUploadCovers {
@@ -3260,9 +4022,15 @@ declare namespace LocalJSX {
     coverURL: string | { [coverId: string]: string };
   };
         "onCoverUploaded"?: (event: AppUploadCoversCustomEvent<any>) => void;
+        /**
+          * @default true
+         */
         "showPhotoURL"?: boolean;
     }
     interface AppUserAvatar {
+        /**
+          * @default 0
+         */
         "size"?: number;
     }
     interface AppUserCards {
@@ -3271,7 +4039,13 @@ declare namespace LocalJSX {
     interface AppUserConfigurations {
     }
     interface AppUserCover {
+        /**
+          * @default true
+         */
         "showCover"?: boolean;
+        /**
+          * @default true
+         */
         "showUserDetails"?: boolean;
         "tmbPosition"?: string;
     }
@@ -3298,19 +4072,31 @@ declare namespace LocalJSX {
     interface AppUserTanks {
     }
     interface AppUserTranslation {
+        /**
+          * @default true
+         */
         "edit"?: boolean;
         "onTranslationEmit"?: (event: AppUserTranslationCustomEvent<UserTranslation>) => void;
         "userTranslation"?: UserTranslationDoc;
     }
     interface AppUsersList {
+        /**
+          * @default false
+         */
         "editable"?: boolean;
         "item"?: any;
         "show"?: string[];
     }
     interface ModalContactUpdate {
+        /**
+          * @default undefined
+         */
         "contactId"?: string;
     }
     interface ModalCustomerUpdate {
+        /**
+          * @default undefined
+         */
         "customerId"?: string;
     }
     interface ModalDatasheetCategory {
@@ -3326,7 +4112,13 @@ declare namespace LocalJSX {
     interface ModalDatasheetQualitycolorcode {
     }
     interface ModalDatasheetUpdate {
+        /**
+          * @default undefined
+         */
         "datasheetId"?: string;
+        /**
+          * @default undefined
+         */
         "duplicateDatasheet"?: { id: string; datasheet: Datasheet };
         "revision"?: boolean;
     }
@@ -3338,12 +4130,18 @@ declare namespace LocalJSX {
         "diveCertification"?: Certification;
     }
     interface ModalDiveCommunityUpdate {
+        /**
+          * @default undefined
+         */
         "diveCommunityId"?: string;
     }
     interface ModalDiveConfiguration {
         "diveDataToShare"?: any;
     }
     interface ModalDivePlanner {
+        /**
+          * @default false
+         */
         "addDive"?: boolean;
         "divePlanModel"?: DivePlanModel;
         "diveTripData"?: {
@@ -3351,50 +4149,100 @@ declare namespace LocalJSX {
     diveSiteId: string;
     divingCenterId: string;
   };
+        /**
+          * @default 0
+         */
         "index"?: number;
         "selectedConfiguration"?: DiveConfiguration;
+        /**
+          * @default false
+         */
         "setDate"?: boolean;
+        /**
+          * @default false
+         */
         "showDiveSite"?: boolean;
+        /**
+          * @default false
+         */
         "showPositionTab"?: boolean;
+        /**
+          * @default []
+         */
         "stdConfigurations"?: Array<DiveConfiguration>;
         "userRoles"?: UserRoles;
     }
     interface ModalDiveSiteUpdate {
+        /**
+          * @default undefined
+         */
         "diveSiteId"?: string;
     }
     interface ModalDiveTemplate {
+        /**
+          * @default false
+         */
         "addDive"?: boolean;
         "divePlanModel"?: DivePlanModel;
+        /**
+          * @default 0
+         */
         "index"?: number;
         "selectedConfiguration"?: DiveConfiguration;
+        /**
+          * @default false
+         */
         "showPositionTab"?: boolean;
+        /**
+          * @default []
+         */
         "stdConfigurations"?: Array<DiveConfiguration>;
         "userRoles"?: UserRoles;
     }
     interface ModalDiveTripUpdate {
         "collectionId"?: string;
+        /**
+          * @default undefined
+         */
         "diveTripId"?: string;
         "organiserId"?: string;
     }
     interface ModalDivingCenterUpdate {
+        /**
+          * @default undefined
+         */
         "divingCenterId"?: string;
     }
     interface ModalDivingClassUpdate {
         "collectionId"?: string;
+        /**
+          * @default undefined
+         */
         "divingClassId"?: string;
         "organiserId"?: string;
     }
     interface ModalDivingSchoolUpdate {
+        /**
+          * @default undefined
+         */
         "divingSchoolId"?: string;
     }
     interface ModalEditUserRoles {
+        /**
+          * @default undefined
+         */
         "uid"?: string;
+    }
+    interface ModalHalcyonImporter {
     }
     interface ModalOperatingConditionsQuestionnaire {
         "condition"?: "EAF" | "LF" | "CCM";
         "conditionData"?: | CustomerConditionEAF
     | CustomerConditionLF
     | CustomerConditionCCM;
+        /**
+          * @default false
+         */
         "editable"?: boolean;
     }
     interface ModalProjectApplicationunit {
@@ -3404,7 +4252,13 @@ declare namespace LocalJSX {
     interface ModalProjectQuantityunit {
     }
     interface ModalProjectUpdate {
+        /**
+          * @default undefined
+         */
         "duplicateProject"?: Project;
+        /**
+          * @default undefined
+         */
         "projectId"?: string;
     }
     interface ModalSearchList {
@@ -3414,26 +4268,47 @@ declare namespace LocalJSX {
         "filterPopup"?: any;
         "item"?: any;
         "list"?: any[];
+        /**
+          * @default []
+         */
         "orderBy"?: string[];
         "placeholder"?: string;
         "searchTitle"?: { tag: string; text: string };
         "showField"?: string;
     }
     interface ModalServiceCenterUpdate {
+        /**
+          * @default undefined
+         */
         "serviceCenterId"?: string;
     }
     interface ModalShapeType {
     }
     interface ModalShapeUpdate {
+        /**
+          * @default undefined
+         */
         "duplicateShape"?: { id: string; shape: Shape };
+        /**
+          * @default undefined
+         */
         "shapeId"?: string;
     }
     interface ModalTankConfiguration {
         "tank"?: TankModel;
     }
     interface ModalUploadImage {
+        /**
+          * @default 16 / 9
+         */
         "aspectRatio"?: number;
+        /**
+          * @default 2000
+         */
         "maxDimensions"?: number;
+        /**
+          * @default false
+         */
         "round"?: boolean;
     }
     interface ModalUserDetails {
@@ -3442,6 +4317,9 @@ declare namespace LocalJSX {
     interface ModalUserPlansUpdate {
         "planIndex"?: number;
         "uid"?: string;
+        /**
+          * @default new UserPlans()
+         */
         "userPlans"?: UserPlans;
     }
     interface ModalUserTeamsUpdate {
@@ -3451,6 +4329,9 @@ declare namespace LocalJSX {
     }
     interface MyTransl {
         "appendText"?: string;
+        /**
+          * @default false
+         */
         "isLabel"?: boolean;
         "replace"?: any;
         "tag"?: string;
@@ -3554,6 +4435,9 @@ declare namespace LocalJSX {
     interface PageLogin {
     }
     interface PageLostpsw {
+        /**
+          * @default ""
+         */
         "email"?: string;
     }
     interface PageMap {
@@ -3601,6 +4485,8 @@ declare namespace LocalJSX {
     }
     interface PageShapes {
     }
+    interface PageSubsurfaceImport {
+    }
     interface PageSupport {
     }
     interface PageTeamManager {
@@ -3623,6 +4509,9 @@ declare namespace LocalJSX {
         "filter"?: DatasheetFilter;
     }
     interface PopoverEditCustomerOwner {
+        /**
+          * @default false
+         */
         "group"?: boolean;
         "owner"?: CustomerGroup;
     }
@@ -3636,6 +4525,9 @@ declare namespace LocalJSX {
         "oldCustomer"?: any;
     }
     interface PopoverGas {
+        /**
+          * @default false
+         */
         "ccr"?: boolean;
         "gasProp"?: Gas;
         "parameters"?: any;
@@ -3643,15 +4535,27 @@ declare namespace LocalJSX {
     }
     interface PopoverGasBlender {
         "gasProp"?: any;
+        /**
+          * @default true
+         */
         "hasTrimixlicence"?: boolean;
+        /**
+          * @default true
+         */
         "showBar"?: boolean;
         "stdGasesList"?: Array<GasModel>;
     }
     interface PopoverLevel {
+        /**
+          * @default false
+         */
         "ccr"?: boolean;
         "levelProp"?: DiveProfilePoint;
         "parameters"?: any;
         "stdGasesList"?: Array<GasModel>;
+        /**
+          * @default "Metric"
+         */
         "units"?: string;
     }
     interface PopoverMediaLoading {
@@ -3670,6 +4574,9 @@ declare namespace LocalJSX {
     }
     interface PopoverNewClassActivity {
         "activity"?: Activity;
+        /**
+          * @default true
+         */
         "showDiveLocation"?: boolean;
     }
     interface PopoverNewDiveTrip {
@@ -3677,7 +4584,13 @@ declare namespace LocalJSX {
         "tripDive"?: TripDive;
     }
     interface PopoverProjectAutofill {
+        /**
+          * @default new AutoFillCourses()
+         */
         "autoFillCourses"?: AutoFillCourses;
+        /**
+          * @default false
+         */
         "bottom"?: boolean;
         "shapes"?: ProjectAreaQualityShape[];
     }
@@ -3691,6 +4604,9 @@ declare namespace LocalJSX {
     }
     interface PopoverSelectDate {
         "appendText"?: any;
+        /**
+          * @default "date"
+         */
         "datePresentation"?: | "date"
     | "date-time"
     | "month"
@@ -3702,11 +4618,20 @@ declare namespace LocalJSX {
         "labelTag"?: string;
         "labelText"?: string;
         "maxDate"?: string;
+        /**
+          * @default false
+         */
         "preferWheel"?: boolean;
+        /**
+          * @default true
+         */
         "showDateTitle"?: boolean;
         "value"?: string;
     }
     interface PopoverSelectSearch {
+        /**
+          * @default "Search"
+         */
         "placeholder"?: string;
         "selectOptions"?: any[];
         "selectValueId"?: string;
@@ -3717,6 +4642,9 @@ declare namespace LocalJSX {
         "filter"?: ShapeFilter;
     }
     interface PopoverTank {
+        /**
+          * @default false
+         */
         "ccr"?: boolean;
         "decoTanks"?: boolean;
         "parameters"?: any;
@@ -3824,6 +4752,7 @@ declare namespace LocalJSX {
         "modal-diving-class-update": ModalDivingClassUpdate;
         "modal-diving-school-update": ModalDivingSchoolUpdate;
         "modal-edit-user-roles": ModalEditUserRoles;
+        "modal-halcyon-importer": ModalHalcyonImporter;
         "modal-operating-conditions-questionnaire": ModalOperatingConditionsQuestionnaire;
         "modal-project-applicationunit": ModalProjectApplicationunit;
         "modal-project-bricksallocationarea": ModalProjectBricksallocationarea;
@@ -3904,6 +4833,7 @@ declare namespace LocalJSX {
         "page-service-warehouse": PageServiceWarehouse;
         "page-shape-details": PageShapeDetails;
         "page-shapes": PageShapes;
+        "page-subsurface-import": PageSubsurfaceImport;
         "page-support": PageSupport;
         "page-team-manager": PageTeamManager;
         "page-trs-dashboard": PageTrsDashboard;
@@ -4036,6 +4966,7 @@ declare module "@stencil/core" {
             "modal-diving-class-update": LocalJSX.ModalDivingClassUpdate & JSXBase.HTMLAttributes<HTMLModalDivingClassUpdateElement>;
             "modal-diving-school-update": LocalJSX.ModalDivingSchoolUpdate & JSXBase.HTMLAttributes<HTMLModalDivingSchoolUpdateElement>;
             "modal-edit-user-roles": LocalJSX.ModalEditUserRoles & JSXBase.HTMLAttributes<HTMLModalEditUserRolesElement>;
+            "modal-halcyon-importer": LocalJSX.ModalHalcyonImporter & JSXBase.HTMLAttributes<HTMLModalHalcyonImporterElement>;
             "modal-operating-conditions-questionnaire": LocalJSX.ModalOperatingConditionsQuestionnaire & JSXBase.HTMLAttributes<HTMLModalOperatingConditionsQuestionnaireElement>;
             "modal-project-applicationunit": LocalJSX.ModalProjectApplicationunit & JSXBase.HTMLAttributes<HTMLModalProjectApplicationunitElement>;
             "modal-project-bricksallocationarea": LocalJSX.ModalProjectBricksallocationarea & JSXBase.HTMLAttributes<HTMLModalProjectBricksallocationareaElement>;
@@ -4116,6 +5047,7 @@ declare module "@stencil/core" {
             "page-service-warehouse": LocalJSX.PageServiceWarehouse & JSXBase.HTMLAttributes<HTMLPageServiceWarehouseElement>;
             "page-shape-details": LocalJSX.PageShapeDetails & JSXBase.HTMLAttributes<HTMLPageShapeDetailsElement>;
             "page-shapes": LocalJSX.PageShapes & JSXBase.HTMLAttributes<HTMLPageShapesElement>;
+            "page-subsurface-import": LocalJSX.PageSubsurfaceImport & JSXBase.HTMLAttributes<HTMLPageSubsurfaceImportElement>;
             "page-support": LocalJSX.PageSupport & JSXBase.HTMLAttributes<HTMLPageSupportElement>;
             "page-team-manager": LocalJSX.PageTeamManager & JSXBase.HTMLAttributes<HTMLPageTeamManagerElement>;
             "page-trs-dashboard": LocalJSX.PageTrsDashboard & JSXBase.HTMLAttributes<HTMLPageTrsDashboardElement>;

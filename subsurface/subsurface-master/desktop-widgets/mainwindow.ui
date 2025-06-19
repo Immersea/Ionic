@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>861</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="fullWindowLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QSplitter" name="mainSplitter">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="NotificationWidget" name="mainErrorMessage" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>861</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="actionCloudstorageopen"/>
+    <addaction name="actionCloudstoragesave"/>
+    <addaction name="actionCloudOnline"/>
+    <addaction name="actionClose"/>
+    <addaction name="separator"/>
+    <addaction name="actionExport"/>
+    <addaction name="actionPrint"/>
+    <addaction name="actionHash_images"/>
+    <addaction name="actionPreferences"/>
+    <addaction name="actionConfigure_Dive_Computer"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuLog">
+    <property name="title">
+     <string>&amp;Log</string>
+    </property>
+    <addaction name="actionAddDive"/>
+    <addaction name="actionDivePlanner"/>
+    <addaction name="actionReplanDive"/>
+    <addaction name="copy"/>
+    <addaction name="paste"/>
+    <addaction name="separator"/>
+    <addaction name="actionRenumber"/>
+    <addaction name="actionAutoGroup"/>
+    <addaction name="separator"/>
+    <addaction name="actionFilterTags"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <addaction name="actionViewAll"/>
+    <addaction name="actionViewList"/>
+    <addaction name="actionViewProfile"/>
+    <addaction name="actionViewInfo"/>
+    <addaction name="actionViewMap"/>
+    <addaction name="actionViewDiveSites"/>
+    <addaction name="separator"/>
+    <addaction name="actionStats"/>
+    <addaction name="actionYearlyStatistics"/>
+    <addaction name="actionPreviousDC"/>
+    <addaction name="actionNextDC"/>
+    <addaction name="separator"/>
+    <addaction name="actionFullScreen"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAboutSubsurface"/>
+    <addaction name="action_Check_for_Updates"/>
+    <addaction name="actionUserManual"/>
+   </widget>
+   <widget class="QMenu" name="menuImport">
+    <property name="title">
+     <string>&amp;Import</string>
+    </property>
+    <addaction name="actionDownloadDC"/>
+    <addaction name="actionImportDiveLog"/>
+    <addaction name="actionImportDiveSites"/>
+    <addaction name="actionDivelogs_de"/>
+   </widget>
+   <widget class="QMenu" name="menu_Edit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menu_Edit"/>
+   <addaction name="menuImport"/>
+   <addaction name="menuLog"/>
+   <addaction name="menuView"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionNew">
+   <property name="text">
+    <string>&amp;New logbook</string>
+   </property>
+   <property name="toolTip">
+    <string>New</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>&amp;Open logbook</string>
+   </property>
+   <property name="toolTip">
+    <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>Sa&amp;ve as</string>
+   </property>
+   <property name="toolTip">
+    <string>Save as</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="toolTip">
+    <string>Close</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="text">
+    <string>&amp;Print</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>P&amp;references</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+,</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
+  </action>
+  <action name="actionDownloadDC">
+   <property name="text">
+    <string>Import from &amp;dive computer</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionAddDive">
+   <property name="text">
+    <string>&amp;Add dive</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl++</string>
+   </property>
+  </action>
+  <action name="copy">
+   <property name="text">
+    <string>&amp;Copy dive components</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+C</string>
+   </property>
+  </action>
+  <action name="paste">
+   <property name="text">
+    <string>&amp;Paste dive components</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionRenumber">
+   <property name="text">
+    <string>&amp;Renumber all dives</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionAutoGroup">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Auto &amp;group</string>
+   </property>
+  </action>
+  <action name="actionYearlyStatistics">
+   <property name="text">
+    <string>&amp;Yearly statistics</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="actionViewList">
+   <property name="text">
+    <string>&amp;Dive list</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+2</string>
+   </property>
+  </action>
+  <action name="actionViewProfile">
+   <property name="text">
+    <string>&amp;Profile</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+3</string>
+   </property>
+  </action>
+  <action name="actionViewInfo">
+   <property name="text">
+    <string>&amp;Info</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+4</string>
+   </property>
+  </action>
+  <action name="actionViewAll">
+   <property name="text">
+    <string>&amp;All</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+1</string>
+   </property>
+  </action>
+  <action name="actionPreviousDC">
+   <property name="text">
+    <string>P&amp;revious DC</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Left</string>
+   </property>
+  </action>
+  <action name="actionNextDC">
+   <property name="text">
+    <string>&amp;Next DC</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Right</string>
+   </property>
+  </action>
+  <action name="actionAboutSubsurface">
+   <property name="text">
+    <string>&amp;About Subsurface</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="actionUserManual">
+   <property name="text">
+    <string>User &amp;manual</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">F1</string>
+   </property>
+  </action>
+  <action name="actionViewMap">
+   <property name="text">
+    <string>&amp;Map</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+5</string>
+   </property>
+  </action>
+  <action name="actionViewDiveSites">
+   <property name="text">
+    <string>Dive sites</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+6</string>
+   </property>
+  </action>
+  <action name="actionDivePlanner">
+   <property name="text">
+    <string>P&amp;lan dive</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionImportDiveLog">
+   <property name="text">
+    <string>&amp;Import log files</string>
+   </property>
+   <property name="toolTip">
+    <string>Import divelog files from other applications</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionImportDiveSites">
+   <property name="text">
+    <string>&amp;Import dive sites</string>
+   </property>
+   <property name="toolTip">
+    <string>Import dive sites from other users</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+J</string>
+   </property>
+  </action>
+  <action name="actionDivelogs_de">
+   <property name="text">
+    <string>Import &amp;from divelogs.de</string>
+   </property>
+  </action>
+  <action name="actionFullScreen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Full screen</string>
+   </property>
+   <property name="toolTip">
+    <string>Toggle full screen</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">F11</string>
+   </property>
+  </action>
+  <action name="action_Check_for_Updates">
+   <property name="text">
+    <string>&amp;Check for updates</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>&amp;Export</string>
+   </property>
+   <property name="toolTip">
+    <string>Export dive logs</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionConfigure_Dive_Computer">
+   <property name="text">
+    <string>Change settings on &amp;dive computer</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+C</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionReplanDive">
+   <property name="text">
+    <string>Edit &amp;dive in planner</string>
+   </property>
+  </action>
+  <action name="actionFilterTags">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Filter divelist</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionStats">
+   <property name="text">
+    <string>Dive statistics</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+T</string>
+   </property>
+  </action>
+  <action name="action_Undo">
+   <property name="text">
+    <string>&amp;Undo</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="action_Redo">
+   <property name="text">
+    <string>&amp;Redo</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+Z</string>
+   </property>
+  </action>
+  <action name="actionHash_images">
+   <property name="text">
+    <string>&amp;Find moved media files</string>
+   </property>
+  </action>
+  <action name="actionCloudstorageopen">
+   <property name="text">
+    <string>Open c&amp;loud storage</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+O</string>
+   </property>
+  </action>
+  <action name="actionCloudstoragesave">
+   <property name="text">
+    <string>Save to clo&amp;ud storage</string>
+   </property>
+  </action>
+  <action name="actionManage_dive_sites">
+   <property name="text">
+    <string>&amp;Manage dive sites</string>
+   </property>
+  </action>
+  <action name="actionDiveSiteEdit">
+   <property name="text">
+    <string>Dive Site &amp;Edit</string>
+   </property>
+  </action>
+  <action name="actionCloudOnline">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Cloud stora&amp;ge online</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NotificationWidget</class>
+   <extends>QWidget</extends>
+   <header>desktop-widgets/notificationwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../subsurface.qrc"/>
+ </resources>
+ <connections/>
+</ui>

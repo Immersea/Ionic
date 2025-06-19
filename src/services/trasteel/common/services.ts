@@ -1,9 +1,9 @@
-import {DatabaseService} from "../../common/database";
-import {SYSTEMCOLLECTION} from "../../common/system";
-import {UserPubicProfile} from "../../../components";
-import {UsersTeams} from "../../../interfaces/trasteel/users/users-teams";
-import {RouterService} from "../../common/router";
-import {UserService} from "../../common/user";
+import { DatabaseService } from "../../common/database";
+import { SYSTEMCOLLECTION } from "../../common/system";
+import { UserPubicProfile } from "../../../components";
+import { UsersTeams } from "../../../interfaces/trasteel/users/users-teams";
+import { RouterService } from "../../common/router";
+import { UserService } from "../../common/user";
 
 const USERSTEAMSDOC = "usersTeams";
 
@@ -12,7 +12,8 @@ export class TrasteelServicesController {
     return [
       "registered",
       "customerDBAdmin",
-      "refraDBAdmin",
+      "Infortuni",
+      "refraDBSuperAdmin",
       "refraTeamAdmin",
       "electDBAdmin",
       "electTeamAdmin",
@@ -63,6 +64,12 @@ export class TrasteelServicesController {
   isRefraDBAdmin(): boolean {
     return (
       UserService.userRoles.roles.indexOf("refraDBAdmin") != -1 ||
+      UserService.userRoles.isSuperAdmin()
+    );
+  }
+  isRefraDBSuperAdmin(): boolean {
+    return (
+      UserService.userRoles.roles.indexOf("refraDBSuperAdmin") != -1 ||
       UserService.userRoles.isSuperAdmin()
     );
   }
@@ -131,7 +138,7 @@ export class TrasteelServicesController {
   }
 
   setUserTeams(user: UserPubicProfile) {
-    RouterService.openModal("modal-user-teams-update", {user: user});
+    RouterService.openModal("modal-user-teams-update", { user: user });
   }
 }
 export const TrasteelService = new TrasteelServicesController();

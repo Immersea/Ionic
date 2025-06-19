@@ -14,6 +14,7 @@ import { orderBy, toInteger } from "lodash";
 
 /*
   MODEL for Buhlmann deco planner
+  This class implements the Buhlmann ZHL-16B model for decompression planning.
 */
 
 export class DiveBuhlmann {

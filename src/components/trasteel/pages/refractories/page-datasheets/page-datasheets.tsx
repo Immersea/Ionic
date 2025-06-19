@@ -9,7 +9,7 @@ import {
 } from "../../../../../services/trasteel/refractories/datasheets";
 import { TrasteelFilterService } from "../../../../../services/trasteel/common/trs-db-filter";
 import { TrasteelService } from "../../../../../services/trasteel/common/services";
-import { cloneDeep, includes, isArray } from "lodash";
+import { cloneDeep, isArray } from "lodash";
 import { DatabaseService } from "../../../../../services/common/database";
 import { SystemService } from "../../../../../services/common/system";
 import Swiper from "swiper";
@@ -225,8 +225,10 @@ export class PageDatasheets {
   openDatasheet(datasheetId) {
     if (this.showDownload) {
       const ds = cloneDeep(DatasheetsService.getDatasheetsById(datasheetId));
-      if (!includes(this.basket, ds)) this.basket.push(ds);
-      this.basket.push(ds);
+      const alreadyInBasket = this.basket.some((item) => item.id === ds.id);
+      if (!alreadyInBasket) {
+        this.basket.push(ds);
+      }
       this.saveBasket();
       this.updateSlider();
     } else {

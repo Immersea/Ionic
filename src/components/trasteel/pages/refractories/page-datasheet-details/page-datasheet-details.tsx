@@ -6,7 +6,7 @@ import { TranslationService } from "../../../../../services/common/translations"
 import { SystemService } from "../../../../../services/common/system";
 import { TrasteelService } from "../../../../../services/trasteel/common/services";
 import { RouterService } from "../../../../../services/common/router";
-import { toString } from "lodash";
+import { toNumber, toString } from "lodash";
 import { Environment } from "../../../../../global/env";
 
 @Component({
@@ -274,32 +274,32 @@ export class PageDatasheetDetails {
               <div id='properties-grid'>
                 <ion-grid>
                   <ion-row>
-                    <ion-col class='centered'>
+                    <ion-col size='2' class='centered'>
                       <small>
                         {TranslationService.getTransl("type", "Type")}
                       </small>
                     </ion-col>
-                    <ion-col class='centered'>
+                    <ion-col size='2' class='centered'>
                       <small>
                         {TranslationService.getTransl("name", "Name")}
                       </small>
                     </ion-col>
-                    <ion-col class='centered'>
+                    <ion-col size='1' class='centered'>
                       <small>
                         {TranslationService.getTransl("typical", "Typical")}
                       </small>
                     </ion-col>
-                    <ion-col class='centered'>
+                    <ion-col size='2' class='centered'>
                       <small>
                         {TranslationService.getTransl("prefix", "Prefix")}
                       </small>
                     </ion-col>
-                    <ion-col class='centered'>
+                    <ion-col size='2' class='centered'>
                       <small>
                         {TranslationService.getTransl("from", "From")}
                       </small>
                     </ion-col>
-                    <ion-col class='centered'>
+                    <ion-col size='2' class='centered'>
                       <small>{TranslationService.getTransl("to", "To")}</small>
                     </ion-col>
                     <ion-col size='1' class='centered'>
@@ -310,7 +310,7 @@ export class PageDatasheetDetails {
                   </ion-row>
                   {this.datasheet.orderPropertiesForExport().map((property) => (
                     <ion-row>
-                      <ion-col>
+                      <ion-col size='2'>
                         <app-item-detail
                           lines='none'
                           detailText={
@@ -320,7 +320,7 @@ export class PageDatasheetDetails {
                           }
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col>
+                      <ion-col size='2'>
                         <app-item-detail
                           lines='none'
                           detailText={
@@ -331,30 +331,68 @@ export class PageDatasheetDetails {
                           }
                         ></app-item-detail>
                       </ion-col>
-                      <ion-col class='centered'>
-                        <app-item-detail
-                          lines='none'
-                          detailText={property.typical}
-                        ></app-item-detail>
-                      </ion-col>
-                      <ion-col class='centered'>
-                        <app-item-detail
-                          lines='none'
-                          detailText={property.prefix}
-                        ></app-item-detail>
-                      </ion-col>
-                      <ion-col class='centered'>
-                        <app-item-detail
-                          lines='none'
-                          detailText={property.lower}
-                        ></app-item-detail>
-                      </ion-col>
-                      <ion-col class='centered'>
-                        <app-item-detail
-                          lines='none'
-                          detailText={property.higher}
-                        ></app-item-detail>
-                      </ion-col>
+                      {property.type === "general" ? (
+                        <ion-col size='7'>
+                          <app-item-detail
+                            lines='none'
+                            detailText={property.prefix}
+                          ></app-item-detail>
+                        </ion-col>
+                      ) : (
+                        [
+                          <ion-col size='1' class='centered'>
+                            <app-item-detail
+                              lines='none'
+                              detailText={
+                                toNumber(property.typical) != 0
+                                  ? toNumber(property.typical).toFixed(
+                                      DatasheetsService.getDatasheetPropertyNames(
+                                        "id",
+                                        property.name
+                                      )[0].decimals
+                                    )
+                                  : null
+                              }
+                            ></app-item-detail>
+                          </ion-col>,
+                          <ion-col size='2'>
+                            <app-item-detail
+                              lines='none'
+                              detailText={property.prefix}
+                            ></app-item-detail>
+                          </ion-col>,
+                          <ion-col size='2' class='centered'>
+                            <app-item-detail
+                              lines='none'
+                              detailText={
+                                toNumber(property.lower) != 0
+                                  ? toNumber(property.lower).toFixed(
+                                      DatasheetsService.getDatasheetPropertyNames(
+                                        "id",
+                                        property.name
+                                      )[0].decimals
+                                    )
+                                  : null
+                              }
+                            ></app-item-detail>
+                          </ion-col>,
+                          <ion-col size='2' class='centered'>
+                            <app-item-detail
+                              lines='none'
+                              detailText={
+                                toNumber(property.higher) != 0
+                                  ? toNumber(property.higher).toFixed(
+                                      DatasheetsService.getDatasheetPropertyNames(
+                                        "id",
+                                        property.name
+                                      )[0].decimals
+                                    )
+                                  : null
+                              }
+                            ></app-item-detail>
+                          </ion-col>,
+                        ]
+                      )}
                       <ion-col size='1' class='centered showbool'>
                         <app-item-detail
                           lines='none'

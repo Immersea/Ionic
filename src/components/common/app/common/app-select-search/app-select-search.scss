@@ -1,2 +1,14 @@
-app-select-search {
+:host {
+  ion-label > span {
+    display: inline;
+    margin: 0;
+    font-size: 0.75rem;
+    color: black;
+    vertical-align: middle;
+  }
+
+  my-transl {
+    display: inline;
+    vertical-align: middle;
+  }
 }

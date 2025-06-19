@@ -25,7 +25,7 @@ import {
 } from "../../../../../services/udive/diveCommunities";
 import { MapDataDiveCommunity } from "../../../../../interfaces/udive/dive-community/diveCommunity";
 import { TranslationService } from "../../../../../services/common/translations";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 
 @Component({
   tag: "app-admin-dive-trips",

@@ -1,4 +1,4 @@
-import {menuController} from "@ionic/core";
+import { menuController } from "@ionic/core";
 
 export class MenuController {
   appMenu = [];
@@ -13,6 +13,7 @@ export class MenuController {
     this.adminMenu = {
       listButtons: [],
     };
+    MenuService.enableMenu("user");
   }
 
   enableMenu(menu: "admin" | "user") {

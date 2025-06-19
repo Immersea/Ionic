@@ -1,5 +1,5 @@
 // change to the version you get from `npm ls workbox-build`
-importScripts("workbox-v7.1.1/workbox-sw.js");
+importScripts("workbox-v7.3.0/workbox-sw.js");
 
 //listen for swUpdate message
 self.addEventListener("message", ({ data }) => {

@@ -9,8 +9,9 @@ import { MapDataDiveSite } from "../../../../../interfaces/udive/dive-site/diveS
 import { RouterService } from "../../../../../services/common/router";
 import { Environment } from "../../../../../global/env";
 import Swiper from "swiper";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 import { toNumber } from "lodash";
+import { HalcyonImporterService } from "../../../../../services/udive/halcyonImporter";
 
 @Component({
   tag: "page-dive-plan-details",
@@ -91,6 +92,13 @@ export class PageDivePlanDetails {
             {this.diveSite ? " - " + this.diveSite.displayName : undefined}
             {" - " + this.divePlan.configuration.stdName}
           </ion-title>
+          <ion-buttons slot='end'>
+            <ion-button
+              onClick={() => HalcyonImporterService.presentHalcyonImporter()}
+            >
+              <ion-label>H</ion-label>
+            </ion-button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>,
       this.diveSite && (this.diveSite.coverURL || this.diveSite.photoURL) ? (

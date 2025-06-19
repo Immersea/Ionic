@@ -1,0 +1,10 @@
+{
+  "name": "subsurface",
+  "version": "1.0.0",
+  "description": "Subsurface package for building and running the application.",
+  "scripts": {
+    "build": "./cmakelist.sh"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}

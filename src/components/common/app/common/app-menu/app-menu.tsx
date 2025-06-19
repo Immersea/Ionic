@@ -24,6 +24,7 @@ export class AppMenu {
   @State() adminMenu: any;
   @State() headerColor: string;
   @State() showMenu: boolean | string = true;
+  @State() resetView: boolean = true;
 
   componentWillLoad() {
     UserService.userRoles$.subscribe((roles) => {
@@ -32,6 +33,7 @@ export class AppMenu {
     });
     //get page url and render menu accordingly
     RouterService.routerSub$.subscribe((to) => {
+      console.log("RouterService.routerSub$", to);
       this.url = to;
       this.renderMenus();
     });
@@ -44,8 +46,6 @@ export class AppMenu {
     this.selectedMenu = Array.isArray(this.url)
       ? this.url.join("/")
       : String(this.url);
-    //create menu for admin
-    MenuService.resetMenus();
 
     if (Environment.isUdive() || Environment.isDecoplanner()) {
       //UDIVE - DECOPLANNER
@@ -58,8 +58,20 @@ export class AppMenu {
     this.appMenu = MenuService.appMenu;
     this.coverItemUser = MenuService.coverItemUser;
     this.coverItemAdmin = MenuService.coverItemAdmin;
-    this.adminMenu = MenuService.adminMenu;
+    this.adminMenu =
+      MenuService.adminMenu &&
+      MenuService.adminMenu.listButtons &&
+      MenuService.adminMenu.listButtons.length > 0
+        ? MenuService.adminMenu
+        : null;
+    if (this.adminMenu) {
+      MenuService.enableMenu("admin");
+    } else {
+      MenuService.enableMenu("user");
+      MenuService.resetMenus();
+    }
     this.headerColor = MenuService.headerColor;
+    this.resetView = !this.resetView;
   }
 
   async itemSelect(item) {
@@ -89,24 +101,123 @@ export class AppMenu {
     }
   }
 
+  resetUserMenu() {
+    RouterService.goHome();
+  }
+
   render() {
     return (
       <ion-split-pane content-id='menu-content' when={this.showMenu}>
-        <ion-menu content-id='menu-content' menuId='user'>
-          <ion-header>
-            <ion-toolbar color={this.headerColor}>
-              <img
-                slot='start'
-                class='logo'
-                src={"/assets/images/" + Environment.getAppLogo()}
-              />
-              <ion-title>{Environment.getAppTitle()}</ion-title>
-              {Environment.getAppSubTitle() && !isPlatform("ios") ? (
-                <ion-title size='small'>
-                  {Environment.getAppSubTitle()}
-                </ion-title>
-              ) : undefined}
-              {/**
+        {this.adminMenu ? (
+          <ion-menu content-id='menu-content' menuId='admin'>
+            {this.adminMenu
+              ? [
+                  <ion-header>
+                    <ion-toolbar color={this.headerColor}>
+                      <ion-title>
+                        {this.coverItemAdmin
+                          ? this.coverItemAdmin.displayName
+                          : undefined}
+                      </ion-title>
+                      <ion-buttons slot='start'>
+                        <ion-button
+                          fill='clear'
+                          onClick={() => this.resetUserMenu()}
+                        >
+                          <ion-icon name='person-outline'></ion-icon>
+                          <ion-label>
+                            <my-transl tag='back' text='Back'></my-transl>
+                          </ion-label>
+                        </ion-button>
+                      </ion-buttons>
+                    </ion-toolbar>
+                  </ion-header>,
+                  <ion-content forceOverscroll={false}>
+                    {this.coverItemAdmin &&
+                    (this.coverItemAdmin.coverURL ||
+                      this.coverItemAdmin.photoURL) ? (
+                      <app-item-cover
+                        item={this.coverItemAdmin}
+                        class='cover'
+                      ></app-item-cover>
+                    ) : undefined}
+                    <ion-list>
+                      {this.adminMenu.listButtons.map((p) =>
+                        !p.adminOnly ||
+                        (p.adminOnly && UserService.userRoles.isAdmin()) ? (
+                          <ion-menu-toggle autoHide={false}>
+                            <ion-item
+                              button
+                              onClick={() => this.itemSelect(p)}
+                              detail={false}
+                              color={
+                                this.selectedMenu == p.url
+                                  ? this.headerColor
+                                  : ""
+                              }
+                            >
+                              {p.avatar ? (
+                                <ion-avatar slot='start'>
+                                  <img src={p.avatar} />
+                                </ion-avatar>
+                              ) : p.iconType && p.iconType !== "ionicon" ? (
+                                p.iconType == "custom" ? (
+                                  <ion-icon
+                                    slot='start'
+                                    src={p.icon}
+                                  ></ion-icon>
+                                ) : (
+                                  <ion-icon
+                                    slot='start'
+                                    class={
+                                      p.iconType == "mapicon"
+                                        ? "map-icon " + p.icon
+                                        : p.iconType == "udiveicon"
+                                          ? "udive-icon " + p.icon
+                                          : undefined
+                                    }
+                                  ></ion-icon>
+                                )
+                              ) : (
+                                <ion-icon slot='start' name={p.icon}></ion-icon>
+                              )}
+
+                              <ion-label>
+                                <my-transl
+                                  tag={p.tag ? p.tag : null}
+                                  text={p.text}
+                                ></my-transl>
+                              </ion-label>
+                            </ion-item>
+                          </ion-menu-toggle>
+                        ) : undefined
+                      )}
+                    </ion-list>
+                  </ion-content>,
+                  <ion-footer>
+                    <ion-title size='small'>
+                      {"version: " + Environment.getAppVersion()}
+                    </ion-title>
+                  </ion-footer>,
+                ]
+              : undefined}
+          </ion-menu>
+        ) : (
+          <ion-menu content-id='menu-content' menuId='user'>
+            <ion-header>
+              <ion-toolbar color={this.headerColor}>
+                <img
+                  slot='start'
+                  class='logo'
+                  src={"/assets/images/" + Environment.getAppLogo()}
+                />
+                <ion-title>{Environment.getAppTitle()}</ion-title>
+                {Environment.getAppSubTitle() && !isPlatform("ios") ? (
+                  <ion-title size='small'>
+                    {Environment.getAppSubTitle()}
+                  </ion-title>
+                ) : undefined}
+                {/**
                * <ion-buttons slot="end">
                 {this.userRoles ? (
                   <ion-button
@@ -127,160 +238,79 @@ export class AppMenu {
                 )}
               </ion-buttons>
                */}
-            </ion-toolbar>
-          </ion-header>
-          <ion-content forceOverscroll={false}>
-            {this.userRoles ? (
-              <app-user-cover
-                showUserDetails={false}
-                class='cover'
-              ></app-user-cover>
-            ) : undefined}
-            {this.appMenu.map((list) => (
-              <ion-list>
-                <ion-list-header>
-                  <my-transl
-                    tag={list.listTitle.tag}
-                    text={list.listTitle.text}
-                    isLabel
-                  ></my-transl>
-                </ion-list-header>
-                {list.listButtons.map((p) =>
-                  !p.adminOnly ||
-                  (p.adminOnly && UserService.userRoles.isAdmin()) ? (
-                    <ion-menu-toggle autoHide={false}>
-                      <ion-item
-                        button
-                        onClick={() => this.itemSelect(p)}
-                        detail={false}
-                        color={
-                          this.selectedMenu == p.url ? this.headerColor : ""
-                        }
-                      >
-                        {p.avatar ? (
-                          <ion-avatar slot='start'>
-                            <img src={p.avatar} />
-                          </ion-avatar>
-                        ) : p.iconType && p.iconType !== "ionicon" ? (
-                          p.iconType == "custom" ? (
-                            <ion-icon slot='start' src={p.icon}></ion-icon>
-                          ) : (
-                            <ion-icon
-                              slot='start'
-                              class={
-                                p.iconType == "mapicon"
-                                  ? "map-icon " + p.icon
-                                  : p.iconType == "udiveicon"
-                                    ? "udive-icon " + p.icon
-                                    : undefined
-                              }
-                            ></ion-icon>
-                          )
-                        ) : (
-                          <ion-icon slot='start' name={p.icon}></ion-icon>
-                        )}
-
-                        <ion-label>
-                          <my-transl
-                            tag={p.tag ? p.tag : null}
-                            text={p.text}
-                          ></my-transl>
-                        </ion-label>
-                      </ion-item>
-                    </ion-menu-toggle>
-                  ) : undefined
-                )}
-              </ion-list>
-            ))}
-          </ion-content>
-          <ion-footer>
-            <ion-title size='small'>
-              {"version: " + Environment.getAppVersion()}
-            </ion-title>
-          </ion-footer>
-        </ion-menu>
-        <ion-menu content-id='menu-content' menuId='admin'>
-          {this.adminMenu
-            ? [
-                <ion-header>
-                  <ion-toolbar color={this.headerColor}>
-                    <ion-title>
-                      {this.coverItemAdmin
-                        ? this.coverItemAdmin.displayName
-                        : undefined}
-                    </ion-title>
-                    <ion-buttons slot='start'>
-                      <ion-button fill='clear' href='/'>
-                        <ion-icon name='arrow-back-outline'></ion-icon>
-                      </ion-button>
-                    </ion-buttons>
-                  </ion-toolbar>
-                </ion-header>,
-                <ion-content forceOverscroll={false}>
-                  {this.coverItemAdmin &&
-                  (this.coverItemAdmin.coverURL ||
-                    this.coverItemAdmin.photoURL) ? (
-                    <app-item-cover
-                      item={this.coverItemAdmin}
-                      class='cover'
-                    ></app-item-cover>
-                  ) : undefined}
-                  <ion-list>
-                    {this.adminMenu.listButtons.map((p) =>
-                      !p.adminOnly ||
-                      (p.adminOnly && UserService.userRoles.isAdmin()) ? (
-                        <ion-menu-toggle autoHide={false}>
-                          <ion-item
-                            button
-                            onClick={() => this.itemSelect(p)}
-                            detail={false}
-                            color={
-                              this.selectedMenu == p.url ? this.headerColor : ""
-                            }
-                          >
-                            {p.avatar ? (
-                              <ion-avatar slot='start'>
-                                <img src={p.avatar} />
-                              </ion-avatar>
-                            ) : p.iconType && p.iconType !== "ionicon" ? (
-                              p.iconType == "custom" ? (
-                                <ion-icon slot='start' src={p.icon}></ion-icon>
-                              ) : (
-                                <ion-icon
-                                  slot='start'
-                                  class={
-                                    p.iconType == "mapicon"
-                                      ? "map-icon " + p.icon
-                                      : p.iconType == "udiveicon"
-                                        ? "udive-icon " + p.icon
-                                        : undefined
-                                  }
-                                ></ion-icon>
-                              )
+              </ion-toolbar>
+            </ion-header>
+            <ion-content forceOverscroll={false}>
+              {this.userRoles ? (
+                <app-user-cover
+                  showUserDetails={false}
+                  class='cover'
+                ></app-user-cover>
+              ) : undefined}
+              {this.appMenu.map((list) => (
+                <ion-list>
+                  <ion-list-header>
+                    <my-transl
+                      tag={list.listTitle.tag}
+                      text={list.listTitle.text}
+                      isLabel
+                    ></my-transl>
+                  </ion-list-header>
+                  {list.listButtons.map((p) =>
+                    !p.adminOnly ||
+                    (p.adminOnly && UserService.userRoles.isAdmin()) ? (
+                      <ion-menu-toggle autoHide={false}>
+                        <ion-item
+                          button
+                          onClick={() => this.itemSelect(p)}
+                          detail={false}
+                          color={
+                            this.selectedMenu == p.url ? this.headerColor : ""
+                          }
+                        >
+                          {p.avatar ? (
+                            <ion-avatar slot='start'>
+                              <img src={p.avatar} />
+                            </ion-avatar>
+                          ) : p.iconType && p.iconType !== "ionicon" ? (
+                            p.iconType == "custom" ? (
+                              <ion-icon slot='start' src={p.icon}></ion-icon>
                             ) : (
-                              <ion-icon slot='start' name={p.icon}></ion-icon>
-                            )}
+                              <ion-icon
+                                slot='start'
+                                class={
+                                  p.iconType == "mapicon"
+                                    ? "map-icon " + p.icon
+                                    : p.iconType == "udiveicon"
+                                      ? "udive-icon " + p.icon
+                                      : undefined
+                                }
+                              ></ion-icon>
+                            )
+                          ) : (
+                            <ion-icon slot='start' name={p.icon}></ion-icon>
+                          )}
 
-                            <ion-label>
-                              <my-transl
-                                tag={p.tag ? p.tag : null}
-                                text={p.text}
-                              ></my-transl>
-                            </ion-label>
-                          </ion-item>
-                        </ion-menu-toggle>
-                      ) : undefined
-                    )}
-                  </ion-list>
-                </ion-content>,
-                <ion-footer>
-                  <ion-title size='small'>
-                    {"version: " + Environment.getAppVersion()}
-                  </ion-title>
-                </ion-footer>,
-              ]
-            : undefined}
-        </ion-menu>
+                          <ion-label>
+                            <my-transl
+                              tag={p.tag ? p.tag : null}
+                              text={p.text}
+                            ></my-transl>
+                          </ion-label>
+                        </ion-item>
+                      </ion-menu-toggle>
+                    ) : undefined
+                  )}
+                </ion-list>
+              ))}
+            </ion-content>
+            <ion-footer>
+              <ion-title size='small'>
+                {"version: " + Environment.getAppVersion()}
+              </ion-title>
+            </ion-footer>
+          </ion-menu>
+        )}
         <ion-router-outlet
           animated={true}
           id='menu-content'

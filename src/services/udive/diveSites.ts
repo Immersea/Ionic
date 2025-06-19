@@ -20,6 +20,7 @@ export class DiveSitesController {
   diveSitesList$: BehaviorSubject<MapDataDiveSite[]> = new BehaviorSubject([]);
 
   init() {
+    //test
     UDiveFilterService.mapDataSub$.subscribe(() => {
       const collection =
         UDiveFilterService.getCollectionArray(DIVESITESCOLLECTION);

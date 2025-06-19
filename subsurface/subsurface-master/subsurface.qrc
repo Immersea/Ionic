@@ -1,0 +1,89 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="satellite-icon">icons/satellite.svg</file>
+        <file alias="graph-icon">icons/pref_tech.png</file>
+        <file alias="star-icon">icons/star.svg</file>
+        <file alias="subsurface-icon">icons/subsurface-icon.svg</file>
+        <file alias="subsurface-mobile-icon">icons/subsurface-mobile-icon.png</file>
+        <file alias="list-add-icon">icons/plus.png</file>
+        <file alias="list-remove-icon">icons/trash.png</file>
+        <file alias="list-remove-disabled-icon">icons/trash-forbidden.png</file>
+        <file alias="units-icon">icons/units.png</file>
+        <file alias="preferences-system-network-icon">icons/network.png</file>
+        <file alias="preferences-cloud-icon">icons/pref_cloud.png</file>
+        <file alias="preferences-equipment-icon">icons/pref_equipment.png</file>
+        <file alias="preferences-media-icon">icons/pref_media.png</file>
+        <file alias="preferences-dc-icon">icons/pref_dc.png</file>
+        <file alias="preferences-log-icon">icons/pref_log.png</file>
+        <file alias="preferences-display-icon">icons/pref_display.png</file>
+        <file alias="preferences-reset-icon">icons/pref_reset.png</file>
+        <file alias="preferences-reset-warning-icon">icons/warning-icon.svg</file>
+        <file alias="scale-graph-icon">icons/graph.png</file>
+        <file alias="value-minimum-icon">icons/minimum.svg</file>
+        <file alias="value-maximum-icon">icons/maximum.svg</file>
+        <file alias="value-average-icon">icons/average.svg</file>
+        <file alias="salinity-warning-icon">icons/bluewarning.png</file>
+        <file alias="ruler-icon">icons/ruler.svg</file>
+        <file alias="poster-icon">icons/poster.png</file>
+        <file>xslt/commonTemplates.xsl</file>
+        <file>xslt/csv2xml.xslt</file>
+        <file>xslt/divelogs-export.xslt</file>
+        <file>xslt/divelogs.xslt</file>
+        <file>xslt/DivingLog.xslt</file>
+        <file>xslt/Mares.xslt</file>
+        <file>xslt/jdivelog2subsurface.xslt</file>
+        <file>xslt/MacDive.xslt</file>
+        <file>xslt/SuuntoDM4.xslt</file>
+        <file>xslt/SuuntoSDM.xslt</file>
+        <file>xslt/udcf.xslt</file>
+        <file>xslt/uddf-export.xslt</file>
+        <file>xslt/xml2csv.xslt</file>
+        <file>xslt/xml2manualcsv.xslt</file>
+        <file>xslt/uddf.xslt</file>
+        <file>xslt/sensuscsv.xslt</file>
+        <file>xslt/subsurfacecsv.xslt</file>
+        <file>xslt/manualcsv2xml.xslt</file>
+        <file>xslt/shearwater.xslt</file>
+        <file>xslt/DiveLog.xslt</file>
+        <file>xslt/av1.xslt</file>
+        <file alias="rate-sac-icon">icons/gas.png</file>
+        <file alias="depth-mod-icon">icons/mod.png</file>
+        <file alias="pp-he-icon">icons/he.png</file>
+        <file alias="pp-n2-icon">icons/n2.png</file>
+        <file alias="pp-o2-icon">icons/o2.png</file>
+        <file alias="ceiling-calculated-icon">icons/ss.png</file>
+        <file alias="ceiling-tissues-icon">icons/icon-ceiling-alltissues.png</file>
+        <file alias="depth-ndl-icon">icons/limit.png</file>
+        <file alias="ceiling-increments-icon">icons/3x3.png</file>
+        <file alias="ceiling-dc-icon">icons/pc.png</file>
+        <file alias="depth-ead-icon">icons/ead.png</file>
+        <file alias="rate-heart-icon">icons/icon-HR.png</file>
+        <file alias="heatmap-icon">icons/heatmap.png</file>
+        <file alias="photo-icon">icons/pictures.png</file>
+        <file>icons/subsurface/index.theme</file>
+        <file alias="go-down-icon">icons/subsurface/32x32/actions/go-down.png</file>
+        <file alias="go-up-icon">icons/subsurface/32x32/actions/go-up.png</file>
+        <file alias="window-close-icon">icons/subsurface/32x32/actions/window-close.png</file>
+        <file alias="dc-ostc-2n-icon">icons/ostc2n.png</file>
+        <file alias="dc-ostc-3-icon">icons/ostc3.png</file>
+        <file alias="dc-ostc-5-icon">icons/ostc5.png</file>
+        <file alias="dc-suunto-vyper-icon">icons/suunto_vyper.png</file>
+        <file alias="edit-clear-icon">icons/edit-undo.svg</file>
+        <file alias="filter-close">icons/process-stop.svg</file>
+        <file alias="edit-icon">icons/edit-circled.svg</file>
+        <file alias="globe-icon">icons/Emblem-earth.svg</file>
+        <file alias="geotag-icon">icons/geocode.svg</file>
+        <file alias="photo-in-icon">icons/duringPhoto.png</file>
+        <file alias="photo-out-icon">icons/outsidePhoto.png</file>
+        <file alias="photo-in-out-icon">icons/inAndOutPhoto.png</file>
+        <file alias="preferences-desktop-locale-icon">icons/language.png</file>
+        <file alias="camera-icon">icons/camera.svg</file>
+        <file alias="video-icon">icons/video.svg</file>
+        <file alias="video-overlay">icons/video_overlay.svg</file>
+        <file alias="unknown-icon">icons/unknown.svg</file>
+        <file alias="tissue-icon">icons/tissue.png</file>
+        <file alias="gps_good_result-icon">icons/resultgreen.png</file>
+        <file alias="gps_warning_result-icon">icons/resultyellow.png</file>
+        <file alias="gps_bad_result-icon">icons/resultred.png</file>
+    </qresource>
+</RCC>

@@ -172,7 +172,7 @@ export class PageShapes {
 
   openShape(shapeId) {
     if (this.showDownload) {
-      const shape = ShapesService.getShapeById(shapeId);
+      const shape = cloneDeep(ShapesService.getShapeById(shapeId));
       //if (!find(this.basket, {shape}))
       this.basket.push({ shape, datasheet: null });
       this.basket = orderBy(this.basket, "shape.shapeName");

@@ -453,32 +453,32 @@ export class ModalDatasheetUpdate {
                 <div id='properties-grid'>
                   <ion-grid>
                     <ion-row>
-                      <ion-col class='centered'>
+                      <ion-col size='2' class='centered'>
                         <small>
                           {TranslationService.getTransl("type", "Type")}
                         </small>
                       </ion-col>
-                      <ion-col class='centered'>
+                      <ion-col size='2' class='centered'>
                         <small>
                           {TranslationService.getTransl("name", "Name")}
                         </small>
                       </ion-col>
-                      <ion-col class='centered'>
+                      <ion-col size='1' class='centered'>
                         <small>
                           {TranslationService.getTransl("typical", "Typical")}
                         </small>
                       </ion-col>
-                      <ion-col class='centered'>
+                      <ion-col size='2' class='centered'>
                         <small>
                           {TranslationService.getTransl("prefix", "Prefix")}
                         </small>
                       </ion-col>
-                      <ion-col class='centered'>
+                      <ion-col size='2' class='centered'>
                         <small>
                           {TranslationService.getTransl("from", "From")}
                         </small>
                       </ion-col>
-                      <ion-col class='centered'>
+                      <ion-col size='2' class='centered'>
                         <small>
                           {TranslationService.getTransl("to", "To")}
                         </small>
@@ -493,101 +493,175 @@ export class ModalDatasheetUpdate {
                     </ion-row>
                     {this.datasheet.properties.map((property, index) => (
                       <ion-row>
-                        <ion-col>
-                          <app-select-search
-                            color='trasteel'
-                            value={property.type ? property.type : null}
-                            lines='none'
-                            selectFn={(ev) =>
-                              this.selectPropertyType(index, ev)
-                            }
-                            selectOptions={DatasheetsService.getDatasheetPropertyTypes()}
-                            selectValueId='typeId'
-                            selectValueText={["typeName"]}
-                          ></app-select-search>
-                        </ion-col>
-                        <ion-col>
-                          <app-select-search
-                            color='trasteel'
-                            value={property.name ? property.name : null}
-                            lines='none'
-                            disabled={!this.propertyNames[index]}
-                            selectFn={(ev) =>
-                              this.selectPropertyName(index, ev)
-                            }
-                            selectOptions={this.propertyNames[index]}
-                            selectValueId='nameId'
-                            selectValueText={["nameName"]}
-                          ></app-select-search>
-                        </ion-col>
-                        <ion-col class='centered'>
-                          <app-form-item
-                            value={property.typical}
-                            name='typical'
-                            input-type='number'
-                            onFormItemChanged={(ev) =>
-                              this.handlePropertyChange(index, ev)
-                            }
-                          ></app-form-item>
-                        </ion-col>
-                        <ion-col class='centered'>
-                          <app-form-item
-                            value={property.prefix}
-                            name='prefix'
-                            input-type='text'
-                            onFormItemChanged={(ev) =>
-                              this.handlePropertyChange(index, ev)
-                            }
-                          ></app-form-item>
-                        </ion-col>
-                        <ion-col class='centered'>
-                          <app-form-item
-                            value={property.lower}
-                            name='lower'
-                            input-type='number'
-                            onFormItemChanged={(ev) =>
-                              this.handlePropertyChange(index, ev)
-                            }
-                          ></app-form-item>
-                        </ion-col>
-                        <ion-col class='centered'>
-                          <app-form-item
-                            value={property.higher}
-                            name='higher'
-                            input-type='number'
-                            onFormItemChanged={(ev) =>
-                              this.handlePropertyChange(index, ev)
-                            }
-                          ></app-form-item>
-                        </ion-col>
-                        <ion-col size='1' class='centered '>
-                          <ion-grid class='remove-background'>
-                            <ion-row>
-                              <ion-col class='centered'>
+                        {property.type === "general"
+                          ? [
+                              <ion-col size='2'>
+                                <app-select-search
+                                  color='trasteel'
+                                  value={property.type ? property.type : null}
+                                  lines='none'
+                                  selectFn={(ev) =>
+                                    this.selectPropertyType(index, ev)
+                                  }
+                                  selectOptions={DatasheetsService.getDatasheetPropertyTypes()}
+                                  selectValueId='typeId'
+                                  selectValueText={["typeName"]}
+                                ></app-select-search>
+                              </ion-col>,
+                              <ion-col size='2'>
+                                <app-select-search
+                                  color='trasteel'
+                                  value={property.name ? property.name : null}
+                                  lines='none'
+                                  disabled={!this.propertyNames[index]}
+                                  selectFn={(ev) =>
+                                    this.selectPropertyName(index, ev)
+                                  }
+                                  selectOptions={this.propertyNames[index]}
+                                  selectValueId='nameId'
+                                  selectValueText={["nameName"]}
+                                ></app-select-search>
+                              </ion-col>,
+                              <ion-col size='7' class='centered'>
                                 <app-form-item
-                                  class='ion-no-padding'
-                                  value={property.show}
-                                  name='show'
-                                  input-type='boolean'
+                                  value={property.prefix}
+                                  name='prefix'
+                                  input-type='text'
                                   onFormItemChanged={(ev) =>
                                     this.handlePropertyChange(index, ev)
                                   }
                                 ></app-form-item>
-                              </ion-col>
-                              <ion-col class='centered'>
-                                <ion-button
-                                  class='ion-no-padding'
-                                  icon-only
-                                  color='danger'
-                                  fill='clear'
-                                  onClick={() => this.deleteProperty(index)}
-                                >
-                                  <ion-icon name='trash'></ion-icon>
-                                </ion-button>
-                              </ion-col>
-                            </ion-row>
-                          </ion-grid>
-                        </ion-col>
+                              </ion-col>,
+                              <ion-col size='1' class='centered'>
+                                <ion-grid class='remove-background'>
+                                  <ion-row>
+                                    <ion-col class='centered'>
+                                      <app-form-item
+                                        class='ion-no-padding'
+                                        value={property.show}
+                                        name='show'
+                                        input-type='boolean'
+                                        onFormItemChanged={(ev) =>
+                                          this.handlePropertyChange(index, ev)
+                                        }
+                                      ></app-form-item>
+                                    </ion-col>
+                                    <ion-col class='centered'>
+                                      <ion-button
+                                        class='ion-no-padding'
+                                        icon-only
+                                        color='danger'
+                                        fill='clear'
+                                        onClick={() =>
+                                          this.deleteProperty(index)
+                                        }
+                                      >
+                                        <ion-icon name='trash'></ion-icon>
+                                      </ion-button>
+                                    </ion-col>
+                                  </ion-row>
+                                </ion-grid>
+                              </ion-col>,
+                            ]
+                          : [
+                              <ion-col size='2'>
+                                <app-select-search
+                                  color='trasteel'
+                                  value={property.type ? property.type : null}
+                                  lines='none'
+                                  selectFn={(ev) =>
+                                    this.selectPropertyType(index, ev)
+                                  }
+                                  selectOptions={DatasheetsService.getDatasheetPropertyTypes()}
+                                  selectValueId='typeId'
+                                  selectValueText={["typeName"]}
+                                ></app-select-search>
+                              </ion-col>,
+                              <ion-col size='2'>
+                                <app-select-search
+                                  color='trasteel'
+                                  value={property.name ? property.name : null}
+                                  lines='none'
+                                  disabled={!this.propertyNames[index]}
+                                  selectFn={(ev) =>
+                                    this.selectPropertyName(index, ev)
+                                  }
+                                  selectOptions={this.propertyNames[index]}
+                                  selectValueId='nameId'
+                                  selectValueText={["nameName"]}
+                                ></app-select-search>
+                              </ion-col>,
+                              <ion-col size='1' class='centered'>
+                                <app-form-item
+                                  value={property.typical}
+                                  name='typical'
+                                  input-type='number'
+                                  onFormItemChanged={(ev) =>
+                                    this.handlePropertyChange(index, ev)
+                                  }
+                                ></app-form-item>
+                              </ion-col>,
+                              <ion-col size='2' class='centered'>
+                                <app-form-item
+                                  value={property.prefix}
+                                  name='prefix'
+                                  input-type='text'
+                                  onFormItemChanged={(ev) =>
+                                    this.handlePropertyChange(index, ev)
+                                  }
+                                ></app-form-item>
+                              </ion-col>,
+                              <ion-col size='2' class='centered'>
+                                <app-form-item
+                                  value={property.lower}
+                                  name='lower'
+                                  input-type='number'
+                                  onFormItemChanged={(ev) =>
+                                    this.handlePropertyChange(index, ev)
+                                  }
+                                ></app-form-item>
+                              </ion-col>,
+                              <ion-col size='2' class='centered'>
+                                <app-form-item
+                                  value={property.higher}
+                                  name='higher'
+                                  input-type='number'
+                                  onFormItemChanged={(ev) =>
+                                    this.handlePropertyChange(index, ev)
+                                  }
+                                ></app-form-item>
+                              </ion-col>,
+                              <ion-col size='1' class='centered'>
+                                <ion-grid class='remove-background'>
+                                  <ion-row>
+                                    <ion-col class='centered'>
+                                      <app-form-item
+                                        class='ion-no-padding'
+                                        value={property.show}
+                                        name='show'
+                                        input-type='boolean'
+                                        onFormItemChanged={(ev) =>
+                                          this.handlePropertyChange(index, ev)
+                                        }
+                                      ></app-form-item>
+                                    </ion-col>
+                                    <ion-col class='centered'>
+                                      <ion-button
+                                        class='ion-no-padding'
+                                        icon-only
+                                        color='danger'
+                                        fill='clear'
+                                        onClick={() =>
+                                          this.deleteProperty(index)
+                                        }
+                                      >
+                                        <ion-icon name='trash'></ion-icon>
+                                      </ion-button>
+                                    </ion-col>
+                                  </ion-row>
+                                </ion-grid>
+                              </ion-col>,
+                            ]}
                       </ion-row>
                     ))}
                   </ion-grid>

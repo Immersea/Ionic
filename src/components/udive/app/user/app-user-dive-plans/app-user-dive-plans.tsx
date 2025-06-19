@@ -9,7 +9,7 @@ import { DivePlansService } from "../../../../../services/udive/divePlans";
 import { TranslationService } from "../../../../../services/common/translations";
 import { Environment } from "../../../../../global/env";
 import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 
 @Component({
   tag: "app-user-dive-plans",

@@ -36,8 +36,8 @@ enum AppSubTitles {
 
 export enum AppVersions {
   udive = "beta 1.1.1",
-  decoplanner = "1.4.2",
-  trasteel = "1.4.13",
+  decoplanner = "1.5.0",
+  trasteel = "1.4.19",
 }
 
 const firebase_settings = {
@@ -104,6 +104,11 @@ const bundleId = {
     : isPlatform("ios")
       ? bundleIds.decoplanner_ios
       : bundleIds.decoplanner_web,
+};
+
+export const FUSIONCHARTSLICENSE = {
+  key: "ThB4d1E-13sA1C4A1H3C10C10C6C4E2F2H5A2D3pckC5E3lji1I-7kC8A3bvgF2A2H2C10D7D5A3B2A3H4E2A2C6C8B4E6vikI4F2C8kB5D6D3C-8B-8tG2C9A4rveE2F2D1vnjD1B5D1A2A2A15A20B7B9B6C6megD3J2VA7isbE3G1H2sbA4ED3D2B-9xiF1C10B8C4A3C3G3H4H2D2C10C2C2B5q==",
+  creditLabel: false,
 };
 
 export const MAPBOX =

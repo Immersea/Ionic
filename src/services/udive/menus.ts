@@ -67,7 +67,7 @@ export class MenuController {
       DivingSchoolsService.unsubscribeDivingSchoolForAdmin();
       ServiceCentersService.unsubscribeServiceCenterForAdmin();
       MenuService.headerColor = Environment.getAppColor();
-      MenuService.enableMenu("user");
+      MenuService.resetMenus();
     }
     this.renderUserMenus();
   }
@@ -677,8 +677,9 @@ export class MenuController {
           },
         ];
         break;
+      default:
+        MenuService.adminMenu.listButtons = [];
     }
-    MenuService.enableMenu("admin");
   }
 }
 export const UDiveMenuService = new MenuController();

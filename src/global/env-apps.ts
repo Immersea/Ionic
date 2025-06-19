@@ -3,4 +3,4 @@ enum AppNames {
   decoplanner = "decoplanner",
   trasteel = "trasteel",
 }
-export const selectedApp = AppNames.udive;
+export const selectedApp = AppNames.decoplanner;

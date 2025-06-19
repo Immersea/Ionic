@@ -28,7 +28,7 @@ import { SystemService } from "../../../../../services/common/system";
 import { RouterService } from "../../../../../services/common/router";
 import { MapDataDiveSite } from "../../../../../interfaces/udive/dive-site/diveSite";
 import { Environment } from "../../../../../global/env";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 
 @Component({
   tag: "app-decoplanner-plan",

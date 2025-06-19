@@ -168,7 +168,8 @@ export class XLSXExportController {
       currency == "USD"
         ? '"$"#,##0.00;[Red]-"$"#,##0.00'
         : '"€"#,##0.00;[Red]-"€"#,##0.00';
-
+    const currencyTotFmt =
+      currency == "USD" ? '"$"#,##0;[Red]-"$"#,##0' : '"€"#,##0;[Red]-"€"#,##0';
     const projectSummary = ProjectsService.createProjectSummary(
       project,
       areaShapes,
@@ -220,7 +221,14 @@ export class XLSXExportController {
       );
       worksheet.getCell(cell).value = upperCase(translated);
     });
+    const date = new Date(project.drawingDate);
 
+    const formattedDate =
+      date.getFullYear() +
+      "/" +
+      String(date.getMonth() + 1).padStart(2, "0") +
+      "/" +
+      String(date.getDate()).padStart(2, "0");
     worksheet.getCell("B4").value =
       TranslationService.getTransl("drawing", "Drawing", null, lang) +
       " " +
@@ -228,7 +236,7 @@ export class XLSXExportController {
       " " +
       TranslationService.getTransl("dated", "dated", null, lang) +
       " " +
-      new Date(project.drawingDate).toLocaleDateString();
+      formattedDate;
     worksheet.getCell("N1").value = project.setsAmount;
     worksheet.getCell("N2").value = currency;
     //bricks
@@ -664,7 +672,7 @@ export class XLSXExportController {
     //set currency formats
     worksheet.getColumn(14).numFmt = currencyFmt;
     worksheet.getColumn(15).numFmt = currencyFmt;
-    worksheet.getColumn(16).numFmt = currencyFmt;
+    worksheet.getColumn(16).numFmt = currencyTotFmt;
     worksheet.getColumn(6).numFmt = mtFmt;
     worksheet.getColumn(8).numFmt = pcsFmt;
     worksheet.getColumn(9).numFmt = mtFmt;
@@ -1016,6 +1024,13 @@ export class XLSXExportController {
       null,
       lang
     );
+    const date = new Date(project.drawingDate);
+    const formattedDate =
+      date.getFullYear() +
+      "/" +
+      String(date.getMonth() + 1).padStart(2, "0") +
+      "/" +
+      String(date.getDate()).padStart(2, "0");
     worksheet.getCell("B4").value =
       TranslationService.getTransl("drawing", "Drawing", null, lang) +
       " " +
@@ -1023,7 +1038,7 @@ export class XLSXExportController {
       " " +
       TranslationService.getTransl("dated", "dated", null, lang) +
       " " +
-      new Date(project.drawingDate).toLocaleDateString();
+      formattedDate;
 
     //fill courses totals
     const cell = worksheet.getCell(7, bricksAreaColumn);
@@ -2192,7 +2207,7 @@ export class XLSXExportController {
             //translate title
             title = TranslationService.getTransl(
               slugify(title + "_analysis"),
-              title + " Analysis",
+              title + (property.type !== "general" ? " Analysis" : ""),
               null,
               lang
             ).toUpperCase();
@@ -2214,19 +2229,22 @@ export class XLSXExportController {
               : "";
 
             const column = limitValues ? "J" : "M";
-            row.getCell(column).value = raw
-              ? TranslationService.getTransl(
-                  "typical_raw",
-                  "Typical for the raw material",
-                  null,
-                  lang
-                )
-              : TranslationService.getTransl(
-                  "typical_prod",
-                  "Typical for the product",
-                  null,
-                  lang
-                );
+            row.getCell(column).value =
+              property.type !== "general"
+                ? raw
+                  ? TranslationService.getTransl(
+                      "typical_raw",
+                      "Typical for the raw material",
+                      null,
+                      lang
+                    )
+                  : TranslationService.getTransl(
+                      "typical_prod",
+                      "Typical for the product",
+                      null,
+                      lang
+                    )
+                : "";
             if (!limitValues) {
               //merge cells for typical
               this.mergeCells(
@@ -2311,20 +2329,92 @@ export class XLSXExportController {
               numFmt = "0";
               break;
           }
-          const cellValue =
-            (property.prefix ? property.prefix + " " : "") +
-            (property.lower >= 0 && property.higher > 0
-              ? roundDecimals(property.lower, propertyDecimals) +
+          // determine numeric range or single values
+          const hasRange =
+            property.lower != null &&
+            property.higher != null &&
+            property.lower >= 0 &&
+            property.higher > 0;
+          const hasLower = property.lower > 0;
+          const hasHigher = property.higher > 0;
+          let cellValue = "";
+          let prefixCell = false;
+          let prefixCellWritten = false;
+          // If prefix is a comparison operator, always include it plus the value
+          if (
+            property.prefix &&
+            ["=", "<", "<=", ">", ">=", "min", "max", "Min", "Max"].includes(
+              property.prefix.toString()
+            )
+          ) {
+            const prefixOp = property.prefix.toString();
+            let valuePart = "";
+            if (hasRange) {
+              valuePart =
+                roundDecimals(property.lower, propertyDecimals).toFixed(
+                  propertyDecimals
+                ) +
                 " - " +
-                roundDecimals(property.higher, propertyDecimals)
-              : property.lower > 0
-                ? roundDecimals(property.lower, propertyDecimals)
-                : property.higher > 0
-                  ? roundDecimals(property.higher, propertyDecimals)
-                  : "");
-          if (cellValue != "") {
+                roundDecimals(property.higher, propertyDecimals).toFixed(
+                  propertyDecimals
+                );
+            } else if (hasLower) {
+              valuePart = roundDecimals(
+                property.lower,
+                propertyDecimals
+              ).toFixed(propertyDecimals);
+            } else if (hasHigher) {
+              valuePart = roundDecimals(
+                property.higher,
+                propertyDecimals
+              ).toFixed(propertyDecimals);
+            }
+            cellValue = valuePart ? `${prefixOp} ${valuePart}` : prefixOp;
+            prefixCellWritten = true;
+          } else if (hasRange) {
+            cellValue =
+              roundDecimals(property.lower, propertyDecimals).toFixed(
+                propertyDecimals
+              ) +
+              " - " +
+              roundDecimals(property.higher, propertyDecimals).toFixed(
+                propertyDecimals
+              );
+          } else if (hasLower) {
+            cellValue = roundDecimals(property.lower, propertyDecimals).toFixed(
+              propertyDecimals
+            );
+          } else if (hasHigher) {
+            cellValue = roundDecimals(
+              property.higher,
+              propertyDecimals
+            ).toFixed(propertyDecimals);
+          } else if (property.prefix) {
+            // only show prefix when no numeric values
+            cellValue = property.prefix.toString();
+            prefixCell = true;
+          }
+
+          //merge general and prefix cells
+          if (property.type === "general") {
+            this.mergeCells(worksheet, startRowNumber, 4, startRowNumber, 15);
+          } else if (prefixCell) {
+            this.mergeCells(worksheet, startRowNumber, 10, startRowNumber, 14);
+          }
+
+          // write to column N if we have a cellValue
+          if (cellValue) {
             row.getCell("N").value = cellValue;
             row.getCell("N").numFmt = numFmt;
+          }
+
+          // if prefix exists alongside numeric values, write prefix in column J
+          if (
+            (hasRange || hasLower || hasHigher) &&
+            property.prefix &&
+            !prefixCellWritten
+          ) {
+            row.getCell("J").value = property.prefix.toString();
           }
 
           if (property.typical > 0) {

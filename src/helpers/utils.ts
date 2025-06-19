@@ -78,7 +78,7 @@ export async function forwardGeocode(address): Promise<LocationIQ[]> {
       "https://eu1.locationiq.com/v1/search?addressdetails=1&key=" +
       LOCATIONIQ_GEOCODE +
       "&q=" +
-      slugify(address, true) +
+      slugify(address, "url") +
       "&format=json&accept-language=en";
     const response = await fetch(req);
     if (response.ok) {
@@ -118,7 +118,7 @@ export function formatNumber(value: number, currency?: "EUR" | "USD"): string {
   return new Intl.NumberFormat().format(value);
 }
 
-export function slugify(string, url = false) {
+export function slugify(string, type: "none" | "url" | "field" = "none") {
   const a =
     "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìıİłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;";
   const b =
@@ -127,10 +127,10 @@ export function slugify(string, url = false) {
   return string
     .toString()
     .toLowerCase()
-    .replace(/\s+/g, url ? "+" : "-") // Replace spaces with -
+    .replace(/\s+/g, type == "url" ? "+" : type == "field" ? "_" : "-") // Replace spaces with -
     .replace(p, (c) => b.charAt(a.indexOf(c))) // Replace special characters
     .replace(/&/g, "-and-") // Replace & with 'and'
-    .replace(!url ? /[^\w\-]+/g : "", "") // Remove all non-word characters
+    .replace(type !== "url" ? /[^\w\-]+/g : "", "") // Remove all non-word characters
     .replace(/\-\-+/g, "-") // Replace multiple - with single -
     .replace(/^-+/, "") // Trim - from start of text
     .replace(/-+$/, ""); // Trim - from end of text

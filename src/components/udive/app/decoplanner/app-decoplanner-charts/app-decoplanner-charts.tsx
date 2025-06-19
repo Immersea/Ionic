@@ -10,7 +10,6 @@ import { DecoplannerDive } from "../../../../../interfaces/udive/planner/decopla
 import { Environment } from "../../../../../global/env";
 import FusionCharts from "fusioncharts";
 import { FusionchartsService } from "../../../../../services/common/fusioncharts";
-import { slideHeight } from "../../../../../helpers/utils";
 import { DiveToolsService } from "../../../../../services/udive/planner/dive-tools";
 
 @Component({
@@ -75,6 +74,16 @@ export class AppDecoplannerCharts {
 
   screenWidth: number;
   screenHeight: number;
+  @State() chartsHeight: number;
+
+  private updateScreenHeight = () => {
+    this.screenHeight = window.innerHeight;
+    // detect if inside an <ion-modal>
+    const isInModal = !!this.el.closest("ion-modal");
+    // subtract 210px for modal, 154px for normal view
+    const offset = isInModal ? 210 : 154;
+    this.chartsHeight = this.screenHeight - offset;
+  };
 
   segmentTitles: {
     profiles: string;
@@ -87,7 +96,7 @@ export class AppDecoplannerCharts {
 
   componentWillLoad() {
     this.screenWidth = window.screen.width;
-    this.screenHeight = window.screen.height;
+    this.updateScreenHeight();
     this.segmentTitles = {
       profiles: TranslationService.getTransl("profiles", "Profiles"),
       runtime: TranslationService.getTransl("runtime", "Runtime"),
@@ -106,6 +115,7 @@ export class AppDecoplannerCharts {
       this.refreshChartElement();
       this.createCharts();
     }
+    window.addEventListener("resize", this.updateScreenHeight);
   }
 
   async createCharts() {
@@ -143,7 +153,8 @@ export class AppDecoplannerCharts {
   resetChartData() {
     let oc = this.getTissueData();
     let chartWidth = "100%";
-    let chartHeight = slideHeight(null, 4, true);
+    const container = this.el.querySelector("#chart-container") as HTMLElement;
+    let chartHeight = container ? `${container.clientHeight}px` : "100%";
     let runtimeData = this.divePlan.getCompartmentChart(
       this.tissueData,
       "runtime",
@@ -791,7 +802,7 @@ export class AppDecoplannerCharts {
       </ion-fab>,
       <div
         id='chart-container'
-        style={{ height: toString(this.screenHeight - 150) + "px" }}
+        style={{ height: toString(this.chartsHeight) + "px" }}
       ></div>,
     ];
   }

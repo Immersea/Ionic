@@ -9,7 +9,7 @@ import { isNumber, orderBy, toNumber } from "lodash";
 import { UserService } from "../../../../../services/common/user";
 import { DiveTripsService } from "../../../../../services/udive/diveTrips";
 import { Subscription } from "rxjs";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 import { Environment } from "../../../../../global/env";
 
 @Component({

@@ -1,0 +1,15 @@
+diff --git a/node_modules/@stencil/core/compiler/stencil.js b/node_modules/@stencil/core/compiler/stencil.js
+index 4be6b15..417b4eb 100644
+--- a/node_modules/@stencil/core/compiler/stencil.js
++++ b/node_modules/@stencil/core/compiler/stencil.js
+@@ -238736,6 +238736,10 @@ function getRequireResolver(extensions, detectCyclesAndConditional, currentlyRes
+       resolvedSources,
+       meta: { commonjs: parentMeta }
+     }) {
++      // ← questo è il guard che previene il crash
++  if (!parentMeta) {
++    return false;
++  }
+       if (!(parentMeta && parentMeta.isCommonJS)) knownCjsModuleTypes[parentId] = false;
+       if (isWrappedId(parentId, ES_IMPORT_SUFFIX)) return false;
+       const parentRequires = parentMeta && parentMeta.requires;

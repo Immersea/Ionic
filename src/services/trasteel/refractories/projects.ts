@@ -284,6 +284,11 @@ export class ProjectsController {
         );
         qtyPerSetMTTotal += qtyPerSetMT;
         qtyPerSetMTRepairTotal += qtyPerSetMTRepair;
+        const areaQuality = area.datasheetId
+          ? DatasheetsService.datasheetsList
+              .find((a) => a.id == area.datasheetId)
+              .productName.replace(/\s*\(rev\.[^)]+\)/gi, "") //remove revision from product name
+          : null;
         projectSummary.push({
           areaIndex: index,
           areaId: area.bricksAllocationAreaId,
@@ -296,11 +301,7 @@ export class ProjectsController {
               ? " (" + TranslationService.getTransl("repair", "Repair") + ")"
               : "")*/,
           position: shape.position,
-          quality: area.datasheetId
-            ? DatasheetsService.datasheetsList.find(
-                (a) => a.id == area.datasheetId
-              ).productName
-            : null,
+          quality: areaQuality,
           datasheetId: area.datasheetId,
           techNo: area.datasheetId
             ? DatasheetsService.datasheetsList.find(
@@ -339,11 +340,7 @@ export class ProjectsController {
               TranslationService.getTransl("repair", "Repair") +
               ")",
             position: shape.position,
-            quality: area.datasheetId
-              ? DatasheetsService.datasheetsList.find(
-                  (a) => a.id == area.datasheetId
-                ).productName
-              : null,
+            quality: areaQuality,
             datasheetId: area.datasheetId,
             techNo: area.datasheetId
               ? DatasheetsService.datasheetsList.find(
@@ -388,9 +385,9 @@ export class ProjectsController {
             ? DatasheetsService.datasheetsList.find(
                 (a) => a.id == mass.datasheetId
               )
-              ? DatasheetsService.datasheetsList.find(
-                  (a) => a.id == mass.datasheetId
-                ).productName
+              ? DatasheetsService.datasheetsList
+                  .find((a) => a.id == mass.datasheetId)
+                  .productName.replace(/\s*\(rev\.[^)]+\)/gi, "") //remove revision from product name
               : null
             : null,
           shape: mass.quantityUnit

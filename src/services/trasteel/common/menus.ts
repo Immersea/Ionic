@@ -236,7 +236,6 @@ export class MenuController {
     MenuService.coverItemAdmin = item;
     switch (type) {
     }
-    MenuService.enableMenu("admin");
   }
 }
 export const TrasteelMenuService = new MenuController();

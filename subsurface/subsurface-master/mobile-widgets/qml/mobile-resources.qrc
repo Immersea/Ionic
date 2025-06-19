@@ -1,0 +1,110 @@
+<RCC>
+	<qresource prefix="/qml">
+		<!-- ********** Templates ********** -->
+		<file>TemplateButton.qml</file>
+		<file>TemplateCheckBox.qml</file>
+		<file>TemplateComboBox.qml</file>
+		<file>TemplateSlimComboBox.qml</file>
+		<file>TemplateEditComboBox.qml</file>
+		<file>TemplateLabel.qml</file>
+		<file>TemplateLabelSmall.qml</file>
+		<file>TemplateLine.qml</file>
+		<file>TemplateRadioButton.qml</file>
+		<file>TemplatePage.qml</file>
+		<file>TemplateSection.qml</file>
+		<file>TemplateSpinBox.qml</file>
+		<file>TemplateTextField.qml</file>
+		<file>TemplateTitle.qml</file>
+
+		<!-- ********** qml ********** -->
+		<file>About.qml</file>
+		<file>CloudCredentials.qml</file>
+		<file>DeleteAccount.qml</file>
+		<file>DiveDetails.qml</file>
+		<file>DiveDetailsEdit.qml</file>
+		<file>DiveDetailsView.qml</file>
+		<file>DiveList.qml</file>
+		<file>DownloadFromDiveComputer.qml</file>
+		<file>DownloadedDiveDelegate.qml</file>
+		<!-- dive planner is unfinished, disable
+			<file>DivePlannerEdit.qml</file>
+			<file>DivePlannerManager.qml</file>
+			<file>DivePlannerSetup.qml</file>
+			<file>DivePlannerView.qml</file>
+		-->
+		<file>DiveSummary.qml</file>
+		<file>Export.qml</file>
+		<file>HintsTextEdit.qml</file>
+		<file>Log.qml</file>
+		<file>main.qml</file>
+		<file>MapPage.qml</file>
+		<file>StatisticsPage.qml</file>
+		<file>Settings.qml</file>
+		<file>CopySettings.qml</file>
+		<file>ThemeTest.qml</file>
+		<file>TripDetails.qml</file>
+		<file>StartPage.qml</file>
+		<file>RecoverCache.qml</file>
+
+		<file>SsrfSwitch.qml</file>
+		<file>SsrfTextField.qml</file>
+
+		<!-- ********** pictures ********** -->
+		<file>icons/dive.jpg</file>
+		<file alias="nocloud.svg">icons/nocloud.svg</file>
+		<file alias="subsurface-mobile-icon.png">../../icons/subsurface-mobile-icon.png</file>
+	</qresource>
+
+	<qresource prefix="/">
+		<!-- ********** qtQuick.2 configuration ********** -->
+		<file>qtquickcontrols2.conf</file>
+	</qresource>
+
+	<qresource>
+		<!-- ********** icons ********** -->
+		<file>icons/account_circle.svg</file>
+		<file>icons/Blue_gps.svg</file>
+		<file>icons/chevron_left.svg</file>
+		<file>icons/cloud_sync.svg</file>
+		<file>icons/contact_support.svg</file>
+		<file>icons/Dark_gps.svg</file>
+		<file alias="icons/downloadDC.svg">icons/button-download-dc_icon.svg</file>
+		<file alias="icons/downloadDC-black.svg">icons/button-download-dc-black_icon.svg</file>
+		<file>icons/expand_less.svg</file>
+		<file>icons/expand_more.svg</file>
+		<file>icons/ic_adb.svg</file>
+		<file>icons/ic_add.svg</file>
+		<file>icons/ic_add_location.svg</file>
+		<file>icons/ic_clear.svg</file>
+		<file>icons/ic_cloud_done.svg</file>
+		<file>icons/ic_cloud_download.svg</file>
+		<file>icons/ic_cloud_off.svg</file>
+		<file>icons/ic_cloud_upload.svg</file>
+		<file>icons/ic_gps_fixed.svg</file>
+		<file>icons/ic_help_outline.svg</file>
+		<file>icons/ic_home.svg</file>
+		<file>icons/ic_info_outline.svg</file>
+		<file>icons/ic_location_off.svg</file>
+		<file>icons/ic_place.svg</file>
+		<file>icons/ic_settings.svg</file>
+		<file>icons/ic_star.svg</file>
+		<file>icons/ic_star_border.svg</file>
+		<file>icons/ic_sync.svg</file>
+		<file>icons/Pink_gps.svg</file>
+		<file>icons/redo.svg</file>
+		<file>icons/sigma.svg</file>
+		<file>icons/undo.svg</file>
+		<file alias="icons/ic_filter_list.svg">icons/ic_filter_list_24px.svg</file>
+		<file alias="icons/ic_sort.svg">icons/ic_sort_24px.svg</file>
+		<file alias="icons/trip_details.svg">icons/local_offer.svg</file>
+		<file alias="icons/recycle.svg">icons/recycle.svg</file>
+
+	</qresource>
+
+	<qresource prefix="/xslt">
+		<!-- ********** xslt ********** -->
+		<file alias="commonTemplates.xsl">../../xslt/commonTemplates.xsl</file>
+		<file alias="uddf-export.xslt">../../xslt/uddf-export.xslt</file>
+		<file alias="divelogs-export.xslt">../../xslt/divelogs-export.xslt</file>
+	</qresource>
+</RCC>

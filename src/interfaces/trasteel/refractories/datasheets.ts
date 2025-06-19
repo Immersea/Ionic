@@ -328,12 +328,13 @@ export class Datasheet {
     );
     const physical = propertiesWithDecimals.filter((x) => x.type == "physical");
     let physical_ordered = [];
-    const BD = physical.find((x) => startsWith(x.name, "bd-"));
-    const AP = physical.find((x) => x.name == "ap");
-    const CCS = physical.find((x) => startsWith(x.name, "ccs-"));
-    if (BD) physical_ordered.push(BD);
-    if (AP) physical_ordered.push(AP);
-    if (CCS) physical_ordered.push(CCS);
+    // collect all BD, AP, and CCS properties, not just the first
+    const BDList = physical.filter((x) => startsWith(x.name, "bd-"));
+    const APList = physical.filter((x) => x.name === "ap");
+    const CCSList = physical.filter((x) => startsWith(x.name, "ccs-"));
+    BDList.forEach((item) => physical_ordered.push(item));
+    APList.forEach((item) => physical_ordered.push(item));
+    CCSList.forEach((item) => physical_ordered.push(item));
     let physical_others = [];
     physical.forEach((value) => {
       if (

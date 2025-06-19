@@ -18,7 +18,7 @@ import { DivingCentersService } from "../../../../../services/udive/divingCenter
 import { Subscription } from "rxjs";
 import { UserService } from "../../../../../services/common/user";
 import { DivePlansService } from "../../../../../services/udive/divePlans";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 import { toNumber } from "lodash";
 import { Environment } from "../../../../../global/env";
 

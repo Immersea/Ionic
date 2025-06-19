@@ -20,7 +20,7 @@ import {
 import { DivingClassesService } from "../../../../../services/udive/divingClasses";
 import { ClassSummary } from "../../../../../interfaces/udive/diving-class/divingClass";
 import { TranslationService } from "../../../../../services/common/translations";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 import { RouterService } from "../../../../../services/common/router";
 //import { DocumentSnapshot } from "firebase/firestore";
 

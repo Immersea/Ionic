@@ -33,7 +33,7 @@
 */
 import { Gas } from "./gas";
 import { DiveProfilePoint } from "./dive-profile-point";
-import { max, orderBy, reverse, round } from "lodash";
+import { max, orderBy, round } from "lodash";
 import { ARPCModel } from "./arpc";
 import { GasBlenderService } from "../../../services/udive/planner/gas-blender";
 import { DiveToolsService } from "../../../services/udive/planner/dive-tools";
@@ -301,7 +301,7 @@ export class DecoplannerDive {
       ? this.CCR[this.selectedModel]
       : this[this.selectedModel];
     if (data) {
-      let depths = reverse(Object.keys(data.rangeDescr));
+      let depths = Object.keys(data.rangeDescr).reverse();
       depths.forEach((depth) => {
         details.push(
           data.rangeDescr[depth] +

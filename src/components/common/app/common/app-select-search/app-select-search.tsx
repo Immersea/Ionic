@@ -83,18 +83,13 @@ export class AppSelectSearch {
           {this.value
             ? [
                 this.label ? (
-                  <p
-                    style={{
-                      "font-size": "0.75rem",
-                      color: "black",
-                    }}
-                  >
+                  <span>
                     <my-transl
                       tag={this.label.tag}
                       text={this.label.text}
                     ></my-transl>
                     {this.labelAddText ? this.labelAddText : ""}
-                  </p>
+                  </span>
                 ) : undefined,
                 <h2>{this.getTextValue()}</h2>,
               ]
